@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-ar="المكتبة القانونية - الحقانية" data-en="Legal Library - Haqania" data-fr="Bibliothèque Juridique - Haqania">المكتبة القانونية - الحقانية</title>
+
+<!-- SEO & Meta -->
+<meta name="description" content="مكتبة قانونية شاملة: كتب، أبحاث، مراجع، قوانين جديدة، وأحكام قضائية.">
+<meta name="keywords" content="مكتبة قانونية، كتب قانون، أبحاث قانونية، الحقانية، قوانين مصر">
+<meta name="author" content="الأستاذ محمد صلاح - الحقانية للإستشارات القانونية">
+<link rel="canonical" href="https://elhaqania-legalconsultation.netlify.app/library.html">
+<meta name="google-site-verification" content="TOLjNwob98CBhRQ2ur97bJXgKzth6vSdwB4pQCmJcio" />
+
+<!-- Styles -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+:root { --gold: #b59461; --gold-dark: #9c7e4d; --dark: #111; --white: #fff; --grey: #f8f9fa; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Cairo', sans-serif; background: var(--white); color: #333; line-height: 1.7; user-select: none; }
+header { background: var(--white); border-bottom: 3px solid var(--gold); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+.logo-box { display: flex; align-items: center; gap: 12px; }
+.logo-box img { height: 70px; width: 70px; border-radius: 50%; border: 2px solid var(--gold); }
+.logo-text { font-weight: 700; font-size: 1.1rem; }
+.logo-sub { font-size: 0.85rem; color: var(--gold); }
+.nav-menu { display: flex; gap: 8px; list-style: none; padding: 0; align-items: center; flex-wrap: wrap; }
+.nav-menu a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.85rem; padding: 8px 12px; border-radius: 6px; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--gold); background: var(--grey); }
+.lang-switcher { display: flex; gap: 5px; margin-right: 10px; }
+.lang-btn { background: var(--gold); color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; }
+.lang-btn.active { background: var(--dark); }
+.hero-small { background: linear-gradient(135deg, var(--dark), var(--gold)); color: white; padding: 60px 5%; text-align: center; }
+.hero-small h1 { font-size: 2rem; margin-bottom: 10px; }
+.container { padding: 50px 8%; }
+
+/* ✅ أدوات التحكم (بحث وفلترة) */
+.controls-container { margin-bottom: 30px; background: var(--grey); padding: 20px; border-radius: 12px; border: 1px solid #ddd; }
+.search-box { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-family: 'Cairo'; font-size: 1rem; margin-bottom: 15px; box-sizing: border-box; }
+.search-box:focus { border-color: var(--gold); outline: none; }
+.filter-buttons { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.filter-btn { background: white; border: 2px solid var(--gold); color: var(--gold); padding: 8px 20px; border-radius: 20px; cursor: pointer; font-family: 'Cairo'; font-weight: 600; transition: 0.3s; font-size: 0.9rem; }
+.filter-btn:hover, .filter-btn.active { background: var(--gold); color: white; }
+
+.library-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+.book-card { background: var(--white); border: 2px solid #eee; border-radius: 16px; padding: 25px; transition: all 0.3s; cursor: pointer; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+.book-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); border-color: var(--gold); }
+.book-icon { font-size: 3rem; color: var(--gold); margin-bottom: 15px; text-align: center; }
+.book-title { font-size: 1.15rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; text-align: center; min-height: 50px; display: flex; align-items: center; justify-content: center; line-height: 1.4; }
+.book-category { font-size: 0.75rem; color: var(--gold); text-align: center; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; background: #fff8e1; padding: 4px 10px; border-radius: 12px; display: inline-block; align-self: center; }
+.book-desc { font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; text-align: center; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.btn-download { background: var(--gold); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; text-align: center; transition: 0.3s; display: inline-block; width: 100%; box-sizing: border-box; }
+.btn-download:hover { background: var(--gold-dark); }
+.loading { text-align: center; padding: 40px; color: var(--gold); font-size: 1.2rem; }
+
+footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-align: center; border-top: 5px solid var(--gold); margin-top: 50px; }
+.footer-logo { height: 90px; width: 90px; border-radius: 50%; border: 3px solid var(--gold); margin-bottom: 20px; }
+.footer-links { margin-top: 25px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+.footer-links a { color: #ccc; text-decoration: none; font-size: 1.5rem; }
+.footer-links a:hover { color: var(--gold); }
+.protection-notice { font-size: 0.85rem; color: #aaa; margin-top: 25px; padding-top: 20px; border-top: 1px solid #444; }
+.whatsapp-float { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 9999; text-decoration: none; }
+@media (max-width: 768px) { header { flex-direction: column; gap: 15px; } .nav-menu { justify-content: center; } .hero-small h1 { font-size: 1.5rem; } .container { padding: 30px 5%; } .filter-buttons { justify-content: center; } }
+</style>
+</head>
+<body oncontextmenu="return false">
+
+<a href="https://wa.me/201554797398" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<header>
+  <div class="logo-box">
+    <img src="https://i.ibb.co/Xxb6xd72/image.jpg" alt="الحقانية" loading="lazy">
+    <div>
+      <div class="logo-text" data-ar="الحقانية للإستشارات القانونية" data-en="Haqania Legal Consultations" data-fr="Haqania Consultations Juridiques">الحقانية للإستشارات القانونية</div>
+      <div class="logo-sub" data-ar="الأستاذ محمد صلاح" data-en="Mr. Mohamed Salah" data-fr="M. Mohamed Salah">الأستاذ محمد صلاح</div>
+    </div>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="index.html" data-ar="الرئيسية" data-en="Home" data-fr="Accueil">الرئيسية</a></li>
+    <li><a href="about.html" data-ar="من نحن" data-en="About Us" data-fr="À Propos">من نحن</a></li>
+    <li><a href="services.html" data-ar="خدماتنا" data-en="Services" data-fr="Services">خدماتنا</a></li>
+    <li><a href="library.html" class="active" data-ar="المكتبة القانونية" data-en="Legal Library" data-fr="Bibliothèque Juridique">المكتبة القانونية</a></li>
+    <li><a href="foreigners-services.html" data-ar="خدمات الأجانب" data-en="Foreigners Services" data-fr="Services Étrangers">خدمات الأجانب</a></li>
+    <li><a href="family.html" data-ar="الأحوال الشخصية" data-en="Family Law" data-fr="Droit de la Famille">الأحوال الشخصية</a></li>
+    <li><a href="inheritance.html" data-ar="المواريث" data-en="Inheritance" data-fr="Héritage">الميراث</a></li>
+    <li><a href="courts-guide.html" data-ar="دليل المحاكم" data-en="Courts Guide" data-fr="Guide des Tribunaux">دليل المحاكم</a></li>
+    <li><a href="articles.html" data-ar="المقالات" data-en="Articles" data-fr="Articles">المقالات</a></li>
+    <li><a href="faq.html" data-ar="أسئلة شائعة" data-en="FAQ" data-fr="FAQ">أسئلة شائعة</a></li>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('ar')" id="btn-ar">عربي</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+    </div>
+  </ul>
+</header>
+
+<div class="hero-small">
+  <h1 data-ar="📚 المكتبة القانونية" data-en="📚 Legal Library" data-fr="📚 Bibliothèque Juridique">📚 المكتبة القانونية</h1>
+  <p data-ar="مراجع قانونية شاملة، قوانين جديدة، وأحكام قضائية" data-en="Comprehensive legal references, new laws, and court rulings" data-fr="Références juridiques complètes, nouvelles lois et jurisprudences">مراجع قانونية شاملة، قوانين جديدة، وأحكام قضائية</p>
+</div>
+
+<div class="container">
+  <!-- ✅ أدوات البحث والفلترة -->
+  <div class="controls-container">
+    <input type="text" id="searchInput" class="search-box" placeholder="🔍 ابحث باسم الكتاب، الموضوع، أو رقم الحكم..." onkeyup="applyFilters()">
+    <div class="filter-buttons" id="filterContainer">
+      <button class="filter-btn active" onclick="setFilter('all')" data-txt-ar="الكل" data-txt-en="All" data-txt-fr="Tout">الكل</button>
+      <button class="filter-btn" onclick="setFilter('قوانين جديدة')" data-txt-ar="قوانين جديدة" data-txt-en="New Laws" data-txt-fr="Nouvelles Lois">قوانين جديدة</button>
+      <button class="filter-btn" onclick="setFilter('قانون جنائي')" data-txt-ar="قانون جنائي" data-txt-en="Criminal Law" data-txt-fr="Droit Pénal">قانون جنائي</button>
+      <button class="filter-btn" onclick="setFilter('أحوال شخصية')" data-txt-ar="أحوال شخصية" data-txt-en="Personal Status" data-txt-fr="Statut Personnel">أحوال شخصية</button>
+      <button class="filter-btn" onclick="setFilter('قانون مدني')" data-txt-ar="قانون مدني" data-txt-en="Civil Law" data-txt-fr="Droit Civil">قانون مدني</button>
+      <button class="filter-btn" onclick="setFilter('تجاري')" data-txt-ar="تجاري" data-txt-en="Commercial" data-txt-fr="Commercial">تجاري</button>
+      <!-- ✅ زر الأحكام المضاف -->
+      <button class="filter-btn" onclick="setFilter('أحكام')" data-txt-ar="أحكام" data-txt-en="Rulings" data-txt-fr="Jurisprudence">أحكام</button>
+    </div>
+  </div>
+
+  <div class="library-grid" id="libraryGrid">
+    <div class="loading" data-ar="جاري التحميل..." data-en="Loading..." data-fr="Chargement...">جاري التحميل...</div>
+  </div>
+</div>
+
+<footer>
+  <img src="https://i.ibb.co/Xxb6xd72/image.jpg" alt="الحقانية" class="footer-logo" loading="lazy">
+  <p style="display:none;">مكتب الحقانية للإستشارات القانونية</p>
+  <span id="visitorCounter" style="display:none;"></span>
+  <p data-ar="© 2026 الحقانية للإستشارات القانونية" data-en="© 2026 Haqania Legal Consultations" data-fr="© 2026 Haqania">© 2026 الحقانية للإستشارات القانونية</p>
+  <div class="footer-links">
+    <a href="https://www.facebook.com/profile.php?id=61575279803936" target="_blank"><i class="fab fa-facebook-square"></i> Haqania</a>
+    <a href="https://wa.me/201554797398" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <a href="refund-policy.html" data-ar="سياسة الاسترجاع" data-en="Refund Policy" data-fr="Politique de Remboursement">سياسة الاسترجاع</a>
+  </div>
+  <div class="protection-notice">⚠️ جميع المحتويات محمية بحقوق الملكية الفكرية</div>
+</footer>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbwyCWHX5yhkM4Knyt_55Ad0MzWXT3t2DUngCq_8zhgUCTPZ7qGHFdnEKiJwyvBH-dwE/exec';
+
+// ✅ البيانات الثابتة الكاملة (بما فيها الحكم الناقص)
+const staticBooks = [
+  { title_ar: "مشروع قانون الإجراءات الجنائية الجديد", title_en: "Criminal Procedure Code", title_fr: "Code de procédure pénale", category: "قوانين جديدة", link: "https://drive.google.com/drive/folders/1KMbtW3IJt4xZ3M_qhG1xHKCIGuGREKKG?usp=drive_link" },
+  { title_ar: "قانون تنظيم المسئولية الطبية وحماية المريض", title_en: "Medical Liability Law", title_fr: "Loi sur la responsabilité médicale", category: "قوانين جديدة", link: "https://drive.google.com/drive/folders/1OGPKTrn4TQX9DxZh_RtdDBrk1h-3aH-z?usp=drive_link" },
+  { title_ar: "قانون الإيجار القديم 164 لسنة 2025", title_en: "Ancient Civil Law (164 years)", title_fr: "Droit civil ancien (164 ans)", category: "قانون مدني", link: "https://drive.google.com/drive/folders/1sXc76lShUtehanIssnzUfwUxHWZ95arv?usp=drive_link" },
+  { title_ar: "الكتاب الدوري رقم ١ لسنة ٢٠٢٦ (جداول المخدرات)", title_en: "Narcotics Table 2026", title_fr: "Tableau des stupéfiants 2026", category: "قانون جنائي", link: "https://drive.google.com/drive/folders/1uxSwpnCl8oedIjkP3QI-5kPoUwuXuR1Y?usp=sharing" },
+  { title_ar: "تعديلات قانون الرياضة", title_en: "Sports Law Amendments", title_fr: "Amendements au droit du sport", category: "قوانين جديدة", link: "https://drive.google.com/drive/folders/16gENhQ0CYDNcKOAbxvE-Hs4inR8PwquA?usp=drive_link" },
+  { title_ar: "قانون الضمان الاجتماعي", title_en: "Social Security Law", title_fr: "Loi sur la sécurité sociale", category: "قوانين جديدة", link: "https://drive.google.com/drive/folders/1hv2Sx1yF3KCcliCq2nWHBRg2UuD9ykkp?usp=sharing" },
+  { title_ar: "مشروع قانون العمل الجديد", title_en: "New Labor Law Project", title_fr: "Projet de nouvelle loi du travail", category: "قوانين جديدة", link: "https://drive.google.com/drive/folders/1Em_WlFjDLP_VpYmuULakEziM_E7Lts0s?usp=drive_link" },
+  { title_ar: "قانون لجوء الأجانب", title_en: "Positive Law", title_fr: "Droit positif", category: "قوانين جديدة", link: "https://drive.google.com/drive/folders/1wEWcsMPk2XRPT0O4-u4eE_TcOqH3FkrV?usp=drive_link" },
+  { title_ar: "القانون التجاري والشركات", title_en: "Commercial & Corporate Law", title_fr: "Droit commercial et des sociétés", category: "تجاري", link: "https://drive.google.com/drive/folders/1c7dSN6-nV7sLp0M1KykA9oMUBciV0F8c" },
+  { title_ar: "الأحوال الشخصية", title_en: "Personal Status Law", title_fr: "Droit du statut personnel", category: "أحوال شخصية", link: "https://drive.google.com/drive/folders/1U-h8mMFYyA3CHwLuE2cwa-MOfYdC8XLl" },
+  { title_ar: "القانون المدني للسنهوري", title_en: "Civil Law for Non-Jurists", title_fr: "Droit civil pour non-juristes", category: "قانون مدني", link: "https://drive.google.com/drive/folders/1wwGf3Uwpc0G-2LAsWRhep7j4sQUs8tFI" },
+  { title_ar: "الموسوعة الجنائية", title_en: "Criminal Encyclopedia", title_fr: "Encyclopédie pénale", category: "قانون جنائي", link: "https://drive.google.com/drive/folders/1zgrujIwxskHMTTtmhuYQF_6U5Tei-eOH" },
+  // ✅ الحكم الناقص تم إضافته هنا
+  { title_ar: "حكم: إنقاص مدة عقد إيجار قديم من 59 سنة لـ 3 سنوات", title_en: "Eviction due to termination of old rental contract duration", title_fr: "Expulsion pour résiliation de la durée d'un contrat de location ancien", category: "أحكام", link: "https://drive.google.com/file/d/1kwJfdajoEtlH2Ifdf1OLbYsBF072nwbt/view" }
+];
+
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('contextmenu', e => { if (e.target.tagName !== 'A') e.preventDefault(); });
+
+let currentLang = localStorage.getItem('siteLang') || 'ar';
+let currentFilter = 'all';
+let allData = []; // لتخزين البيانات المدمجة
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('siteLang', lang);
+  document.getElementById('mainHtml').lang = lang;
+  document.getElementById('mainHtml').dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn-'+lang).classList.add('active');
+  
+  document.querySelectorAll('[data-ar][data-en][data-fr]').forEach(el => {
+    const txt = el.getAttribute('data-'+lang);
+    if(txt) el.innerText = txt;
+  });
+
+  // تحديث نصوص أزرار الفلتر
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    const txt = btn.getAttribute('data-txt-'+lang);
+    if(txt) btn.innerText = txt;
+  });
+
+  applyFilters(); // إعادة التطبيق عند تغيير اللغة
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const imgs = document.querySelectorAll('img[loading="lazy"]');
+  imgs.forEach(img => { img.src = img.dataset.src || img.src; });
+  
+  let count = localStorage.getItem('haqania_visitor_count') || 0;
+  count++;
+  localStorage.setItem('haqania_visitor_count', count);
+  const counterEl = document.getElementById('visitorCounter');
+  if(counterEl) counterEl.textContent = count;
+
+  setLang(currentLang);
+  loadLibrary();
+});
+
+async function loadLibrary() {
+  const grid = document.getElementById('libraryGrid');
+  
+  try {
+    const res = await fetch(`${API_URL}?action=get_data&sheet=library`);
+    let sheetData = [];
+    
+    if(res.ok) {
+      const json = await res.json();
+      if(json && json.length > 0) {
+        sheetData = json.map(item => ({
+          title_ar: item.title_ar || item.title,
+          title_en: item.title_en || item.title,
+          title_fr: item.title_fr || item.title,
+          category: item.category || 'عام',
+          link: item.file_link || '#'
+        }));
+      }
+    }
+    
+    // دمج البيانات: بيانات الشيت أولاً، ثم البيانات الثابتة (إذا لم تكن مكررة)
+    // لتجنب التكرار، يمكن فحص العناوين، لكن للتبسيط سنضمهم كلهم
+    allData = [...sheetData, ...staticBooks];
+    
+    applyFilters();
+
+  } catch(e) {
+    console.error(e);
+    allData = staticBooks; // في حالة الخطأ، اعرض البيانات الثابتة فقط
+    applyFilters();
+  }
+}
+
+function setFilter(category) {
+  currentFilter = category;
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  const grid = document.getElementById('libraryGrid');
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  
+  grid.innerHTML = '';
+  
+  const filteredData = allData.filter(item => {
+    // تحديد العنوان حسب اللغة
+    const title = (currentLang === 'ar' ? item.title_ar : currentLang === 'en' ? item.title_en : item.title_fr) || '';
+    const category = item.category || '';
+    
+    // شرط الفلتر
+    const matchCategory = currentFilter === 'all' || category.includes(currentFilter);
+    
+    // شرط البحث (في العنوان والتصنيف)
+    const matchSearch = title.toLowerCase().includes(searchTerm) || category.toLowerCase().includes(searchTerm);
+    
+    return matchCategory && matchSearch;
+  });
+
+  if(filteredData.length === 0) {
+    grid.innerHTML = '<p style="text-align:center; color:#666; grid-column:1/-1; padding: 40px;">لا توجد نتائج مطابقة لبحثك أو الفلتر المختار.</p>';
+    return;
+  }
+
+  filteredData.forEach(item => {
+    const title = (currentLang === 'ar' ? item.title_ar : currentLang === 'en' ? item.title_en : item.title_fr);
+    const iconClass = item.category === 'أحكام' ? 'fa-gavel' : 'fa-book';
+    
+    const card = document.createElement('div');
+    card.className = 'book-card';
+    card.innerHTML = `
+      <div class="book-category">${item.category}</div>
+      <div class="book-icon"><i class="fas ${iconClass}"></i></div>
+      <div class="book-title">${title}</div>
+      <a href="${item.link}" target="_blank" class="btn-download" onclick="event.stopPropagation()">
+        <i class="fas fa-download"></i> <span data-ar="تحميل / فتح" data-en="Download / Open" data-fr="Télécharger / Ouvrir">تحميل / فتح</span>
+      </a>
+    `;
+    card.onclick = (e) => {
+      if(e.target.tagName !== 'A' && !e.target.closest('a')) window.open(item.link, '_blank');
+    };
+    grid.appendChild(card);
+  });
+}
+</script>
+</body>
+</html>

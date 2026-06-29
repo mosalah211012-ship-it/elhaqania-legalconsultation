@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ✅ sitemap.xml - الحقانية للإستشارات القانونية -->
+<!-- ✅ آخر تحديث: 2026-01-01 -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- ✅ 01. الصفحة الرئيسية -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/index.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/index.html"/>
+  </url>
+
+  <!-- ✅ 02. من نحن -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/about.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/about.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/about.html"/>
+  </url>
+
+  <!-- ✅ 03. خدماتنا -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/services.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/services.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/services.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/services.html"/>
+  </url>
+
+  <!-- ✅ 04. المكتبة القانونية -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/library.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/library.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/library.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/library.html"/>
+  </url>
+
+  <!-- ✅ 05. الأحوال الشخصية -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/family.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/family.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/family.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/family.html"/>
+  </url>
+
+  <!-- ✅ 06. الميراث -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/inheritance.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/inheritance.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/inheritance.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/inheritance.html"/>
+  </url>
+
+  <!-- ✅ 07. المقالات -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/articles.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/articles.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/articles.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/articles.html"/>
+  </url>
+
+  <!-- ✅ 08. الأسئلة الشائعة -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/faq.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/faq.html"/>
+  </url>
+
+  <!-- ✅ 09. التقييمات -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/reviews.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/reviews.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/reviews.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/reviews.html"/>
+  </url>
+
+  <!-- ✅ 10. حاسبة الميراث -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/calculator.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/calculator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/calculator.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/calculator.html"/>
+  </url>
+
+  <!-- ✅ 11. سياسة الاسترجاع -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/refund-policy.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/refund-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/refund-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/refund-policy.html"/>
+  </url>
+
+  <!-- ✅ 12. تفاصيل المقال -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/article-detail.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/article-detail.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/article-detail.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/article-detail.html"/>
+  </url>
+
+  <!-- ✅ 13. أحكام الميراث -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/inheritance-rules.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/inheritance-rules.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/inheritance-rules.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/inheritance-rules.html"/>
+  </url>
+
+  <!-- ✅ 14. نماذج الميراث -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/inheritance-templates.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/inheritance-templates.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/inheritance-templates.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/inheritance-templates.html"/>
+  </url>
+
+  <!-- ✅ 15. خدمات إضافية -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/extras.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/extras.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.netlify.app/extras.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.netlify.app/extras.html"/>
+  </url>
+
+  <!-- ✅ 16. لوحة التحكم (مخفية من جوجل) -->
+  <url>
+    <loc>https://elhaqania-legalconsultation.netlify.app/admin-stats.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.netlify.app/admin-stats.html"/>
+  </url>
+
+</urlset>

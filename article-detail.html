@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-ar="تفاصيل المقال - الحقانية" data-en="Article Details - Haqania" data-fr="Détails de l'Article - Haqania">تفاصيل المقال - الحقانية</title>
+
+<!-- SEO & Meta -->
+<meta name="description" content="اقرأ المقال القانوني بالتفصيل من مكتب الحقانية">
+<meta name="keywords" content="مقال قانوني، تحليل قانوني، الحقانية">
+<meta name="author" content="الأستاذ محمد صلاح - الحقانية للإستشارات القانونية">
+<link rel="canonical" href="https://elhaqania-legalconsultation.netlify.app/article-detail.html">
+<meta name="google-site-verification" content="TOLjNwob98CBhRQ2ur97bJXgKzth6vSdwB4pQCmJcio" />
+
+<!-- ✅ Open Graph Tags (قيم افتراضية آمنة) -->
+<meta property="og:title" content="الحقانية للإستشارات القانونية">
+<meta property="og:description" content="خدمات قانونية متكاملة في مصر">
+<meta property="og:image" content="https://i.ibb.co/Xxb6xd72/image.jpg">
+<meta property="og:url" content="https://elhaqania-legalconsultation.netlify.app/article-detail.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="الحقانية للإستشارات القانونية">
+
+<!-- Styles -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+:root { --gold: #b59461; --gold-dark: #9c7e4d; --dark: #111; --white: #fff; --grey: #f8f9fa; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Cairo', sans-serif; background: var(--white); color: #333; line-height: 1.7; user-select: none; }
+header { background: var(--white); border-bottom: 3px solid var(--gold); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+.logo-box { display: flex; align-items: center; gap: 12px; }
+.logo-box img { height: 70px; width: 70px; border-radius: 50%; border: 2px solid var(--gold); }
+.logo-text { font-weight: 700; font-size: 1.1rem; }
+.logo-sub { font-size: 0.85rem; color: var(--gold); }
+.nav-menu { display: flex; gap: 8px; list-style: none; padding: 0; align-items: center; flex-wrap: wrap; }
+.nav-menu a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.85rem; padding: 8px 12px; border-radius: 6px; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--gold); background: var(--grey); }
+.lang-switcher { display: flex; gap: 5px; margin-right: 10px; }
+.lang-btn { background: var(--gold); color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; }
+.lang-btn.active { background: var(--dark); }
+.hero-small { background: linear-gradient(135deg, var(--dark), var(--gold)); color: white; padding: 60px 5%; text-align: center; }
+.hero-small h1 { font-size: 2rem; margin-bottom: 10px; }
+.container { padding: 50px 8%; max-width: 900px; margin: 0 auto; }
+.article-content { background: var(--white); padding: 40px; border-radius: 16px; border: 2px solid #eee; margin-bottom: 40px; }
+.article-header { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px solid var(--gold); }
+.article-title { color: var(--gold); font-size: 2rem; margin-bottom: 15px; }
+.article-date { color: #888; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+.article-body { font-size: 1.1rem; line-height: 2; color: #444; white-space: pre-wrap; }
+.article-image { width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: none; }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-bottom: 25px; transition: all 0.3s; }
+.back-btn:hover { background: var(--gold-dark); transform: translateX(-5px); }
+.loading { text-align: center; padding: 60px; color: var(--gold); font-size: 1.2rem; }
+.error-msg { text-align: center; padding: 60px; background: #f8d7da; border-radius: 10px; color: #721c24; }
+
+/* ✅ تنسيقات زر المشاركة */
+.share-section { margin-top: 40px; padding-top: 30px; border-top: 2px solid #eee; text-align: center; }
+.share-title { font-size: 1.1rem; color: #555; margin-bottom: 20px; font-weight: 600; }
+.share-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+.share-btn { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; text-decoration: none; transition: transform 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.share-btn:hover { transform: translateY(-5px); }
+.share-wa { background: #25d366; }
+.share-fb { background: #1877f2; }
+.share-tw { background: #000; }
+.share-li { background: #0077b5; }
+.share-copy { background: var(--dark); cursor: pointer; border: none; font-family: 'Cairo'; }
+.share-copy i { margin-left: 5px; }
+
+footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-align: center; border-top: 5px solid var(--gold); margin-top: 50px; }
+.footer-logo { height: 90px; width: 90px; border-radius: 50%; border: 3px solid var(--gold); margin-bottom: 20px; }
+.footer-links { margin-top: 25px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+.footer-links a { color: #ccc; text-decoration: none; font-size: 1.5rem; }
+.footer-links a:hover { color: var(--gold); }
+.protection-notice { font-size: 0.85rem; color: #aaa; margin-top: 25px; padding-top: 20px; border-top: 1px solid #444; }
+.whatsapp-float { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 9999; text-decoration: none; }
+@media (max-width: 768px) { header { flex-direction: column; gap: 15px; } .nav-menu { justify-content: center; } .hero-small h1 { font-size: 1.5rem; } .container { padding: 30px 5%; } .article-content { padding: 25px; } .article-title { font-size: 1.5rem; } }
+</style>
+</head>
+<body oncontextmenu="return false">
+
+<a href="https://wa.me/201554797398" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<header>
+  <div class="logo-box">
+    <img src="https://i.ibb.co/Xxb6xd72/image.jpg" alt="الحقانية" loading="lazy">
+    <div>
+      <div class="logo-text" data-ar="الحقانية للإستشارات القانونية" data-en="Haqania Legal Consultations" data-fr="Haqania Consultations Juridiques">الحقانية للإستشارات القانونية</div>
+      <div class="logo-sub" data-ar="الأستاذ محمد صلاح" data-en="Mr. Mohamed Salah" data-fr="M. Mohamed Salah">الأستاذ محمد صلاح</div>
+    </div>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="index.html" data-ar="الرئيسية" data-en="Home" data-fr="Accueil">الرئيسية</a></li>
+    <li><a href="about.html" data-ar="من نحن" data-en="About Us" data-fr="À Propos">من نحن</a></li>
+    <li><a href="services.html" data-ar="خدماتنا" data-en="Services" data-fr="Services">خدماتنا</a></li>
+    <li><a href="library.html" data-ar="المكتبة القانونية" data-en="Legal Library" data-fr="Bibliothèque Juridique">المكتبة القانونية</a></li>
+    <li><a href="foreigners-services.html" data-ar="خدمات الأجانب" data-en="Foreigners Services" data-fr="Services Étrangers">خدمات الأجانب</a></li>
+    <li><a href="family.html" data-ar="الأحوال الشخصية" data-en="Family Law" data-fr="Droit de la Famille">الأحوال الشخصية</a></li>
+    <li><a href="inheritance.html" data-ar="الميراث" data-en="Inheritance" data-fr="Héritage">الميراث</a></li>
+    <li><a href="courts-guide.html" data-ar="دليل المحاكم" data-en="Courts Guide" data-fr="Guide des Tribunaux">دليل المحاكم</a></li>
+    <li><a href="articles.html" data-ar="المقالات" data-en="Articles" data-fr="Articles">المقالات</a></li>
+    <li><a href="faq.html" data-ar="أسئلة شائعة" data-en="FAQ" data-fr="FAQ">أسئلة شائعة</a></li>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('ar')" id="btn-ar">عربي</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+    </div>
+  </ul>
+</header>
+
+<div class="hero-small">
+  <h1 data-ar="📰 تفاصيل المقال" data-en="📰 Article Details" data-fr="📰 Détails de l'Article">📰 تفاصيل المقال</h1>
+</div>
+
+<div class="container">
+  <a href="articles.html" class="back-btn">
+    <i class="fas fa-arrow-right"></i>
+    <span data-ar="العودة للمقالات" data-en="Back to Articles" data-fr="Retour aux Articles">العودة للمقالات</span>
+  </a>
+  
+  <!-- محتوى المقال -->
+  <div class="article-content" id="articleContainer">
+    <div class="loading">جاري التحميل...</div>
+  </div>
+
+  <!-- ✅ قسم المشاركة (سيظهر بعد تحميل المقال) -->
+  <div class="share-section" id="shareSection" style="display:none;">
+    <div class="share-title" data-ar="شارك هذا المقال" data-en="Share this article" data-fr="Partager cet article">شارك هذا المقال</div>
+    <div class="share-buttons">
+      <a href="#" id="shareWa" class="share-btn share-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="#" id="shareFb" class="share-btn share-fb" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" id="shareTw" class="share-btn share-tw" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="#" id="shareLi" class="share-btn share-li" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <button class="share-btn share-copy" onclick="copyLink()" title="نسخ الرابط"><i class="fas fa-link"></i></button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <img src="https://i.ibb.co/Xxb6xd72/image.jpg" alt="الحقانية" class="footer-logo" loading="lazy">
+  <p style="display:none;">مكتب الحقانية للإستشارات القانونية</p>
+  <span id="visitorCounter" style="display:none;"></span>
+  <p data-ar="© 2026 الحقانية للإستشارات القانونية" data-en="© 2026 Haqania Legal Consultations" data-fr="© 2026 Haqania">© 2026 الحقانية للإستشارات القانونية</p>
+  <div class="footer-links">
+    <a href="https://www.facebook.com/profile.php?id=61575279803936" target="_blank"><i class="fab fa-facebook-square"></i> Haqania</a>
+    <a href="https://wa.me/201554797398" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <a href="refund-policy.html" data-ar="سياسة الاسترجاع" data-en="Refund Policy" data-fr="Politique de Remboursement">سياسة الاسترجاع</a>
+  </div>
+  <div class="protection-notice">⚠️ جميع المحتويات محمية بحقوق الملكية الفكرية</div>
+</footer>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbwyCWHX5yhkM4Knyt_55Ad0MzWXT3t2DUngCq_8zhgUCTPZ7qGHFdnEKiJwyvBH-dwE/exec';
+let currentArticleId = null;
+let currentLang = localStorage.getItem('siteLang') || 'ar';
+let currentArticleData = {};
+
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('contextmenu', e => { if (e.target.tagName !== 'A') e.preventDefault(); });
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('siteLang', lang);
+  document.getElementById('mainHtml').lang = lang;
+  document.getElementById('mainHtml').dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn-'+lang).classList.add('active');
+  document.querySelectorAll('[data-ar][data-en][data-fr]').forEach(el => {
+    const txt = el.getAttribute('data-'+lang);
+    if(txt) el.innerText = txt;
+  });
+}
+
+// ✅ تحميل المقال وتحديث الميتا تايجز
+async function loadArticle() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const articleId = urlParams.get('id');
+  currentArticleId = articleId;
+  
+  if (!articleId) {
+    document.getElementById('articleContainer').innerHTML = `<div class="error-msg"><h2>المقال غير موجود</h2></div>`;
+    return;
+  }
+  
+  const container = document.getElementById('articleContainer');
+  container.innerHTML = '<div class="loading">جاري التحميل...</div>';
+  
+  try {
+    const res = await fetch(`${API_URL}?action=get_data&sheet=articles`);
+    const data = await res.json();
+    const article = data.find(a => a.id == articleId);
+    
+    if (!article) {
+      container.innerHTML = `<div class="error-msg"><h2>المقال غير موجود</h2></div>`;
+      return;
+    }
+    
+    currentArticleData = article;
+    
+    const title = currentLang === 'ar' ? (article.title_ar||article.title) : currentLang === 'en' ? (article.title_en||article.title) : (article.title_fr||article.title);
+    const content = currentLang === 'ar' ? (article.content_ar||article.content) : currentLang === 'en' ? (article.content_en||article.content) : (article.content_fr||article.content);
+    const date = article.date || '';
+    const image = article.image || '';
+
+    // ✅ تحديث الميتا تايجز فوراً وبشكل قاطع
+    updateMetaTags(title, content, image);
+
+    let imageHtml = '';
+    if(image) {
+        imageHtml = `<img src="${image}" alt="${title}" class="article-image" style="display:block;">`;
+    }
+
+    container.innerHTML = `
+      <div class="article-header">
+        <h1 class="article-title">${title}</h1>
+        <div class="article-date"><i class="fas fa-calendar-alt"></i> <span>${date}</span></div>
+      </div>
+      ${imageHtml}
+      <div class="article-body">${content}</div>
+    `;
+    
+    setupShareButtons(title, window.location.href);
+    document.getElementById('shareSection').style.display = 'block';
+    
+  } catch (e) {
+    container.innerHTML = `<div class="error-msg"><h2>خطأ في التحميل</h2></div>`;
+  }
+}
+
+// ✅ دالة تحديث الميتا تايجز (الحل الجذري)
+function updateMetaTags(title, content, image) {
+    // تحديد الصورة النهائية (صورة المقال أو اللوجو)
+    const finalImage = image ? image : 'https://i.ibb.co/Xxb6xd72/image.jpg';
+    
+    // إنشاء عناصر ميتا جديدة لضمان استبدالها تماماً
+    // هذه الطريقة أجبر للمتصفح وفيسبوك على قراءة البيانات الجديدة
+    
+    // 1. العنوان
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if(!ogTitle) { ogTitle = document.createElement('meta'); ogTitle.setAttribute('property', 'og:title'); document.head.appendChild(ogTitle); }
+    ogTitle.setAttribute('content', title + ' | الحقانية للإستشارات القانونية');
+    document.title = title + ' | الحقانية'; // تحديث عنوان الصفحة أيضاً
+
+    // 2. الوصف
+    let ogDesc = document.querySelector('meta[property="og:description"]');
+    if(!ogDesc) { ogDesc = document.createElement('meta'); ogDesc.setAttribute('property', 'og:description'); document.head.appendChild(ogDesc); }
+    ogDesc.setAttribute('content', content.substring(0, 150) + '...');
+
+    // 3. الصورة
+    let ogImg = document.querySelector('meta[property="og:image"]');
+    if(!ogImg) { ogImg = document.createElement('meta'); ogImg.setAttribute('property', 'og:image'); document.head.appendChild(ogImg); }
+    ogImg.setAttribute('content', finalImage);
+    
+    // 4. الرابط
+    let ogUrl = document.querySelector('meta[property="og:url"]');
+    if(!ogUrl) { ogUrl = document.createElement('meta'); ogUrl.setAttribute('property', 'og:url'); document.head.appendChild(ogUrl); }
+    ogUrl.setAttribute('content', window.location.href);
+}
+
+function setupShareButtons(title, url) {
+    const text = encodeURIComponent(title + ' | اقرأ المزيد على موقع الحقانية للإستشارات القانونية');
+    const encodedUrl = encodeURIComponent(url);
+    
+    document.getElementById('shareWa').href = `https://wa.me/?text=${text}%20${encodedUrl}`;
+    document.getElementById('shareFb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+    document.getElementById('shareTw').href = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${text}`;
+    document.getElementById('shareLi').href = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodeURIComponent(title)}`;
+}
+
+function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+        alert('✅ تم نسخ رابط المقال بنجاح!');
+    }).catch(err => {
+        alert('❌ فشل نسخ الرابط');
+    });
+}
+
+(function() {
+  var count = localStorage.getItem('haqania_visitor_count') || 0;
+  count++;
+  localStorage.setItem('haqania_visitor_count', count);
+  const el = document.getElementById('visitorCounter');
+  if(el) el.textContent = count;
+})();
+
+window.addEventListener('DOMContentLoaded', () => { 
+  setLang(currentLang); 
+  loadArticle(); 
+});
+</script>
+</body>
+</html>

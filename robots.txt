@@ -1,0 +1,36 @@
+# ✅ robots.txt - الحقانية للإستشارات القانونية
+# ✅ آخر تحديث: 2026-01-01
+
+# ✅ السماح لجميع محركات البحث
+User-agent: *
+Allow: /
+
+# ✅ السماح بالزحف لكل الملفات
+Allow: *.html
+Allow: *.css
+Allow: *.js
+Allow: *.jpg
+Allow: *.png
+Allow: *.svg
+
+# ✅ منع الزحف للملفات الإدارية (لو في)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# ✅ منع زحف ملفات النظام
+Disallow: /*?*
+Disallow: /*.json$
+
+# ✅ خريطة الموقع (مهم جداً لجوجل)
+Sitemap: https://elhaqania-legalconsultation.netlify.app/sitemap.xml
+
+# ✅ تأخير الزحف عشان متأثرش على أداء الموقع
+Crawl-delay: 1
+
+# ✅ محركات البحث المدعومة
+# - Google
+# - Bing
+# - Yahoo
+# - DuckDuckGo
+# - Baidu

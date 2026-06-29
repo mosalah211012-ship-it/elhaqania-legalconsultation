@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-ar="من نحن - الحقانية للإستشارات القانونية" data-en="About Us - Haqania Legal Consultations" data-fr="À Propos - Haqania Consultations Juridiques">من نحن - الحقانية للإستشارات القانونية</title>
+
+<!-- SEO & Meta -->
+<meta name="description" content="تعرف على مكتب الحقانية والأستاذ محمد صلاح: محامٍ مصري متخصص في القضايا الجنائية، عضو اتحاد المحامين العرب، حاصل على ماجستير في القانون.">
+<meta name="keywords" content="من نحن، محمد صلاح، محامي مصر، الحقانية، محامي جنائي، اتحاد المحامين العرب، خبرة قانونية، مؤهلات قانونية">
+<meta name="author" content="الأستاذ محمد صلاح - الحقانية للإستشارات القانونية">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://elhaqania-legalconsultation.netlify.app/about.html">
+<meta name="google-site-verification" content="TOLjNwob98CBhRQ2ur97bJXgKzth6vSdwB4pQCmJcio" />
+
+<!-- Styles -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+:root { --gold: #b59461; --gold-dark: #9c7e4d; --dark: #111; --white: #fff; --grey: #f8f9fa; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Cairo', sans-serif; background: var(--white); color: #333; line-height: 1.7; 
+    /* ✅ حماية متقدمة: منع تحديد النص */
+    -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; 
+}
+input, textarea { user-select: text; -webkit-user-select: text; }
+
+header { background: var(--white); border-bottom: 3px solid var(--gold); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.logo-box { display: flex; align-items: center; gap: 12px; }
+.logo-box img { height: 70px; width: 70px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; }
+.logo-text { font-weight: 700; font-size: 1.1rem; }
+.logo-sub { font-size: 0.85rem; color: var(--gold); }
+.nav-menu { display: flex; gap: 8px; list-style: none; padding: 0; align-items: center; flex-wrap: wrap; }
+.nav-menu a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.85rem; padding: 8px 12px; border-radius: 6px; transition: all 0.3s; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--gold); background: var(--grey); }
+.lang-switcher { display: flex; gap: 5px; margin-right: 10px; }
+.lang-btn { background: var(--gold); color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
+.lang-btn.active { background: var(--dark); }
+.hero-small { background: linear-gradient(135deg, var(--dark), var(--gold)); color: white; padding: 60px 5%; text-align: center; }
+.hero-small h1 { font-size: 2rem; margin-bottom: 10px; }
+.container { padding: 50px 8%; }
+.about-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center; margin-bottom: 50px; }
+.about-image { text-align: center; }
+.about-image img { width: 100%; max-width: 350px; border-radius: 16px; border: 3px solid var(--gold); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+.about-content h2 { color: var(--gold); font-size: 1.8rem; margin-bottom: 20px; }
+.about-content p { color: #555; line-height: 1.9; margin-bottom: 20px; }
+.about-features { list-style: none; margin: 25px 0; }
+.about-features li { padding: 10px 0; display: flex; align-items: center; gap: 12px; color: #333; }
+.about-features li i { color: var(--gold); font-size: 1.1rem; }
+.qualifications-section { background: var(--grey); padding: 40px; border-radius: 16px; margin-bottom: 40px; }
+.qualifications-section h2 { color: var(--gold); text-align: center; margin-bottom: 30px; }
+.qualifications-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.qualification-card { background: var(--white); padding: 25px; border-radius: 12px; text-align: center; border-right: 4px solid var(--gold); transition: transform 0.3s; }
+.qualification-card:hover { transform: translateY(-5px); }
+.qualification-card i { font-size: 2.5rem; color: var(--gold); margin-bottom: 15px; }
+.qualification-card h3 { color: var(--dark); margin-bottom: 10px; font-size: 1.1rem; min-height: 50px; display:flex; align-items:center; justify-content:center;}
+.qualification-card p { color: #666; font-size: 0.9rem; line-height: 1.6; }
+.values-section { margin-bottom: 40px; }
+.values-section h2 { color: var(--gold); text-align: center; margin-bottom: 30px; }
+.values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+.value-card { text-align: center; padding: 30px; border: 2px solid #eee; border-radius: 16px; transition: all 0.3s; }
+.value-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); border-color: var(--gold); }
+.value-card i { font-size: 3rem; color: var(--gold); margin-bottom: 20px; }
+.value-card h3 { color: var(--dark); margin-bottom: 15px; font-size: 1.3rem; }
+.value-card p { color: #666; line-height: 1.8; }
+.cta-box { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: white; padding: 40px; border-radius: 16px; text-align: center; }
+.cta-box h3 { font-size: 1.5rem; margin-bottom: 15px; }
+.cta-box p { margin-bottom: 25px; opacity: 0.95; }
+.cta-box .btn { background: white; color: var(--gold); padding: 14px 40px; border-radius: 30px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; }
+.cta-box .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-align: center; border-top: 5px solid var(--gold); margin-top: 50px; }
+.footer-logo { height: 90px; width: 90px; border-radius: 50%; border: 3px solid var(--gold); margin-bottom: 20px; }
+.footer-links { margin-top: 25px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+.footer-links a { color: #ccc; text-decoration: none; font-size: 1.5rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+.footer-links a:hover { color: var(--gold); transform: translateY(-3px); }
+.protection-notice { font-size: 0.85rem; color: #aaa; margin-top: 25px; padding-top: 20px; border-top: 1px solid #444; }
+.whatsapp-float { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 9999; text-decoration: none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); }
+.whatsapp-float:hover { transform: scale(1.1); }
+@media (max-width: 768px) { header { flex-direction: column; gap: 15px; } .nav-menu { justify-content: center; } .hero-small h1 { font-size: 1.5rem; } .container { padding: 30px 5%; } .about-section { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body oncontextmenu="return true"> <!-- ✅ سمحنا بالرايت كليك -->
+
+<a href="https://wa.me/201554797398" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<header>
+  <div class="logo-box">
+    <img src="https://i.ibb.co/Xxb6xd72/image.jpg" alt="الحقانية" loading="lazy">
+    <div>
+      <div class="logo-text" data-ar="الحقانية للإستشارات القانونية" data-en="Haqania Legal Consultations" data-fr="Haqania Consultations Juridiques">الحقانية للإستشارات القانونية</div>
+      <div class="logo-sub" data-ar="الأستاذ محمد صلاح" data-en="Mr. Mohamed Salah" data-fr="M. Mohamed Salah">الأستاذ محمد صلاح</div>
+    </div>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="index.html" data-ar="الرئيسية" data-en="Home" data-fr="Accueil">الرئيسية</a></li>
+    <li><a href="about.html" class="active" data-ar="من نحن" data-en="About Us" data-fr="À Propos">من نحن</a></li>
+    <li><a href="services.html" data-ar="خدماتنا" data-en="Services" data-fr="Services">خدماتنا</a></li>
+    <li><a href="library.html" data-ar="المكتبة القانونية" data-en="Legal Library" data-fr="Bibliothèque Juridique">المكتبة القانونية</a></li>
+    <li><a href="foreigners-services.html" data-ar="خدمات الأجانب" data-en="Foreigners Services" data-fr="Services Étrangers">خدمات الأجانب</a></li>
+    <li><a href="family.html" data-ar="الأحوال الشخصية" data-en="Family Law" data-fr="Droit de la Famille">الأحوال الشخصية</a></li>
+    <li><a href="inheritance.html" data-ar="الميراث" data-en="Inheritance" data-fr="Héritage">الميراث</a></li>
+    <li><a href="courts-guide.html" data-ar="دليل المحاكم" data-en="Courts Guide" data-fr="Guide des Tribunaux">دليل المحاكم</a></li>
+    <li><a href="articles.html" data-ar="المقالات" data-en="Articles" data-fr="Articles">المقالات</a></li>
+    <li><a href="faq.html" data-ar="أسئلة شائعة" data-en="FAQ" data-fr="FAQ">أسئلة شائعة</a></li>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('ar')" id="btn-ar">عربي</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+    </div>
+  </ul>
+</header>
+
+<div class="hero-small">
+  <h1 data-ar="👤 من نحن" data-en="👤 About Us" data-fr="👤 À Propos">👤 من نحن</h1>
+  <p data-ar="تعرف على مكتب الحقانية وفريق العمل" data-en="Get to know Haqania Office and the team" data-fr="Découvrez le cabinet Haqania et l'équipe">تعرف على مكتب الحقانية وفريق العمل</p>
+</div>
+
+<div class="container">
+  <div class="about-section">
+    <div class="about-image">
+      <img src="https://i.ibb.co/Xxb6xd72/image.jpg" alt="الأستاذ محمد صلاح" loading="lazy">
+    </div>
+    <div class="about-content">
+      <h2 data-ar="الأستاذ محمد صلاح" data-en="Mr. Mohamed Salah" data-fr="M. Mohamed Salah">الأستاذ محمد صلاح</h2>
+      <p data-ar="مؤسس مكتب الحقانية للإستشارات القانونية والأبحاث العلمية، محامٍ مصري متخصص في القضايا الجنائية والجنح، عضو اتحاد المحامين العرب، وحاصل على دبلومتين في القانون العام والعلوم الجنائية، وماجستير في القانون العام والجنائي." data-en="Founder of Haqania Legal Consultations & Scientific Research, Egyptian lawyer specializing in criminal cases, Member of the Arab Lawyers Union, holder of diplomas in public law and criminal sciences, and Master's in public and criminal law." data-fr="Fondateur du cabinet Haqania, avocat égyptien spécialisé en affaires pénales, Membre de l'Union des Avocats Arabes, titulaire de diplômes en droit public et sciences criminelles, et Master en droit.">مؤسس مكتب الحقانية للإستشارات القانونية والأبحاث العلمية، محامٍ مصري متخصص في القضايا الجنائية والجنح، عضو اتحاد المحامين العرب، وحاصل على دبلومتين في القانون العام والعلوم الجنائية، وماجستير في القانون العام والجنائي.</p>
+      <ul class="about-features">
+        <li><i class="fas fa-check-circle"></i> <span data-ar="خبرة عملية في النزاعات الواقعية" data-en="Practical experience in real disputes" data-fr="Expérience pratique dans les litiges réels">خبرة عملية في النزاعات الواقعية</span></li>
+        <li><i class="fas fa-check-circle"></i> <span data-ar="فهم قانوني دقيق للنصوص والتطبيقات" data-en="Accurate legal understanding of texts and applications" data-fr="Compréhension juridique précise des textes et applications">فهم قانوني دقيق للنصوص والتطبيقات</span></li>
+        <li><i class="fas fa-check-circle"></i> <span data-ar="التزام بالسرية التامة مع العملاء" data-en="Commitment to complete confidentiality with clients" data-fr="Engagement à la confidentialité totale avec les clients">التزام بالسرية التامة مع العملاء</span></li>
+        <li><i class="fas fa-check-circle"></i> <span data-ar="تقديم نماذج قانونية جاهزة ومعتمدة" data-en="Providing ready and approved legal templates" data-fr="Fourniture de modèles juridiques prêts et approuvés">تقديم نماذج قانونية جاهزة ومعتمدة</span></li>
+      </ul>
+      <a href="https://wa.me/201554797398" class="btn" style="background:var(--gold); color:white; padding:12px 30px; border-radius:25px; text-decoration:none; display:inline-block;" target="_blank" data-ar="تواصل معنا" data-en="Contact Us" data-fr="Contactez-nous">تواصل معنا</a>
+    </div>
+  </div>
+  
+  <div class="qualifications-section">
+    <h2 data-ar="🎓 المؤهلات والعضويات" data-en="🎓 Qualifications & Memberships" data-fr="🎓 Qualifications & Adhésions">🎓 المؤهلات والعضويات</h2>
+    <div class="qualifications-grid">
+      <!-- الكارت الجديد: اتحاد المحامين العرب -->
+      <div class="qualification-card">
+        <i class="fas fa-globe-americas"></i>
+        <h3 data-ar="عضو اتحاد المحامين العرب" data-en="Member of Arab Lawyers Union" data-fr="Membre de l'Union des Avocats Arabes">عضو اتحاد المحامين العرب</h3>
+        <p data-ar="انتماء مهني إقليمي وامتداد للشبكة القانونية العربية" data-en="Regional professional affiliation and extension of the Arab legal network" data-fr="Appartenance professionnelle régionale et extension du réseau juridique arabe">انتماء مهني إقليمي وامتداد للشبكة القانونية العربية</p>
+      </div>
+      
+      <div class="qualification-card">
+        <i class="fas fa-graduation-cap"></i>
+        <h3 data-ar="دبلوم القانون العام" data-en="Diploma in Public Law" data-fr="Diplôme en Droit Public">دبلوم القانون العام</h3>
+        <p data-ar="تخصص في النظم الدستورية والإدارية" data-en="Specialization in constitutional and administrative systems" data-fr="Spécialisation en systèmes constitutionnels et administratifs">تخصص في النظم الدستورية والإدارية</p>
+      </div>
+      <div class="qualification-card">
+        <i class="fas fa-gavel"></i>
+        <h3 data-ar="دبلوم العلوم الجنائية" data-en="Diploma in Criminal Sciences" data-fr="Diplôme en Sciences Criminelles">دبلوم العلوم الجنائية</h3>
+        <p data-ar="تخصص في الجنايات والجنح والإجراءات" data-en="Specialization in felonies, misdemeanors and procedures" data-fr="Spécialisation en crimes, délits et procédures">تخصص في الجنايات والجنح والإجراءات</p>
+      </div>
+      <div class="qualification-card">
+        <i class="fas fa-medal"></i>
+        <h3 data-ar="ماجستير القانون" data-en="Master's in Law" data-fr="Master en Droit">ماجستير القانون</h3>
+        <p data-ar="بحث متخصص في القانون العام والجنائي" data-en="Specialized research in public and criminal law" data-fr="Recherche spécialisée en droit public et pénal">بحث متخصص في القانون العام والجنائي</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="values-section">
+    <h2 data-ar="💎 قيمنا" data-en="💎 Our Values" data-fr="💎 Nos Valeurs">💎 قيمنا</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <i class="fas fa-handshake"></i>
+        <h3 data-ar="النزاهة" data-en="Integrity" data-fr="Intégrité">النزاهة</h3>
+        <p data-ar="نلتزم بأعلى معايير الأخلاقيات المهنية في كل تعاملاتنا" data-en="We adhere to the highest standards of professional ethics in all our dealings" data-fr="Nous adhérons aux plus hauts standards d'éthique professionnelle dans toutes nos relations">نلتزم بأعلى معايير الأخلاقيات المهنية في كل تعاملاتنا</p>
+      </div>
+      <div class="value-card">
+        <i class="fas fa-bullseye"></i>
+        <h3 data-ar="الدقة" data-en="Accuracy" data-fr="Précision">الدقة</h3>
+        <p data-ar="نهتم بأدق التفاصيل لضمان أفضل النتائج لعملائنا" data-en="We pay attention to the smallest details to ensure the best results for our clients" data-fr="Nous prêtons attention aux moindres détails pour assurer les meilleurs résultats pour nos clients">نهتم بأدق التفاصيل لضمان أفضل النتائج لعملائنا</p>
+      </div>
+      <div class="value-card">
+        <i class="fas fa-clock"></i>
+        <h3 data-ar="الالتزام" data-en="Commitment" data-fr="Engagement">الالتزام</h3>
+        <p data-ar="نحترم مواعيد التسليم ونلتزم بالجدول الزمني المتفق عليه" data-en="We respect delivery deadlines and adhere to the agreed schedule" data-fr="Nous respectons les délais de livraison et adhérons au calendrier convenu">نحترم مواعيد التسليم ونلتزم بالجدول الزمني المتفق عليه</p>
+      </div>
+      <div class="value-card">
+        <i class="fas fa-shield-alt"></i>
+        <h3 data-ar="السرية" data-en="Confidentiality" data-fr="Confidentialité">السرية</h3>
+        <p data-ar="نضمن سرية تامة لجميع بيانات العملاء وملفاتهم" data-en="We guarantee complete confidentiality for all client data and files" data-fr="Nous garantissons une confidentialité totale pour toutes les données et dossiers des clients">نضمن سرية تامة لجميع بيانات العملاء وملفاتهم</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="cta-box">
+    <h3 data-ar="📞 جاهزون لمساعدتك" data-en="📞 Ready to Help You" data-fr="📞 Prêts à Vous Aider">📞 جاهزون لمساعدتك</h3>
+    <p data-ar="تواصل معنا الآن للحصول على استشارة قانونية متخصصة من فريق محترف" data-en="Contact us now to get a specialized legal consultation from a professional team" data-fr="Contactez-nous maintenant pour obtenir une consultation juridique spécialisée d'une équipe professionnelle">تواصل معنا الآن للحصول على استشارة قانونية متخصصة من فريق محترف</p>
+    <a href="https://wa.me/201554797398" class="btn" target="_blank"><i class="fab fa-whatsapp"></i> <span data-ar="ابدأ محادثتك الآن" data-en="Start Your Conversation Now" data-fr="Commencez Votre Conversation Maintenant">ابدأ محادثتك الآن</span></a>
+  </div>
+</div>
+
+<footer>
+  <img src="https://i.ibb.co/Xxb6xd72/image.jpg" alt="الحقانية" class="footer-logo" loading="lazy">
+  <p style="display:none;">مكتب الحقانية للإستشارات القانونية</p>
+  <span id="visitorCounter" style="display:none;"></span>
+  <p data-ar="© 2026 الحقانية للإستشارات القانونية" data-en="© 2026 Haqania Legal Consultations" data-fr="© 2026 Haqania">© 2026 الحقانية للإستشارات القانونية</p>
+  <div class="footer-links">
+    <a href="https://www.facebook.com/profile.php?id=61575279803936" target="_blank"><i class="fab fa-facebook-square"></i> Haqania</a>
+    <a href="https://wa.me/201554797398" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <!-- ✅ تمت إضافة رابط سياسة الاسترجاع هنا -->
+    <a href="refund-policy.html" data-ar="سياسة الاسترجاع" data-en="Refund Policy" data-fr="Politique de Remboursement">سياسة الاسترجاع</a>
+  </div>
+  <div class="protection-notice">⚠️ جميع المحتويات محمية بحقوق الملكية الفكرية</div>
+</footer>
+
+<script>
+// ✅ حماية المحتوى: منع النسخ والقص، لكن السماح بالرايت كليك
+document.addEventListener('copy', e => { e.preventDefault(); alert('⚠️ المحتوى محمي بحقوق الملكية الفكرية'); });
+document.addEventListener('cut', e => { e.preventDefault(); });
+
+let currentLang = localStorage.getItem('siteLang') || 'ar';
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('siteLang', lang);
+  document.getElementById('mainHtml').lang = lang;
+  document.getElementById('mainHtml').dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn-'+lang).classList.add('active');
+  document.querySelectorAll('[data-ar][data-en][data-fr]').forEach(el => {
+    const txt = el.getAttribute('data-'+lang);
+    if(txt) el.innerText = txt;
+  });
+}
+
+// Counter
+(function(){ var c=localStorage.getItem('haqania_visitor_count')||0; c++; localStorage.setItem('haqania_visitor_count',c); var el=document.getElementById('visitorCounter'); if(el) el.textContent=c; })();
+
+window.addEventListener('DOMContentLoaded', () => { setLang(currentLang); });
+</script>
+</body>
+</html>

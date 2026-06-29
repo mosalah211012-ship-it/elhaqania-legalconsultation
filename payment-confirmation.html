@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تم استلام الدفع - Haqania Legal Consultations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e3a5f);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 600px;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #b59461;
+            backdrop-filter: blur(10px);
+        }
+        .success-icon {
+            font-size: 5rem;
+            color: #28a745;
+            margin-bottom: 20px;
+            animation: bounce 1s ease;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        h1 {
+            color: #b59461;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .message {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        .countdown {
+            background: rgba(181, 148, 97, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.1rem;
+        }
+        .countdown span {
+            color: #b59461;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        .whatsapp-btn:hover {
+            background: #1ebc57;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37,211,102,0.4);
+        }
+        .note {
+            margin-top: 30px;
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✅</div>
+        <h1>تم استلام الدفع بنجاح!</h1>
+        <p class="message">
+            شكراً لك على الدفع.<br>
+            تم تأكيد استلام مبلغ $100 للاستشارة العاجلة.<br>
+            سيتم تحويلك إلى واتساب للتواصل الفوري مع المستشار القانوني.
+        </p>
+        
+        <div class="countdown">
+            جاري التحويل خلال <span id="countdown">5</span> ثوانٍ...
+        </div>
+        
+        <a href="https://wa.me/201554797398?text=Hello%20Haqania%2C%20I%20just%20paid%20%24100%20for%20an%20URGENT%20consultation.%20Please%20contact%20me%20as%20soon%20as%20possible." 
+           class="whatsapp-btn" 
+           id="whatsappBtn"
+           target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            تواصل عبر واتساب الآن
+        </a>
+        
+        <p class="note">
+            لو مفيش تحويل أوتوماتيك، اضغط على الزر أعلاه 👆
+        </p>
+    </div>
+
+    <script>
+        // Countdown and auto-redirect
+        let seconds = 5;
+        const countdownEl = document.getElementById('countdown');
+        const whatsappUrl = 'https://wa.me/201554797398?text=Hello%20Haqania%2C%20I%20just%20paid%20%24100%20for%20an%20URGENT%20consultation.%20Please%20contact%20me%20as%20soon%20as%20possible.';
+        
+        const countdownInterval = setInterval(() => {
+            seconds--;
+            countdownEl.textContent = seconds;
+            
+            if (seconds <= 0) {
+                clearInterval(countdownInterval);
+                window.location.href = whatsappUrl;
+            }
+        }, 1000);
+        
+        // Also redirect on button click
+        document.getElementById('whatsappBtn').addEventListener('click', function() {
+            clearInterval(countdownInterval);
+        });
+    </script>
+</body>
+</html>

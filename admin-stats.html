@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة تحكم الحقانية الشاملة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+    :root { --primary: #b59461; --dark: #111; --light: #f8f9fa; --danger: #dc3545; --success: #28a745; --warning: #ffc107; --info: #17a2b8; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Cairo', sans-serif; background: var(--light); color: #333; padding-bottom: 50px; }
+    header { background: var(--dark); color: white; padding: 20px; text-align: center; border-bottom: 4px solid var(--primary); margin-bottom: 20px; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+    
+    /* Login */
+    #loginScreen { display: flex; justify-content: center; align-items: center; height: 80vh; }
+    .login-box { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-align: center; width: 100%; max-width: 400px; }
+    .login-box input { width: 100%; padding: 12px; margin: 15px 0; border: 2px solid #ddd; border-radius: 5px; font-family: 'Cairo'; }
+    
+    /* Tabs */
+    .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; border-bottom: 2px solid #ddd; padding-bottom: 10px; overflow-x: auto; }
+    .tab-btn { padding: 10px 20px; background: #eee; border: none; border-radius: 5px; cursor: pointer; font-family: 'Cairo'; font-weight: 600; transition: 0.3s; white-space: nowrap; }
+    .tab-btn.active { background: var(--primary); color: white; }
+    .tab-content { display: none; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); animation: fadeIn 0.3s; }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Forms */
+    .form-section { background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #eee; margin-bottom: 25px; }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+    .form-group { margin-bottom: 10px; }
+    .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; color: #555; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: 'Cairo'; font-size: 0.95rem; }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .lang-group { border-right: 3px solid var(--primary); padding-right: 10px; margin-bottom: 15px; background: #fff; padding: 10px; border-radius: 5px; }
+    .lang-title { font-size: 0.85rem; color: var(--primary); font-weight: bold; margin-bottom: 5px; display: block; }
+
+    /* Buttons */
+    .btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-family: 'Cairo'; font-weight: 600; color: white; transition: 0.3s; font-size: 0.9rem; display: inline-block; }
+    .btn-primary { background: var(--primary); }
+    .btn-danger { background: var(--danger); }
+    .btn-success { background: var(--success); }
+    .btn-warning { background: var(--warning); color: #000; }
+    .btn-info { background: var(--info); }
+    .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn:disabled { background: #ccc; cursor: not-allowed; }
+
+    /* Tables */
+    .table-responsive { overflow-x: auto; margin-top: 20px; }
+    table { width: 100%; border-collapse: collapse; min-width: 900px; }
+    th, td { padding: 12px 15px; border: 1px solid #ddd; text-align: right; vertical-align: middle; }
+    th { background: var(--dark); color: white; white-space: nowrap; }
+    tr:nth-child(even) { background: #f9f9f9; }
+    tr:hover { background: #f1f1f1; }
+    .action-cell { display: flex; gap: 5px; flex-wrap: wrap; }
+    .status-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+    .status-active { background: #d4edda; color: #155724; }
+    .status-pending { background: #fff3cd; color: #856404; }
+    .status-refused { background: #f8d7da; color: #721c24; }
+
+    .loading { text-align: center; padding: 30px; color: var(--primary); font-weight: bold; font-size: 1.1rem; }
+    .empty-msg { text-align: center; color: #777; padding: 20px; font-style: italic; }
+
+    /* Modal */
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+    .modal-content { background-color: #fefefe; margin: 5% auto; padding: 25px; border: 1px solid #888; width: 80%; max-width: 800px; border-radius: 10px; position: relative; animation: slideDown 0.3s; }
+    @keyframes slideDown { from {top: -50px; opacity: 0;} to {top: 0; opacity: 1;} }
+    .close { color: #aaa; float: left; font-size: 28px; font-weight: bold; cursor: pointer; }
+    .close:hover { color: black; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>⚖️ لوحة تحكم الحقانية الشاملة</h1>
+    <p>إدارة كاملة: تقييمات، تعليقات، مقالات، مكتبة، أحكام، نماذج، أجهزة، ودليل المحاكم (Multilingual)</p>
+</header>
+
+<div class="container">
+    <!-- Login -->
+    <div id="loginScreen">
+        <div class="login-box">
+            <h2>تسجيل دخول المسؤول</h2>
+            <input type="password" id="adminPassword" placeholder="كلمة المرور">
+            <button class="btn btn-primary" style="width:100%" onclick="checkLogin()">دخول آمن</button>
+            <p id="loginMsg" style="color:red; margin-top:10px; font-size:0.9rem;"></p>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" style="display:none;">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('reviews')">التقييمات</button>
+            <button class="tab-btn" onclick="switchTab('comments')">تعليقات المقالات</button>
+            <button class="tab-btn" onclick="switchTab('articles')">المقالات</button>
+            <button class="tab-btn" onclick="switchTab('library')">المكتبة القانونية</button>
+            <button class="tab-btn" onclick="switchTab('judgments')">الأحكام القضائية</button>
+            <button class="tab-btn" onclick="switchTab('products')">النماذج المدفوعة</button>
+            <button class="tab-btn" onclick="switchTab('devices')">الأجهزة المسجلة</button>
+            <!-- ✅ زر جديد لدليل المحاكم -->
+            <button class="tab-btn" onclick="switchTab('extras')">دليل المحاكم والخدمات</button>
+        </div>
+
+        <!-- 1. التقييمات -->
+        <div id="reviews" class="tab-content active">
+            <h2><i class="fas fa-star"></i> إدارة التقييمات</h2>
+            <div id="reviewsLoading" class="loading">جاري جلب التقييمات...</div>
+            <div class="table-responsive">
+                <table id="reviewsTable"><thead><tr><th>ID</th><th>الاسم</th><th>التقييم</th><th>النص</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody></tbody></table>
+            </div>
+        </div>
+
+        <!-- 2. تعليقات المقالات -->
+        <div id="comments" class="tab-content">
+            <h2><i class="fas fa-comments"></i> تعليقات الزوار (تفاعلي)</h2>
+            <div id="commentsLoading" class="loading">جاري جلب التعليقات...</div>
+            <div class="table-responsive">
+                <table id="commentsTable"><thead><tr><th>ID</th><th>المقال</th><th>الاسم</th><th>التعليق / الرد</th><th>التاريخ</th><th>إجراءات</th></tr></thead><tbody></tbody></table>
+            </div>
+        </div>
+
+        <!-- 3. المقالات -->
+        <div id="articles" class="tab-content">
+            <h2><i class="fas fa-newspaper"></i> إدارة المقالات</h2>
+            <div class="form-section">
+                <h3>➕ إضافة مقال جديد</h3>
+                <div class="form-grid">
+                    <div class="form-group" style="grid-column: 1/-1;"><label>رابط الصورة</label><input type="text" id="artImage" placeholder="https://..."></div>
+                    <div class="form-group"><label>التصنيف</label><input type="text" id="artCategory"></div>
+                    
+                    <div class="lang-group" style="grid-column: 1/-1; display:grid; grid-template-columns: 1fr 1fr;">
+                        <span class="lang-title">🇸🇦 عربي</span>
+                        <div class="form-group"><input type="text" id="artTitleAr" placeholder="العنوان بالعربي"></div>
+                        <div class="form-group" style="grid-column: 1/-1;"><textarea id="artContentAr" placeholder="المحتوى بالعربي"></textarea></div>
+                    </div>
+                    <div class="lang-group" style="grid-column: 1/-1; display:grid; grid-template-columns: 1fr 1fr;">
+                        <span class="lang-title">🇬🇧 English</span>
+                        <div class="form-group"><input type="text" id="artTitleEn" placeholder="Title in English"></div>
+                        <div class="form-group" style="grid-column: 1/-1;"><textarea id="artContentEn" placeholder="Content in English"></textarea></div>
+                    </div>
+                    <div class="lang-group" style="grid-column: 1/-1; display:grid; grid-template-columns: 1fr 1fr;">
+                        <span class="lang-title">🇫🇷 Français</span>
+                        <div class="form-group"><input type="text" id="artTitleFr" placeholder="Titre en français"></div>
+                        <div class="form-group" style="grid-column: 1/-1;"><textarea id="artContentFr" placeholder="Contenu en français"></textarea></div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="addNewItem('add_article', 'articles')">نشر المقال</button>
+            </div>
+            <h3>📂 المقالات المنشورة</h3>
+            <div id="articlesLoading" class="loading">جاري التحميل...</div>
+            <div class="table-responsive"><table id="articlesTable"><thead><tr><th>ID</th><th>العنوان (AR)</th><th>التصنيف</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody></tbody></table></div>
+        </div>
+
+        <!-- 4. المكتبة -->
+        <div id="library" class="tab-content">
+            <h2><i class="fas fa-book"></i> إدارة المكتبة القانونية</h2>
+            <div class="form-section">
+                <h3>➕ إضافة كتاب / بحث جديد</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>المؤلف</label><input type="text" id="libAuthor"></div>
+                    <div class="form-group"><label>التصنيف</label><input type="text" id="libCategory"></div>
+                    <div class="form-group" style="grid-column: 1/-1;"><label>رابط الملف (PDF)</label><input type="text" id="libLink"></div>
+                    
+                    <div class="lang-group" style="grid-column: 1/-1;">
+                        <span class="lang-title">🇸🇦 عربي</span>
+                        <input type="text" id="libTitleAr" placeholder="العنوان بالعربي" style="width:100%; margin-bottom:5px;">
+                        <textarea id="libDescAr" placeholder="وصف بالعربي"></textarea>
+                    </div>
+                    <div class="lang-group" style="grid-column: 1/-1;">
+                        <span class="lang-title">🇬🇧 English</span>
+                        <input type="text" id="libTitleEn" placeholder="Title in English" style="width:100%; margin-bottom:5px;">
+                        <textarea id="libDescEn" placeholder="Description in English"></textarea>
+                    </div>
+                    <div class="lang-group" style="grid-column: 1/-1;">
+                        <span class="lang-title">🇫🇷 Français</span>
+                        <input type="text" id="libTitleFr" placeholder="Titre en français" style="width:100%; margin-bottom:5px;">
+                        <textarea id="libDescFr" placeholder="Description en français"></textarea>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="addNewItem('add_library', 'library')">إضافة للمكتبة</button>
+            </div>
+            <h3>📚 الكتب والأبحاث الموجودة</h3>
+            <div id="libraryLoading" class="loading">جاري التحميل...</div>
+            <div class="table-responsive"><table id="libraryTable"><thead><tr><th>ID</th><th>العنوان (AR)</th><th>المؤلف</th><th>الرابط</th><th>إجراءات</th></tr></thead><tbody></tbody></table></div>
+        </div>
+
+        <!-- 5. الأحكام -->
+        <div id="judgments" class="tab-content">
+            <h2><i class="fas fa-gavel"></i> إدارة الأحكام القضائية</h2>
+            <div class="form-section">
+                <h3>➕ إضافة حكم جديد</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>المحكمة</label><input type="text" id="judCourt"></div>
+                    <div class="form-group" style="grid-column: 1/-1;"><label>رابط الملف</label><input type="text" id="judLink"></div>
+                    
+                    <div class="lang-group" style="grid-column: 1/-1;">
+                        <span class="lang-title">🇸🇦 عربي</span>
+                        <input type="text" id="judTitleAr" placeholder="عنوان الحكم" style="width:100%; margin-bottom:5px;">
+                        <textarea id="judSummaryAr" placeholder="ملخص الحكم"></textarea>
+                    </div>
+                    <div class="lang-group" style="grid-column: 1/-1;">
+                        <span class="lang-title">🇬🇧 English</span>
+                        <input type="text" id="judTitleEn" placeholder="Judgment Title" style="width:100%; margin-bottom:5px;">
+                        <textarea id="judSummaryEn" placeholder="Summary"></textarea>
+                    </div>
+                    <div class="lang-group" style="grid-column: 1/-1;">
+                        <span class="lang-title">🇫🇷 Français</span>
+                        <input type="text" id="judTitleFr" placeholder="Titre du jugement" style="width:100%; margin-bottom:5px;">
+                        <textarea id="judSummaryFr" placeholder="Résumé"></textarea>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="addNewItem('add_judgment', 'judgments')">إضافة الحكم</button>
+            </div>
+            <h3>⚖️ الأحكام المنشورة</h3>
+            <div id="judgmentsLoading" class="loading">جاري التحميل...</div>
+            <div class="table-responsive"><table id="judgmentsTable"><thead><tr><th>ID</th><th>العنوان (AR)</th><th>المحكمة</th><th>إجراءات</th></tr></thead><tbody></tbody></table></div>
+        </div>
+
+        <!-- 6. المنتجات -->
+        <div id="products" class="tab-content">
+            <h2><i class="fas fa-file-contract"></i> إدارة النماذج القانونية</h2>
+            <div class="form-section">
+                <h3>➕ إضافة نموذج جديد</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>السعر (ج.م)</label><input type="number" id="prodPrice"></div>
+                    <div class="form-group" style="grid-column: 1/-1;"><label>رابط الملف</label><input type="text" id="prodLink"></div>
+                    
+                    <div class="lang-group" style="grid-column: 1/-1;">
+                        <span class="lang-title">🇸🇦 عربي</span>
+                        <input type="text" id="prodNameAr" placeholder="اسم النموذج" style="width:100%; margin-bottom:5px;">
+                        <textarea id="prodShortAr" placeholder="وصف مختصر" rows="2"></textarea>
+                        <textarea id="prodFullAr" placeholder="الوصف الكامل" rows="3"></textarea>
+                    </div>
+                    <div class="lang-group" style="grid-column: 1/-1;">
+                        <span class="lang-title">🇬🇧 English</span>
+                        <input type="text" id="prodNameEn" placeholder="Product Name" style="width:100%; margin-bottom:5px;">
+                        <textarea id="prodShortEn" placeholder="Short Description" rows="2"></textarea>
+                        <textarea id="prodFullEn" placeholder="Full Description" rows="3"></textarea>
+                    </div>
+                    <div class="lang-group" style="grid-column: 1/-1;">
+                        <span class="lang-title">🇫🇷 Français</span>
+                        <input type="text" id="prodNameFr" placeholder="Nom du produit" style="width:100%; margin-bottom:5px;">
+                        <textarea id="prodShortFr" placeholder="Description courte" rows="2"></textarea>
+                        <textarea id="prodFullFr" placeholder="Description complète" rows="3"></textarea>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="addNewItem('add_product', 'products')">إضافة المنتج</button>
+            </div>
+            <h3>💼 النماذج المتاحة</h3>
+            <div id="productsLoading" class="loading">جاري التحميل...</div>
+            <div class="table-responsive"><table id="productsTable"><thead><tr><th>ID</th><th>الاسم (AR)</th><th>السعر</th><th>إجراءات</th></tr></thead><tbody></tbody></table></div>
+        </div>
+
+        <!-- 7. الأجهزة -->
+        <div id="devices" class="tab-content">
+            <h2><i class="fas fa-laptop-code"></i> إدارة الأجهزة المسموحة</h2>
+            <div class="form-section" style="background:#eef2f5; border-color:#ccddee;">
+                <h3>تسجيل جهازك الحالي</h3>
+                <p>Device ID: <span id="currentDeviceId" style="font-family:monospace; background:#fff; padding:5px; border-radius:4px; color:var(--primary);">جاري التحديد...</span></p>
+                <div style="margin-top:10px;">
+                    <input type="text" id="deviceNameInput" placeholder="أدخل اسماً للجهاز" style="padding:8px; width:60%; border:1px solid #ccc; border-radius:4px;">
+                    <button class="btn btn-success" onclick="registerMyDevice()">تسجيل الجهاز</button>
+                </div>
+            </div>
+            <h3>قائمة الأجهزة المسجلة</h3>
+            <div id="devicesLoading" class="loading">جاري التحميل...</div>
+            <div class="table-responsive"><table id="devicesTable"><thead><tr><th>ID الجهاز</th><th>الاسم</th><th>تاريخ التسجيل</th><th>حذف</th></tr></thead><tbody></tbody></table></div>
+        </div>
+
+        <!-- ✅ 8. دليل المحاكم والخدمات (جديد) -->
+        <div id="extras" class="tab-content">
+            <h2><i class="fas fa-map-marked-alt"></i> إدارة دليل المحاكم والخدمات</h2>
+            <div class="form-section">
+                <h3>➕ إضافة خدمة / رابط جديد</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>الاسم (Name)</label><input type="text" id="extName" placeholder="مثال: نيابة أسرة المنتزة"></div>
+                    <div class="form-group"><label>التصنيف (Category)</label>
+                        <select id="extCategory">
+                            <option value="مواقع هامة">مواقع هامة</option>
+                            <option value="توزيع عمل">توزيع عمل</option>
+                            <option value="أجندات">أجندات</option>
+                            <option value="تليجرام">تليجرام</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="grid-column: 1/-1;"><label>الرابط (Link)</label><input type="text" id="extLink" placeholder="https://..."></div>
+                </div>
+                <button class="btn btn-primary" onclick="addNewItem('add_extra', 'extras')">إضافة للدليل</button>
+            </div>
+            <h3>📋 العناصر الموجودة</h3>
+            <div id="extrasLoading" class="loading">جاري التحميل...</div>
+            <div class="table-responsive"><table id="extrasTable"><thead><tr><th>ID</th><th>الاسم</th><th>التصنيف</th><th>الرابط</th><th>إجراءات</th></tr></thead><tbody></tbody></table></div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal للتعديل -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle">تعديل العنصر</h2>
+        <div id="modalFormContainer"></div>
+        <div style="margin-top:20px; text-align:left;">
+            <button class="btn btn-success" id="saveEditBtn">حفظ التعديلات</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbwyCWHX5yhkM4Knyt_55Ad0MzWXT3t2DUngCq_8zhgUCTPZ7qGHFdnEKiJwyvBH-dwE/exec';
+let currentPassword = '';
+let currentDeviceId = '';
+let currentEditData = {};
+
+function generateDeviceId() {
+    return 'dev_' + Math.random().toString(36).substr(2, 9) + '_' + navigator.platform;
+}
+
+function checkLogin() {
+    const pass = document.getElementById('adminPassword').value;
+    if(pass === 'Mohamed221995') {
+        currentPassword = pass;
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        currentDeviceId = generateDeviceId();
+        document.getElementById('currentDeviceId').innerText = currentDeviceId;
+        loadTabData('reviews');
+    } else {
+        document.getElementById('loginMsg').innerText = '❌ كلمة المرور خطأ!';
+    }
+}
+
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
+    loadTabData(tabId);
+}
+
+function loadTabData(tabId) {
+    let sheetName = '';
+    let tableId = '';
+    let renderFunc = null;
+
+    if(tabId === 'reviews') { sheetName='reviews'; tableId='reviewsTable'; renderFunc=renderReviews; }
+    else if(tabId === 'comments') { sheetName='comments'; tableId='commentsTable'; renderFunc=renderComments; }
+    else if(tabId === 'articles') { sheetName='articles'; tableId='articlesTable'; renderFunc=renderGenericTable; }
+    else if(tabId === 'library') { sheetName='library'; tableId='libraryTable'; renderFunc=renderGenericTable; }
+    else if(tabId === 'judgments') { sheetName='judgments'; tableId='judgmentsTable'; renderFunc=renderGenericTable; }
+    else if(tabId === 'products') { sheetName='products'; tableId='productsTable'; renderFunc=renderGenericTable; }
+    else if(tabId === 'devices') { sheetName='devices'; tableId='devicesTable'; renderFunc=renderDevices; }
+    // ✅ إضافة حالة extras
+    else if(tabId === 'extras') { sheetName='extras'; tableId='extrasTable'; renderFunc=renderExtras; }
+
+    if(!sheetName) return;
+
+    const loader = document.getElementById(tabId + 'Loading');
+    if(loader) loader.style.display = 'block';
+    
+    fetch(`${API_URL}?action=get_data&sheet=${sheetName}`)
+        .then(res => res.json())
+        .then(data => {
+            if(loader) loader.style.display = 'none';
+            const tbody = document.querySelector(`#${tableId} tbody`);
+            tbody.innerHTML = '';
+            if(data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="10" class="empty-msg">لا توجد بيانات لعرضها</td></tr>';
+                return;
+            }
+            renderFunc(data, tbody, sheetName);
+        })
+        .catch(err => {
+            console.error(err);
+            if(loader) loader.innerText = '❌ حدث خطأ في الاتصال';
+        });
+}
+
+// --- دوال العرض ---
+function renderReviews(data, tbody, sheetName) {
+    data.forEach(row => {
+        const tr = document.createElement('tr');
+        const stars = '⭐'.repeat(row.rating || 0);
+        const statusClass = row.status === 'active' ? 'status-active' : (row.status === 'refused' ? 'status-refused' : 'status-pending');
+        let actions = '';
+        const rowNum = row.row_number;
+        
+        if(row.status !== 'active') actions += `<button class="btn btn-success" style="padding:5px 10px; font-size:0.8rem" onclick="updateStatus('${sheetName}', ${rowNum}, 'active')">اعتماد</button> `;
+        if(row.status !== 'refused') actions += `<button class="btn btn-warning" style="padding:5px 10px; font-size:0.8rem" onclick="updateStatus('${sheetName}', ${rowNum}, 'refused')">رفض</button> `;
+        actions += `<button class="btn btn-danger" style="padding:5px 10px; font-size:0.8rem" onclick="deleteItem('${sheetName}', ${rowNum})">حذف</button>`;
+
+        tr.innerHTML = `
+            <td>${row.id}</td>
+            <td>${row.name}</td>
+            <td>${stars}</td>
+            <td style="max-width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${row.text}">${row.text}</td>
+            <td><span class="status-badge ${statusClass}">${row.status}</span></td>
+            <td class="action-cell">${actions}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function renderComments(data, tbody, sheetName) {
+    data.forEach(row => {
+        const tr = document.createElement('tr');
+        const isReply = row.parent_id && row.parent_id != '';
+        if(isReply) tr.style.background = '#fffbf0';
+        const rowNum = row.row_number;
+        const actions = `
+            <button class="btn btn-info" style="padding:4px 8px; font-size:0.75rem" onclick="promptReply(${row.id})">رد</button>
+            <button class="btn btn-danger" style="padding:4px 8px; font-size:0.75rem" onclick="deleteItem('${sheetName}', ${rowNum})">حذف</button>
+        `;
+        tr.innerHTML = `
+            <td>${row.id}</td>
+            <td>${row.article_id}</td>
+            <td>${row.name}</td>
+            <td>${isReply ? '<i class="fas fa-reply" style="color:var(--primary)"></i> ' : ''}${row.comment}</td>
+            <td>${row.date ? new Date(row.date).toLocaleDateString('ar-EG') : '-'}</td>
+            <td class="action-cell">${actions}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function renderGenericTable(data, tbody, sheetName) {
+    data.forEach(row => {
+        const tr = document.createElement('tr');
+        const rowNum = row.row_number;
+        let cells = '';
+        let editFields = {};
+
+        if(sheetName === 'articles') {
+            cells = `<td>${row.id}</td><td>${row.title_ar || 'بدون عنوان'}</td><td>${row.category}</td><td><span class="status-badge ${row.status==='active'?'status-active':'status-pending'}">${row.status}</span></td>`;
+            editFields = {title_ar: row.title_ar, title_en: row.title_en, title_fr: row.title_fr, content_ar: row.content_ar, content_en: row.content_en, content_fr: row.content_fr, image: row.image, category: row.category};
+        } else if(sheetName === 'library') {
+            cells = `<td>${row.id}</td><td>${row.title_ar || 'بدون عنوان'}</td><td>${row.author}</td><td><a href="${row.file_link}" target="_blank" style="color:var(--primary)">رابط</a></td>`;
+            editFields = {title_ar: row.title_ar, title_en: row.title_en, title_fr: row.title_fr, author: row.author, description_ar: row.description_ar, description_en: row.description_en, description_fr: row.description_fr, file_link: row.file_link, category: row.category};
+        } else if(sheetName === 'judgments') {
+            cells = `<td>${row.id}</td><td>${row.title_ar || 'بدون عنوان'}</td><td>${row.court}</td>`;
+            editFields = {title_ar: row.title_ar, title_en: row.title_en, title_fr: row.title_fr, court: row.court, summary_ar: row.summary_ar, summary_en: row.summary_en, summary_fr: row.summary_fr, file_link: row.file_link};
+        } else if(sheetName === 'products') {
+            cells = `<td>${row.id}</td><td>${row.name_ar || 'بدون اسم'}</td><td>${row.price} ج.م</td>`;
+            editFields = {name_ar: row.name_ar, name_en: row.name_en, name_fr: row.name_fr, price: row.price, short_desc_ar: row.short_desc_ar, short_desc_en: row.short_desc_en, short_desc_fr: row.short_desc_fr, full_desc_ar: row.full_desc_ar, full_desc_en: row.full_desc_en, full_desc_fr: row.full_desc_fr, file_link: row.file_link};
+        }
+
+        const actions = `
+            <button class="btn btn-warning" style="padding:5px 10px; font-size:0.8rem" onclick='openEditModal("${sheetName}", ${row.id}, ${JSON.stringify(editFields).replace(/'/g, "&apos;")})'>تعديل</button>
+            <button class="btn btn-danger" style="padding:5px 10px; font-size:0.8rem" onclick="deleteItem('${sheetName}', ${rowNum})">حذف</button>
+        `;
+
+        tr.innerHTML = `${cells}<td class="action-cell">${actions}</td>`;
+        tbody.appendChild(tr);
+    });
+}
+
+function renderDevices(data, tbody, sheetName) {
+    data.forEach(row => {
+        const tr = document.createElement('tr');
+        const rowNum = row.row_number || (data.indexOf(row) + 2); 
+        const dateStr = row.registered_date ? new Date(row.registered_date).toLocaleDateString('ar-EG') : '-';
+        tr.innerHTML = `
+            <td style="font-family:monospace">${row.device_id}</td>
+            <td>${row.device_name}</td>
+            <td>${dateStr}</td>
+            <td><button class="btn btn-danger" style="padding:5px 10px; font-size:0.8rem" onclick="deleteItem('${sheetName}', ${rowNum})">حذف</button></td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+// ✅ دالة عرض جديدة لـ extras
+function renderExtras(data, tbody, sheetName) {
+    data.forEach(row => {
+        const tr = document.createElement('tr');
+        const rowNum = row.row_number;
+        // التعامل مع أسماء الأعمدة سواء كانت Capital أو Small
+        const name = row.Name || row.name || 'بدون اسم';
+        const category = row.Category || row.category || 'عام';
+        const link = row.Link || row.link || '#';
+        
+        tr.innerHTML = `
+            <td>${row.id || '-'}</td>
+            <td>${name}</td>
+            <td>${category}</td>
+            <td><a href="${link}" target="_blank" style="color:var(--primary)">رابط</a></td>
+            <td class="action-cell">
+                <button class="btn btn-danger" style="padding:5px 10px; font-size:0.8rem" onclick="deleteItem('${sheetName}', ${rowNum})">حذف</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+// --- دوال الإجراءات ---
+
+async function updateStatus(sheet, rowNum, status) {
+    if(!confirm(`هل أنت متأكد من تغيير الحالة إلى ${status}؟`)) return;
+    const formData = new FormData();
+    formData.append('action', 'update_status');
+    formData.append('sheet', sheet);
+    formData.append('row_index', rowNum);
+    formData.append('status', status);
+    formData.append('password', currentPassword);
+    await sendRequest(formData, sheet === 'reviews' ? 'reviews' : 'comments');
+}
+
+async function deleteItem(sheet, rowNum) {
+    if(!confirm('⚠️ هل أنت متأكد من الحذف نهائياً؟')) return;
+    const formData = new FormData();
+    formData.append('action', 'delete_row');
+    formData.append('sheet', sheet);
+    formData.append('row_index', rowNum);
+    formData.append('password', currentPassword);
+    await sendRequest(formData, getTabIdFromSheet(sheet));
+}
+
+// ✅ الدالة المعدلة لإضافة العناصر الجديدة
+async function addNewItem(action, sheetName) {
+    const data = {};
+    if(action === 'add_article') {
+        data.title_ar = document.getElementById('artTitleAr').value;
+        data.title_en = document.getElementById('artTitleEn').value;
+        data.title_fr = document.getElementById('artTitleFr').value;
+        data.content_ar = document.getElementById('artContentAr').value;
+        data.content_en = document.getElementById('artContentEn').value;
+        data.content_fr = document.getElementById('artContentFr').value;
+        data.image = document.getElementById('artImage').value;
+        data.category = document.getElementById('artCategory').value;
+    } else if(action === 'add_library') {
+        data.title_ar = document.getElementById('libTitleAr').value;
+        data.title_en = document.getElementById('libTitleEn').value;
+        data.title_fr = document.getElementById('libTitleFr').value;
+        data.author = document.getElementById('libAuthor').value;
+        data.description_ar = document.getElementById('libDescAr').value;
+        data.description_en = document.getElementById('libDescEn').value;
+        data.description_fr = document.getElementById('libDescFr').value;
+        data.file_link = document.getElementById('libLink').value;
+        data.category = document.getElementById('libCategory').value;
+    } else if(action === 'add_judgment') {
+        data.title_ar = document.getElementById('judTitleAr').value;
+        data.title_en = document.getElementById('judTitleEn').value;
+        data.title_fr = document.getElementById('judTitleFr').value;
+        data.court = document.getElementById('judCourt').value;
+        data.summary_ar = document.getElementById('judSummaryAr').value;
+        data.summary_en = document.getElementById('judSummaryEn').value;
+        data.summary_fr = document.getElementById('judSummaryFr').value;
+        data.file_link = document.getElementById('judLink').value;
+    } else if(action === 'add_product') {
+        data.name_ar = document.getElementById('prodNameAr').value;
+        data.name_en = document.getElementById('prodNameEn').value;
+        data.name_fr = document.getElementById('prodNameFr').value;
+        data.price = document.getElementById('prodPrice').value;
+        data.short_desc_ar = document.getElementById('prodShortAr').value;
+        data.short_desc_en = document.getElementById('prodShortEn').value;
+        data.short_desc_fr = document.getElementById('prodShortFr').value;
+        data.full_desc_ar = document.getElementById('prodFullAr').value;
+        data.full_desc_en = document.getElementById('prodFullEn').value;
+        data.full_desc_fr = document.getElementById('prodFullFr').value;
+        data.file_link = document.getElementById('prodLink').value;
+    } 
+    // ✅ حالة جديدة لإضافة عناصر دليل المحاكم
+    else if(action === 'add_extra') {
+        data.Name = document.getElementById('extName').value;
+        data.Category = document.getElementById('extCategory').value;
+        data.Link = document.getElementById('extLink').value;
+    }
+
+    if(!Object.values(data).some(v => v && v.trim() !== '')) {
+        alert('❌ يرجى ملء بعض الحقول على الأقل');
+        return;
+    }
+
+    const btn = event.target;
+    const originalText = btn.innerText;
+    btn.disabled = true;
+    btn.innerText = 'جاري الإضافة...';
+
+    try {
+        const formData = new FormData();
+        formData.append('action', action);
+        formData.append('password', currentPassword);
+        formData.append('postData', JSON.stringify(data));
+
+        const res = await fetch(API_URL, {
+            method: 'POST',
+            body: formData
+        });
+        
+        const text = await res.text();
+        console.log("Server Response:", text);
+        
+        let result;
+        try {
+            result = JSON.parse(text);
+        } catch (e) {
+            throw new Error("السيرفر أرسل رد غير مفهوم: " + text);
+        }
+        
+        if(result.status === 'success') {
+            alert('✅ تمت الإضافة بنجاح!');
+            document.querySelectorAll(`#${sheetName} input, #${sheetName} textarea, #${sheetName} select`).forEach(el => el.value = '');
+            loadTabData(getTabIdFromSheet(sheetName));
+        } else {
+            alert('❌ فشل الإضافة: ' + (result.message || 'خطأ غير معروف'));
+        }
+    } catch(e) {
+        alert('❌ خطأ في الاتصال: ' + e.message);
+        console.error(e);
+    } finally {
+        btn.disabled = false;
+        btn.innerText = originalText;
+    }
+}
+
+// --- دوال التعديل (Modal) ---
+
+function openEditModal(sheetName, id, fields) {
+    currentEditData = { sheetName, id, fields };
+    const modal = document.getElementById('editModal');
+    const container = document.getElementById('modalFormContainer');
+    document.getElementById('modalTitle').innerText = `تعديل عنصر في ${sheetName}`;
+    
+    let html = '<div class="form-grid">';
+    for (const [key, value] of Object.entries(fields)) {
+        if(key.includes('ar')) {
+            html += `<div class="lang-group" style="grid-column: 1/-1;"><span class="lang-title">🇸🇦 عربي (${key})</span><textarea id="edit_${key}" rows="3">${value || ''}</textarea></div>`;
+        } else if(key.includes('en')) {
+            html += `<div class="lang-group" style="grid-column: 1/-1;"><span class="lang-title">🇬🇧 English (${key})</span><textarea id="edit_${key}" rows="3">${value || ''}</textarea></div>`;
+        } else if(key.includes('fr')) {
+            html += `<div class="lang-group" style="grid-column: 1/-1;"><span class="lang-title">🇫🇷 Français (${key})</span><textarea id="edit_${key}" rows="3">${value || ''}</textarea></div>`;
+        } else {
+            html += `<div class="form-group"><label>${key}</label><input type="text" id="edit_${key}" value="${value || ''}"></div>`;
+        }
+    }
+    html += '</div>';
+    
+    container.innerHTML = html;
+    modal.style.display = "block";
+    document.getElementById('saveEditBtn').onclick = saveEdit;
+}
+
+function closeModal() {
+    document.getElementById('editModal').style.display = "none";
+}
+
+async function saveEdit() {
+    const data = {};
+    for (const key of Object.keys(currentEditData.fields)) {
+        const el = document.getElementById(`edit_${key}`);
+        if(el) data[key] = el.value;
+    }
+    
+    const params = new URLSearchParams();
+    params.append('action', 'update_item');
+    params.append('sheet', currentEditData.sheetName);
+    params.append('id', currentEditData.id);
+    params.append('password', currentPassword);
+    params.append('postData', JSON.stringify(data));
+
+    try {
+        const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params
+        });
+        
+        const text = await res.text();
+        let result;
+        try {
+            result = JSON.parse(text);
+        } catch (e) {
+            throw new Error("رد غير صحيح من السيرفر");
+        }
+
+        if(result.status === 'success') {
+            alert('✅ تم الحفظ بنجاح');
+            closeModal();
+            loadTabData(getTabIdFromSheet(currentEditData.sheetName));
+        } else {
+            alert('❌ فشل الحفظ: ' + result.message);
+        }
+    } catch(e) {
+        alert('❌ خطأ: ' + e.message);
+    }
+}
+
+// --- دوال مساعدة ---
+
+async function sendRequest(formData, tabToReload, callback) {
+    try {
+        const res = await fetch(API_URL, { method: 'POST', body: formData });
+        const text = await res.text();
+        let result;
+        try { result = JSON.parse(text); } catch(e) { throw new Error("رد غير مفهوم"); }
+        
+        if(result.status === 'success') {
+            alert('✅ تمت العملية بنجاح');
+            if(callback) callback();
+            loadTabData(tabToReload);
+        } else {
+            alert('❌ فشل العملية: ' + result.message);
+        }
+    } catch(e) {
+        alert('❌ خطأ في الاتصال: ' + e.message);
+    }
+}
+
+function promptReply(parentId) {
+    const text = prompt('اكتب ردك هنا:');
+    if(text) {
+        const params = new URLSearchParams();
+        params.append('action', 'add_comment');
+        params.append('password', currentPassword);
+        params.append('postData', JSON.stringify({parent_id: parentId, comment: text, name: 'الأستاذ محمد صلاح', article_id: 'general'}));
+        
+        fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params
+        }).then(res => res.text()).then(text => {
+            let result;
+            try { result = JSON.parse(text); } catch(e) { throw new Error("رد غير مفهوم"); }
+            
+            if(result.status === 'success') {
+                alert('✅ تم الرد بنجاح');
+                loadTabData('comments');
+            } else {
+                alert('❌ فشل الرد');
+            }
+        }).catch(err => alert('❌ خطأ: ' + err.message));
+    }
+}
+
+async function registerMyDevice() {
+    const name = document.getElementById('deviceNameInput').value;
+    if(!name) { alert('اكتب اسماً للجهاز'); return; }
+    
+    const params = new URLSearchParams();
+    params.append('action', 'register_device');
+    params.append('device_id', currentDeviceId);
+    params.append('device_name', name);
+    params.append('password', currentPassword);
+
+    try {
+        const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params
+        });
+        const text = await res.text();
+        let result;
+        try { result = JSON.parse(text); } catch(e) { throw new Error("رد غير مفهوم"); }
+
+        if(result.status === 'success') {
+            alert('✅ تم تسجيل الجهاز بنجاح!');
+            document.getElementById('deviceNameInput').value = '';
+            loadTabData('devices');
+        } else {
+            alert('❌ فشل التسجيل');
+        }
+    } catch(e) {
+        alert('❌ خطأ: ' + e.message);
+    }
+}
+
+function getTabIdFromSheet(sheetName) {
+    const map = { 
+        'reviews':'reviews', 
+        'comments':'comments', 
+        'articles':'articles', 
+        'library':'library', 
+        'judgments':'judgments', 
+        'products':'products', 
+        'devices':'devices',
+        'extras':'extras' // ✅ إضافة extras للخريطة
+    };
+    return map[sheetName] || 'reviews';
+}
+
+window.onclick = function(event) {
+    if (event.target == document.getElementById('editModal')) {
+        closeModal();
+    }
+}
+</script>
+</body>
+</html>

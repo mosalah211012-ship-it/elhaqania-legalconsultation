@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-ar="الحقانية للإستشارات القانونية - الصفحة الرئيسية" data-en="Haqania Legal Consultations - Home Page" data-fr="Haqania Consultations Juridiques - Page d'Accueil">الحقانية للإستشارات القانونية - الصفحة الرئيسية</title>
+
+<!-- SEO & Meta -->
+<meta name="description" content="مكتب الحقانية للإستشارات القانونية - خدمات قانونية متكاملة في مصر: تمثيل قانوني، استشارات، صياغة عقود، أبحاث علمية، حاسبة ميراث، ودليل المحاكم.">
+<meta name="keywords" content="محامي مصر، استشارة قانونية، عقود قانونية، ميراث، أحوال شخصية، أبحاث قانونية، الحقانية، حاسبة الميراث، نماذج قانونية، دليل المحاكم">
+<meta name="author" content="الأستاذ محمد صلاح - الحقانية للإستشارات القانونية">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://elhaqania-legalconsultation.netlify.app/index.html">
+<meta name="google-site-verification" content="TOLjNwob98CBhRQ2ur97bJXgKzth6vSdwB4pQCmJcio" />
+
+<!-- Styles -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+:root { --gold: #b59461; --gold-dark: #9c7e4d; --dark: #111; --white: #fff; --grey: #f8f9fa; --danger: #dc3545; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Cairo', sans-serif; background: var(--white); color: #333; line-height: 1.7; 
+    /* ✅ حماية متقدمة: منع تحديد النص */
+    -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; 
+}
+/* ✅ السماح بالتحديد فقط داخل الحقول (لو فيه فورم) */
+input, textarea { user-select: text; -webkit-user-select: text; }
+
+header { background: var(--white); border-bottom: 3px solid var(--gold); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.logo-box { display: flex; align-items: center; gap: 12px; }
+.logo-box img { height: 70px; width: 70px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; }
+.logo-text { font-weight: 700; font-size: 1.1rem; }
+.logo-sub { font-size: 0.85rem; color: var(--gold); }
+.nav-menu { display: flex; gap: 8px; list-style: none; padding: 0; align-items: center; flex-wrap: wrap; }
+.nav-menu a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.85rem; padding: 8px 12px; border-radius: 6px; transition: all 0.3s; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--gold); background: var(--grey); }
+.lang-switcher { display: flex; gap: 5px; margin-right: 10px; }
+.lang-btn { background: var(--gold); color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
+.lang-btn.active { background: var(--dark); }
+.hero { background: linear-gradient(135deg, var(--dark), var(--gold)); color: white; padding: 80px 5%; text-align: center; }
+.hero h1 { font-size: 2rem; margin-bottom: 15px; }
+.hero-features { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; }
+.hero-features span { background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 20px; font-size: 0.85rem; }
+.hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+.btn { padding: 14px 35px; border-radius: 30px; text-decoration: none; font-weight: 700; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s; font-family: 'Cairo', sans-serif; }
+.btn-gold { background: var(--gold); color: white; }
+.btn-gold:hover { background: var(--gold-dark); transform: translateY(-2px); }
+.section { padding: 50px 8%; }
+.section-title { text-align: center; margin-bottom: 40px; }
+.section-title h2 { color: var(--gold); font-size: 1.8rem; margin-bottom: 10px; }
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; align-items: center; justify-content: center; }
+.modal.active { display: flex; }
+.modal-content { background: var(--white); padding: 35px; border-radius: 16px; max-width: 500px; width: 90%; text-align: center; position: relative; animation: modalSlide 0.3s ease; }
+@keyframes modalSlide { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.modal-close { position: absolute; top: 15px; left: 15px; background: var(--danger); color: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; }
+.modal-content h3 { color: var(--gold); margin-bottom: 20px; font-size: 1.4rem; }
+.price-tag { background: var(--gold); color: white; padding: 12px 30px; border-radius: 25px; font-size: 1.5rem; font-weight: 700; margin: 20px 0; display: inline-block; }
+.payment-info { text-align: right; background: var(--grey); padding: 20px; border-radius: 10px; margin: 20px 0; }
+.payment-info h4 { color: var(--gold); margin-bottom: 15px; font-size: 1rem; }
+.payment-info p { margin: 10px 0; color: #333; font-size: 0.95rem; }
+.payment-info strong { color: var(--dark); }
+.whatsapp-btn { background: #25d366; color: white; padding: 14px 35px; border-radius: 30px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s; margin-top: 15px; }
+.whatsapp-btn:hover { background: #1ebc57; transform: translateY(-2px); }
+.sections-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+.section-card { background: var(--white); border: 2px solid #eee; border-radius: 16px; padding: 30px; text-align: center; transition: all 0.3s; }
+.section-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); border-color: var(--gold); }
+.section-card i { font-size: 3rem; color: var(--gold); margin-bottom: 20px; }
+.section-card h3 { color: var(--dark); margin-bottom: 15px; font-size: 1.2rem; }
+.section-card p { color: #666; line-height: 1.6; margin-bottom: 20px; font-size: 0.9rem; }
+
+/* ✅ تنسيقات الأقسام الديناميكية الجديدة */
+.dynamic-section { background: var(--grey); padding: 40px 8%; border-top: 2px solid var(--gold); }
+.dynamic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 30px; }
+.dynamic-card { background: white; padding: 20px; border-radius: 12px; border: 1px solid #ddd; transition: 0.3s; cursor: pointer; }
+.dynamic-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: var(--gold); }
+.dynamic-card h4 { color: var(--dark); margin-bottom: 10px; font-size: 1.1rem; }
+.dynamic-card p { color: #666; font-size: 0.9rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.dynamic-card .meta { font-size: 0.8rem; color: var(--gold); margin-top: 15px; font-weight: bold; }
+
+footer { background: var(--dark); color: white; padding: 40px 8% 25px; text-align: center; border-top: 5px solid var(--gold); }
+.footer-logo { height: 90px; width: 90px; border-radius: 50%; border: 3px solid var(--gold); margin-bottom: 20px; }
+.footer-links { margin-top: 20px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+.footer-links a { color: #ccc; text-decoration: none; font-size: 1.5rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+.footer-links a:hover { color: var(--gold); transform: translateY(-3px); }
+.protection-notice { font-size: 0.8rem; color: #aaa; margin-top: 20px; padding-top: 15px; border-top: 1px solid #444; }
+.whatsapp-float { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 9999; text-decoration: none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); }
+.whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(37,211,102,0.6); }
+@media (max-width: 768px) { header { flex-direction: column; gap: 15px; } .nav-menu { justify-content: center; } .hero h1 { font-size: 1.5rem; } .section { padding: 35px 5%; } .hero-buttons { flex-direction: column; align-items: center; } }
+</style>
+</head>
+<body oncontextmenu="return true"> <!-- ✅ سمحنا بالرايت كليك هنا -->
+
+<a href="https://wa.me/201554797398" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<header>
+  <div class="logo-box">
+    <img src="https://i.ibb.co/Xxb6xd72/image.jpg" alt="الحقانية" loading="lazy">
+    <div>
+      <div class="logo-text" data-ar="الحقانية للإستشارات القانونية" data-en="Haqania Legal Consultations" data-fr="Haqania Consultations Juridiques">الحقانية للإستشارات القانونية</div>
+      <div class="logo-sub" data-ar="الأستاذ محمد صلاح" data-en="Mr. Mohamed Salah" data-fr="M. Mohamed Salah">الأستاذ محمد صلاح</div>
+    </div>
+  </div>
+  
+  <!-- ✅ ✅ ✅ القائمة العلوية بالترتيب الجديد المطلوب ✅ ✅ ✅ -->
+  <ul class="nav-menu">
+    <li><a href="index.html" class="active" data-ar="الرئيسية" data-en="Home" data-fr="Accueil">الرئيسية</a></li>
+    <li><a href="about.html" data-ar="من نحن" data-en="About Us" data-fr="À Propos">من نحن</a></li>
+    <li><a href="services.html" data-ar="خدماتنا" data-en="Services" data-fr="Services">خدماتنا</a></li>
+    <li><a href="library.html" data-ar="المكتبة القانونية" data-en="Legal Library" data-fr="Bibliothèque Juridique">المكتبة القانونية</a></li>
+    <li><a href="foreigners-services.html" data-ar="خدمات الأجانب" data-en="Foreigners Services" data-fr="Services Étrangers">خدمات الأجانب</a></li>
+    <li><a href="family.html" data-ar="الأحوال الشخصية" data-en="Family Law" data-fr="Droit de la Famille">الأحوال الشخصية</a></li>
+    <li><a href="inheritance.html" data-ar="المواريث" data-en="Inheritance" data-fr="Héritage">الميراث</a></li>
+    <li><a href="courts-guide.html" data-ar="دليل المحاكم" data-en="Courts Guide" data-fr="Guide des Tribunaux">دليل المحاكم</a></li>
+    <li><a href="articles.html" data-ar="المقالات" data-en="Articles" data-fr="Articles">المقالات</a></li>
+    <li><a href="faq.html" data-ar="أسئلة شائعة" data-en="FAQ" data-fr="FAQ">أسئلة شائعة</a></li>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('ar')" id="btn-ar">عربي</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+    </div>
+  </ul>
+</header>
+
+<div class="hero">
+  <h1 data-ar="مكتب الحقانية للإستشارات القانونية" data-en="Haqania Legal Consultations Office" data-fr="Cabinet Haqania Consultations Juridiques">مكتب الحقانية للإستشارات القانونية</h1>
+  <div class="hero-features">
+    <span data-ar="خبرة عملية في النزاعات الواقعية" data-en="Practical Experience in Real Disputes" data-fr="Expérience Pratique dans les Litiges Réels">خبرة عملية في النزاعات الواقعية</span>
+    <span data-ar="فهم قانوني دقيق" data-en="Accurate Legal Understanding" data-fr="Compréhension Juridique Précise">فهم قانوني دقيق</span>
+    <span data-ar="سرية تامة" data-en="Complete Confidentiality" data-fr="Confidentialité Totale">سرية تامة</span>
+    <span data-ar="نماذج جاهزة" data-en="Ready Templates" data-fr="Modèles Prêts">نماذج جاهزة</span>
+  </div>
+  <div class="hero-buttons">
+    <button class="btn btn-gold" onclick="openModal('egypt')"><i class="fas fa-phone-alt"></i><span data-ar="استشارة المصريين" data-en="Consultation for Egyptians" data-fr="Consultation pour Égyptiens">استشارة المصريين</span></button>
+    <button class="btn btn-gold" onclick="openModal('foreign')"><i class="fas fa-globe"></i><span data-ar="استشارة الأجانب" data-en="Consultation for Foreigners" data-fr="Consultation pour Étrangers">استشارة الأجانب</span></button>
+    <a href="https://wa.me/201554797398?text=مرحبا، أريد طلب بحث علمي" class="btn" style="background:var(--dark); color:var(--gold); border:2px solid var(--gold);" target="_blank"><i class="fas fa-book-open"></i><span data-ar="أبحاث علمية" data-en="Scientific Research" data-fr="Recherche Scientifique">أبحاث علمية</span></a>
+  </div>
+</div>
+
+<!-- Modal Sections -->
+<div class="section">
+  <div class="section-title"><h2 data-ar="💳 احصل على استشارتك الآن" data-en="💳 Get Your Consultation Now" data-fr="💳 Obtenez Votre Consultation Maintenant">💳 احصل على استشارتك الآن</h2></div>
+  
+  <div class="modal" id="modalEgypt">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('egypt')">×</button>
+      <h3 data-ar="📞 استشارة قانونية للمصريين" data-en="📞 Legal Consultation for Egyptians" data-fr="📞 Consultation Juridique pour Égyptiens">📞 استشارة قانونية للمصريين</h3>
+      <div class="price-tag" data-ar="300 جنيه" data-en="500 EGP" data-fr="500 EGP">300 جنيه</div>
+      <div class="payment-info">
+        <h4 data-ar="💳 طريقة الدفع:" data-en="💳 Payment Method:" data-fr="💳 Mode de Paiement:">💳 طريقة الدفع:</h4>
+        <p data-ar="لحجز استشارة، الرجاء دفع 300 جنيه عبر إنستا باي:" data-en="To book, please pay 300 EGP via InstaPay:" data-fr="Pour réserver, veuillez payer 300 EGP via InstaPay:">لحجز استشارة، الرجاء دفع 300 جنيه عبر إنستا باي:</p>
+        <p><strong>💳 إنستا باي:</strong> 01278683280</p>
+      </div>
+      <a href="https://wa.me/201554797398?text=لحجز%20استشارة" class="whatsapp-btn" target="_blank"><i class="fab fa-whatsapp"></i><span data-ar="إرسال إثبات الدفع" data-en="Send Payment Proof" data-fr="Envoyer Preuve de Paiement">إرسال إثبات الدفع</span></a>
+    </div>
+  </div>
+  
+  <div class="modal" id="modalForeign">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('foreign')">×</button>
+      <h3 data-ar="🌍 استشارة قانونية للأجانب" data-en="🌍 Legal Consultation for Foreigners" data-fr="🌍 Consultation Juridique pour Étrangers">🌍 استشارة قانونية للأجانب</h3>
+      
+      <div style="background: var(--grey); padding: 25px; border-radius: 12px; margin: 20px 0; border-right: 4px solid var(--gold);">
+        <p style="font-size: 1.1rem; color: var(--dark); margin-bottom: 20px; font-weight: 600;" data-ar="لحجز استشارة قانونية، الرجاء دفع مبلغ 25 دولار عن طريق الرابط التالي:" data-en="To book a legal consultation, please pay $25 via the link below:" data-fr="Pour réserver une consultation juridique, veuillez payer 25$ via le lien ci-dessous:">
+          لحجز استشارة قانونية، الرجاء دفع مبلغ 25 دولار عن طريق الرابط التالي:
+        </p>
+        
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NZ58WNL6JH77A&return=https%3A%2F%2Fwa.me%2F201554797398" target="_blank" class="whatsapp-btn" style="width: 100%; justify-content: center; font-size: 1.1rem;">
+          <i class="fab fa-paypal"></i>
+          <span data-ar="ادفع 25 دولار الآن" data-en="Pay $25 Now" data-fr="Payer 25$ Maintenant">ادفع 25 دولار الآن</span>
+        </a>
+        
+        <p style="font-size: 0.85rem; color: var(--gray); margin-top: 15px; text-align: center;" data-ar="بعد الدفع، اضغط 'Return to Merchant' للعودة للواتساب" data-en="After payment, click 'Return to Merchant' to return to WhatsApp" data-fr="Après paiement, cliquez sur 'Return to Merchant' pour revenir à WhatsApp">
+          بعد الدفع، اضغط 'Return to Merchant' للعودة للواتساب
+        </p>
+      </div>
+      
+      <a href="https://wa.me/201554797398?text=Payment%20Proof" class="whatsapp-btn" target="_blank" style="background: var(--dark);">
+        <i class="fab fa-whatsapp"></i>
+        <span data-ar="إرسال إثبات الدفع" data-en="Send Payment Proof" data-fr="Envoyer Preuve de Paiement">إرسال إثبات الدفع</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Static Cards -->
+  <div class="sections-grid">
+    <a href="family.html" class="section-card"><i class="fas fa-users"></i><h3 data-ar="الأحوال الشخصية" data-en="Family Law" data-fr="Droit de la Famille">الأحوال الشخصية</h3><p data-ar="نماذج قانونية معتمدة لجميع دعاوى الأسرة." data-en="Approved legal templates for family cases." data-fr="Modèles juridiques pour cas familiaux.">نماذج قانونية معتمدة لجميع دعاوى الأسرة.</p><span class="btn btn-gold" style="font-size:0.85rem; padding:10px 25px;">تصفح النماذج</span></a>
+    <a href="inheritance.html" class="section-card"><i class="fas fa-chart-pie"></i><h3 data-ar="قسم الميراث" data-en="Inheritance Section" data-fr="Section Héritage">قسم الميراث</h3><p data-ar="حاسبة ميراث شاملة + أحكام الميراث التفصيلية." data-en="Comprehensive inheritance calculator + rulings." data-fr="Calculateur d'héritage + décisions.">حاسبة ميراث شاملة + أحكام الميراث التفصيلية.</p><span class="btn btn-gold" style="font-size:0.85rem; padding:10px 25px;">دخول القسم</span></a>
+    
+    <a href="courts-guide.html" class="section-card"><i class="fas fa-map-marked-alt"></i><h3 data-ar="دليل المحاكم والخدمات" data-en="Courts Guide & Services" data-fr="Guide des Tribunaux">دليل المحاكم والخدمات</h3><p data-ar="توزيع العمل، أجندات الجلسات، وقنوات تليجرام الرسمية." data-en="Work distribution, court agendas, and official Telegram channels." data-fr="Répartition du travail, agendas et chaînes Telegram officielles.">توزيع العمل، أجندات الجلسات، وقنوات تليجرام الرسمية.</p><span class="btn btn-gold" style="font-size:0.85rem; padding:10px 25px;">دخول الدليل</span></a>
+
+    <a href="foreigners-services.html" class="section-card"><i class="fas fa-globe"></i><h3 data-ar="خدمات الأجانب" data-en="Foreigners Services" data-fr="Services Étrangers">خدمات الأجانب</h3><p data-ar="حلول قانونية شاملة مصممة خصيصاً للأجانب في مصر" data-en="Comprehensive legal solutions tailored for foreigners in Egypt" data-fr="Solutions juridiques complètes adaptées aux étrangers en Égypte">حلول قانونية شاملة مصممة خصيصاً للأجانب في مصر</p><span class="btn btn-gold" style="font-size:0.85rem; padding:10px 25px;">دخول القسم</span></a>
+
+    <a href="articles.html" class="section-card"><i class="fas fa-newspaper"></i><h3 data-ar="المقالات القانونية" data-en="Legal Articles" data-fr="Articles Juridiques">المقالات القانونية</h3><p data-ar="مقالات قانونية متخصصة في مختلف المجالات." data-en="Specialized legal articles." data-fr="Articles juridiques spécialisés.">مقالات قانونية متخصصة في مختلف المجالات.</p><span class="btn btn-gold" style="font-size:0.85rem; padding:10px 25px;">قراءة المقالات</span></a>
+    <a href="services.html" class="section-card"><i class="fas fa-briefcase"></i><h3 data-ar="خدماتنا" data-en="Our Services" data-fr="Nos Services">خدماتنا</h3><p data-ar="تمثيل قانوني، استشارات، صياغة عقود، أبحاث علمية." data-en="Legal representation, consultations, contracts." data-fr="Représentation, consultations, contrats.">تمثيل قانوني، استشارات، صياغة عقود، أبحاث علمية.</p><span class="btn btn-gold" style="font-size:0.85rem; padding:10px 25px;">اعرف المزيد</span></a>
+  </div>
+</div>
+
+<!-- ✅ قسم أحدث المقالات (ديناميكي) -->
+<div class="dynamic-section">
+  <div class="section-title">
+    <h2 data-ar="📰 أحدث المقالات القانونية" data-en="📰 Latest Legal Articles" data-fr="📰 Derniers Articles Juridiques">📰 أحدث المقالات القانونية</h2>
+    <p data-ar="تحديث مستمر من مكتب الحقانية" data-en="Continuous updates from Haqania" data-fr="Mises à jour continues de Haqania">تحديث مستمر من مكتب الحقانية</p>
+  </div>
+  <div id="latestArticles" class="dynamic-grid">
+    <div class="loading" style="grid-column: 1/-1; text-align:center; padding:20px;">جاري تحميل المقالات...</div>
+  </div>
+  <div style="text-align:center; margin-top:30px;">
+    <a href="articles.html" class="btn btn-gold" data-ar="عرض كل المقالات" data-en="View All Articles" data-fr="Voir Tous les Articles">عرض كل المقالات</a>
+  </div>
+</div>
+
+<!-- ✅ قسم أحدث النماذج (ديناميكي) -->
+<div class="dynamic-section" style="background:white;">
+  <div class="section-title">
+    <h2 data-ar="📄 أحدث النماذج والعقود" data-en="📄 Latest Templates & Contracts" data-fr="📄 Derniers Modèles & Contrats">📄 أحدث النماذج والعقود</h2>
+    <p data-ar="نماذج جاهزة للتحميل الفوري" data-en="Ready templates for instant download" data-fr="Modèles prêts à télécharger">نماذج جاهزة للتحميل الفوري</p>
+  </div>
+  <div id="latestProducts" class="dynamic-grid">
+    <div class="loading" style="grid-column: 1/-1; text-align:center; padding:20px;">جاري تحميل النماذج...</div>
+  </div>
+  <div style="text-align:center; margin-top:30px;">
+    <a href="family.html" class="btn btn-gold" data-ar="عرض كل النماذج" data-en="View All Templates" data-fr="Voir Tous les Modèles">عرض كل النماذج</a>
+  </div>
+</div>
+
+<footer>
+  <img src="https://i.ibb.co/Xxb6xd72/image.jpg" alt="الحقانية" class="footer-logo" loading="lazy">
+  <p style="display:none;">مكتب الحقانية للإستشارات القانونية</p>
+  <span id="visitorCounter" style="display:none;"></span>
+  <p data-ar="© 2026 الحقانية للإستشارات القانونية" data-en="© 2026 Haqania Legal Consultations" data-fr="© 2026 Haqania">© 2026 الحقانية للإستشارات القانونية</p>
+  <div class="footer-links">
+    <a href="https://www.facebook.com/profile.php?id=61575279803936" target="_blank"><i class="fab fa-facebook-square"></i> Haqania</a>
+    <a href="https://wa.me/201554797398" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <a href="refund-policy.html" data-ar="سياسة الاسترجاع" data-en="Refund Policy" data-fr="Politique de Remboursement">سياسة الاسترجاع</a>
+  </div>
+  <div class="protection-notice">⚠️ جميع المحتويات محمية بحقوق الملكية الفكرية</div>
+</footer>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbwyCWHX5yhkM4Knyt_55Ad0MzWXT3t2DUngCq_8zhgUCTPZ7qGHFdnEKiJwyvBH-dwE/exec';
+
+// ✅ حماية المحتوى: منع النسخ والقص، لكن السماح بالرايت كليك
+document.addEventListener('copy', e => { e.preventDefault(); alert('⚠️ المحتوى محمي بحقوق الملكية الفكرية'); });
+document.addEventListener('cut', e => { e.preventDefault(); });
+
+let currentLang = localStorage.getItem('siteLang') || 'ar';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('siteLang', lang);
+  document.getElementById('mainHtml').lang = lang;
+  document.getElementById('mainHtml').dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn-'+lang).classList.add('active');
+  document.querySelectorAll('[data-ar][data-en][data-fr]').forEach(el => {
+    const txt = el.getAttribute('data-'+lang);
+    if(txt) el.innerText = txt;
+  });
+  loadLatestArticles();
+  loadLatestProducts();
+}
+
+async function loadLatestArticles() {
+  const container = document.getElementById('latestArticles');
+  try {
+    const res = await fetch(`${API_URL}?action=get_data&sheet=articles`);
+    const data = await res.json();
+    const articles = data.filter(a => a.status === 'active').slice(0, 3);
+    if(articles.length === 0) { container.innerHTML = '<p style="grid-column:1/-1; text-align:center;">لا توجد مقالات حالياً</p>'; return; }
+    let html = '';
+    articles.forEach(art => {
+      const title = currentLang === 'ar' ? (art.title_ar||art.title) : currentLang === 'en' ? (art.title_en||art.title) : (art.title_fr||art.title);
+      const content = currentLang === 'ar' ? (art.content_ar||art.content) : currentLang === 'en' ? (art.content_en||art.content) : (art.content_fr||art.content);
+      const short = content ? content.substring(0, 100) + '...' : '';
+      html += `<div class="dynamic-card" onclick="window.location.href='article-detail.html?id=${art.id}'"><h4>${title}</h4><p>${short}</p><div class="meta">${art.date || ''}</div></div>`;
+    });
+    container.innerHTML = html;
+  } catch(e) { container.innerHTML = '<p style="color:red; text-align:center;">خطأ في التحميل</p>'; }
+}
+
+async function loadLatestProducts() {
+  const container = document.getElementById('latestProducts');
+  try {
+    const res = await fetch(`${API_URL}?action=get_data&sheet=products`);
+    const data = await res.json();
+    const products = data.filter(p => p.status === 'active').slice(0, 3);
+    if(products.length === 0) { container.innerHTML = '<p style="grid-column:1/-1; text-align:center;">لا توجد نماذج حالياً</p>'; return; }
+    let html = '';
+    products.forEach(prod => {
+      const name = currentLang === 'ar' ? (prod.name_ar||prod.name) : currentLang === 'en' ? (prod.name_en||prod.name) : (prod.name_fr||prod.name);
+      const price = prod.price || '0';
+      html += `<div class="dynamic-card" onclick="window.location.href='family.html'"><h4>${name}</h4><p style="color:var(--gold); font-weight:bold; margin-top:10px;">${price} ج.م</p></div>`;
+    });
+    container.innerHTML = html;
+  } catch(e) { container.innerHTML = '<p style="color:red; text-align:center;">خطأ في التحميل</p>'; }
+}
+
+function openModal(type) { if(type==='egypt') document.getElementById('modalEgypt').classList.add('active'); else document.getElementById('modalForeign').classList.add('active'); }
+function closeModal(type) { if(type==='egypt') document.getElementById('modalEgypt').classList.remove('active'); else document.getElementById('modalForeign').classList.remove('active'); }
+window.onclick = e => { if(e.target.classList.contains('modal')) e.target.classList.remove('active'); };
+
+(function(){ var c=localStorage.getItem('haqania_visitor_count')||0; c++; localStorage.setItem('haqania_visitor_count',c); var el=document.getElementById('visitorCounter'); if(el) el.textContent=c; })();
+
+window.addEventListener('DOMContentLoaded', () => { setLang(currentLang); loadLatestArticles(); loadLatestProducts(); });
+</script>
+</body>
+</html>

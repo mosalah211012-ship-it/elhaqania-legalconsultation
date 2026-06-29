@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-ar="دليل المحاكم والخدمات - الحقانية" data-en="Courts Guide & Services - Haqania" data-fr="Guide des Tribunaux - Haqania">دليل المحاكم والخدمات - الحقانية</title>
+
+<!-- SEO & Meta -->
+<meta name="description" content="دليل شامل للمحاكم المصرية، توزيع العمل القضائي، أجندات الجلسات، وقنوات التليجرام الرسمية.">
+<meta name="keywords" content="دليل المحاكم، توزيع العمل القضائي، أجندات الأسرة، تليجرام نيابات، وزارة العدل، الحقانية">
+<meta name="author" content="الأستاذ محمد صلاح - الحقانية للإستشارات القانونية">
+<link rel="canonical" href="https://elhaqania-legalconsultation.netlify.app/courts-guide.html">
+<meta name="google-site-verification" content="TOLjNwob98CBhRQ2ur97bJXgKzth6vSdwB4pQCmJcio" />
+
+<!-- Styles -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+:root { --gold: #b59461; --gold-dark: #9c7e4d; --dark: #111; --white: #fff; --grey: #f8f9fa; --telegram: #0088cc; --gov: #2c3e50; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Cairo', sans-serif; background: var(--white); color: #333; line-height: 1.7; user-select: none; }
+header { background: var(--white); border-bottom: 3px solid var(--gold); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+.logo-box { display: flex; align-items: center; gap: 12px; }
+.logo-box img { height: 70px; width: 70px; border-radius: 50%; border: 2px solid var(--gold); }
+.logo-text { font-weight: 700; font-size: 1.1rem; }
+.logo-sub { font-size: 0.85rem; color: var(--gold); }
+.nav-menu { display: flex; gap: 8px; list-style: none; padding: 0; align-items: center; flex-wrap: wrap; }
+.nav-menu a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.85rem; padding: 8px 12px; border-radius: 6px; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--gold); background: var(--grey); }
+.lang-switcher { display: flex; gap: 5px; margin-right: 10px; }
+.lang-btn { background: var(--gold); color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; }
+.lang-btn.active { background: var(--dark); }
+.hero-small { background: linear-gradient(135deg, var(--dark), var(--gold)); color: white; padding: 60px 5%; text-align: center; }
+.hero-small h1 { font-size: 2rem; margin-bottom: 10px; }
+.container { padding: 50px 8%; }
+
+/* ✅ أدوات التحكم */
+.controls-container { margin-bottom: 30px; background: var(--grey); padding: 20px; border-radius: 12px; border: 1px solid #ddd; }
+.search-box { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-family: 'Cairo'; font-size: 1rem; margin-bottom: 15px; box-sizing: border-box; }
+.search-box:focus { border-color: var(--gold); outline: none; }
+.filter-buttons { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.filter-btn { background: white; border: 2px solid var(--gold); color: var(--gold); padding: 8px 20px; border-radius: 20px; cursor: pointer; font-family: 'Cairo'; font-weight: 600; transition: 0.3s; font-size: 0.9rem; }
+.filter-btn:hover, .filter-btn.active { background: var(--gold); color: white; }
+
+.guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+.guide-card { background: var(--white); border: 2px solid #eee; border-radius: 16px; padding: 25px; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.guide-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); border-color: var(--gold); }
+.card-icon { font-size: 2.5rem; margin-bottom: 15px; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+.icon-gov { background: #eef2f5; color: var(--gov); }
+.icon-telegram { background: #e0f7fa; color: var(--telegram); }
+.icon-file { background: #fff8e1; color: var(--gold); }
+.icon-agenda { background: #fce4ec; color: #d81b60; }
+
+.guide-title { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+.guide-category { font-size: 0.75rem; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; background: #f0f0f0; padding: 4px 10px; border-radius: 12px; }
+.btn-visit { background: var(--gold); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; text-align: center; transition: 0.3s; display: inline-block; width: 100%; box-sizing: border-box; }
+.btn-visit.telegram { background: var(--telegram); }
+.btn-visit:hover { opacity: 0.9; transform: translateY(-2px); }
+
+.loading { text-align: center; padding: 40px; color: var(--gold); font-size: 1.2rem; }
+
+footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-align: center; border-top: 5px solid var(--gold); margin-top: 50px; }
+.footer-logo { height: 90px; width: 90px; border-radius: 50%; border: 3px solid var(--gold); margin-bottom: 20px; }
+.footer-links { margin-top: 25px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+.footer-links a { color: #ccc; text-decoration: none; font-size: 1.5rem; }
+.footer-links a:hover { color: var(--gold); }
+.protection-notice { font-size: 0.85rem; color: #aaa; margin-top: 25px; padding-top: 20px; border-top: 1px solid #444; }
+.whatsapp-float { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 9999; text-decoration: none; }
+@media (max-width: 768px) { header { flex-direction: column; gap: 15px; } .nav-menu { justify-content: center; } .hero-small h1 { font-size: 1.5rem; } .container { padding: 30px 5%; } .filter-buttons { justify-content: center; } }
+</style>
+</head>
+<body oncontextmenu="return false">
+
+<a href="https://wa.me/201554797398" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<header>
+  <div class="logo-box">
+    <img src="https://i.ibb.co/Xxb6xd72/image.jpg" alt="الحقانية" loading="lazy">
+    <div>
+      <div class="logo-text" data-ar="الحقانية للإستشارات القانونية" data-en="Haqania Legal Consultations" data-fr="Haqania Consultations Juridiques">الحقانية للإستشارات القانونية</div>
+      <div class="logo-sub" data-ar="الأستاذ محمد صلاح" data-en="Mr. Mohamed Salah" data-fr="M. Mohamed Salah">الأستاذ محمد صلاح</div>
+    </div>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="index.html" data-ar="الرئيسية" data-en="Home" data-fr="Accueil">الرئيسية</a></li>
+    <li><a href="about.html" data-ar="من نحن" data-en="About Us" data-fr="À Propos">من نحن</a></li>
+    <li><a href="services.html" data-ar="خدماتنا" data-en="Services" data-fr="Services">خدماتنا</a></li>
+    <li><a href="library.html" data-ar="المكتبة القانونية" data-en="Legal Library" data-fr="Bibliothèque Juridique">المكتبة القانونية</a></li>
+    <li><a href="foreigners-services.html" data-ar="خدمات الأجانب" data-en="Foreigners Services" data-fr="Services Étrangers">خدمات الأجانب</a></li>
+    <li><a href="family.html" data-ar="الأحوال الشخصية" data-en="Family Law" data-fr="Droit de la Famille">الأحوال الشخصية</a></li>
+    <li><a href="inheritance.html" data-ar="المواريث" data-en="Inheritance" data-fr="Héritage">الميراث</a></li>
+    <li><a href="courts-guide.html" class="active" data-ar="دليل المحاكم" data-en="Courts Guide" data-fr="Guide des Tribunaux">دليل المحاكم</a></li>
+    <li><a href="articles.html" data-ar="المقالات" data-en="Articles" data-fr="Articles">المقالات</a></li>
+    <li><a href="faq.html" data-ar="أسئلة شائعة" data-en="FAQ" data-fr="FAQ">أسئلة شائعة</a></li>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('ar')" id="btn-ar">عربي</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+    </div>
+  </ul>
+</header>
+
+<div class="hero-small">
+  <h1 data-ar="⚖️ دليل المحاكم والخدمات القضائية" data-en="Courts Guide & Judicial Services" data-fr="Guide des Tribunaux et Services Judiciaires">⚖️ دليل المحاكم والخدمات القضائية</h1>
+  <p data-ar="توزيع العمل، أجندات الجلسات، قنوات التليجرام، والبوابات الرسمية" data-en="Work distribution, court agendas, Telegram channels, and official portals" data-fr="Répartition du travail, agendas d'audience, chaînes Telegram et portails officiels">توزيع العمل، أجندات الجلسات، قنوات التليجرام، والبوابات الرسمية</p>
+</div>
+
+<div class="container">
+  <!-- ✅ أدوات البحث والفلترة -->
+  <div class="controls-container">
+    <input type="text" id="searchInput" class="search-box" placeholder="🔍 ابحث باسم المحكمة، النيابة، أو الخدمة..." onkeyup="applyFilters()">
+    <div class="filter-buttons" id="filterContainer">
+      <button class="filter-btn active" onclick="setFilter('all')" data-txt-ar="الكل" data-txt-en="All" data-txt-fr="Tout">الكل</button>
+      <button class="filter-btn" onclick="setFilter('مواقع هامة')" data-txt-ar="مواقع هامة" data-txt-en="Important Sites" data-txt-fr="Sites Importants">مواقع هامة</button>
+      <button class="filter-btn" onclick="setFilter('توزيع عمل')" data-txt-ar="توزيع عمل" data-txt-en="Work Distribution" data-txt-fr="Répartition du Travail">توزيع عمل</button>
+      <button class="filter-btn" onclick="setFilter('أجندات')" data-txt-ar="أجندات" data-txt-en="Agendas" data-txt-fr="Agendas">أجندات</button>
+      <button class="filter-btn" onclick="setFilter('تليجرام')" data-txt-ar="تليجرام" data-txt-en="Telegram" data-txt-fr="Telegram">تليجرام</button>
+    </div>
+  </div>
+
+  <div class="guide-grid" id="guideGrid">
+    <div class="loading" data-ar="جاري التحميل..." data-en="Loading..." data-fr="Chargement...">جاري التحميل...</div>
+  </div>
+</div>
+
+<footer>
+  <img src="https://i.ibb.co/Xxb6xd72/image.jpg" alt="الحقانية" class="footer-logo" loading="lazy">
+  <p style="display:none;">مكتب الحقانية للإستشارات القانونية</p>
+  <span id="visitorCounter" style="display:none;"></span>
+  <p data-ar="© 2026 الحقانية للإستشارات القانونية" data-en="© 2026 Haqania Legal Consultations" data-fr="© 2026 Haqania">© 2026 الحقانية للإستشارات القانونية</p>
+  <div class="footer-links">
+    <a href="https://www.facebook.com/profile.php?id=61575279803936" target="_blank"><i class="fab fa-facebook-square"></i> Haqania</a>
+    <a href="https://wa.me/201554797398" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <a href="refund-policy.html" data-ar="سياسة الاسترجاع" data-en="Refund Policy" data-fr="Politique de Remboursement">سياسة الاسترجاع</a>
+  </div>
+  <div class="protection-notice">⚠️ جميع المحتويات محمية بحقوق الملكية الفكرية</div>
+</footer>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbwyCWHX5yhkM4Knyt_55Ad0MzWXT3t2DUngCq_8zhgUCTPZ7qGHFdnEKiJwyvBH-dwE/exec';
+
+// ✅ البيانات الثابتة (اختياري - لو عايز تضيف بيانات جوه الكود كاحتياط)
+const staticData = [
+  // ممكن تضيف هنا بيانات لو الشيت اتقفل يومًا ما
+];
+
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('contextmenu', e => { if (e.target.tagName !== 'A') e.preventDefault(); });
+
+let currentLang = localStorage.getItem('siteLang') || 'ar';
+let currentFilter = 'all';
+let allData = [];
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('siteLang', lang);
+  document.getElementById('mainHtml').lang = lang;
+  document.getElementById('mainHtml').dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn-'+lang).classList.add('active');
+  
+  document.querySelectorAll('[data-ar][data-en][data-fr]').forEach(el => {
+    const txt = el.getAttribute('data-'+lang);
+    if(txt) el.innerText = txt;
+  });
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    const txt = btn.getAttribute('data-txt-'+lang);
+    if(txt) btn.innerText = txt;
+  });
+
+  applyFilters();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const imgs = document.querySelectorAll('img[loading="lazy"]');
+  imgs.forEach(img => { img.src = img.dataset.src || img.src; });
+  
+  let count = localStorage.getItem('haqania_visitor_count') || 0;
+  count++;
+  localStorage.setItem('haqania_visitor_count', count);
+  const counterEl = document.getElementById('visitorCounter');
+  if(counterEl) counterEl.textContent = count;
+
+  setLang(currentLang);
+  loadGuide();
+});
+
+async function loadGuide() {
+  const grid = document.getElementById('guideGrid');
+  
+  try {
+    // ✅ تم تعديل اسم الشيت إلى extras ليطابق الصورة
+    const res = await fetch(`${API_URL}?action=get_data&sheet=extras`);
+    let sheetData = [];
+    
+    if(res.ok) {
+      const json = await res.json();
+      if(json && json.length > 0) {
+        sheetData = json.map(item => ({
+          // ✅ قراءة الأعمدة بالإنجليزي كما هي في الشيت
+          name: item.Name || item.name,
+          link: item.Link || item.link,
+          category: item.Category || item.category || 'عام'
+        }));
+      }
+    }
+    
+    // دمج البيانات: الشيت أولاً ثم الثابت
+    allData = [...sheetData, ...staticData];
+    applyFilters();
+
+  } catch(e) {
+    console.error(e);
+    allData = staticData;
+    applyFilters();
+  }
+}
+
+function setFilter(category) {
+  currentFilter = category;
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  const grid = document.getElementById('guideGrid');
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  
+  grid.innerHTML = '';
+  
+  const filteredData = allData.filter(item => {
+    const name = item.name || '';
+    const category = item.category || '';
+    
+    const matchCategory = currentFilter === 'all' || category.includes(currentFilter);
+    const matchSearch = name.toLowerCase().includes(searchTerm) || category.toLowerCase().includes(searchTerm);
+    
+    return matchCategory && matchSearch;
+  });
+
+  if(filteredData.length === 0) {
+    grid.innerHTML = '<p style="text-align:center; color:#666; grid-column:1/-1; padding: 40px;">لا توجد نتائج مطابقة.</p>';
+    return;
+  }
+
+  filteredData.forEach(item => {
+    let iconClass = 'fa-building';
+    let iconType = 'icon-gov';
+    let btnText = 'زيارة الموقع';
+    let btnClass = '';
+
+    if(item.category.includes('تليجرام')) {
+      iconClass = 'fa-telegram-plane';
+      iconType = 'icon-telegram';
+      btnText = currentLang === 'ar' ? 'انضم للقناة' : 'Join Channel';
+      btnClass = 'telegram';
+    } else if(item.category.includes('أجند')) {
+      iconClass = 'fa-calendar-alt';
+      iconType = 'icon-agenda';
+      btnText = currentLang === 'ar' ? 'عرض الملف' : 'View File';
+    } else if(item.category.includes('توزيع')) {
+      iconClass = 'fa-balance-scale';
+      iconType = 'icon-file';
+      btnText = currentLang === 'ar' ? 'عرض التوزيع' : 'View Distribution';
+    }
+
+    const card = document.createElement('div');
+    card.className = 'guide-card';
+    card.innerHTML = `
+      <div class="card-icon ${iconType}"><i class="fas ${iconClass}"></i></div>
+      <div class="guide-category">${item.category}</div>
+      <div class="guide-title">${item.name}</div>
+      <a href="${item.link}" target="_blank" class="btn-visit ${btnClass}">
+        <i class="fas fa-external-link-alt"></i> ${btnText}
+      </a>
+    `;
+    grid.appendChild(card);
+  });
+}
+</script>
+</body>
+</html>

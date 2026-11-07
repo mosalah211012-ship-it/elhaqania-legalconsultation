@@ -6,7 +6,7 @@
 <title data-ar="حاسبة الميراث الشاملة - الحقانية للإستشارات القانونية" data-en="Comprehensive Inheritance Calculator - Haqania" data-fr="Calculateur d'Héritage Complet - Haqania">حاسبة الميراث الشاملة - الحقانية للإستشارات القانونية</title>
 
 <!-- SEO & Meta -->
-<meta name="description" content="حاسبة الميراث الشرعية الشاملة من الحقانية: احسب أنصبة الورثة بدقة حسب الشريعة الإسلامية والقانون المصري. أداة مجانية وسريعة.">
+<meta name="description" content="حاسبة الميراث الشرعية الشاملة من الحقانية: احسب أنصبة الورثة بدقة حسب الشريعة الإسلامية والقانون المصري. أداة مجانية وسريعة مع 40 وريث محتمل.">
 <meta name="keywords" content="حاسبة الميراث، ميراث شرعي، أنصبة الورثة، قانون الميراث مصر، الحقانية، شريعة إسلامية، قسمة تركة، فرائض">
 <meta name="author" content="الأستاذ محمد صلاح - الحقانية للإستشارات القانونية">
 <meta name="robots" content="index, follow">
@@ -15,7 +15,7 @@
 
 <!-- Open Graph & Twitter -->
 <meta property="og:title" content="حاسبة الميراث الشاملة - الحقانية للإستشارات القانونية">
-<meta property="og:description" content="احسب أنصبة الورثة بدقة حسب الشريعة الإسلامية والقانون المصري. أداة مجانية مع نتائج فورية وتنبيهات شرعية.">
+<meta property="og:description" content="احسب أنصبة الورثة بدقة حسب الشريعة الإسلامية والقانون المصري. أداة مجانية مع 40 وريث محتمل ونتائج فورية.">
 <meta property="og:image" content="https://i.ibb.co/Gf08dRs9/image-c77e535a.png">
 <meta property="og:url" content="https://elhaqania-legalconsultation.netlify.app/calculator.html">
 <meta property="og:type" content="website">
@@ -47,7 +47,6 @@ header { background: var(--white); border-bottom: 3px solid var(--gold); padding
 .calculator-box { background: var(--white); border: 2px solid var(--gold); border-radius: 16px; padding: 40px; max-width: 1200px; margin: 0 auto; }
 .calculator-box h2 { color: var(--gold); text-align: center; margin-bottom: 30px; }
 
-/* أقسام الإدخال الجديدة */
 .input-section { background: var(--grey); padding: 25px; border-radius: 12px; margin-bottom: 25px; border-right: 4px solid var(--gold); }
 .input-section h3 { color: var(--dark); margin-bottom: 20px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
 .input-section h3 i { color: var(--gold); }
@@ -58,20 +57,21 @@ header { background: var(--white); border-bottom: 3px solid var(--gold); padding
 .input-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
 .optional-text { color: #888; font-size: 0.85rem; margin-top: 5px; }
 
-/* شبكة الورثة */
-.heirs-section { margin-bottom: 30px; padding-bottom: 25px; border-bottom: 2px dashed #ddd; }
-.heirs-section:last-child { border-bottom: none; }
+/* ✅ تحسينات شبكة الورثة */
+.heirs-section { margin-bottom: 30px; }
+.heir-group { background: var(--grey); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-right: 4px solid var(--gold); }
+.heir-group-title { color: var(--gold); font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 2px dashed #ddd; }
+.heir-group-title i { font-size: 1.2rem; }
 .heirs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
 .heir-option { position: relative; background: var(--white); padding: 15px; border-radius: 10px; border: 2px solid #ddd; transition: all 0.3s; }
 .heir-option.has-heir { border-color: var(--gold); background: #fff9e6; }
-.heir-option label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 600; }
+.heir-option label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 600; font-size: 0.95rem; }
 .heir-option input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; accent-color: var(--gold); }
 .heir-count { margin-top: 12px; display: none; padding-top: 12px; border-top: 1px dashed #ddd; }
 .heir-count.active { display: block; }
 .heir-count label { display: block; margin-bottom: 8px; color: #666; font-size: 0.9rem; }
 .heir-count input { width: 100%; padding: 8px; border: 2px solid #ddd; border-radius: 6px; font-size: 1rem; text-align: center; }
 
-/* الأزرار والنتائج */
 .calc-btn { background: var(--gold); color: white; padding: 18px 50px; border: none; border-radius: 30px; cursor: pointer; font-weight: 700; font-size: 1.2rem; width: 100%; margin-top: 20px; transition: all 0.3s; }
 .calc-btn:hover { background: var(--gold-dark); transform: translateY(-2px); }
 .calc-result { display: none; margin-top: 35px; padding: 30px; background: var(--grey); border-radius: 12px; border-right: 4px solid var(--gold); }
@@ -97,6 +97,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
   .hero-small h1 { font-size: 1.5rem; } 
   .container { padding: 30px 5%; } 
   .heirs-grid { grid-template-columns: 1fr 1fr; } 
+  .calculator-box { padding: 20px; }
 }
 </style>
 </head>
@@ -133,7 +134,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
 
 <div class="hero-small">
   <h1 data-ar="🧮 حاسبة الميراث الشاملة" data-en="🧮 Comprehensive Inheritance Calculator" data-fr="🧮 Calculateur d'Héritage Complet">🧮 حاسبة الميراث الشاملة</h1>
-  <p data-ar="احسب أنصبة جميع الورثة بدقة حسب الشريعة الإسلامية والقانون المصري" data-en="Calculate heirs' shares accurately according to Islamic Sharia and Egyptian law" data-fr="Calculez les parts des héritiers avec précision selon la charia et la loi égyptienne">احسب أنصبة جميع الورثة بدقة حسب الشريعة الإسلامية والقانون المصري</p>
+  <p data-ar="احسب أنصبة جميع الورثة بدقة حسب الشريعة الإسلامية والقانون المصري - 40 وريث محتمل" data-en="Calculate heirs' shares accurately - 40 potential heirs" data-fr="Calculez les parts avec précision - 40 héritiers potentiels">احسب أنصبة جميع الورثة بدقة حسب الشريعة الإسلامية والقانون المصري - 40 وريث محتمل</p>
 </div>
 
 <div class="container">
@@ -228,51 +229,106 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
       </div>
     </div>
     
-    <!-- 4. شبكة الورثة الموسعة -->
+    <!-- ✅ 4. شبكة الورثة الكاملة (40 وريثاً) - مقسمة إلى 7 مجموعات -->
     <div class="heirs-section">
-      <h3><i class="fas fa-users"></i> <span data-ar="حدد الورثة الموجودين" data-en="Select Existing Heirs" data-fr="Sélectionnez les Héritiers Existants">حدد الورثة الموجودين</span></h3>
-      <div class="heirs-grid">
-        <!-- الأزواج -->
-        <div class="heir-option" id="opt-husband"><label><input type="checkbox" id="husband" onchange="toggleHeir('husband')"> 👨 <span data-ar="الزوج" data-en="Husband" data-fr="Époux">الزوج</span></label></div>
-        <div class="heir-option" id="opt-wife"><label><input type="checkbox" id="wife" onchange="toggleHeir('wife')"> 👩 <span data-ar="الزوجة" data-en="Wife" data-fr="Épouse">الزوجة</span></label></div>
-        
-        <!-- الأصول -->
-        <div class="heir-option" id="opt-father"><label><input type="checkbox" id="father" onchange="toggleHeir('father')"> 👴 <span data-ar="الأب" data-en="Father" data-fr="Père">الأب</span></label></div>
-        <div class="heir-option" id="opt-mother"><label><input type="checkbox" id="mother" onchange="toggleHeir('mother')"> 👵 <span data-ar="الأم" data-en="Mother" data-fr="Mère">الأم</span></label></div>
-        <div class="heir-option" id="opt-grandfatherFather"><label><input type="checkbox" id="grandfatherFather" onchange="toggleHeir('grandfatherFather')"> <span data-ar="جد الأب (أب الأب)" data-en="Paternal Grandfather" data-fr="Grand-père Paternel">جد الأب (أب الأب)</span></label></div>
-        <div class="heir-option" id="opt-grandmotherFather"><label><input type="checkbox" id="grandmotherFather" onchange="toggleHeir('grandmotherFather')"> <span data-ar="جدة الأب (أم الأب)" data-en="Paternal Grandmother" data-fr="Grand-mère Paternelle">جدة الأب (أم الأب)</span></label></div>
-        <div class="heir-option" id="opt-grandfatherMother"><label><input type="checkbox" id="grandfatherMother" onchange="toggleHeir('grandfatherMother')"> <span data-ar="جد الأم (أب الأم)" data-en="Maternal Grandfather" data-fr="Grand-père Maternel">جد الأم (أب الأم)</span></label></div>
-        <div class="heir-option" id="opt-grandmotherMother"><label><input type="checkbox" id="grandmotherMother" onchange="toggleHeir('grandmotherMother')"> <span data-ar="جدة الأم (أم الأم)" data-en="Maternal Grandmother" data-fr="Grand-mère Maternelle">جدة الأم (أم الأم)</span></label></div>
-        
-        <!-- الفروع -->
-        <div class="heir-option" id="opt-sons"><label><input type="checkbox" id="sons" onchange="toggleHeir('sons')"> 👦 <span data-ar="الأبناء" data-en="Sons" data-fr="Fils">الأبناء</span></label><div class="heir-count" id="count-sons"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
-        <div class="heir-option" id="opt-daughters"><label><input type="checkbox" id="daughters" onchange="toggleHeir('daughters')"> 👧 <span data-ar="البنات" data-en="Daughters" data-fr="Filles">البنات</span></label><div class="heir-count" id="count-daughters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
-        <div class="heir-option" id="opt-sonSons"><label><input type="checkbox" id="sonSons" onchange="toggleHeir('sonSons')"> <span data-ar="أبناء الابن" data-en="Son's Sons" data-fr="Fils du Fils">أبناء الابن</span></label><div class="heir-count" id="count-sonSons"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
-        <div class="heir-option" id="opt-sonDaughters"><label><input type="checkbox" id="sonDaughters" onchange="toggleHeir('sonDaughters')"> <span data-ar="بنات الابن" data-en="Son's Daughters" data-fr="Filles du Fils">بنات الابن</span></label><div class="heir-count" id="count-sonDaughters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
-        
-        <!-- الإخوة والأخوات -->
-        <div class="heir-option" id="opt-fullBrothers"><label><input type="checkbox" id="fullBrothers" onchange="toggleHeir('fullBrothers')"> <span data-ar="إخوة أشقاء" data-en="Full Brothers" data-fr="Frères Germains">إخوة أشقاء</span></label><div class="heir-count" id="count-fullBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
-        <div class="heir-option" id="opt-fullSisters"><label><input type="checkbox" id="fullSisters" onchange="toggleHeir('fullSisters')"> <span data-ar="أخوات شقيقات" data-en="Full Sisters" data-fr="Sœurs Germaines">أخوات شقيقات</span></label><div class="heir-count" id="count-fullSisters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
-        <div class="heir-option" id="opt-paternalBrothers"><label><input type="checkbox" id="paternalBrothers" onchange="toggleHeir('paternalBrothers')"> <span data-ar="إخوة لأب" data-en="Paternal Brothers" data-fr="Frères Paternels">إخوة لأب</span></label><div class="heir-count" id="count-paternalBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
-        <div class="heir-option" id="opt-paternalSisters"><label><input type="checkbox" id="paternalSisters" onchange="toggleHeir('paternalSisters')"> <span data-ar="أخوات لأب" data-en="Paternal Sisters" data-fr="Sœurs Paternelles">أخوات لأب</span></label><div class="heir-count" id="count-paternalSisters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
-        <div class="heir-option" id="opt-maternalBrothers"><label><input type="checkbox" id="maternalBrothers" onchange="toggleHeir('maternalBrothers')"> <span data-ar="إخوة لأم" data-en="Maternal Brothers" data-fr="Frères Maternels">إخوة لأم</span></label><div class="heir-count" id="count-maternalBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
-        <div class="heir-option" id="opt-maternalSisters"><label><input type="checkbox" id="maternalSisters" onchange="toggleHeir('maternalSisters')"> <span data-ar="أخوات لأم" data-en="Maternal Sisters" data-fr="Sœurs Maternelles">أخوات لأم</span></label><div class="heir-count" id="count-maternalSisters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
-        
-        <!-- أبناء الإخوة -->
-        <div class="heir-option" id="opt-sonFullBrothers"><label><input type="checkbox" id="sonFullBrothers" onchange="toggleHeir('sonFullBrothers')"> <span data-ar="أبناء الإخوة الأشقاء" data-en="Full Brother's Sons" data-fr="Fils des frères germains">أبناء الإخوة الأشقاء</span></label><div class="heir-count" id="count-sonFullBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
-        <div class="heir-option" id="opt-sonPaternalBrothers"><label><input type="checkbox" id="sonPaternalBrothers" onchange="toggleHeir('sonPaternalBrothers')"> <span data-ar="أبناء الإخوة لأب" data-en="Paternal Brother's Sons" data-fr="Fils des frères paternels">أبناء الإخوة لأب</span></label><div class="heir-count" id="count-sonPaternalBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
-        
-        <!-- الأعمام وأبناء الأعمام -->
-        <div class="heir-option" id="opt-fullUncles"><label><input type="checkbox" id="fullUncles" onchange="toggleHeir('fullUncles')"> <span data-ar="أعمام أشقاء" data-en="Full Paternal Uncles" data-fr="Oncles paternels germains">أعمام أشقاء</span></label><div class="heir-count" id="count-fullUncles"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
-        <div class="heir-option" id="opt-paternalUncles"><label><input type="checkbox" id="paternalUncles" onchange="toggleHeir('paternalUncles')"> <span data-ar="أعمام لأب" data-en="Paternal Uncles" data-fr="Oncles paternels">أعمام لأب</span></label><div class="heir-count" id="count-paternalUncles"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
-        <div class="heir-option" id="opt-sonFullUncles"><label><input type="checkbox" id="sonFullUncles" onchange="toggleHeir('sonFullUncles')"> <span data-ar="أبناء الأعمام الأشقاء" data-en="Full Uncle's Sons" data-fr="Fils des oncles paternels germains">أبناء الأعمام الأشقاء</span></label><div class="heir-count" id="count-sonFullUncles"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
-        <div class="heir-option" id="opt-sonPaternalUncles"><label><input type="checkbox" id="sonPaternalUncles" onchange="toggleHeir('sonPaternalUncles')"> <span data-ar="أبناء الأعمام لأب" data-en="Paternal Uncle's Sons" data-fr="Fils des oncles paternels">أبناء الأعمام لأب</span></label><div class="heir-count" id="count-sonPaternalUncles"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+      <h3 style="color: var(--gold); text-align: center; margin-bottom: 25px; font-size: 1.5rem;">
+        <i class="fas fa-users"></i> <span data-ar="حدد الورثة الموجودين (40 وريث محتمل)" data-en="Select Existing Heirs (40 potential heirs)" data-fr="Sélectionnez les Héritiers Existants (40 héritiers potentiels)">حدد الورثة الموجودين (40 وريث محتمل)</span>
+      </h3>
+
+      <!-- المجموعة 1: الزوج/الزوجة -->
+      <div class="heir-group">
+        <div class="heir-group-title"><i class="fas fa-heart"></i> <span data-ar="الزوج/الزوجة" data-en="Spouse" data-fr="Conjoint">الزوج/الزوجة</span></div>
+        <div class="heirs-grid">
+          <div class="heir-option" id="opt-husband"><label><input type="checkbox" id="husband" onchange="toggleHeir('husband')"> 👨 <span data-ar="الزوج" data-en="Husband" data-fr="Époux">الزوج</span></label></div>
+          <div class="heir-option" id="opt-wife"><label><input type="checkbox" id="wife" onchange="toggleHeir('wife')"> 👩 <span data-ar="الزوجة" data-en="Wife" data-fr="Épouse">الزوجة</span></label><div class="heir-count" id="count-wife"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" max="4" value="1"></div></div>
+        </div>
       </div>
+
+      <!-- المجموعة 2: الأصول -->
+      <div class="heir-group">
+        <div class="heir-group-title"><i class="fas fa-tree"></i> <span data-ar="الأصول (الأب، الأم، الأجداد، الجدات)" data-en="Ascendants (Parents, Grandparents)" data-fr="Ascendants (Parents, Grands-parents)">الأصول (الأب، الأم، الأجداد، الجدات)</span></div>
+        <div class="heirs-grid">
+          <div class="heir-option" id="opt-father"><label><input type="checkbox" id="father" onchange="toggleHeir('father')"> 👴 <span data-ar="الأب" data-en="Father" data-fr="Père">الأب</span></label></div>
+          <div class="heir-option" id="opt-mother"><label><input type="checkbox" id="mother" onchange="toggleHeir('mother')"> 👵 <span data-ar="الأم" data-en="Mother" data-fr="Mère">الأم</span></label></div>
+          <div class="heir-option" id="opt-grandfatherFather"><label><input type="checkbox" id="grandfatherFather" onchange="toggleHeir('grandfatherFather')"> <span data-ar="جد (أب الأب)" data-en="Paternal Grandfather" data-fr="Grand-père Paternel">جد (أب الأب)</span></label></div>
+          <div class="heir-option" id="opt-grandfatherFatherFather"><label><input type="checkbox" id="grandfatherFatherFather" onchange="toggleHeir('grandfatherFatherFather')"> <span data-ar="جد (أب أب الأب)" data-en="Great Paternal Grandfather" data-fr="Arrière-grand-père Paternel">جد (أب أب الأب)</span></label></div>
+          <div class="heir-option" id="opt-grandmotherFather"><label><input type="checkbox" id="grandmotherFather" onchange="toggleHeir('grandmotherFather')"> <span data-ar="جدة (أم الأب)" data-en="Paternal Grandmother" data-fr="Grand-mère Paternelle">جدة (أم الأب)</span></label></div>
+          <div class="heir-option" id="opt-grandmotherMother"><label><input type="checkbox" id="grandmotherMother" onchange="toggleHeir('grandmotherMother')"> <span data-ar="جدة (أم الأم)" data-en="Maternal Grandmother" data-fr="Grand-mère Maternelle">جدة (أم الأم)</span></label></div>
+          <div class="heir-option" id="opt-grandfatherMother"><label><input type="checkbox" id="grandfatherMother" onchange="toggleHeir('grandfatherMother')"> <span data-ar="جد (أب الأم)" data-en="Maternal Grandfather" data-fr="Grand-père Maternel">جد (أب الأم)</span></label></div>
+          <div class="heir-option" id="opt-grandmotherMotherMother"><label><input type="checkbox" id="grandmotherMotherMother" onchange="toggleHeir('grandmotherMotherMother')"> <span data-ar="جدة (أم أم الأم)" data-en="Great Maternal Grandmother" data-fr="Arrière-grand-mère Maternelle">جدة (أم أم الأم)</span></label></div>
+          <div class="heir-option" id="opt-grandmotherFatherFather"><label><input type="checkbox" id="grandmotherFatherFather" onchange="toggleHeir('grandmotherFatherFather')"> <span data-ar="جدة (أم أب الأب)" data-en="Paternal Great Grandmother" data-fr="Arrière-grand-mère Paternelle">جدة (أم أب الأب)</span></label></div>
+          <div class="heir-option" id="opt-grandmotherMotherFather"><label><input type="checkbox" id="grandmotherMotherFather" onchange="toggleHeir('grandmotherMotherFather')"> <span data-ar="جدة (أم أم الأب)" data-en="Maternal-side Great Grandmother" data-fr="Arrière-grand-mère côté maternel">جدة (أم أم الأب)</span></label></div>
+        </div>
+      </div>
+
+      <!-- المجموعة 3: الفروع -->
+      <div class="heir-group">
+        <div class="heir-group-title"><i class="fas fa-baby"></i> <span data-ar="الفروع (الأبناء، البنات، وأبناء الأبناء)" data-en="Descendants (Children & Grandchildren)" data-fr="Descendants (Enfants et Petits-enfants)">الفروع (الأبناء، البنات، وأبناء الأبناء)</span></div>
+        <div class="heirs-grid">
+          <div class="heir-option" id="opt-sons"><label><input type="checkbox" id="sons" onchange="toggleHeir('sons')"> 👦 <span data-ar="الابن" data-en="Son" data-fr="Fils">الابن</span></label><div class="heir-count" id="count-sons"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-daughters"><label><input type="checkbox" id="daughters" onchange="toggleHeir('daughters')"> 👧 <span data-ar="البنت" data-en="Daughter" data-fr="Fille">البنت</span></label><div class="heir-count" id="count-daughters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonSons"><label><input type="checkbox" id="sonSons" onchange="toggleHeir('sonSons')"> <span data-ar="ابن الابن" data-en="Son's Son" data-fr="Fils du Fils">ابن الابن</span></label><div class="heir-count" id="count-sonSons"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonDaughters"><label><input type="checkbox" id="sonDaughters" onchange="toggleHeir('sonDaughters')"> <span data-ar="بنت الابن" data-en="Son's Daughter" data-fr="Fille du Fils">بنت الابن</span></label><div class="heir-count" id="count-sonDaughters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonSonSons"><label><input type="checkbox" id="sonSonSons" onchange="toggleHeir('sonSonSons')"> <span data-ar="ابن ابن الابن" data-en="Son's Son's Son" data-fr="Petit-fils du Fils">ابن ابن الابن</span></label><div class="heir-count" id="count-sonSonSons"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonSonDaughters"><label><input type="checkbox" id="sonSonDaughters" onchange="toggleHeir('sonSonDaughters')"> <span data-ar="بنت ابن الابن" data-en="Son's Son's Daughter" data-fr="Petite-fille du Fils">بنت ابن الابن</span></label><div class="heir-count" id="count-sonSonDaughters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonSonSonSons"><label><input type="checkbox" id="sonSonSonSons" onchange="toggleHeir('sonSonSonSons')"> <span data-ar="ابن ابن ابن الابن" data-en="Son's Son's Son's Son" data-fr="Arrière-petit-fils">ابن ابن ابن الابن</span></label><div class="heir-count" id="count-sonSonSonSons"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonSonSonDaughters"><label><input type="checkbox" id="sonSonSonDaughters" onchange="toggleHeir('sonSonSonDaughters')"> <span data-ar="بنت ابن ابن الابن" data-en="Son's Son's Son's Daughter" data-fr="Arrière-petite-fille">بنت ابن ابن الابن</span></label><div class="heir-count" id="count-sonSonSonDaughters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
+        </div>
+      </div>
+
+      <!-- المجموعة 4: الإخوة والأخوات -->
+      <div class="heir-group">
+        <div class="heir-group-title"><i class="fas fa-user-friends"></i> <span data-ar="الإخوة والأخوات" data-en="Siblings" data-fr="Frères et Sœurs">الإخوة والأخوات</span></div>
+        <div class="heirs-grid">
+          <div class="heir-option" id="opt-fullBrothers"><label><input type="checkbox" id="fullBrothers" onchange="toggleHeir('fullBrothers')"> <span data-ar="أخ شقيق" data-en="Full Brother" data-fr="Frère Germain">أخ شقيق</span></label><div class="heir-count" id="count-fullBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-fullSisters"><label><input type="checkbox" id="fullSisters" onchange="toggleHeir('fullSisters')"> <span data-ar="أخت شقيقة" data-en="Full Sister" data-fr="Sœur Germaine">أخت شقيقة</span></label><div class="heir-count" id="count-fullSisters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-paternalBrothers"><label><input type="checkbox" id="paternalBrothers" onchange="toggleHeir('paternalBrothers')"> <span data-ar="أخ لأب" data-en="Paternal Brother" data-fr="Frère Paternel">أخ لأب</span></label><div class="heir-count" id="count-paternalBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-paternalSisters"><label><input type="checkbox" id="paternalSisters" onchange="toggleHeir('paternalSisters')"> <span data-ar="أخت لأب" data-en="Paternal Sister" data-fr="Sœur Paternelle">أخت لأب</span></label><div class="heir-count" id="count-paternalSisters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-maternalBrothers"><label><input type="checkbox" id="maternalBrothers" onchange="toggleHeir('maternalBrothers')"> <span data-ar="أخ لأم" data-en="Maternal Brother" data-fr="Frère Maternel">أخ لأم</span></label><div class="heir-count" id="count-maternalBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-maternalSisters"><label><input type="checkbox" id="maternalSisters" onchange="toggleHeir('maternalSisters')"> <span data-ar="أخت لأم" data-en="Maternal Sister" data-fr="Sœur Maternelle">أخت لأم</span></label><div class="heir-count" id="count-maternalSisters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
+        </div>
+      </div>
+
+      <!-- المجموعة 5: أبناء الإخوة -->
+      <div class="heir-group">
+        <div class="heir-group-title"><i class="fas fa-child"></i> <span data-ar="أبناء الإخوة" data-en="Nephews (Brothers' Sons)" data-fr="Neveux (Fils des Frères)">أبناء الإخوة</span></div>
+        <div class="heirs-grid">
+          <div class="heir-option" id="opt-sonFullBrothers"><label><input type="checkbox" id="sonFullBrothers" onchange="toggleHeir('sonFullBrothers')"> <span data-ar="ابن الأخ الشقيق" data-en="Full Brother's Son" data-fr="Fils du frère germain">ابن الأخ الشقيق</span></label><div class="heir-count" id="count-sonFullBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonPaternalBrothers"><label><input type="checkbox" id="sonPaternalBrothers" onchange="toggleHeir('sonPaternalBrothers')"> <span data-ar="ابن الأخ لأب" data-en="Paternal Brother's Son" data-fr="Fils du frère paternel">ابن الأخ لأب</span></label><div class="heir-count" id="count-sonPaternalBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonSonFullBrothers"><label><input type="checkbox" id="sonSonFullBrothers" onchange="toggleHeir('sonSonFullBrothers')"> <span data-ar="ابن ابن الأخ الشقيق" data-en="Full Brother's Son's Son" data-fr="Petit-fils du frère germain">ابن ابن الأخ الشقيق</span></label><div class="heir-count" id="count-sonSonFullBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonSonPaternalBrothers"><label><input type="checkbox" id="sonSonPaternalBrothers" onchange="toggleHeir('sonSonPaternalBrothers')"> <span data-ar="ابن ابن الأخ لأب" data-en="Paternal Brother's Son's Son" data-fr="Petit-fils du frère paternel">ابن ابن الأخ لأب</span></label><div class="heir-count" id="count-sonSonPaternalBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+        </div>
+      </div>
+
+      <!-- المجموعة 6: الأعمام وأبناء الأعمام -->
+      <div class="heir-group">
+        <div class="heir-group-title"><i class="fas fa-user-tie"></i> <span data-ar="الأعمام وأبناء الأعمام" data-en="Uncles & Cousins (Paternal)" data-fr="Oncles et Cousins (Paternels)">الأعمام وأبناء الأعمام</span></div>
+        <div class="heirs-grid">
+          <div class="heir-option" id="opt-fullUncles"><label><input type="checkbox" id="fullUncles" onchange="toggleHeir('fullUncles')"> <span data-ar="عم شقيق" data-en="Full Paternal Uncle" data-fr="Oncle paternel germain">عم شقيق</span></label><div class="heir-count" id="count-fullUncles"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-paternalUncles"><label><input type="checkbox" id="paternalUncles" onchange="toggleHeir('paternalUncles')"> <span data-ar="عم لأب" data-en="Paternal Uncle" data-fr="Oncle paternel">عم لأب</span></label><div class="heir-count" id="count-paternalUncles"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonFullUncles"><label><input type="checkbox" id="sonFullUncles" onchange="toggleHeir('sonFullUncles')"> <span data-ar="ابن العم الشقيق" data-en="Full Uncle's Son" data-fr="Fils de l'oncle paternel germain">ابن العم الشقيق</span></label><div class="heir-count" id="count-sonFullUncles"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonPaternalUncles"><label><input type="checkbox" id="sonPaternalUncles" onchange="toggleHeir('sonPaternalUncles')"> <span data-ar="ابن العم لأب" data-en="Paternal Uncle's Son" data-fr="Fils de l'oncle paternel">ابن العم لأب</span></label><div class="heir-count" id="count-sonPaternalUncles"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonSonFullUncles"><label><input type="checkbox" id="sonSonFullUncles" onchange="toggleHeir('sonSonFullUncles')"> <span data-ar="ابن ابن العم الشقيق" data-en="Full Uncle's Son's Son" data-fr="Petit-fils de l'oncle paternel germain">ابن ابن العم الشقيق</span></label><div class="heir-count" id="count-sonSonFullUncles"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonSonPaternalUncles"><label><input type="checkbox" id="sonSonPaternalUncles" onchange="toggleHeir('sonSonPaternalUncles')"> <span data-ar="ابن ابن العم لأب" data-en="Paternal Uncle's Son's Son" data-fr="Petit-fils de l'oncle paternel">ابن ابن العم لأب</span></label><div class="heir-count" id="count-sonSonPaternalUncles"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+        </div>
+      </div>
+
+      <!-- المجموعة 7: أعمام الأب وأبناء أعمام الأب -->
+      <div class="heir-group">
+        <div class="heir-group-title"><i class="fas fa-users-cog"></i> <span data-ar="أعمام الأب وأبناء أعمام الأب" data-en="Grandfather's Brothers & Their Sons" data-fr="Frères du Grand-père et Leurs Fils">أعمام الأب وأبناء أعمام الأب</span></div>
+        <div class="heirs-grid">
+          <div class="heir-option" id="opt-grandfatherFullBrothers"><label><input type="checkbox" id="grandfatherFullBrothers" onchange="toggleHeir('grandfatherFullBrothers')"> <span data-ar="عم الأب الشقيق (أخ الجد)" data-en="Grandfather's Full Brother" data-fr="Frère germain du grand-père">عم الأب الشقيق (أخ الجد)</span></label><div class="heir-count" id="count-grandfatherFullBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-grandfatherPaternalBrothers"><label><input type="checkbox" id="grandfatherPaternalBrothers" onchange="toggleHeir('grandfatherPaternalBrothers')"> <span data-ar="عم الأب لأب" data-en="Grandfather's Paternal Brother" data-fr="Frère paternel du grand-père">عم الأب لأب</span></label><div class="heir-count" id="count-grandfatherPaternalBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonGrandfatherFullBrothers"><label><input type="checkbox" id="sonGrandfatherFullBrothers" onchange="toggleHeir('sonGrandfatherFullBrothers')"> <span data-ar="ابن عم الأب (الشقيق)" data-en="Grandfather's Full Brother's Son" data-fr="Fils du frère germain du grand-père">ابن عم الأب (الشقيق)</span></label><div class="heir-count" id="count-sonGrandfatherFullBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-sonGrandfatherPaternalBrothers"><label><input type="checkbox" id="sonGrandfatherPaternalBrothers" onchange="toggleHeir('sonGrandfatherPaternalBrothers')"> <span data-ar="ابن عم الأب (لأب)" data-en="Grandfather's Paternal Brother's Son" data-fr="Fils du frère paternel du grand-père">ابن عم الأب (لأب)</span></label><div class="heir-count" id="count-sonGrandfatherPaternalBrothers"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
+        </div>
+      </div>
+
     </div>
     
     <button class="calc-btn" onclick="calculateInheritance()" data-ar="🧮 احسب الميراث الآن" data-en="🧮 Calculate Inheritance Now" data-fr="🧮 Calculer l'Héritage Maintenant">🧮 احسب الميراث الآن</button>
     
-    <!-- قسم النتائج (سيتم ملؤه بالمحرك الحسابي في الخطوة 2) -->
+    <!-- قسم النتائج -->
     <div class="calc-result" id="calcResult">
       <h3 data-ar="📊 نتيجة الحساب التفصيلية" data-en="📊 Detailed Calculation Result" data-fr="📊 Résultat du Calcul Détaillé">📊 نتيجة الحساب التفصيلية</h3>
       <div id="calculationSteps" style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ddd;">
@@ -283,7 +339,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
         <tbody id="resultBody"></tbody>
       </table>
       <div class="result-note">
-        <strong data-ar="⚠️ تنبيه هام:" data-en="⚠️ Important Notice:" data-fr="⚠️ Avis Important:">⚠️ تنبيه هام:</strong> <span data-ar="هذه الحاسبة تعتمد على القواعد العامة للفرائض. للمسائل المعقدة (كالحمل، المفقود، المناسخة)، يرجى التواصل معنا لاستشارة متخصصة ومعتمدة." data-en="This calculator is based on general inheritance rules. For complex cases (pregnancy, missing persons), please contact us for a specialized consultation." data-fr="Ce calculateur est basé sur les règles générales des successions. Pour les cas complexes, veuillez nous contacter pour une consultation spécialisée.">هذه الحاسبة تعتمد على القواعد العامة للفرائض. للمسائل المعقدة (كالحمل، المفقود، المناسخة)، يرجى التواصل معنا لاستشارة متخصصة ومعتمدة.</span>
+        <strong data-ar="⚠️ تنبيه هام:" data-en="⚠️ Important Notice:" data-fr="⚠️ Avis Important:">⚠️ تنبيه هام:</strong> <span data-ar="هذه الحاسبة تعتمد على القواعد العامة للفرائض. للمسائل المعقدة (كالحمل، المفقود، المناسخة)، يرجى التواصل معنا لاستشارة متخصصة ومعتمدة." data-en="This calculator is based on general inheritance rules. For complex cases, please contact us for a specialized consultation." data-fr="Ce calculateur est basé sur les règles générales. Pour les cas complexes, veuillez nous contacter.">هذه الحاسبة تعتمد على القواعد العامة للفرائض. للمسائل المعقدة (كالحمل، المفقود، المناسخة)، يرجى التواصل معنا لاستشارة متخصصة ومعتمدة.</span>
       </div>
       <a href="https://wa.me/201554797398" class="calc-btn" style="margin-top:15px; text-decoration:none; display:inline-block; text-align:center;" data-ar="تواصل للاستشارة المعتمدة" data-en="Contact for Certified Consultation" data-fr="Contact pour Consultation Certifiée">تواصل للاستشارة المعتمدة</a>
     </div>
@@ -332,7 +388,7 @@ function toggleWillDetails() {
   document.getElementById('willDetails').style.display = hasWill === 'yes' ? 'block' : 'none';
 }
 
-// ✅ إظهار/إخفاء حقل العدد عند اختيار الوريث
+// ✅ إظهار/إخفاء حقل العدد
 function toggleHeir(id) {
   const checkbox = document.getElementById(id);
   const option = document.getElementById('opt-' + id);
@@ -346,7 +402,7 @@ function toggleHeir(id) {
   }
 }
 
-// ✅ دالة مؤقتة للزر (سيتم استبدالها بالمحرك الحسابي في الخطوة 2)
+// ✅ دالة مؤقتة للزر
 function calculateInheritance() {
   const estateDesc = document.getElementById('estateDescription').value.trim();
   if (!estateDesc) { 
@@ -354,11 +410,9 @@ function calculateInheritance() {
     return; 
   }
   
-  // إظهار قسم النتائج كإثبات أن الواجهة تعمل
   document.getElementById('calcResult').classList.add('active');
   document.getElementById('calcResult').scrollIntoView({ behavior: 'smooth' });
   
-  // رسالة مؤقتة حتى نبرمج المحرك
   const stepsDiv = document.getElementById('calculationSteps');
   stepsDiv.innerHTML = `<p style="color: var(--gold); font-weight: bold; text-align: center;">
     <i class="fas fa-cogs fa-spin"></i> 
@@ -381,7 +435,7 @@ function calculateInheritance() {
 
 window.addEventListener('DOMContentLoaded', () => { 
   setLang(currentLang); 
-  toggleWillDetails(); // ضبط حالة الوصية عند التحميل
+  toggleWillDetails();
 });
 </script>
 </body>

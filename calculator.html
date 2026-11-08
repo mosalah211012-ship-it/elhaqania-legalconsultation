@@ -147,7 +147,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
 
 <div class="container">
   <div class="calculator-box" id="calculatorBox">
-    <h2 data-ar="⚖️ بيانات المتوفى والتركة" data-en="⚖️ Deceased & Estate Information" data-fr="⚖️ Informations sur le Défunt et la Succession">⚖️ بيانات المتوفى والتركة</h2>
+    <h2 data-ar="️ بيانات المتوفى والتركة" data-en="⚖️ Deceased & Estate Information" data-fr="⚖️ Informations sur le Défunt et la Succession">⚖️ بيانات المتوفى والتركة</h2>
     
     <div class="input-section">
       <h3><i class="fas fa-user"></i> <span data-ar="بيانات المتوفى الأساسية" data-en="Basic Deceased Information" data-fr="Informations de base sur le défunt">بيانات المتوفى الأساسية</span></h3>
@@ -267,7 +267,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
         <div class="heir-group-title"><i class="fas fa-baby"></i> <span data-ar="الفروع (الأبناء، البنات، وأبناء الأبناء)" data-en="Descendants (Children & Grandchildren)" data-fr="Descendants (Enfants et Petits-enfants)">الفروع (الأبناء، البنات، وأبناء الأبناء)</span></div>
         <div class="heirs-grid">
           <div class="heir-option" id="opt-sons"><label><input type="checkbox" id="sons" onchange="toggleHeir('sons')"> 👦 <span data-ar="الابن" data-en="Son" data-fr="Fils">الابن</span></label><div class="heir-count" id="count-sons"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
-          <div class="heir-option" id="opt-daughters"><label><input type="checkbox" id="daughters" onchange="toggleHeir('daughters')"> 👧 <span data-ar="البنت" data-en="Daughter" data-fr="Fille">البنت</span></label><div class="heir-count" id="count-daughters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-daughters"><label><input type="checkbox" id="daughters" onchange="toggleHeir('daughters')">  <span data-ar="البنت" data-en="Daughter" data-fr="Fille">البنت</span></label><div class="heir-count" id="count-daughters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
           <div class="heir-option" id="opt-sonSons"><label><input type="checkbox" id="sonSons" onchange="toggleHeir('sonSons')"> <span data-ar="ابن الابن" data-en="Son's Son" data-fr="Petit-fils">ابن الابن</span></label><div class="heir-count" id="count-sonSons"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
           <div class="heir-option" id="opt-sonDaughters"><label><input type="checkbox" id="sonDaughters" onchange="toggleHeir('sonDaughters')"> <span data-ar="بنت الابن" data-en="Son's Daughter" data-fr="Petite-fille">بنت الابن</span></label><div class="heir-count" id="count-sonDaughters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
           <div class="heir-option" id="opt-sonSonSons"><label><input type="checkbox" id="sonSonSons" onchange="toggleHeir('sonSonSons')"> <span data-ar="ابن ابن الابن" data-en="Son's Son's Son" data-fr="Arrière-petit-fils">ابن ابن الابن</span></label><div class="heir-count" id="count-sonSonSons"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
@@ -323,12 +323,12 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
 
     </div>
     
-    <button class="calc-btn" onclick="calculateInheritance()" data-ar="🧮 احسب الميراث الآن" data-en="🧮 Calculate Inheritance Now" data-fr="🧮 Calculer l'Héritage Maintenant">🧮 احسب الميراث الآن</button>
+    <button class="calc-btn" onclick="calculateInheritance()" data-ar="🧮 احسب الميراث الآن" data-en=" Calculate Inheritance Now" data-fr="🧮 Calculer l'Héritage Maintenant">🧮 احسب الميراث الآن</button>
     
     <button class="calc-btn secondary" onclick="printPDF()" id="printBtn" style="display:none;" data-ar="📄 طباعة / حفظ PDF" data-en="📄 Print / Save PDF" data-fr="📄 Imprimer / Enregistrer PDF">📄 طباعة / حفظ PDF</button>
     
     <div class="calc-result" id="calcResult">
-      <h3 data-ar="📊 نتيجة الحساب التفصيلية" data-en="📊 Detailed Calculation Result" data-fr="📊 Résultat du Calcul Détaillé">📊 نتيجة الحساب التفصيلية</h3>
+      <h3 data-ar="📊 نتيجة الحساب التفصيلية" data-en="📊 Detailed Calculation Result" data-fr=" Résultat du Calcul Détaillé">📊 نتيجة الحساب التفصيلية</h3>
       
       <div class="chart-container" id="chartContainer" style="display:none;">
         <canvas id="inheritanceChart"></canvas>
@@ -365,7 +365,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
     <a href="https://wa.me/201554797398" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
     <a href="refund-policy.html" data-ar="سياسة الاسترجاع" data-en="Refund Policy" data-fr="Politique de Remboursement">سياسة الاسترجاع</a>
   </div>
-  <div class="protection-notice" data-ar="⚠️ جميع المحتويات محمية بحقوق الملكية الفكرية" data-en="⚠️ All content protected by intellectual property rights" data-fr="⚠️ Tout le contenu protégé par les droits de propriété intellectuelle">⚠️ جميع المحتويات محمية بحقوق الملكية الفكرية</div>
+  <div class="protection-notice" data-ar="⚠️ جميع المحتويات محمية بحقوق الملكية الفكرية" data-en="️ All content protected by intellectual property rights" data-fr="⚠️ Tout le contenu protégé par les droits de propriété intellectuelle">⚠️ جميع المحتويات محمية بحقوق الملكية الفكرية</div>
 </footer>
 
 <script>
@@ -419,6 +419,19 @@ window.addEventListener('DOMContentLoaded', () => {
   setLang(currentLang); 
   toggleWillDetails();
 });
+
+// ✅ الدوال المفقودة - تمت الإضافة
+function fmt(n) {
+  if (typeof n !== 'number' || isNaN(n)) return '0.00';
+  return n.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+function cur() {
+  return currentLang === 'ar' ? 'جنيه' : currentLang === 'en' ? 'EGP' : 'EGP';
+}
 
 function gcd(a,b){ a=Math.abs(a); b=Math.abs(b); while(b){ const t=b; b=a%b; a=t; } return a||1; }
 function lcm(a,b){ return (a*b)/gcd(a,b); }
@@ -749,198 +762,203 @@ function solveEstate(input, madhab){
 }
 
 function calculateInheritance(){
-  const madhab = document.getElementById('madhab').value;
-  const gender = document.getElementById('deceasedGender').value;
-  const input = readHeirs();
-  const warn = [];
+  try {
+    const madhab = document.getElementById('madhab').value;
+    const gender = document.getElementById('deceasedGender').value;
+    const input = readHeirs();
+    const warn = [];
 
-  const uncheck = id => { const cb=document.getElementById(id); if(cb){ cb.checked=false; toggleHeir(id); } input[id]=0; };
-  if(input.husband && gender==='male'){ uncheck('husband'); warn.push(R('المتوفى ذكر، فلا يمكن وجود زوج','Deceased is male; husband impossible','Le défunt est un homme ; époux impossible')); }
-  if(input.wife && gender==='female'){ uncheck('wife'); warn.push(R('المتوفى أنثى، فلا يمكن وجود زوجة','Deceased is female; wife impossible','Le défunt est une femme ; épouse impossible')); }
-  if(input.wife > 4){ input.wife = 4; warn.push(R('الحد الأقصى للزوجات أربع','Maximum of four wives','Maximum quatre épouses')); }
+    const uncheck = id => { const cb=document.getElementById(id); if(cb){ cb.checked=false; toggleHeir(id); } input[id]=0; };
+    if(input.husband && gender==='male'){ uncheck('husband'); warn.push(R('المتوفى ذكر، فلا يمكن وجود زوج','Deceased is male; husband impossible','Le défunt est un homme ; époux impossible')); }
+    if(input.wife && gender==='female'){ uncheck('wife'); warn.push(R('المتوفى أنثى، فلا يمكن وجود زوجة','Deceased is female; wife impossible','Le défunt est une femme ; épouse impossible')); }
+    if(input.wife > 4){ input.wife = 4; warn.push(R('الحد الأقصى للزوجات أربع','Maximum of four wives','Maximum quatre épouses')); }
 
-  const totalHeirs = ALL_HEIRS.reduce((s,id)=>s+(input[id]||0),0);
-  if(!totalHeirs){
-    alert(T(R('❌ يرجى تحديد وريث واحد على الأقل','❌ Please select at least one heir','❌ Veuillez sélectionner au moins un héritier')));
-    return;
-  }
-
-  [['special-pregnancy', R('مسائل الحمل تحتاج مراجعة متخصصة','Pregnancy cases require specialist review','Cas de grossesse : révision spécialisée')],
-   ['special-khuntha', R('مسائل الخنثى تحتاج مراجعة متخصصة','Intersex cases require specialist review','Cas d\'intersexuation : révision spécialisée')],
-   ['special-missing', R('مسائل المفقود تحتاج مراجعة متخصصة','Missing heir requires specialist review','Absent : révision spécialisée')]
-  ].forEach(p=>{ const el=document.getElementById(p[0]); if(el && el.checked) warn.push(p[1]); });
-
-  const gross = parseFloat(document.getElementById('estateValue').value) || 0;
-  const debts = parseFloat(document.getElementById('debtsValue').value) || 0;
-  const net = Math.max(0, gross - debts);
-  let obligatory = 0;
-
-  const wwEl = document.getElementById('special-wasiyaWajiba');
-  const grandKidIds = ['sonSons','sonDaughters','sonSonSons','sonSonDaughters','sonSonSonSons','sonSonSonDaughters'];
-  if(wwEl && wwEl.checked && net>0){
-    const hasGrandKids = grandKidIds.some(id=>input[id]>0);
-    const isBlocked = input.sons > 0;
-    if(hasGrandKids && isBlocked){
-      const virtual = Object.assign({}, input);
-      grandKidIds.forEach(id=>virtual[id]=0);
-      virtual.sons = 1;
-      const vres = solveEstate(virtual, madhab);
-      const frac = vres.virtualFractionOf('sons');
-      obligatory = Math.min(F.val(frac)*net, net/3);
+    const totalHeirs = ALL_HEIRS.reduce((s,id)=>s+(input[id]||0),0);
+    if(!totalHeirs){
+      alert(T(R('❌ يرجى تحديد وريث واحد على الأقل','❌ Please select at least one heir','❌ Veuillez sélectionner au moins un héritier')));
+      return;
     }
-  }
 
-  let willAmt = 0, willCapped = false;
-  if(document.getElementById('hasWill').value === 'yes' && net>0){
-    const raw = (document.getElementById('willValue').value||'').trim();
-    let v = 0;
-    if(/^\d+\s*\/\s*\d+$/.test(raw)){ const p=raw.split('/'); v = net * (parseFloat(p[0])/parseFloat(p[1])); }
-    else v = parseFloat(raw) || 0;
-    const consent = document.getElementById('willConsent').value === 'yes';
-    const cap = Math.max(0, net/3 - obligatory);
-    if(!consent && v > cap){ willAmt = cap; willCapped = true; } else willAmt = Math.min(v, net);
-  }
-  const distributable = Math.max(0, net - obligatory - willAmt);
+    [['special-pregnancy', R('مسائل الحمل تحتاج مراجعة متخصصة','Pregnancy cases require specialist review','Cas de grossesse : révision spécialisée')],
+     ['special-khuntha', R('مسائل الخنثى تحتاج مراجعة متخصصة','Intersex cases require specialist review','Cas d\'intersexuation : révision spécialisée')],
+     ['special-missing', R('مسائل المفقود تحتاج مراجعة متخصصة','Missing heir requires specialist review','Absent : révision spécialisée')]
+    ].forEach(p=>{ const el=document.getElementById(p[0]); if(el && el.checked) warn.push(p[1]); });
 
-  const res = solveEstate(input, madhab);
-  const money = gross > 0;
-  const shareValue = money && res.asl ? distributable / res.asl : 0;
+    const gross = parseFloat(document.getElementById('estateValue').value) || 0;
+    const debts = parseFloat(document.getElementById('debtsValue').value) || 0;
+    const net = Math.max(0, gross - debts);
+    let obligatory = 0;
 
-  const L = {
-    steps: R('🧭 خطوات الحل التفصيلية','🧭 Detailed Solution Steps','🧭 Étapes détaillées'),
-    blocked: R('🚫 المحجوبون','🚫 Excluded Heirs','🚫 Héritiers exclus'),
-    by: R('محجوب بـ','blocked by','exclu par'),
-    asl: R('أصل المسألة','Base of the problem','Base du problème'),
-    afterAwl: R('أصل المسألة بعد العول','Asl after Awl','Base après Awl'),
-    shareVal: R('قيمة السهم','Value of one share','Valeur d\'une part'),
-    net: R('صافي التركة','Net estate','Succession nette'),
-    will: R('الوصية المنفذة','Executed will','Testament exécuté'),
-    oblig: R('الوصية الواجبة','Obligatory will','Testament obligatoire'),
-    dist: R('الصافي الموزّع','Amount distributed','Montant distribué'),
-    noHeirs: R('لا يوجد وارث','No heirs','Aucun héritier')
-  };
+    const wwEl = document.getElementById('special-wasiyaWajiba');
+    const grandKidIds = ['sonSons','sonDaughters','sonSonSons','sonSonDaughters','sonSonSonSons','sonSonSonDaughters'];
+    if(wwEl && wwEl.checked && net>0){
+      const hasGrandKids = grandKidIds.some(id=>input[id]>0);
+      const isBlocked = input.sons > 0;
+      if(hasGrandKids && isBlocked){
+        const virtual = Object.assign({}, input);
+        grandKidIds.forEach(id=>virtual[id]=0);
+        virtual.sons = 1;
+        const vres = solveEstate(virtual, madhab);
+        const frac = vres.virtualFractionOf('sons');
+        obligatory = Math.min(F.val(frac)*net, net/3);
+      }
+    }
 
-  let stepsHtml = '<h4 style="color:var(--gold);margin-bottom:12px;">'+T(L.steps)+'</h4><ol style="padding-inline-start:22px;line-height:2.1;color:#444;">';
-  if(money){
-    stepsHtml += '<li>'+T(L.net)+': <b>'+fmt(net)+'</b> '+cur()+'</li>';
-    if(obligatory>0) stepsHtml += '<li>'+T(L.oblig)+': <b>'+fmt(obligatory)+'</b> '+cur()+'</li>';
-    if(willAmt>0) stepsHtml += '<li>'+T(L.will)+': <b>'+fmt(willAmt)+'</b> '+cur()+'</li>';
-    stepsHtml += '<li>'+T(L.dist)+': <b>'+fmt(distributable)+'</b> '+cur()+'</li>';
-  }
-  stepsHtml += '<li>'+T(L.asl)+': <b>'+res.baseAsl+'</b>'+(res.awl?' ← '+T(L.afterAwl)+': <b>'+res.asl+'</b>':'')+(res.corrected?' ← '+T(R('صُحّحت إلى','corrected to','corrigée à'))+' <b>'+res.asl+'</b>':'')+'</li>';
-  if(res.radd) stepsHtml += '<li>'+T(R('طُبّق الرد','Radd applied','Radd appliqué'))+'</li>';
-  if(res.omariyyatan) stepsHtml += '<li>'+T(R('مسألة عُمرية','Umariyyatain','Umariyyatain'))+'</li>';
-  if(res.asabaNote) stepsHtml += '<li>'+T(res.asabaNote)+'</li>';
-  if(money) stepsHtml += '<li>'+T(L.shareVal)+': <b>'+fmt(shareValue)+'</b> '+cur()+'</li>';
-  stepsHtml += '</ol>';
+    let willAmt = 0, willCapped = false;
+    if(document.getElementById('hasWill').value === 'yes' && net>0){
+      const raw = (document.getElementById('willValue').value||'').trim();
+      let v = 0;
+      if(/^\d+\s*\/\s*\d+$/.test(raw)){ const p=raw.split('/'); v = net * (parseFloat(p[0])/parseFloat(p[1])); }
+      else v = parseFloat(raw) || 0;
+      const consent = document.getElementById('willConsent').value === 'yes';
+      const cap = Math.max(0, net/3 - obligatory);
+      if(!consent && v > cap){ willAmt = cap; willCapped = true; } else willAmt = Math.min(v, net);
+    }
+    const distributable = Math.max(0, net - obligatory - willAmt);
 
-  if(!res.rows.length) stepsHtml += '<p style="color:#c0392b;font-weight:700;">'+T(L.noHeirs)+'</p>';
+    const res = solveEstate(input, madhab);
+    const money = gross > 0;
+    const shareValue = money && res.asl ? distributable / res.asl : 0;
 
-  if(res.notes.length){
-    stepsHtml += '<div style="margin-top:12px;padding:12px;background:#fff9e6;border-radius:8px;border-right:3px solid var(--gold);">';
-    res.notes.forEach(n=> stepsHtml += '<div>• '+T(n)+'</div>');
-    stepsHtml += '</div>';
-  }
-  if(warn.length){
-    stepsHtml += '<div style="margin-top:12px;padding:12px;background:#fdecea;border-radius:8px;border-right:3px solid #c0392b;color:#922b21;">';
-    warn.forEach(n=> stepsHtml += '<div>⚠️ '+T(n)+'</div>');
-    stepsHtml += '</div>';
-  }
-  if(res.blocked.length){
-    stepsHtml += '<h4 style="color:var(--gold);margin:18px 0 10px;">'+T(L.blocked)+'</h4><ul style="padding-inline-start:22px;color:#666;line-height:2;">';
-    res.blocked.forEach(b=>{
-      stepsHtml += '<li><b>'+nm(b.id)+'</b> — '+(b.note? T(b.note) : (b.by? T(L.by)+' <b>'+nm(b.by)+'</b>' : ''))+'</li>';
+    const L = {
+      steps: R('🧭 خطوات الحل التفصيلية','🧭 Detailed Solution Steps','🧭 Étapes détaillées'),
+      blocked: R('🚫 المحجوبون','🚫 Excluded Heirs','🚫 Héritiers exclus'),
+      by: R('محجوب بـ','blocked by','exclu par'),
+      asl: R('أصل المسألة','Base of the problem','Base du problème'),
+      afterAwl: R('أصل المسألة بعد العول','Asl after Awl','Base après Awl'),
+      shareVal: R('قيمة السهم','Value of one share','Valeur d\'une part'),
+      net: R('صافي التركة','Net estate','Succession nette'),
+      will: R('الوصية المنفذة','Executed will','Testament exécuté'),
+      oblig: R('الوصية الواجبة','Obligatory will','Testament obligatoire'),
+      dist: R('الصافي الموزّع','Amount distributed','Montant distribué'),
+      noHeirs: R('لا يوجد وارث','No heirs','Aucun héritier')
+    };
+
+    let stepsHtml = '<h4 style="color:var(--gold);margin-bottom:12px;">'+T(L.steps)+'</h4><ol style="padding-inline-start:22px;line-height:2.1;color:#444;">';
+    if(money){
+      stepsHtml += '<li>'+T(L.net)+': <b>'+fmt(net)+'</b> '+cur()+'</li>';
+      if(obligatory>0) stepsHtml += '<li>'+T(L.oblig)+': <b>'+fmt(obligatory)+'</b> '+cur()+'</li>';
+      if(willAmt>0) stepsHtml += '<li>'+T(L.will)+': <b>'+fmt(willAmt)+'</b> '+cur()+'</li>';
+      stepsHtml += '<li>'+T(L.dist)+': <b>'+fmt(distributable)+'</b> '+cur()+'</li>';
+    }
+    stepsHtml += '<li>'+T(L.asl)+': <b>'+res.baseAsl+'</b>'+(res.awl?' ← '+T(L.afterAwl)+': <b>'+res.asl+'</b>':'')+(res.corrected?' ← '+T(R('صُحّحت إلى','corrected to','corrigée à'))+' <b>'+res.asl+'</b>':'')+'</li>';
+    if(res.radd) stepsHtml += '<li>'+T(R('طُبّق الرد','Radd applied','Radd appliqué'))+'</li>';
+    if(res.omariyyatan) stepsHtml += '<li>'+T(R('مسألة عُمرية','Umariyyatain','Umariyyatain'))+'</li>';
+    if(res.asabaNote) stepsHtml += '<li>'+T(res.asabaNote)+'</li>';
+    if(money) stepsHtml += '<li>'+T(L.shareVal)+': <b>'+fmt(shareValue)+'</b> '+cur()+'</li>';
+    stepsHtml += '</ol>';
+
+    if(!res.rows.length) stepsHtml += '<p style="color:#c0392b;font-weight:700;">'+T(L.noHeirs)+'</p>';
+
+    if(res.notes.length){
+      stepsHtml += '<div style="margin-top:12px;padding:12px;background:#fff9e6;border-radius:8px;border-right:3px solid var(--gold);">';
+      res.notes.forEach(n=> stepsHtml += '<div>• '+T(n)+'</div>');
+      stepsHtml += '</div>';
+    }
+    if(warn.length){
+      stepsHtml += '<div style="margin-top:12px;padding:12px;background:#fdecea;border-radius:8px;border-right:3px solid #c0392b;color:#922b21;">';
+      warn.forEach(n=> stepsHtml += '<div>⚠️ '+T(n)+'</div>');
+      stepsHtml += '</div>';
+    }
+    if(res.blocked.length){
+      stepsHtml += '<h4 style="color:var(--gold);margin:18px 0 10px;">'+T(L.blocked)+'</h4><ul style="padding-inline-start:22px;color:#666;line-height:2;">';
+      res.blocked.forEach(b=>{
+        stepsHtml += '<li><b>'+nm(b.id)+'</b> — '+(b.note? T(b.note) : (b.by? T(L.by)+' <b>'+nm(b.by)+'</b>' : ''))+'</li>';
+      });
+      stepsHtml += '</ul>';
+    }
+    document.getElementById('calculationSteps').innerHTML = stepsHtml;
+
+    const table = document.querySelector('.result-table');
+    table.parentNode.style.overflowX = 'auto';
+    table.querySelector('thead').innerHTML =
+      '<tr><th>'+T(R('الوارث','Heir','Héritier'))+'</th><th>'+T(R('العدد','No.','Nbre'))+'</th><th>'+
+      T(R('الفرض / السبب','Share / Reason','Part / Motif'))+'</th><th>'+T(R('السهام','Shares','Parts'))+'</th><th>'+
+      T(R('النسبة','%','%'))+'</th><th>'+T(R('القيمة (جنيه)','Value (EGP)','Valeur (EGP)'))+'</th></tr>';
+
+    let body = '';
+    res.rows.forEach(r=>{
+      const pct = (F.val(r.frac)*100);
+      const total = money ? distributable * F.val(r.frac) : 0;
+      const each = money && r.count ? total/r.count : 0;
+      body += '<tr>'+
+        '<td><b>'+nm(r.id)+'</b><br><small style="color:#888;">'+shareName(r.frac)+'</small></td>'+
+        '<td style="text-align:center;">'+r.count+'</td>'+
+        '<td><span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:.75rem;background:'+(r.kind==='تعصيب'?'#e8f5e9':r.kind==='مقاسمة'?'#e3f2fd':'#fff3cd')+';">'+r.kind+'</span><br><small>'+T(r.reason)+'</small></td>'+
+        '<td style="text-align:center;"><b>'+r.units+'</b> / '+res.asl+'</td>'+
+        '<td style="text-align:center;">'+pct.toFixed(2)+'%</td>'+
+        '<td>'+(money? '<b>'+fmt(total)+'</b>'+(r.count>1?'<br><small style="color:#888;">'+T(R('للفرد','each','chacun'))+': '+fmt(each)+'</small>':'') : '—')+'</td>'+
+      '</tr>';
     });
-    stepsHtml += '</ul>';
-  }
-  document.getElementById('calculationSteps').innerHTML = stepsHtml;
-
-  const table = document.querySelector('.result-table');
-  table.parentNode.style.overflowX = 'auto';
-  table.querySelector('thead').innerHTML =
-    '<tr><th>'+T(R('الوارث','Heir','Héritier'))+'</th><th>'+T(R('العدد','No.','Nbre'))+'</th><th>'+
-    T(R('الفرض / السبب','Share / Reason','Part / Motif'))+'</th><th>'+T(R('السهام','Shares','Parts'))+'</th><th>'+
-    T(R('النسبة','%','%'))+'</th><th>'+T(R('القيمة (جنيه)','Value (EGP)','Valeur (EGP)'))+'</th></tr>';
-
-  let body = '';
-  res.rows.forEach(r=>{
-    const pct = (F.val(r.frac)*100);
-    const total = money ? distributable * F.val(r.frac) : 0;
-    const each = money && r.count ? total/r.count : 0;
-    body += '<tr>'+
-      '<td><b>'+nm(r.id)+'</b><br><small style="color:#888;">'+shareName(r.frac)+'</small></td>'+
-      '<td style="text-align:center;">'+r.count+'</td>'+
-      '<td><span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:.75rem;background:'+(r.kind==='تعصيب'?'#e8f5e9':r.kind==='مقاسمة'?'#e3f2fd':'#fff3cd')+';">'+r.kind+'</span><br><small>'+T(r.reason)+'</small></td>'+
-      '<td style="text-align:center;"><b>'+r.units+'</b> / '+res.asl+'</td>'+
-      '<td style="text-align:center;">'+pct.toFixed(2)+'%</td>'+
-      '<td>'+(money? '<b>'+fmt(total)+'</b>'+(r.count>1?'<br><small style="color:#888;">'+T(R('للفرد','each','chacun'))+': '+fmt(each)+'</small>':'') : '—')+'</td>'+
-    '</tr>';
-  });
-  if(money && res.rows.length){
-    body += '<tr style="background:#fff9e6;font-weight:700;"><td colspan="3">'+T(R('الإجمالي','Total','Total'))+'</td>'+
-      '<td style="text-align:center;">'+res.rows.reduce((s,r)=>s+r.units,0)+' / '+res.asl+'</td>'+
-      '<td style="text-align:center;">'+res.rows.reduce((s,r)=>s+F.val(r.frac)*100,0).toFixed(2)+'%</td>'+
-      '<td>'+fmt(distributable)+'</td></tr>';
-  }
-  document.getElementById('resultBody').innerHTML = body || '<tr><td colspan="6" style="text-align:center;color:#888;">—</td></tr>';
-
-  document.getElementById('printBtn').style.display = 'block';
-  document.getElementById('calcResult').classList.add('active');
-  document.getElementById('calcResult').scrollIntoView({behavior:'smooth'});
-
-  if(money && res.rows.length){
-    const chartContainer = document.getElementById('chartContainer');
-    chartContainer.style.display = 'block';
-    
-    if(window.inheritanceChartInstance){
-      window.inheritanceChartInstance.destroy();
+    if(money && res.rows.length){
+      body += '<tr style="background:#fff9e6;font-weight:700;"><td colspan="3">'+T(R('الإجمالي','Total','Total'))+'</td>'+
+        '<td style="text-align:center;">'+res.rows.reduce((s,r)=>s+r.units,0)+' / '+res.asl+'</td>'+
+        '<td style="text-align:center;">'+res.rows.reduce((s,r)=>s+F.val(r.frac)*100,0).toFixed(2)+'%</td>'+
+        '<td>'+fmt(distributable)+'</td></tr>';
     }
-    
-    const ctx = document.getElementById('inheritanceChart').getContext('2d');
-    const labels = res.rows.map(r => nm(r.id));
-    const data = res.rows.map(r => distributable * F.val(r.frac));
-    const colors = ['#b59461', '#9c7e4d', '#d4af37', '#c9a961', '#a67c52', '#8b6f47', '#6b5635', '#4a3c24', '#2c3e50', '#34495e', '#7f8c8d', '#95a5a6', '#16a085', '#27ae60', '#2980b9'];
-    
-    window.inheritanceChartInstance = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: labels,
-        datasets: [{
-          data: data,
-          backgroundColor: colors.slice(0, res.rows.length),
-          borderWidth: 2,
-          borderColor: '#fff'
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'bottom',
-            labels: { font: { family: 'Cairo', size: 13 }, padding: 15 }
-          },
-          title: {
-            display: true,
-            text: currentLang === 'ar' ? '📊 توزيع الأنصبة' : currentLang === 'en' ? '📊 Distribution of Shares' : '📊 Répartition des parts',
-            font: { family: 'Cairo', size: 18, weight: 'bold' },
-            padding: { bottom: 20 }
-          },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                const label = context.label || '';
-                const value = context.parsed || 0;
-                const total = context.dataset.data.reduce((a,b) => a+b, 0);
-                const pct = ((value/total)*100).toFixed(2);
-                return label + ': ' + fmt(value) + ' ' + cur() + ' (' + pct + '%)';
+    document.getElementById('resultBody').innerHTML = body || '<tr><td colspan="6" style="text-align:center;color:#888;">—</td></tr>';
+
+    document.getElementById('printBtn').style.display = 'block';
+    document.getElementById('calcResult').classList.add('active');
+    document.getElementById('calcResult').scrollIntoView({behavior:'smooth'});
+
+    if(money && res.rows.length){
+      const chartContainer = document.getElementById('chartContainer');
+      chartContainer.style.display = 'block';
+      
+      if(window.inheritanceChartInstance){
+        window.inheritanceChartInstance.destroy();
+      }
+      
+      const ctx = document.getElementById('inheritanceChart').getContext('2d');
+      const labels = res.rows.map(r => nm(r.id));
+      const data = res.rows.map(r => distributable * F.val(r.frac));
+      const colors = ['#b59461', '#9c7e4d', '#d4af37', '#c9a961', '#a67c52', '#8b6f47', '#6b5635', '#4a3c24', '#2c3e50', '#34495e', '#7f8c8d', '#95a5a6', '#16a085', '#27ae60', '#2980b9'];
+      
+      window.inheritanceChartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: data,
+            backgroundColor: colors.slice(0, res.rows.length),
+            borderWidth: 2,
+            borderColor: '#fff'
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { font: { family: 'Cairo', size: 13 }, padding: 15 }
+            },
+            title: {
+              display: true,
+              text: currentLang === 'ar' ? '📊 توزيع الأنصبة' : currentLang === 'en' ? '📊 Distribution of Shares' : ' Répartition des parts',
+              font: { family: 'Cairo', size: 18, weight: 'bold' },
+              padding: { bottom: 20 }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const label = context.label || '';
+                  const value = context.parsed || 0;
+                  const total = context.dataset.data.reduce((a,b) => a+b, 0);
+                  const pct = ((value/total)*100).toFixed(2);
+                  return label + ': ' + fmt(value) + ' ' + cur() + ' (' + pct + '%)';
+                }
               }
             }
           }
         }
-      }
-    });
-  } else {
-    document.getElementById('chartContainer').style.display = 'none';
+      });
+    } else {
+      document.getElementById('chartContainer').style.display = 'none';
+    }
+  } catch (error) {
+    console.error('Error in calculateInheritance:', error);
+    alert('حدث خطأ في الحساب: ' + error.message);
   }
 }
 

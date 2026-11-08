@@ -267,7 +267,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
         <div class="heir-group-title"><i class="fas fa-baby"></i> <span data-ar="الفروع (الأبناء، البنات، وأبناء الأبناء)" data-en="Descendants (Children & Grandchildren)" data-fr="Descendants (Enfants et Petits-enfants)">الفروع (الأبناء، البنات، وأبناء الأبناء)</span></div>
         <div class="heirs-grid">
           <div class="heir-option" id="opt-sons"><label><input type="checkbox" id="sons" onchange="toggleHeir('sons')"> 👦 <span data-ar="الابن" data-en="Son" data-fr="Fils">الابن</span></label><div class="heir-count" id="count-sons"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
-          <div class="heir-option" id="opt-daughters"><label><input type="checkbox" id="daughters" onchange="toggleHeir('daughters')">  <span data-ar="البنت" data-en="Daughter" data-fr="Fille">البنت</span></label><div class="heir-count" id="count-daughters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
+          <div class="heir-option" id="opt-daughters"><label><input type="checkbox" id="daughters" onchange="toggleHeir('daughters')"> 👧 <span data-ar="البنت" data-en="Daughter" data-fr="Fille">البنت</span></label><div class="heir-count" id="count-daughters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
           <div class="heir-option" id="opt-sonSons"><label><input type="checkbox" id="sonSons" onchange="toggleHeir('sonSons')"> <span data-ar="ابن الابن" data-en="Son's Son" data-fr="Petit-fils">ابن الابن</span></label><div class="heir-count" id="count-sonSons"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
           <div class="heir-option" id="opt-sonDaughters"><label><input type="checkbox" id="sonDaughters" onchange="toggleHeir('sonDaughters')"> <span data-ar="بنت الابن" data-en="Son's Daughter" data-fr="Petite-fille">بنت الابن</span></label><div class="heir-count" id="count-sonDaughters"><label data-ar="عددهن:" data-en="Number:" data-fr="Nombre:">عددهن:</label><input type="number" min="1" value="1"></div></div>
           <div class="heir-option" id="opt-sonSonSons"><label><input type="checkbox" id="sonSonSons" onchange="toggleHeir('sonSonSons')"> <span data-ar="ابن ابن الابن" data-en="Son's Son's Son" data-fr="Arrière-petit-fils">ابن ابن الابن</span></label><div class="heir-count" id="count-sonSonSons"><label data-ar="عددهم:" data-en="Number:" data-fr="Nombre:">عددهم:</label><input type="number" min="1" value="1"></div></div>
@@ -323,12 +323,12 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
 
     </div>
     
-    <button class="calc-btn" onclick="calculateInheritance()" data-ar="🧮 احسب الميراث الآن" data-en=" Calculate Inheritance Now" data-fr="🧮 Calculer l'Héritage Maintenant">🧮 احسب الميراث الآن</button>
+    <button class="calc-btn" onclick="calculateInheritance()" data-ar="🧮 احسب الميراث الآن" data-en="🧮 Calculate Inheritance Now" data-fr="🧮 Calculer l'Héritage Maintenant">🧮 احسب الميراث الآن</button>
     
-    <button class="calc-btn secondary" onclick="printPDF()" id="printBtn" style="display:none;" data-ar="📄 طباعة / حفظ PDF" data-en="📄 Print / Save PDF" data-fr="📄 Imprimer / Enregistrer PDF">📄 طباعة / حفظ PDF</button>
+    <button class="calc-btn secondary" onclick="printPDF()" id="printBtn" style="display:none;" data-ar=" طباعة / حفظ PDF" data-en=" Print / Save PDF" data-fr="📄 Imprimer / Enregistrer PDF">📄 طباعة / حفظ PDF</button>
     
     <div class="calc-result" id="calcResult">
-      <h3 data-ar="📊 نتيجة الحساب التفصيلية" data-en="📊 Detailed Calculation Result" data-fr=" Résultat du Calcul Détaillé">📊 نتيجة الحساب التفصيلية</h3>
+      <h3 data-ar="📊 نتيجة الحساب التفصيلية" data-en="📊 Detailed Calculation Result" data-fr="📊 Résultat du Calcul Détaillé">📊 نتيجة الحساب التفصيلية</h3>
       
       <div class="chart-container" id="chartContainer" style="display:none;">
         <canvas id="inheritanceChart"></canvas>
@@ -343,7 +343,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
       </table>
       
       <div class="legal-notice">
-        <strong data-ar="⚖️ ملاحظة قانونية:" data-en="⚖️ Legal Notice:" data-fr="⚖️ Avis Juridique:">⚖️ ملاحظة قانونية:</strong>
+        <strong data-ar="⚖️ ملاحظة قانونية:" data-en="⚖️ Legal Notice:" data-fr="️ Avis Juridique:">⚖️ ملاحظة قانونية:</strong>
         <span data-ar="هذه الحاسبة تعتمد على أحكام الشريعة الإسلامية والقانون المصري الموحد للأحوال الشخصية، والذي يطبق على المسلمين والأقباط في مصر. للحالات المعقدة (كالحمل، المفقود، الخنثى، المناسخة)، يرجى التواصل معنا لاستشارة متخصصة ومعتمدة." data-en="This calculator is based on Islamic Sharia and the unified Egyptian Personal Status Law, which applies to both Muslims and Copts in Egypt. For complex cases, please contact us for a specialized consultation." data-fr="Ce calculateur est basé sur la Charia islamique et la loi égyptienne unifiée sur le statut personnel, qui s'applique aux musulmans et aux coptes en Égypte. Pour les cas complexes, veuillez nous contacter.">هذه الحاسبة تعتمد على أحكام الشريعة الإسلامية والقانون المصري الموحد للأحوال الشخصية، والذي يطبق على المسلمين والأقباط في مصر. للحالات المعقدة (كالحمل، المفقود، الخنثى، المناسخة)، يرجى التواصل معنا لاستشارة متخصصة ومعتمدة.</span>
       </div>
       
@@ -420,7 +420,6 @@ window.addEventListener('DOMContentLoaded', () => {
   toggleWillDetails();
 });
 
-// ✅ الدوال المفقودة - تمت الإضافة
 function fmt(n) {
   if (typeof n !== 'number' || isNaN(n)) return '0.00';
   return n.toLocaleString('en-US', {
@@ -775,7 +774,7 @@ function calculateInheritance(){
 
     const totalHeirs = ALL_HEIRS.reduce((s,id)=>s+(input[id]||0),0);
     if(!totalHeirs){
-      alert(T(R('❌ يرجى تحديد وريث واحد على الأقل','❌ Please select at least one heir','❌ Veuillez sélectionner au moins un héritier')));
+      alert(T(R('❌ يرجى تحديد وريث واحد على الأقل',' Please select at least one heir','❌ Veuillez sélectionner au moins un héritier')));
       return;
     }
 
@@ -822,7 +821,7 @@ function calculateInheritance(){
 
     const L = {
       steps: R('🧭 خطوات الحل التفصيلية','🧭 Detailed Solution Steps','🧭 Étapes détaillées'),
-      blocked: R('🚫 المحجوبون','🚫 Excluded Heirs','🚫 Héritiers exclus'),
+      blocked: R(' المحجوبون','🚫 Excluded Heirs','🚫 Héritiers exclus'),
       by: R('محجوب بـ','blocked by','exclu par'),
       asl: R('أصل المسألة','Base of the problem','Base du problème'),
       afterAwl: R('أصل المسألة بعد العول','Asl after Awl','Base après Awl'),
@@ -913,7 +912,8 @@ function calculateInheritance(){
       const ctx = document.getElementById('inheritanceChart').getContext('2d');
       const labels = res.rows.map(r => nm(r.id));
       const data = res.rows.map(r => distributable * F.val(r.frac));
-      const colors = ['#b59461', '#9c7e4d', '#d4af37', '#c9a961', '#a67c52', '#8b6f47', '#6b5635', '#4a3c24', '#2c3e50', '#34495e', '#7f8c8d', '#95a5a6', '#16a085', '#27ae60', '#2980b9'];
+      // ✅ ألوان مختلفة وواضحة للرسم البياني
+      const colors = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#e67e22', '#34495e', '#95a5a6', '#d35400', '#2980b9', '#27ae60', '#8e44ad', '#16a085', '#c0392b'];
       
       window.inheritanceChartInstance = new Chart(ctx, {
         type: 'doughnut',
@@ -935,7 +935,7 @@ function calculateInheritance(){
             },
             title: {
               display: true,
-              text: currentLang === 'ar' ? '📊 توزيع الأنصبة' : currentLang === 'en' ? '📊 Distribution of Shares' : ' Répartition des parts',
+              text: currentLang === 'ar' ? '📊 توزيع الأنصبة' : currentLang === 'en' ? '📊 Distribution of Shares' : '📊 Répartition des parts',
               font: { family: 'Cairo', size: 18, weight: 'bold' },
               padding: { bottom: 20 }
             },
@@ -964,63 +964,92 @@ function calculateInheritance(){
 
 function printPDF() {
   const element = document.getElementById('calculatorBox');
+  
   const opt = {
-    margin: [10, 10, 10, 10],
+    margin: [5, 5, 5, 5],
     filename: 'haqania-inheritance-' + Date.now() + '.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { 
       scale: 2, 
       useCORS: true, 
       logging: false,
-      letterRendering: true
+      letterRendering: true,
+      scrollY: 0,
+      windowWidth: 794
     },
     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
     pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
   };
   
   const tempDiv = document.createElement('div');
-  tempDiv.style.cssText = 'font-family: Cairo, sans-serif; direction: rtl; padding: 20px; background: white;';
+  tempDiv.style.cssText = `
+    font-family: 'Cairo', sans-serif; 
+    direction: rtl; 
+    text-align: right;
+    width: 210mm;
+    padding: 10mm;
+    background: white;
+    line-height: 1.6;
+  `;
   
   const headerHtml = `
-    <div style="text-align: center; margin-bottom: 25px; padding: 20px; border-bottom: 3px solid #b59461; background: #f8f9fa; border-radius: 12px;">
+    <div style="text-align: center; margin-bottom: 20px; padding: 15px; border-bottom: 3px solid #b59461; background: #f8f9fa; border-radius: 8px;">
       <img src="https://i.ibb.co/Gf08dRs9/image-c77e535a.png" 
-           style="height: 90px; width: 90px; border-radius: 50%; border: 3px solid #b59461; object-fit: cover; margin-bottom: 10px;">
-      <div style="font-weight: 700; font-size: 1.4rem; margin-top: 10px; color: #b59461;">
+           style="height: 80px; width: 80px; border-radius: 50%; border: 3px solid #b59461; object-fit: cover; margin-bottom: 10px;">
+      <div style="font-weight: 700; font-size: 1.3rem; margin-top: 10px; color: #b59461;">
         الحقانية للإستشارات القانونية
       </div>
-      <div style="font-size: 1rem; color: #333; margin-top: 5px;">
+      <div style="font-size: 0.95rem; color: #333; margin-top: 5px;">
         الأستاذ محمد صلاح - محامي أمام جميع المحاكم المصرية
       </div>
-      <div style="font-size: 0.85rem; color: #666; margin-top: 5px;">
+      <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">
         عضو اتحاد المحامين العرب | ماجستير في القانون العام والجنائي
       </div>
-      <div style="font-size: 0.8rem; color: #888; margin-top: 10px;">
-        📞 +20-155-479-7398 | 🌐 elhaqania-legalconsultation.netlify.app
+      <div style="font-size: 0.75rem; color: #888; margin-top: 8px;">
+        📞 +20-155-479-7398 |  elhaqania-legalconsultation.netlify.app
       </div>
     </div>
   `;
   
   const dateHtml = `
-    <div style="text-align: left; font-size: 0.85rem; color: #666; margin-bottom: 15px; padding: 8px; background: #f8f9fa; border-radius: 6px;">
-      📅 تاريخ الطباعة: ${new Date().toLocaleDateString('ar-EG')} | ⏰ ${new Date().toLocaleTimeString('ar-EG')}
+    <div style="text-align: left; font-size: 0.8rem; color: #666; margin-bottom: 15px; padding: 6px; background: #f8f9fa; border-radius: 6px;">
+       تاريخ الطباعة: ${new Date().toLocaleDateString('ar-EG')} | ⏰ ${new Date().toLocaleTimeString('ar-EG')}
     </div>
   `;
   
-  tempDiv.innerHTML = headerHtml + dateHtml + element.innerHTML;
+  const clone = element.cloneNode(true);
   
-  const hideElements = tempDiv.querySelectorAll('.calc-btn, .whatsapp-float, header, .hero-small, footer, #printBtn');
+  const hideElements = clone.querySelectorAll('.calc-btn, .whatsapp-float, #printBtn');
   hideElements.forEach(el => el.style.display = 'none');
   
+  const styleFix = document.createElement('style');
+  styleFix.textContent = `
+    .calculator-box { padding: 0 !important; border: none !important; }
+    .input-section, .heir-group { page-break-inside: avoid; margin-bottom: 15px !important; }
+    .chart-container { page-break-inside: avoid; max-width: 100% !important; }
+    .result-table { page-break-inside: avoid; width: 100% !important; font-size: 0.85rem; }
+    .calc-result { display: block !important; margin-top: 15px !important; }
+    .heirs-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+  `;
+  
+  tempDiv.appendChild(styleFix);
+  
+  const contentDiv = document.createElement('div');
+  contentDiv.innerHTML = clone.innerHTML;
+  
+  tempDiv.innerHTML += headerHtml + dateHtml;
+  tempDiv.appendChild(contentDiv);
+  
   const signatureHtml = `
-    <div style="margin-top: 30px; padding: 20px; background: #fff9e6; border-radius: 8px; border-right: 3px solid #b59461; text-align: center;">
-      <div style="font-weight: 700; color: #b59461; margin-bottom: 10px;">
+    <div style="margin-top: 25px; padding: 15px; background: #fff9e6; border-radius: 8px; border-right: 3px solid #b59461; text-align: center; page-break-inside: avoid;">
+      <div style="font-weight: 700; color: #b59461; margin-bottom: 8px; font-size: 1rem;">
         ⚖️ مكتب الحقانية للإستشارات القانونية
       </div>
-      <div style="font-size: 0.9rem; color: #555; line-height: 1.8;">
+      <div style="font-size: 0.85rem; color: #555; line-height: 1.6;">
         للاستشارات القانونية المعتمدة وحساب الميراث بدقة، تواصل معنا عبر الواتساب:<br>
-        <strong style="color: #25d366;">📱 +20-155-479-7398</strong>
+        <strong style="color: #25d366; font-size: 1rem;">📱 +20-155-479-7398</strong>
       </div>
-      <div style="margin-top: 15px; font-size: 0.8rem; color: #888;">
+      <div style="margin-top: 10px; font-size: 0.75rem; color: #888;">
         هذا التقرير استرشادي، وللحصول على حساب معتمد قانونياً يرجى التواصل معنا.
       </div>
     </div>
@@ -1028,7 +1057,10 @@ function printPDF() {
   tempDiv.innerHTML += signatureHtml;
   
   html2pdf().set(opt).from(tempDiv).save().then(() => {
-    alert(currentLang === 'ar' ? '✅ تم حفظ ملف PDF بنجاح!' : currentLang === 'en' ? '✅ PDF saved successfully!' : '✅ PDF enregistré avec succès !');
+    alert(currentLang === 'ar' ? '✅ تم حفظ ملف PDF بنجاح بدون صفحات فاضية!' : '✅ PDF saved successfully!');
+  }).catch(err => {
+    console.error('PDF Error:', err);
+    alert('حدث خطأ أثناء إنشاء ملف PDF');
   });
 }
 </script>

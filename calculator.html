@@ -21,7 +21,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 
 <style>
@@ -99,10 +98,31 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
 .whatsapp-float { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 9999; text-decoration: none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); transition: transform 0.3s; }
 .whatsapp-float:hover { transform: scale(1.1); }
 
-/* ✅ الهيدر والتذييل المخصصان للطباعة - مخفيان في العرض العادي */
-.print-header, .print-footer {
-  display: none;
-}
+.print-header, .print-footer { display: none; }
+
+.heir-blocked { opacity: 0.5; background: #f0f0f0 !important; border-color: #ccc !important; cursor: not-allowed; }
+.heir-blocked label { cursor: not-allowed; text-decoration: line-through; color: #999; }
+
+.evidence-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; z-index: 10000; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.evidence-modal-content { background: white; border-radius: 16px; max-width: 700px; width: 90%; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); border: 3px solid var(--gold); }
+.evidence-header { background: linear-gradient(135deg, var(--dark), var(--gold)); color: white; padding: 20px; border-radius: 13px 13px 0 0; display: flex; justify-content: space-between; align-items: center; }
+.evidence-header h3 { margin: 0; font-size: 1.3rem; }
+.evidence-close { background: rgba(255, 255, 255, 0.2); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: all 0.3s; }
+.evidence-close:hover { background: rgba(255, 255, 255, 0.3); transform: rotate(90deg); }
+.evidence-body { padding: 25px; }
+.evidence-section { margin-bottom: 20px; padding: 15px; border-radius: 10px; border-right: 4px solid var(--gold); }
+.quran-section { background: #f8f9fa; border-color: #27ae60; }
+.law-section { background: #fff9e6; border-color: var(--gold); }
+.fiqh-section { background: #f0f8ff; border-color: #3498db; }
+.evidence-section h4 { margin: 0 0 10px 0; color: var(--dark); font-size: 1.1rem; }
+.quran-text { font-size: 1.3rem; line-height: 2; color: #27ae60; font-weight: 600; text-align: center; padding: 15px; background: white; border-radius: 8px; margin-bottom: 10px; font-family: 'Traditional Arabic', 'Cairo', serif; }
+.quran-ref { text-align: center; color: #666; font-size: 0.9rem; }
+.law-text { font-size: 1rem; line-height: 1.8; color: #333; }
+.law-ref { margin-top: 8px; font-size: 0.85rem; color: #888; font-style: italic; }
+.fiqh-text { font-size: 1rem; line-height: 1.9; color: #333; }
+.evidence-btn { background: var(--gold); color: white; border: none; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s; display: inline-flex; align-items: center; gap: 5px; }
+.evidence-btn:hover { background: var(--gold-dark); transform: scale(1.05); }
 
 @media (max-width: 768px) { 
   header { flex-direction: column; gap: 15px; } 
@@ -111,82 +131,22 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
   .container { padding: 30px 5%; } 
   .heirs-grid { grid-template-columns: 1fr 1fr; } 
   .calculator-box { padding: 20px; }
+  .evidence-modal-content { width: 95%; max-height: 90vh; }
+  .quran-text { font-size: 1.1rem; }
 }
 
-/* ✅ تنسيقات الطباعة - مهمة جداً للعربية */
 @media print {
-  /* إخفاء العناصر غير الضرورية */
-  header, footer, .whatsapp-float, .calc-btn, #printBtn, .hero-small, .nav-menu, .lang-switcher, .protection-notice {
-    display: none !important;
-  }
-  
-  /* تنسيق الصفحة */
-  body {
-    background: white !important;
-    font-size: 12pt !important;
-    line-height: 1.6 !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-  
-  .container {
-    padding: 0 !important;
-    max-width: 100% !important;
-  }
-  
-  .calculator-box {
-    border: none !important;
-    padding: 0 !important;
-    box-shadow: none !important;
-  }
-  
-  /* الحفاظ على الألوان */
-  .input-section, .heir-group, .calc-result {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-  }
-  
-  /* الجدول */
-  .result-table {
-    width: 100% !important;
-    font-size: 10pt !important;
-    break-inside: avoid !important;
-  }
-  
-  .result-table th, .result-table td {
-    padding: 8px !important;
-    border: 1px solid #ddd !important;
-  }
-  
-  /* الرسم البياني */
-  .chart-container {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-    max-width: 100% !important;
-  }
-  
-  /* الهيدر المخصص للطباعة */
-  .print-header {
-    display: block !important;
-    text-align: center;
-    margin-bottom: 20px;
-    padding: 15px;
-    border-bottom: 3px solid #b59461;
-    background: #f8f9fa;
-    border-radius: 8px;
-  }
-  
-  /* التوقيع في النهاية */
-  .print-footer {
-    display: block !important;
-    margin-top: 30px;
-    padding: 15px;
-    background: #fff9e6;
-    border-right: 3px solid #b59461;
-    border-radius: 8px;
-    text-align: center;
-    break-inside: avoid !important;
-  }
+  header, footer, .whatsapp-float, .calc-btn, #printBtn, .hero-small, .nav-menu, .lang-switcher, .protection-notice { display: none !important; }
+  body { background: white !important; font-size: 11pt !important; line-height: 1.5 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .container { padding: 0 !important; max-width: 100% !important; }
+  .calculator-box { border: none !important; padding: 0 !important; box-shadow: none !important; }
+  .input-section, .heir-group, .calc-result { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .result-table { width: 100% !important; font-size: 9pt !important; break-inside: avoid !important; }
+  .result-table th, .result-table td { padding: 6px !important; border: 1px solid #ddd !important; }
+  .chart-container { break-inside: avoid !important; page-break-inside: avoid !important; max-width: 100% !important; }
+  .print-header { display: block !important; text-align: center; margin-bottom: 20px; padding: 15px; border-bottom: 3px solid #b59461; background: #f8f9fa; border-radius: 8px; }
+  .print-footer { display: block !important; margin-top: 30px; padding: 15px; background: #fff9e6; border-right: 3px solid #b59461; border-radius: 8px; text-align: center; break-inside: avoid !important; }
+  .evidence-btn { display: none !important; } /* إخفاء زر الأدلة في الطباعة لتوفير المساحة */
 }
 </style>
 </head>
@@ -229,7 +189,6 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
 <div class="container">
   <div class="calculator-box" id="calculatorBox">
     
-    <!-- ✅ هيدر مخصص للطباعة (يظهر فقط عند الطباعة) -->
     <div class="print-header">
       <img src="https://i.ibb.co/Gf08dRs9/image-c77e535a.png" style="height: 80px; width: 80px; border-radius: 50%; border: 3px solid #b59461; margin-bottom: 10px;">
       <h2 style="color: #b59461; margin: 10px 0;">الحقانية للإستشارات القانونية</h2>
@@ -430,7 +389,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
         <p style="color: #666; text-align: center;" data-ar="جاري الحساب..." data-en="Calculating..." data-fr="Calcul en cours...">جاري الحساب...</p>
       </div>
       <table class="result-table">
-        <thead><tr><th data-ar="الوارث" data-en="Heir" data-fr="Héritier">الوارث</th><th data-ar="العدد" data-en="No." data-fr="Nbre">العدد</th><th data-ar="الفرض / السبب" data-en="Share / Reason" data-fr="Part / Motif">الفرض / السبب</th><th data-ar="السهام" data-en="Shares" data-fr="Parts">السهام</th><th data-ar="النسبة" data-en="%" data-fr="%">النسبة</th><th data-ar="القيمة (جنيه)" data-en="Value (EGP)" data-fr="Valeur (EGP)">القيمة (جنيه)</th></tr></thead>
+        <thead><tr><th data-ar="الوارث" data-en="Heir" data-fr="Héritier">الوارث</th><th data-ar="العدد" data-en="No." data-fr="Nbre">العدد</th><th data-ar="الفرض / السبب" data-en="Share / Reason" data-fr="Part / Motif">الفرض / السبب</th><th data-ar="السهام" data-en="Shares" data-fr="Parts">السهام</th><th data-ar="النسبة" data-en="%" data-fr="%">النسبة</th><th data-ar="القيمة (جنيه)" data-en="Value (EGP)" data-fr="Valeur (EGP)">القيمة (جنيه)</th><th>📖 الأدلة</th></tr></thead>
         <tbody id="resultBody"></tbody>
       </table>
       
@@ -445,7 +404,6 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
       <a href="https://wa.me/201554797398" class="calc-btn" style="margin-top:15px; text-decoration:none; display:inline-block; text-align:center;" data-ar="تواصل للاستشارة المعتمدة" data-en="Contact for Certified Consultation" data-fr="Contact pour Consultation Certifiée">تواصل للاستشارة المعتمدة</a>
     </div>
     
-    <!-- ✅ تذييل مخصص للطباعة (يظهر فقط عند الطباعة) -->
     <div class="print-footer">
       <h3 style="color: #b59461; margin-bottom: 10px;">⚖️ مكتب الحقانية للإستشارات القانونية</h3>
       <p style="font-size: 0.9rem; color: #555; line-height: 1.6;">
@@ -510,6 +468,7 @@ function toggleHeir(id) {
     option.classList.remove('has-heir');
     if (countDiv) countDiv.classList.remove('active');
   }
+  updateBlockedHeirs();
 }
 
 (function(){ 
@@ -523,14 +482,12 @@ function toggleHeir(id) {
 window.addEventListener('DOMContentLoaded', () => { 
   setLang(currentLang); 
   toggleWillDetails();
+  updateBlockedHeirs();
 });
 
 function fmt(n) {
   if (typeof n !== 'number' || isNaN(n)) return '0.00';
-  return n.toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
+  return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function cur() {
@@ -552,46 +509,24 @@ function R(ar,en,fr){ return [ar,en,fr]; }
 function T(a){ return currentLang==='ar'? a[0] : currentLang==='en'? a[1] : a[2]; }
 
 const HEIR_NAMES = {
-  husband:['الزوج','Husband','Époux'],
-  wife:['الزوجة','Wife','Épouse'],
-  father:['الأب','Father','Père'],
-  mother:['الأم','Mother','Mère'],
-  grandfatherFather:['الجد (أب الأب)','Grandfather','Grand-père paternel'],
-  grandfatherFatherFather:['الجد (أب أب الأب)','Great grandfather','Arrière-grand-père'],
-  grandmotherFather:['الجدة (أم الأب)','Grandmother','Grand-mère paternelle'],
-  grandmotherMother:['الجدة (أم الأم)','Grandmother','Grand-mère maternelle'],
-  grandfatherMother:['جد الأم','Maternal grandfather','Grand-père maternel'],
-  grandmotherMotherMother:['الجدة (أم أم الأم)','Great grandmother','Arrière-grand-mère maternelle'],
-  grandmotherFatherFather:['الجدة (أم أب الأب)','Great grandmother','Arrière-grand-mère paternelle'],
-  grandmotherMotherFather:['الجدة (أم أم الأب)','Great grandmother','Arrière-grand-mère'],
-  sons:['الابن','Son','Fils'],
-  daughters:['البنت','Daughter','Fille'],
-  sonSons:['ابن الابن','Son\'s son','Petit-fils'],
-  sonDaughters:['بنت الابن','Son\'s daughter','Petite-fille'],
-  sonSonSons:['ابن ابن الابن','Great grandson','Arrière-petit-fils'],
-  sonSonDaughters:['بنت ابن الابن','Great granddaughter','Arrière-petite-fille'],
-  sonSonSonSons:['ابن ابن ابن الابن','Great-great grandson','Arrière-arrière-petit-fils'],
-  sonSonSonDaughters:['بنت ابن ابن الابن','Great-great granddaughter','Arrière-arrière-petite-fille'],
-  fullBrothers:['الأخ الشقيق','Full brother','Frère germain'],
-  fullSisters:['الأخت الشقيقة','Full sister','Sœur germaine'],
-  paternalBrothers:['الأخ لأب','Paternal brother','Frère paternel'],
-  paternalSisters:['الأخت لأب','Paternal sister','Sœur paternelle'],
-  maternalBrothers:['الأخ لأم','Maternal brother','Frère maternel'],
-  maternalSisters:['الأخت لأم','Maternal sister','Sœur maternelle'],
-  sonFullBrothers:['ابن الأخ الشقيق','Full brother\'s son','Fils du frère germain'],
-  sonPaternalBrothers:['ابن الأخ لأب','Paternal brother\'s son','Fils du frère paternel'],
-  sonSonFullBrothers:['ابن ابن الأخ الشقيق','Grand-nephew','Petit-neveu germain'],
-  sonSonPaternalBrothers:['ابن ابن الأخ لأب','Grand-nephew','Petit-neveu paternel'],
-  fullUncles:['العم الشقيق','Full paternal uncle','Oncle paternel germain'],
-  paternalUncles:['العم لأب','Paternal uncle','Oncle paternel'],
-  sonFullUncles:['ابن العم الشقيق','Full cousin','Cousin germain'],
-  sonPaternalUncles:['ابن العم لأب','Paternal cousin','Cousin paternel'],
-  sonSonFullUncles:['ابن ابن العم الشقيق','Son of full cousin','Fils du cousin germain'],
-  sonSonPaternalUncles:['ابن ابن العم لأب','Son of paternal cousin','Fils du cousin paternel'],
-  grandfatherFullBrothers:['عم الأب الشقيق','Grandfather\'s full brother','Frère germain du grand-père'],
-  grandfatherPaternalBrothers:['عم الأب لأب','Grandfather\'s paternal brother','Frère paternel du grand-père'],
-  sonGrandfatherFullBrothers:['ابن عم الأب الشقيق','Father\'s full cousin','Cousin germain du père'],
-  sonGrandfatherPaternalBrothers:['ابن عم الأب لأب','Father\'s paternal cousin','Cousin paternel du père']
+  husband:['الزوج','Husband','Époux'], wife:['الزوجة','Wife','Épouse'], father:['الأب','Father','Père'], mother:['الأم','Mother','Mère'],
+  grandfatherFather:['الجد (أب الأب)','Grandfather','Grand-père paternel'], grandfatherFatherFather:['الجد (أب أب الأب)','Great grandfather','Arrière-grand-père'],
+  grandmotherFather:['الجدة (أم الأب)','Grandmother','Grand-mère paternelle'], grandmotherMother:['الجدة (أم الأم)','Grandmother','Grand-mère maternelle'],
+  grandfatherMother:['جد الأم','Maternal grandfather','Grand-père maternel'], grandmotherMotherMother:['الجدة (أم أم الأم)','Great grandmother','Arrière-grand-mère maternelle'],
+  grandmotherFatherFather:['الجدة (أم أب الأب)','Great grandmother','Arrière-grand-mère paternelle'], grandmotherMotherFather:['الجدة (أم أم الأب)','Great grandmother','Arrière-grand-mère'],
+  sons:['الابن','Son','Fils'], daughters:['البنت','Daughter','Fille'], sonSons:['ابن الابن','Son\'s son','Petit-fils'], sonDaughters:['بنت الابن','Son\'s daughter','Petite-fille'],
+  sonSonSons:['ابن ابن الابن','Great grandson','Arrière-petit-fils'], sonSonDaughters:['بنت ابن الابن','Great granddaughter','Arrière-petite-fille'],
+  sonSonSonSons:['ابن ابن ابن الابن','Great-great grandson','Arrière-arrière-petit-fils'], sonSonSonDaughters:['بنت ابن ابن الابن','Great-great granddaughter','Arrière-arrière-petite-fille'],
+  fullBrothers:['الأخ الشقيق','Full brother','Frère germain'], fullSisters:['الأخت الشقيقة','Full sister','Sœur germaine'],
+  paternalBrothers:['الأخ لأب','Paternal brother','Frère paternel'], paternalSisters:['الأخت لأب','Paternal sister','Sœur paternelle'],
+  maternalBrothers:['الأخ لأم','Maternal brother','Frère maternel'], maternalSisters:['الأخت لأم','Maternal sister','Sœur maternelle'],
+  sonFullBrothers:['ابن الأخ الشقيق','Full brother\'s son','Fils du frère germain'], sonPaternalBrothers:['ابن الأخ لأب','Paternal brother\'s son','Fils du frère paternel'],
+  sonSonFullBrothers:['ابن ابن الأخ الشقيق','Grand-nephew','Petit-neveu germain'], sonSonPaternalBrothers:['ابن ابن الأخ لأب','Grand-nephew','Petit-neveu paternel'],
+  fullUncles:['العم الشقيق','Full paternal uncle','Oncle paternel germain'], paternalUncles:['العم لأب','Paternal uncle','Oncle paternel'],
+  sonFullUncles:['ابن العم الشقيق','Full cousin','Cousin germain'], sonPaternalUncles:['ابن العم لأب','Paternal cousin','Cousin paternel'],
+  sonSonFullUncles:['ابن ابن العم الشقيق','Son of full cousin','Fils du cousin germain'], sonSonPaternalUncles:['ابن ابن العم لأب','Son of paternal cousin','Fils du cousin paternel'],
+  grandfatherFullBrothers:['عم الأب الشقيق','Grandfather\'s full brother','Frère germain du grand-père'], grandfatherPaternalBrothers:['عم الأب لأب','Grandfather\'s paternal brother','Frère paternel du grand-père'],
+  sonGrandfatherFullBrothers:['ابن عم الأب الشقيق','Father\'s full cousin','Cousin germain du père'], sonGrandfatherPaternalBrothers:['ابن عم الأب لأب','Father\'s paternal cousin','Cousin paternel du père']
 };
 const ALL_HEIRS = Object.keys(HEIR_NAMES);
 function nm(id){ return HEIR_NAMES[id] ? T(HEIR_NAMES[id]) : id; }
@@ -607,12 +542,194 @@ function readHeirs(){ const o={}; ALL_HEIRS.forEach(id=>o[id]=heirCount(id)); re
 
 function shareName(f){
   const s = F.txt(F.make(f.n,f.d));
-  const map = {'1/2':['النصف','One half','La moitié'],'1/4':['الربع','One quarter','Le quart'],
-    '3/4':['ثلاثة أرباع','Three quarters','Trois quarts'],'1/8':['الثمن','One eighth','Le huitième'],
-    '1/3':['الثلث','One third','Le tiers'],'2/3':['الثلثان','Two thirds','Les deux tiers'],
-    '1/6':['السدس','One sixth','Le sixième'],'1':'الكل','1/1':['الكل','Whole','La totalité']};
+  const map = {'1/2':['النصف','One half','La moitié'],'1/4':['الربع','One quarter','Le quart'], '3/4':['ثلاثة أرباع','Three quarters','Trois quarts'],'1/8':['الثمن','One eighth','Le huitième'],
+    '1/3':['الثلث','One third','Le tiers'],'2/3':['الثلثان','Two thirds','Les deux tiers'], '1/6':['السدس','One sixth','Le sixième'],'1':'الكل','1/1':['الكل','Whole','La totalité']};
   if(map[s]) return T(map[s]);
   return s;
+}
+
+function updateBlockedHeirs() {
+  const input = readHeirs();
+  const N = id => input[id] || 0;
+  ALL_HEIRS.forEach(id => {
+    const opt = document.getElementById('opt-' + id);
+    const cb = document.getElementById(id);
+    if (opt && cb) {
+      cb.disabled = false;
+      opt.classList.remove('heir-blocked');
+      const msg = opt.querySelector('.blocked-msg');
+      if (msg) msg.remove();
+    }
+  });
+
+  const block = (id, byId, reason) => {
+    const opt = document.getElementById('opt-' + id);
+    const cb = document.getElementById(id);
+    if (opt && cb) {
+      cb.checked = false;
+      cb.disabled = true;
+      opt.classList.add('heir-blocked');
+      const countDiv = document.getElementById('count-' + id);
+      if (countDiv) countDiv.classList.remove('active');
+      let msg = opt.querySelector('.blocked-msg');
+      if (!msg) {
+        msg = document.createElement('div');
+        msg.className = 'blocked-msg';
+        msg.style.cssText = 'font-size: 0.75rem; color: #c0392b; margin-top: 5px; font-weight: 600;';
+        opt.appendChild(msg);
+      }
+      msg.textContent = `🚫 محجوب بـ: ${nm(byId)}`;
+    }
+  };
+
+  const siblingsAndCousins = ['fullBrothers','fullSisters','paternalBrothers','paternalSisters','maternalBrothers','maternalSisters','sonFullBrothers','sonPaternalBrothers','sonSonFullBrothers','sonSonPaternalBrothers','fullUncles','paternalUncles','sonFullUncles','sonPaternalUncles','sonSonFullUncles','sonSonPaternalUncles','grandfatherFullBrothers','grandfatherPaternalBrothers','sonGrandfatherFullBrothers','sonGrandfatherPaternalBrothers'];
+  const paternalAndBelow = ['paternalBrothers','paternalSisters','sonFullBrothers','sonPaternalBrothers','sonSonFullBrothers','sonSonPaternalBrothers','fullUncles','paternalUncles','sonFullUncles','sonPaternalUncles','sonSonFullUncles','sonSonPaternalUncles','grandfatherFullBrothers','grandfatherPaternalBrothers','sonGrandfatherFullBrothers','sonGrandfatherPaternalBrothers'];
+  const descendantsAndSiblings = ['sonSons','sonDaughters','sonSonSons','sonSonDaughters','sonSonSonSons','sonSonSonDaughters','fullBrothers','fullSisters','paternalBrothers','paternalSisters','maternalBrothers','maternalSisters','sonFullBrothers','sonPaternalBrothers','sonSonFullBrothers','sonSonPaternalBrothers','fullUncles','paternalUncles','sonFullUncles','sonPaternalUncles','sonSonFullUncles','sonSonPaternalUncles','grandfatherFullBrothers','grandfatherPaternalBrothers','sonGrandfatherFullBrothers','sonGrandfatherPaternalBrothers'];
+
+  if (N('father')) {
+    block('grandfatherFather', 'father'); block('grandfatherFatherFather', 'father');
+    block('grandmotherFather', 'father'); block('grandmotherFatherFather', 'father');
+    siblingsAndCousins.forEach(id => block(id, 'father'));
+  }
+  if (N('mother')) {
+    ['grandmotherFather', 'grandmotherMother', 'grandmotherMotherMother', 'grandmotherFatherFather', 'grandmotherMotherFather'].forEach(id => block(id, 'mother'));
+  }
+  if (N('sons')) {
+    descendantsAndSiblings.forEach(id => block(id, 'sons'));
+  }
+  const hasFar3 = N('sons') || N('daughters') || N('sonSons') || N('sonDaughters') || N('sonSonSons') || N('sonSonDaughters');
+  if (hasFar3 || N('father') || N('grandfatherFather')) {
+    const blocker = hasFar3 ? 'الفرع الوارث' : (N('father') ? 'الأب' : 'الجد');
+    block('maternalBrothers', blocker); block('maternalSisters', blocker);
+  }
+  if (N('fullBrothers')) {
+    paternalAndBelow.forEach(id => block(id, 'fullBrothers'));
+  }
+  if (N('fullSisters') >= 2 || (N('fullSisters') > 0 && (N('daughters') > 0 || N('sonDaughters') > 0))) {
+    block('paternalBrothers', 'fullSisters'); block('paternalSisters', 'fullSisters');
+  }
+  if (N('sonSons')) {
+    block('sonSonSons', 'sonSons'); block('sonSonDaughters', 'sonSons');
+    block('sonSonSonSons', 'sonSons'); block('sonSonSonDaughters', 'sonSons');
+  }
+  if (N('daughters') >= 2 && N('sonSons') === 0) {
+    block('sonDaughters', 'daughters'); block('sonSonDaughters', 'daughters');
+  }
+}
+
+const LEGAL_EVIDENCE = {
+  husband: {
+    half: { quran: { text: "وَلَكُمْ نِصْفُ مَا تَرَكَ أَزْوَاجُكُمْ إِن لَّمْ يَكُن لَّهُنَّ وَلَدٌ", surah: "سورة النساء", verse: 12 }, law: { article: "المادة 24", text: "للزوج النصف إذا لم يكن للزوجة فرع وارث" }, fiqh: "يرث الزوج النصف فرضاً عند عدم وجود فرع وارث للزوجة." },
+    quarter: { quran: { text: "فَإِن كَانَ لَهُنَّ وَلَدٌ فَلَكُمُ الرُّبُعُ مِمَّا تَرَكْنَ", surah: "سورة النساء", verse: 12 }, law: { article: "المادة 24", text: "للزوج الربع إذا كان للزوجة فرع وارث" }, fiqh: "ينزل نصيب الزوج من النصف إلى الربع عند وجود فرع وارث للزوجة." }
+  },
+  wife: {
+    quarter: { quran: { text: "وَلَهُنَّ الرُّبُعُ مِمَّا تَرَكْتُمْ إِن لَّمْ يَكُن لَّكُمْ وَلَدٌ", surah: "سورة النساء", verse: 12 }, law: { article: "المادة 25", text: "للزوجة الربع إذا لم يكن للزوج فرع وارث" }, fiqh: "ترث الزوجة الربع فرضاً عند عدم وجود فرع وارث للزوج." },
+    eighth: { quran: { text: "فَإِن كَانَ لَكُمْ وَلَدٌ فَلَهُنَّ الثُّمُنُ مِمَّا تَرَكْتُم", surah: "سورة النساء", verse: 12 }, law: { article: "المادة 25", text: "للزوجة الثمن إذا كان للزوج فرع وارث" }, fiqh: "تنزل الزوجة من الربع إلى الثمن عند وجود فرع وارث للزوج." }
+  },
+  father: {
+    sixth: { quran: { text: "وَلِأَبَوَيْهِ لِكُلِّ وَاحِدٍ مِّنْهُمَا السُّدُسُ مِمَّا تَرَكَ إِن كَانَ لَهُ وَلَدٌ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 21", text: "للأب السدس فرضاً عند وجود فرع وارث مذكر" }, fiqh: "يرث الأب السدس فرضاً عند وجود فرع وارث مذكر، ويأخذ الباقي تعصيباً." },
+    residuary: { quran: { text: "يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ ۖ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنثَيَيْنِ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 21", text: "الأب وارث بالفرض والتعصيب" }, fiqh: "إذا لم يوجد فرع وارث يرث الأب كل التركة تعصيباً." }
+  },
+  mother: {
+    third: { quran: { text: "فَإِن لَّمْ يَكُن لَّهُ وَلَدٌ وَوَرِثَهُ أَبَوَاهُ فَلِأُمِّهِ الثُّلُثُ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 20", text: "للأم الثلث إذا لم يكن للمتوفى فرع وارث ولا جمع من الإخوة" }, fiqh: "ترث الأم الثلث عند عدم وجود فرع وارث وعدم وجود جمع من الإخوة." },
+    sixth: { quran: { text: "وَلِأَبَوَيْهِ لِكُلِّ وَاحِدٍ مِّنْهُمَا السُّدُسُ مِمَّا تَرَكَ إِن كَانَ لَهُ وَلَدٌ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 20", text: "للأم السدس عند وجود فرع وارث أو جمع من الإخوة" }, fiqh: "تنزل الأم من الثلث إلى السدس في حالتين: وجود فرع وارث، أو وجود جمع من الإخوة." }
+  },
+  grandfatherFather: {
+    sixth: { quran: { text: "وَلِأَبَوَيْهِ لِكُلِّ وَاحِدٍ مِّنْهُمَا السُّدُسُ مِمَّا تَرَكَ إِن كَانَ لَهُ وَلَدٌ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 22", text: "للجد الصحيح حكم الأب عند عدم وجود الأب" }, fiqh: "يرث الجد الصحيح السدس عند وجود الفرع الوارث المذكر، ويأخذ الباقي تعصيباً، ويقاسم الإخوة في المذهب الحنفي والقانون المصري." },
+    residuary: { quran: { text: "يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ ۖ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنثَيَيْنِ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 22", text: "الجد الصحيح وارث بالفرض والتعصيب" }, fiqh: "إذا لم يوجد فرع وارث ولا أب، يرث الجد الصحيح التركة تعصيباً." }
+  },
+  grandmotherFather: {
+    sixth: { hadith: { text: "لِلْجَدَّةِ السُّدُسُ مَا لَمْ تَحْجُبْهَا أُمٌّ", source: "سنن أبي داود والترمذي" }, law: { article: "المادة 23", text: "للجدة الصحيحة السدس" }, fiqh: "ترث الجدة الصحيحة (أم الأب أو أم الأم) السدس فرضاً إذا لم تحجبها الأم، وتشترك الجدات في السدس إذا تعددن." }
+  },
+  grandmotherMother: {
+    sixth: { hadith: { text: "لِلْجَدَّةِ السُّدُسُ مَا لَمْ تَحْجُبْهَا أُمٌّ", source: "سنن أبي داود والترمذي" }, law: { article: "المادة 23", text: "للجدة الصحيحة السدس" }, fiqh: "ترث الجدة لأم السدس فرضاً إذا لم تحجبها الأم، وتشترك مع الجدة لأب في السدس." }
+  },
+  sons: {
+    residuary: { quran: { text: "يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ ۖ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنثَيَيْنِ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 15", text: "الابن وارث بالتعصيب" }, fiqh: "الابن وارث بالتعصيب، يأخذ باقي التركة بعد أصحاب الفروض، للذكر مثل حظ الأنثيين." }
+  },
+  daughters: {
+    half: { quran: { text: "وَإِن كَانَتْ وَاحِدَةً فَلَهَا النِّصْفُ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 16", text: "للبنت الواحدة النصف" }, fiqh: "ترث البنت الواحدة النصف فرضاً عند انفرداها وعدم وجود ابن يعصبها." },
+    twoThirds: { quran: { text: "فَإِن كُنَّ نِسَاءً فَوْقَ اثْنَتَيْنِ فَلَهُنَّ ثُلُثَا مَا تَرَكَ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 16", text: "للبنتين فأكثر الثلثان" }, fiqh: "ترث البنتان فأكثر الثلثين فرضاً عند عدم وجود ابن يعصبهن." },
+    residuary: { quran: { text: "يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ ۖ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنثَيَيْنِ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 16", text: "البنت ترث مع الابن تعصيباً" }, fiqh: "إذا وجدت البنت مع الابن، ترث البنت تعصيباً مع الابن، للذكر مثل حظ الأنثيين." }
+  },
+  sonSons: {
+    residuary: { quran: { text: "يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 17", text: "ابن الابن ينزل منزلة الابن عند عدمه" }, fiqh: "يرث ابن الابن بالتعصيب عند عدم وجود الابن المباشر، للذكر مثل حظ الأنثيين." }
+  },
+  sonDaughters: {
+    half: { quran: { text: "فَإِن كَانَتَا اثْنَتَيْنِ فَلَهُمَا الثُّلُثَانِ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 17", text: "لبنت الابن النصف أو الثلثان" }, fiqh: "ترث بنت الابن النصف إذا كانت واحدة، والثلثين إذا كن اثنتين فأكثر، في عدم وجود الابن أو البنت الصلبية." },
+    sixth: { quran: { text: "فَإِن كُنَّ نِسَاءً فَوْقَ اثْنَتَيْنِ فَلَهُنَّ ثُلُثَا مَا تَرَكَ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 17", text: "لبنت الابن السدس تكملة للثلثين" }, fiqh: "ترث بنت الابن السدس تكملة للثلثين إذا وجدت معها بنت صلبية واحدة." },
+    residuary: { quran: { text: "يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 17", text: "بنت الابن ترث مع ابن الابن تعصيباً" }, fiqh: "ترث بنت الابن تعصيباً مع ابن الابن في درجتها، للذكر مثل حظ الأنثيين." }
+  },
+  fullBrothers: {
+    residuary: { quran: { text: "يَسْتَفْتُونَكَ قُلِ اللَّهُ يُفْتِيكُمْ فِي الْكَلَالَةِ...", surah: "سورة النساء", verse: 176 }, law: { article: "المادة 18", text: "الأخ الشقيق وارث بالتعصيب" }, fiqh: "يرث الأخ الشقيق بالتعصيب عند عدم وجود الأب أو الفرع الوارث المذكر." }
+  },
+  fullSisters: {
+    half: { quran: { text: "وَإِن كَانَتْ وَاحِدَةً فَلَهَا النِّصْفُ", surah: "سورة النساء", verse: 12 }, law: { article: "المادة 18", text: "للأخت الشقيقة النصف" }, fiqh: "ترث الأخت الشقيقة النصف فرضاً عند انفرداها وعدم وجود من يعصبها." },
+    twoThirds: { quran: { text: "فَإِن كَانُواْ إِخْوَةً رِّجَالاً وَنِسَاءً فَلِلذَّكَرِ مِثْلُ حَظِّ الْأُنثَيَيْنِ", surah: "سورة النساء", verse: 176 }, law: { article: "المادة 18", text: "للأختين الشقيقتين فأكثر الثلثان" }, fiqh: "ترث الأختان الشقيقتان فأكثر الثلثين فرضاً عند عدم وجود من يعصبهن." },
+    residuary: { quran: { text: "يَسْتَفْتُونَكَ قُلِ اللَّهُ يُفْتِيكُمْ فِي الْكَلَالَةِ", surah: "سورة النساء", verse: 176 }, law: { article: "المادة 18", text: "الأخت الشقيقة عصبة مع الغير" }, fiqh: "تصير الأخت الشقيقة عصبة مع البنت أو بنت الابن، وتأخذ الباقي." }
+  },
+  paternalBrothers: {
+    residuary: { quran: { text: "يَسْتَفْتُونَكَ قُلِ اللَّهُ يُفْتِيكُمْ فِي الْكَلَالَةِ", surah: "سورة النساء", verse: 176 }, law: { article: "المادة 18", text: "الأخ لأب وارث بالتعصيب" }, fiqh: "يرث الأخ لأب بالتعصيب عند عدم وجود الأخ الشقيق أو من يحجبه." }
+  },
+  paternalSisters: {
+    half: { quran: { text: "وَإِن كَانَتْ وَاحِدَةً فَلَهَا النِّصْفُ", surah: "سورة النساء", verse: 12 }, law: { article: "المادة 18", text: "للأخت لأب النصف" }, fiqh: "ترث الأخت لأب النصف فرضاً عند انفرداها." },
+    twoThirds: { quran: { text: "فَإِن كَانُواْ إِخْوَةً رِّجَالاً وَنِسَاءً فَلِلذَّكَرِ مِثْلُ حَظِّ الْأُنثَيَيْنِ", surah: "سورة النساء", verse: 176 }, law: { article: "المادة 18", text: "للأختين لأب فأكثر الثلثان" }, fiqh: "ترث الأختان لأب فأكثر الثلثين فرضاً." },
+    sixth: { quran: { text: "فَإِن كُنَّ نِسَاءً فَوْقَ اثْنَتَيْنِ فَلَهُنَّ ثُلُثَا مَا تَرَكَ", surah: "سورة النساء", verse: 11 }, law: { article: "المادة 18", text: "للأخت لأب السدس تكملة" }, fiqh: "ترث الأخت لأب السدس تكملة للثلثين إذا وجدت معها أخت شقيقة واحدة." },
+    residuary: { quran: { text: "يَسْتَفْتُونَكَ قُلِ اللَّهُ يُفْتِيكُمْ فِي الْكَلَالَةِ", surah: "سورة النساء", verse: 176 }, law: { article: "المادة 18", text: "الأخت لأب عصبة مع الغير" }, fiqh: "تصير الأخت لأب عصبة مع البنت أو بنت الابن عند عدم وجود الأخ لأب." }
+  },
+  maternalBrothers: {
+    sixth: { quran: { text: "وَإِن كَانَ رَجُلٌ يُورَثُ كَلَالَةً أَوِ امْرَأَةٌ وَلَهُ أَخٌ أَوْ أُخْتٌ فَلِكُلِّ وَاحِدٍ مِّنْهُمَا السُّدُسُ", surah: "سورة النساء", verse: 12 }, law: { article: "المادة 19", text: "للأخ لأم السدس" }, fiqh: "يرث الأخ لأم السدس إذا كان واحداً، ولا فرق بين الذكر والأنثى." },
+    third: { quran: { text: "فَإِن كَانُواْ أَكْثَرَ مِن ذَٰلِكَ فَهُمْ شُرَكَاءُ فِي الثُّلُثِ", surah: "سورة النساء", verse: 12 }, law: { article: "المادة 19", text: "للإخوة لأم الثلث" }, fiqh: "إذا تعدد الإخوة لأم اشتركوا في الثلث، للذكر مثل حظ الأنثى." }
+  },
+  maternalSisters: {
+    sixth: { quran: { text: "وَلَهُ أَخٌ أَوْ أُخْتٌ فَلِكُلِّ وَاحِدٍ مِّنْهُمَا السُّدُسُ", surah: "سورة النساء", verse: 12 }, law: { article: "المادة 19", text: "للأخت لأم السدس" }, fiqh: "ترث الأخت لأم السدس إذا كانت واحدة." },
+    third: { quran: { text: "فَإِن كَانُواْ أَكْثَرَ مِن ذَٰلِكَ فَهُمْ شُرَكَاءُ فِي الثُّلُثِ", surah: "سورة النساء", verse: 12 }, law: { article: "المادة 19", text: "للإخوة لأم الثلث" }, fiqh: "تشترك الأخت لأم مع الإخوة لأم في الثلث إذا تعددوا." }
+  },
+  sonFullBrothers: { residuary: { law: { article: "المادة 26", text: "ابن الأخ الشقيق عصبة بالنفس" }, fiqh: "يرث ابن الأخ الشقيق بالتعصيب عند عدم وجود الإخوة أو من يحجبه." } },
+  sonPaternalBrothers: { residuary: { law: { article: "المادة 26", text: "ابن الأخ لأب عصبة بالنفس" }, fiqh: "يرث ابن الأخ لأب بالتعصيب عند عدم وجود ابن الأخ الشقيق أو من يحجبه." } },
+  fullUncles: { residuary: { law: { article: "المادة 27", text: "العم الشقيق عصبة بالنفس" }, fiqh: "يرث العم الشقيق بالتعصيب عند عدم وجود فروع الإخوة." } },
+  paternalUncles: { residuary: { law: { article: "المادة 27", text: "العم لأب عصبة بالنفس" }, fiqh: "يرث العم لأب بالتعصيب عند عدم وجود العم الشقيق." } },
+  sonFullUncles: { residuary: { law: { article: "المادة 28", text: "ابن العم الشقيق عصبة بالنفس" }, fiqh: "يرث ابن العم الشقيق بالتعصيب عند عدم وجود الأعمام." } },
+  sonPaternalUncles: { residuary: { law: { article: "المادة 28", text: "ابن العم لأب عصبة بالنفس" }, fiqh: "يرث ابن العم لأب بالتعصيب عند عدم وجود ابن العم الشقيق." } },
+  defaultAsabah: { residuary: { hadith: { text: "أَلْحِقُوا الْفَرَائِضَ بِأَهْلِهَا، فَمَا بَقِيَ فَلِأَوْلَى رَجُلٍ ذَكَرٍ", source: "متفق عليه" }, law: { article: "المادة 29", text: "العصبة بالنفس تأخذ الباقي" }, fiqh: "أي وارث ذكر من ذوي الأرحام البعيدين يرث بالتعصيب عند انعدام جميع الفئات السابقة." } }
+};
+
+function showEvidence(heirId, shareKey) {
+  let evidence = LEGAL_EVIDENCE[heirId] ? LEGAL_EVIDENCE[heirId][shareKey] : null;
+  if (!evidence && LEGAL_EVIDENCE[heirId]) {
+      const keys = Object.keys(LEGAL_EVIDENCE[heirId]);
+      evidence = LEGAL_EVIDENCE[heirId][keys[0]];
+  }
+  if (!evidence) {
+    evidence = LEGAL_EVIDENCE['defaultAsabah']['residuary'];
+  }
+
+  const modal = document.createElement('div');
+  modal.className = 'evidence-modal';
+  
+  let quranHtml = evidence.quran ? `<div class="evidence-section quran-section"><h4>📜 الدليل القرآني</h4><div class="quran-text">${evidence.quran.text}</div><div class="quran-ref">[${evidence.quran.surah} - الآية ${evidence.quran.verse}]</div></div>` : '';
+  let hadithHtml = evidence.hadith ? `<div class="evidence-section quran-section"><h4>📜 الدليل من السنة</h4><div class="quran-text" style="color:#2980b9;">${evidence.hadith.text}</div><div class="quran-ref">[${evidence.hadith.source}]</div></div>` : '';
+  let lawHtml = evidence.law ? `<div class="evidence-section law-section"><h4>⚖️ الدليل القانوني</h4><div class="law-text"><strong>${evidence.law.article}:</strong> ${evidence.law.text}</div><div class="law-ref">[قانون المواريث المصري رقم 77 لسنة 1943 وتعديلاته]</div></div>` : '';
+  
+  modal.innerHTML = `
+    <div class="evidence-modal-content">
+      <div class="evidence-header">
+        <h3>📖 الأدلة الشرعية والقانونية</h3>
+        <button class="evidence-close" onclick="this.closest('.evidence-modal').remove()">✕</button>
+      </div>
+      <div class="evidence-body">
+        ${quranHtml}
+        ${hadithHtml}
+        ${lawHtml}
+        <div class="evidence-section fiqh-section">
+          <h4>📚 الشرح الفقهي</h4>
+          <div class="fiqh-text">${evidence.fiqh}</div>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
 }
 
 function solveEstate(input, madhab){
@@ -669,9 +786,7 @@ function solveEstate(input, madhab){
   else if(maleGen>=0){ SIB.concat(COUSINS).forEach(id=>B(id,GENS[maleGen][0])); }
   else if(gfId && jumhoor){ SIB.concat(COUSINS).forEach(id=>B(id,gfId)); }
 
-  const muqasama = !!(gfId && !N('father') && maleGen<0 && !jumhoor &&
-                    (N('fullBrothers')||N('fullSisters')||N('paternalBrothers')||N('paternalSisters')));
-
+  const muqasama = !!(gfId && !N('father') && maleGen<0 && !jumhoor && (N('fullBrothers')||N('fullSisters')||N('paternalBrothers')||N('paternalSisters')));
   const matBlocker = N('father') ? 'father' : (gfId ? gfId : (maleGen>=0?GENS[maleGen][0]:(femGen>=0?GENS[femGen][1]:null)));
   if(hasFar3 || N('father') || gfId){ B('maternalBrothers', matBlocker); B('maternalSisters', matBlocker); }
 
@@ -704,12 +819,8 @@ function solveEstate(input, madhab){
   const entries = [];
   const push = (members, frac, reason, kind) => { if(F.val(frac)>0) entries.push({members:members, frac:frac, reason:reason, kind:kind||'فرض'}); };
 
-  if(N('husband')) push([{id:'husband',count:1,weight:1}], F.make(1, hasFar3?4:2),
-      hasFar3? R('الربع لوجود الفرع الوارث','1/4 due to descendants','1/4 en présence de descendants')
-             : R('النصف لعدم وجود فرع وارث','1/2 no descendants','1/2 sans descendants'));
-  if(N('wife')) push([{id:'wife',count:N('wife'),weight:1}], F.make(1, hasFar3?8:4),
-      hasFar3? R('الثمن لوجود الفرع الوارث','1/8 due to descendants','1/8 en présence de descendants')
-             : R('الربع لعدم وجود فرع وارث','1/4 no descendants','1/4 sans descendants'));
+  if(N('husband')) push([{id:'husband',count:1,weight:1}], F.make(1, hasFar3?4:2), hasFar3? R('الربع لوجود الفرع الوارث','1/4 due to descendants','1/4 en présence de descendants') : R('النصف لعدم وجود فرع وارث','1/2 no descendants','1/2 sans descendants'));
+  if(N('wife')) push([{id:'wife',count:N('wife'),weight:1}], F.make(1, hasFar3?8:4), hasFar3? R('الثمن لوجود الفرع الوارث','1/8 due to descendants','1/8 en présence de descendants') : R('الربع لعدم وجود فرع وارث','1/4 no descendants','1/4 sans descendants'));
 
   let omariyyatan = false;
   if(N('mother')){
@@ -741,8 +852,7 @@ function solveEstate(input, madhab){
 
   if(N('fullSisters') && !N('fullBrothers') && !(winner && winner.id==='fullSisters')){
     const cnt=N('fullSisters');
-    push([{id:'fullSisters',count:cnt,weight:1}], cnt===1?F.make(1,2):F.make(2,3),
-      cnt===1? R('النصف للانفراد','1/2 alone','1/2 seule') : R('الثلثان للتعدد','2/3 for plurality','2/3 pour pluralité'));
+    push([{id:'fullSisters',count:cnt,weight:1}], cnt===1?F.make(1,2):F.make(2,3), cnt===1? R('النصف للانفراد','1/2 alone','1/2 seule') : R('الثلثان للتعدد','2/3 for plurality','2/3 pour pluralité'));
   }
   if(N('paternalSisters') && !N('paternalBrothers') && !(winner && winner.id==='paternalSisters')){
     const cnt=N('paternalSisters'), fs=N('fullSisters');
@@ -776,8 +886,7 @@ function solveEstate(input, madhab){
   }
 
   if(liveGM.length){
-    push(liveGM.map(g=>({id:g.id,count:1,weight:1})), F.make(1,6),
-      liveGM.length>1 ? R('السدس يقسم بين الجدات','1/6 shared among grandmothers','1/6 partagé') : R('السدس للجدة','1/6 for grandmother','1/6 pour la grand-mère'));
+    push(liveGM.map(g=>({id:g.id,count:1,weight:1})), F.make(1,6), liveGM.length>1 ? R('السدس يقسم بين الجدات','1/6 shared among grandmothers','1/6 partagé') : R('السدس للجدة','1/6 for grandmother','1/6 pour la grand-mère'));
   }
 
   let sum = F.make(0); entries.forEach(e=>sum=F.add(sum,e.frac));
@@ -978,13 +1087,51 @@ function calculateInheritance(){
     table.querySelector('thead').innerHTML =
       '<tr><th>'+T(R('الوارث','Heir','Héritier'))+'</th><th>'+T(R('العدد','No.','Nbre'))+'</th><th>'+
       T(R('الفرض / السبب','Share / Reason','Part / Motif'))+'</th><th>'+T(R('السهام','Shares','Parts'))+'</th><th>'+
-      T(R('النسبة','%','%'))+'</th><th>'+T(R('القيمة (جنيه)','Value (EGP)','Valeur (EGP)'))+'</th></tr>';
+      T(R('النسبة','%','%'))+'</th><th>'+T(R('القيمة (جنيه)','Value (EGP)','Valeur (EGP)'))+'</th><th>📖 الأدلة</th></tr>';
 
     let body = '';
     res.rows.forEach(r=>{
       const pct = (F.val(r.frac)*100);
       const total = money ? distributable * F.val(r.frac) : 0;
       const each = money && r.count ? total/r.count : 0;
+      
+      let evidenceKey = '';
+      if (r.id === 'husband') evidenceKey = F.val(r.frac) === 0.5 ? 'half' : 'quarter';
+      else if (r.id === 'wife') evidenceKey = F.val(r.frac) === 0.125 ? 'eighth' : 'quarter';
+      else if (r.id === 'father') evidenceKey = F.val(r.frac) === 1/6 ? 'sixth' : 'residuary';
+      else if (r.id === 'mother') evidenceKey = F.val(r.frac) === 1/3 ? 'third' : 'sixth';
+      else if (r.id === 'grandfatherFather') evidenceKey = F.val(r.frac) === 1/6 ? 'sixth' : 'residuary';
+      else if (r.id === 'grandmotherFather' || r.id === 'grandmotherMother') evidenceKey = 'sixth';
+      else if (r.id === 'sons' || r.id === 'sonSons' || r.id === 'sonSonSons' || r.id === 'sonSonSonSons') evidenceKey = 'residuary';
+      else if (r.id === 'daughters') {
+        if (F.val(r.frac) === 0.5) evidenceKey = 'half';
+        else if (F.val(r.frac) === 2/3) evidenceKey = 'twoThirds';
+        else evidenceKey = 'residuary';
+      }
+      else if (r.id === 'sonDaughters' || r.id === 'sonSonDaughters' || r.id === 'sonSonSonDaughters') {
+        if (F.val(r.frac) === 0.5) evidenceKey = 'half';
+        else if (F.val(r.frac) === 1/6) evidenceKey = 'sixth';
+        else evidenceKey = 'residuary';
+      }
+      else if (r.id === 'fullSisters') {
+        if (F.val(r.frac) === 0.5) evidenceKey = 'half';
+        else if (F.val(r.frac) === 2/3) evidenceKey = 'twoThirds';
+        else evidenceKey = 'residuary';
+      }
+      else if (r.id === 'paternalSisters') {
+        if (F.val(r.frac) === 0.5) evidenceKey = 'half';
+        else if (F.val(r.frac) === 2/3) evidenceKey = 'twoThirds';
+        else if (F.val(r.frac) === 1/6) evidenceKey = 'sixth';
+        else evidenceKey = 'residuary';
+      }
+      else if (r.id === 'fullBrothers' || r.id === 'paternalBrothers') evidenceKey = 'residuary';
+      else if (r.id === 'maternalBrothers' || r.id === 'maternalSisters') evidenceKey = F.val(r.frac) === 1/6 ? 'sixth' : 'third';
+      else if (['sonFullBrothers','sonPaternalBrothers','sonSonFullBrothers','sonSonPaternalBrothers','fullUncles','paternalUncles','sonFullUncles','sonPaternalUncles','sonSonFullUncles','sonSonPaternalUncles','grandfatherFullBrothers','grandfatherPaternalBrothers','sonGrandfatherFullBrothers','sonGrandfatherPaternalBrothers'].includes(r.id)) {
+        evidenceKey = 'residuary';
+      }
+
+      const evidenceBtn = `<button class="evidence-btn" onclick="showEvidence('${r.id}', '${evidenceKey}')">📖 عرض الأدلة</button>`;
+
       body += '<tr>'+
         '<td><b>'+nm(r.id)+'</b><br><small style="color:#888;">'+shareName(r.frac)+'</small></td>'+
         '<td style="text-align:center;">'+r.count+'</td>'+
@@ -992,6 +1139,7 @@ function calculateInheritance(){
         '<td style="text-align:center;"><b>'+r.units+'</b> / '+res.asl+'</td>'+
         '<td style="text-align:center;">'+pct.toFixed(2)+'%</td>'+
         '<td>'+(money? '<b>'+fmt(total)+'</b>'+(r.count>1?'<br><small style="color:#888;">'+T(R('للفرد','each','chacun'))+': '+fmt(each)+'</small>':'') : '—')+'</td>'+
+        '<td style="text-align:center;">'+evidenceBtn+'</td>'+
       '</tr>';
     });
     if(money && res.rows.length){
@@ -1000,7 +1148,7 @@ function calculateInheritance(){
         '<td style="text-align:center;">'+res.rows.reduce((s,r)=>s+F.val(r.frac)*100,0).toFixed(2)+'%</td>'+
         '<td>'+fmt(distributable)+'</td></tr>';
     }
-    document.getElementById('resultBody').innerHTML = body || '<tr><td colspan="6" style="text-align:center;color:#888;">—</td></tr>';
+    document.getElementById('resultBody').innerHTML = body || '<tr><td colspan="7" style="text-align:center;color:#888;">—</td></tr>';
 
     document.getElementById('printBtn').style.display = 'block';
     document.getElementById('calcResult').classList.add('active');
@@ -1033,27 +1181,9 @@ function calculateInheritance(){
         options: {
           responsive: true,
           plugins: {
-            legend: {
-              position: 'bottom',
-              labels: { font: { family: 'Cairo', size: 13 }, padding: 15 }
-            },
-            title: {
-              display: true,
-              text: currentLang === 'ar' ? '📊 توزيع الأنصبة' : currentLang === 'en' ? '📊 Distribution of Shares' : '📊 Répartition des parts',
-              font: { family: 'Cairo', size: 18, weight: 'bold' },
-              padding: { bottom: 20 }
-            },
-            tooltip: {
-              callbacks: {
-                label: function(context) {
-                  const label = context.label || '';
-                  const value = context.parsed || 0;
-                  const total = context.dataset.data.reduce((a,b) => a+b, 0);
-                  const pct = ((value/total)*100).toFixed(2);
-                  return label + ': ' + fmt(value) + ' ' + cur() + ' (' + pct + '%)';
-                }
-              }
-            }
+            legend: { position: 'bottom', labels: { font: { family: 'Cairo', size: 13 }, padding: 15 } },
+            title: { display: true, text: currentLang === 'ar' ? '📊 توزيع الأنصبة' : currentLang === 'en' ? '📊 Distribution of Shares' : '📊 Répartition des parts', font: { family: 'Cairo', size: 18, weight: 'bold' }, padding: { bottom: 20 } },
+            tooltip: { callbacks: { label: function(context) { const label = context.label || ''; const value = context.parsed || 0; const total = context.dataset.data.reduce((a,b) => a+b, 0); const pct = ((value/total)*100).toFixed(2); return label + ': ' + fmt(value) + ' ' + cur() + ' (' + pct + '%)'; } } }
           }
         }
       });
@@ -1066,19 +1196,13 @@ function calculateInheritance(){
   }
 }
 
-// ✅ دالة طباعة المتصفح - تحل مشكلة العربية 100%
 function printPDF() {
-  // ملء تاريخ الطباعة
   const printDateEl = document.getElementById('printDate');
   if (printDateEl) {
     printDateEl.textContent = new Date().toLocaleDateString('ar-EG') + ' ' + new Date().toLocaleTimeString('ar-EG');
   }
-  
-  // إظهار النتائج لو مخفية
   document.getElementById('calcResult').style.display = 'block';
   document.getElementById('calcResult').classList.add('active');
-  
-  // استدعاء نافذة الطباعة
   window.print();
 }
 </script>

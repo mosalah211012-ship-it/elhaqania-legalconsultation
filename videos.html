@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-ar="الحقانية للإستشارات القانونية - فيديوهات تعليمية" data-en="Haqania Legal Consultations - Educational Videos" data-fr="Haqania Consultations Juridiques - Vidéos Éducatives">الحقانية للإستشارات القانونية - فيديوهات تعليمية</title>
+
+<!-- SEO & Meta -->
+<meta name="description" content="فيديوهات تعليمية مبسطة من مكتب الحقانية للإستشارات القانونية - شرح قانوني عملي للأفراد: الأحوال الشخصية، الميراث، العقود، والقضايا الجنائية.">
+<meta name="keywords" content="فيديوهات قانونية، شرح قانوني، محامي مصر، الحقانية، استشارة قانونية، أحوال شخصية، ميراث، قانون جنائي">
+<meta name="author" content="الأستاذ محمد صلاح - الحقانية للإستشارات القانونية">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://elhaqania-legalconsultation.vercel.app/videos.html">
+<meta property="og:title" content="الحقانية - فيديوهات تعليمية قانونية">
+<meta property="og:description" content="شرح قانوني مبسط بالفيديو من مكتب الحقانية للإستشارات القانونية">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://elhaqania-legalconsultation.vercel.app/videos.html">
+
+<!-- Styles -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+:root { --gold: #b59461; --gold-dark: #9c7e4d; --dark: #111; --white: #fff; --grey: #f8f9fa; --danger: #dc3545; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Cairo', sans-serif; background: var(--white); color: #333; line-height: 1.7;
+    -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
+}
+input, textarea { user-select: text; -webkit-user-select: text; }
+
+header { background: var(--white); border-bottom: 3px solid var(--gold); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.logo-box { display: flex; align-items: center; gap: 12px; }
+.logo-box img { height: 70px; width: 70px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; }
+.logo-text { font-weight: 700; font-size: 1.1rem; }
+.logo-sub { font-size: 0.85rem; color: var(--gold); }
+.nav-menu { display: flex; gap: 8px; list-style: none; padding: 0; align-items: center; flex-wrap: wrap; }
+.nav-menu a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.85rem; padding: 8px 12px; border-radius: 6px; transition: all 0.3s; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--gold); background: var(--grey); }
+.lang-switcher { display: flex; gap: 5px; margin-right: 10px; }
+.lang-btn { background: var(--gold); color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
+.lang-btn.active { background: var(--dark); }
+.hero { background: linear-gradient(135deg, var(--dark), var(--gold)); color: white; padding: 60px 5%; text-align: center; }
+.hero h1 { font-size: 2rem; margin-bottom: 12px; }
+.hero p { font-size: 1rem; opacity: 0.9; max-width: 640px; margin: 0 auto; }
+.btn { padding: 14px 35px; border-radius: 30px; text-decoration: none; font-weight: 700; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s; font-family: 'Cairo', sans-serif; }
+.btn-gold { background: var(--gold); color: white; }
+.btn-gold:hover { background: var(--gold-dark); transform: translateY(-2px); }
+.section { padding: 50px 8%; }
+.section-title { text-align: center; margin-bottom: 40px; }
+.section-title h2 { color: var(--gold); font-size: 1.8rem; margin-bottom: 10px; }
+.section-title p { color: #666; }
+
+/* شبكة الفيديوهات */
+.featured-wrap { max-width: 900px; margin: 0 auto 40px; }
+.videos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+.video-card { background: var(--white); border: 2px solid #eee; border-radius: 16px; overflow: hidden; transition: all 0.3s; }
+.video-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); border-color: var(--gold); }
+.video-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; background: var(--dark); }
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; cursor: pointer; border: 0; padding: 0; background: var(--dark); }
+.video-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.video-thumb .play-badge { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 68px; height: 48px; background: rgba(181,148,97,0.95); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; transition: all 0.3s; }
+.video-thumb:hover .play-badge { background: var(--gold-dark); transform: translate(-50%, -50%) scale(1.08); }
+.video-info { padding: 18px 20px; text-align: right; }
+.video-info h3 { color: var(--dark); font-size: 1.05rem; margin-bottom: 6px; }
+.video-info p { color: #666; font-size: 0.88rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* حالة عدم وجود فيديوهات بعد */
+.empty-state { background: var(--grey); border: 2px dashed var(--gold); border-radius: 16px; padding: 45px 30px; text-align: center; }
+.empty-state i { font-size: 3rem; color: var(--gold); margin-bottom: 15px; }
+.empty-state h3 { color: var(--dark); font-size: 1.3rem; margin-bottom: 10px; }
+.empty-state p { color: #666; max-width: 520px; margin: 0 auto 20px; }
+
+/* قسم القنوات */
+.socials-section { background: var(--dark); color: white; padding: 50px 8%; text-align: center; border-top: 5px solid var(--gold); }
+.socials-section h2 { color: var(--gold); font-size: 1.6rem; margin-bottom: 10px; }
+.socials-section p { color: #ccc; margin-bottom: 30px; }
+.socials-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.social-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 30px; border-radius: 30px; text-decoration: none; font-weight: 700; color: white; transition: all 0.3s; font-size: 1rem; }
+.social-btn:hover { transform: translateY(-3px); }
+.social-btn i { font-size: 1.4rem; }
+.social-youtube { background: #c4302b; }
+.social-youtube:hover { background: #a32723; }
+.social-facebook { background: #1877f2; }
+.social-facebook:hover { background: #125fbd; }
+.social-tiktok { background: #010101; border: 1px solid #444; }
+.social-tiktok:hover { background: #222; }
+.social-whatsapp { background: #25d366; }
+.social-whatsapp:hover { background: #1ebc57; }
+
+footer { background: var(--dark); color: white; padding: 40px 8% 25px; text-align: center; border-top: 1px solid #333; }
+.footer-logo { height: 90px; width: 90px; border-radius: 50%; border: 3px solid var(--gold); margin-bottom: 20px; object-fit: cover; }
+.footer-links { margin-top: 20px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+.footer-links a { color: #ccc; text-decoration: none; font-size: 1.5rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+.footer-links a:hover { color: var(--gold); transform: translateY(-3px); }
+.protection-notice { font-size: 0.8rem; color: #aaa; margin-top: 20px; padding-top: 15px; border-top: 1px solid #444; }
+.whatsapp-float { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 9999; text-decoration: none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); }
+.whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(37,211,102,0.6); }
+@media (max-width: 768px) { header { flex-direction: column; gap: 15px; } .nav-menu { justify-content: center; } .hero h1 { font-size: 1.5rem; } .section { padding: 35px 5%; } .social-btn { width: 100%; justify-content: center; max-width: 320px; } }
+</style>
+</head>
+<body oncontextmenu="return true">
+
+<a href="https://wa.me/201554797398" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<header>
+  <div class="logo-box">
+    <img src="https://i.ibb.co/Gf08dRs9/image-c77e535a.png" alt="الحقانية" loading="lazy">
+    <div>
+      <div class="logo-text" data-ar="الحقانية للإستشارات القانونية" data-en="Haqania Legal Consultations" data-fr="Haqania Consultations Juridiques">الحقانية للإستشارات القانونية</div>
+      <div class="logo-sub" data-ar="الأستاذ محمد صلاح" data-en="Mr. Mohamed Salah" data-fr="M. Mohamed Salah">الأستاذ محمد صلاح</div>
+    </div>
+  </div>
+
+  <ul class="nav-menu">
+    <li><a href="index.html" data-ar="الرئيسية" data-en="Home" data-fr="Accueil">الرئيسية</a></li>
+    <li><a href="about.html" data-ar="من نحن" data-en="About Us" data-fr="À Propos">من نحن</a></li>
+    <li><a href="services.html" data-ar="خدماتنا" data-en="Services" data-fr="Services">خدماتنا</a></li>
+    <li><a href="library.html" data-ar="المكتبة القانونية" data-en="Legal Library" data-fr="Bibliothèque Juridique">المكتبة القانونية</a></li>
+    <li><a href="foreigners-services.html" data-ar="خدمات الأجانب" data-en="Foreigners Services" data-fr="Services Étrangers">خدمات الأجانب</a></li>
+    <li><a href="family.html" data-ar="الأحوال الشخصية" data-en="Family Law" data-fr="Droit de la Famille">الأحوال الشخصية</a></li>
+    <li><a href="inheritance.html" data-ar="المواريث" data-en="Inheritance" data-fr="Héritage">الميراث</a></li>
+    <li><a href="courts-guide.html" data-ar="دليل المحاكم" data-en="Courts Guide" data-fr="Guide des Tribunaux">دليل المحاكم</a></li>
+    <li><a href="articles.html" data-ar="المقالات" data-en="Articles" data-fr="Articles">المقالات</a></li>
+    <li><a href="videos.html" class="active" data-ar="الفيديوهات" data-en="Videos" data-fr="Vidéos">الفيديوهات</a></li>
+    <li><a href="faq.html" data-ar="أسئلة شائعة" data-en="FAQ" data-fr="FAQ">أسئلة شائعة</a></li>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('ar')" id="btn-ar">عربي</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+    </div>
+  </ul>
+</header>
+
+<div class="hero">
+  <h1 data-ar="فيديوهات الحقانية التعليمية" data-en="Haqania Educational Videos" data-fr="Vidéos Éducatives Haqania">فيديوهات الحقانية التعليمية</h1>
+  <p data-ar="شرح قانوني مبسط بالفيديو: حقوقك وواجباتك في المواقف اليومية، بلغة واضحة من الأستاذ محمد صلاح." data-en="Simple legal explainers on video: your rights and duties in everyday situations, in clear language by Mr. Mohamed Salah." data-fr="Explications juridiques simples en vidéo: vos droits et devoirs au quotidien, par M. Mohamed Salah.">شرح قانوني مبسط بالفيديو: حقوقك وواجباتك في المواقف اليومية، بلغة واضحة من الأستاذ محمد صلاح.</p>
+</div>
+
+<div class="section">
+  <div class="section-title">
+    <h2 data-ar="🎬 شاهد أحدث الفيديوهات" data-en="🎬 Watch the Latest Videos" data-fr="🎬 Regardez les Dernières Vidéos">🎬 شاهد أحدث الفيديوهات</h2>
+    <p data-ar="المحتوى للتوعية القانونية العامة ولا يغني عن استشارة خاصة بحالتك" data-en="Content is for general legal awareness and does not replace a consultation for your case" data-fr="Contenu à but de sensibilisation juridique générale, ne remplace pas une consultation">المحتوى للتوعية القانونية العامة ولا يغني عن استشارة خاصة بحالتك</p>
+  </div>
+  <div id="videosContainer">
+    <div class="loading" style="text-align:center; padding:20px;">جاري تحميل الفيديوهات...</div>
+  </div>
+</div>
+
+<div class="socials-section">
+  <h2 data-ar="📱 تابعنا على قنواتنا" data-en="📱 Follow Our Channels" data-fr="📱 Suivez Nos Chaînes">📱 تابعنا على قنواتنا</h2>
+  <p data-ar="كل جديدنا يصلك أول بأول على المنصة التي تفضلها" data-en="Get every new release first on your favorite platform" data-fr="Recevez chaque nouveauté en premier sur votre plateforme préférée">كل جديدنا يصلك أول بأول على المنصة التي تفضلها</p>
+  <div class="socials-grid" id="socialsGrid">
+    <a id="btnYoutube" class="social-btn social-youtube" href="#" target="_blank" rel="noopener" style="display:none;">
+      <i class="fab fa-youtube"></i>
+      <span data-ar="اشترك على يوتيوب" data-en="Subscribe on YouTube" data-fr="S'abonner sur YouTube">اشترك على يوتيوب</span>
+    </a>
+    <a id="btnFacebook" class="social-btn social-facebook" href="#" target="_blank" rel="noopener" style="display:none;">
+      <i class="fab fa-facebook-square"></i>
+      <span data-ar="تابعنا على فيسبوك" data-en="Follow on Facebook" data-fr="Suivre sur Facebook">تابعنا على فيسبوك</span>
+    </a>
+    <a id="btnTiktok" class="social-btn social-tiktok" href="#" target="_blank" rel="noopener" style="display:none;">
+      <i class="fab fa-tiktok"></i>
+      <span data-ar="تابعنا على تيك توك" data-en="Follow on TikTok" data-fr="Suivre sur TikTok">تابعنا على تيك توك</span>
+    </a>
+    <a class="social-btn social-whatsapp" href="https://wa.me/201554797398" target="_blank" rel="noopener">
+      <i class="fab fa-whatsapp"></i>
+      <span data-ar="تواصل واتساب" data-en="WhatsApp Us" data-fr="WhatsApp">تواصل واتساب</span>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <img src="https://i.ibb.co/Gf08dRs9/image-c77e535a.png" alt="الحقانية" class="footer-logo" loading="lazy">
+  <p style="display:none;">مكتب الحقانية للإستشارات القانونية</p>
+  <p data-ar="© 2026 الحقانية للإستشارات القانونية" data-en="© 2026 Haqania Legal Consultations" data-fr="© 2026 Haqania">© 2026 الحقانية للإستشارات القانونية</p>
+  <div class="footer-links">
+    <a href="https://www.facebook.com/profile.php?id=61575279803936" target="_blank"><i class="fab fa-facebook-square"></i> Haqania</a>
+    <a href="https://wa.me/201554797398" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <a href="refund-policy.html" data-ar="سياسة الاسترجاع" data-en="Refund Policy" data-fr="Politique de Remboursement">سياسة الاسترجاع</a>
+  </div>
+  <div class="protection-notice">⚠️ جميع المحتويات محمية بحقوق الملكية الفكرية</div>
+</footer>
+
+<script>
+/* =========================================================
+   ✅ إعدادات الصفحة — عدّل هنا فقط
+   ========================================================= */
+
+/* روابط القنوات: املأ الرابط عند توفره وسيظهر الزر تلقائياً */
+const CHANNELS = {
+  youtube:  "",                                                  /* مثال: "https://www.youtube.com/@Haqania" */
+  facebook: "https://www.facebook.com/profile.php?id=61575279803936",
+  tiktok:   ""                                                   /* مثال: "https://www.tiktok.com/@haqania" */
+};
+
+/* ✅ الجلب التلقائي: أحدث فيديوهات القناة تظهر هنا تلقائياً فور نزولها على يوتيوب
+   دون أي تعديل يدوي. يعمل بعد رفع ملف api/videos.js مع الموقع وضبط معرّف القناة فيه.
+   إن تعذّر الجلب لأي سبب تُستخدم القائمة اليدوية بالأسفل كاحتياطي تلقائياً. */
+const AUTO_FETCH = true;
+const API_ENDPOINT = "/api/videos";
+const MAX_VIDEOS = 12;
+
+/* قائمة احتياطية يدوية — لا حاجة لملئها عند عمل الجلب التلقائي.
+   id هو كود الفيديو من رابط يوتيوب (ما بعد watch?v= أو ما بعد youtu.be/ )
+   مثال جاهز — احذف علامتي التعليق واكتب بيانات الفيديو:
+{
+  id: "XXXXXXXXXXX",
+  title_ar: "عنوان الفيديو بالعربية",
+  title_en: "Video title in English",
+  title_fr: "Titre de la vidéo en français",
+  desc_ar: "وصف مختصر للفيديو",
+  desc_en: "Short video description",
+  desc_fr: "Courte description de la vidéo"
+},
+*/
+const VIDEOS = [
+
+];
+
+/* =========================================================
+   من هنا لا حاجة لأي تعديل
+   ========================================================= */
+
+document.addEventListener('copy', e => { e.preventDefault(); alert('⚠️ المحتوى محمي بحقوق الملكية الفكرية'); });
+document.addEventListener('cut', e => { e.preventDefault(); });
+
+let currentLang = localStorage.getItem('siteLang') || 'ar';
+
+function tr(obj, base) {
+  return obj[base + '_' + currentLang] || obj[base + '_ar'] || '';
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('siteLang', lang);
+  document.getElementById('mainHtml').lang = lang;
+  document.getElementById('mainHtml').dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn-' + lang).classList.add('active');
+  document.querySelectorAll('[data-ar][data-en][data-fr]').forEach(el => {
+    const txt = el.getAttribute('data-' + lang);
+    if (txt) el.innerText = txt;
+  });
+  if (currentVideos !== null) renderVideos(currentVideos, currentBanner);
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+let currentVideos = null;
+let currentBanner = '';
+let currentGenerated = null;
+
+const OUTAGE_TEXT = {
+  ar: { h: 'تعذّر تحميل أحدث الفيديوهات حاليًا', p: 'خلل مؤقت في جلب فيديوهات القناة من يوتيوب. حاول مرة أخرى بعد قليل.', retry: 'إعادة المحاولة', fallback: 'تُعرض الآن قائمة احتياطية لحين عودة التحديث التلقائي', updated: 'آخر تحديث للقائمة: ' },
+  en: { h: 'Could not load the latest videos', p: 'Temporary problem fetching the channel videos from YouTube. Please try again shortly.', retry: 'Retry', fallback: 'Showing a backup list until auto-update is back', updated: 'List last updated: ' },
+  fr: { h: 'Impossible de charger les dernières vidéos', p: 'Problème temporaire de récupération des vidéos YouTube. Réessayez dans un instant.', retry: 'Réessayer', fallback: 'Liste de secours affichée en attendant la mise à jour automatique', updated: 'Dernière mise à jour : ' }
+};
+
+async function loadVideos() {
+  if (!AUTO_FETCH) { currentVideos = VIDEOS; currentBanner = ''; renderVideos(currentVideos, ''); return; }
+  let res = null;
+  try {
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), 8000);
+    res = await fetch(API_ENDPOINT, { signal: ctl.signal });
+    clearTimeout(timer);
+  } catch (e) { res = null; }
+
+  if (res && res.ok) {
+    try {
+      const data = await res.json();
+      if (data.reason === 'channel_id_not_set') { currentVideos = VIDEOS; currentBanner = ''; renderVideos(currentVideos, ''); return; }
+      const vids = (data.videos || []).filter(v => v && v.id).slice(0, MAX_VIDEOS).map(v => ({
+        id: String(v.id),
+        title_ar: String(v.title || '')
+      }));
+      if (vids.length) {
+        currentVideos = vids; currentBanner = '';
+        currentGenerated = data.generated || null;
+        renderVideos(currentVideos, '');
+        return;
+      }
+    } catch (e) { /* يُعامل كعطل */ }
+  }
+
+  // عطل صريح في الجلب (بما فيه 404 بعد النشر = عطل نشر): لا نخفيه بحالة "قريباً"
+  const t = OUTAGE_TEXT[currentLang] || OUTAGE_TEXT.ar;
+  if (VIDEOS.length) {
+    currentVideos = VIDEOS;
+    currentBanner = '<div class="empty-state" style="margin-bottom:25px; padding:25px 20px;">' +
+      '<i class="fas fa-rotate"></i><h3>' + t.h + '</h3><p>' + t.fallback + '</p>' +
+      '<button class="btn btn-gold" onclick="loadVideos()" style="padding:10px 30px;">' + t.retry + '</button></div>';
+    renderVideos(currentVideos, currentBanner);
+  } else {
+    currentVideos = [];
+    currentBanner = '';
+    document.getElementById('videosContainer').innerHTML =
+      '<div class="empty-state"><i class="fas fa-rotate"></i><h3>' + t.h + '</h3><p>' + t.p + '</p>' +
+      '<button class="btn btn-gold" onclick="loadVideos()">' + t.retry + '</button></div>';
+  }
+}
+
+function playVideo(btn, id) {
+  const frame = btn.parentElement;
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0';
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  iframe.allowFullscreen = true;
+  iframe.title = 'YouTube video player';
+  frame.replaceChildren(iframe);
+}
+
+function renderVideos(list, bannerHtml) {
+  const container = document.getElementById('videosContainer');
+  if (!list.length) {
+    const t = {
+      ar: { h: 'الفيديوهات قادمة قريباً', p: 'نجهّز لكم سلسلة فيديوهات شرح قانوني مبسط. تابعونا على قنواتنا بالأسفل ليصلكم كل جديد فور نزوله.' },
+      en: { h: 'Videos are coming soon', p: 'We are preparing a series of simple legal explainer videos. Follow our channels below to get every new release.' },
+      fr: { h: 'Les vidéos arrivent bientôt', p: 'Nous préparons une série de vidéos juridiques simplifiées. Suivez nos chaînes ci-dessous pour chaque nouveauté.' }
+    }[currentLang] || {};
+    container.innerHTML =
+      '<div class="empty-state">' +
+        '<i class="fab fa-youtube"></i>' +
+        '<h3>' + t.h + '</h3>' +
+        '<p>' + t.p + '</p>' +
+      '</div>';
+    return;
+  }
+  let html = '<div class="videos-grid">';
+  list.forEach(v => {
+    const id = String(v.id || '').replace(/[^A-Za-z0-9_-]/g, '');
+    if (!id) return;
+    const title = escapeHtml(tr(v, 'title'));
+    const desc = escapeHtml(tr(v, 'desc'));
+    html +=
+      '<div class="video-card">' +
+        '<div class="video-frame">' +
+          '<button class="video-thumb" onclick="playVideo(this, \'' + id + '\')" aria-label="' + title + '">' +
+            '<img src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg" alt="' + title + '" loading="lazy">' +
+            '<span class="play-badge"><i class="fas fa-play"></i></span>' +
+          '</button>' +
+        '</div>' +
+        '<div class="video-info">' +
+          '<h3>' + title + '</h3>' +
+          (desc ? '<p>' + desc + '</p>' : '') +
+        '</div>' +
+      '</div>';
+  });
+  html += '</div>';
+  let foot = '';
+  if (currentGenerated) {
+    const t = OUTAGE_TEXT[currentLang] || OUTAGE_TEXT.ar;
+    let when = '';
+    try { when = new Date(currentGenerated).toLocaleString(currentLang === 'ar' ? 'ar-EG' : currentLang, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); } catch (e) {}
+    if (when) foot = '<p style="text-align:center; color:#999; font-size:0.8rem; margin-top:15px;">' + t.updated + when + '</p>';
+  }
+  container.innerHTML = (bannerHtml || '') + html + foot;
+}
+
+function renderChannels() {
+  const map = { youtube: 'btnYoutube', facebook: 'btnFacebook', tiktok: 'btnTiktok' };
+  Object.keys(map).forEach(k => {
+    const url = (CHANNELS[k] || '').trim();
+    if (url) {
+      const a = document.getElementById(map[k]);
+      a.href = url;
+      a.style.display = 'inline-flex';
+    }
+  });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  setLang(currentLang);
+  renderChannels();
+  loadVideos();
+});
+</script>
+</body>
+</html>

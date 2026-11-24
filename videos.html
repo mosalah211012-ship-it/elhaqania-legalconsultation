@@ -283,6 +283,7 @@ async function loadVideos() {
         renderVideos(currentVideos, '');
         return;
       }
+              if (!data.error) { currentVideos = []; currentBanner = ''; renderVideos([], ''); return; }
     } catch (e) { /* يُعامل كعطل */ }
   }
 

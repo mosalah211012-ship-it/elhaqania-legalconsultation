@@ -18,7 +18,7 @@
 
 <!-- Styles -->
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 <style>
 :root { --gold: #b59461; --gold-dark: #9c7e4d; --dark: #111; --white: #fff; --grey: #f8f9fa; --danger: #dc3545; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -63,6 +63,19 @@ header { background: var(--white); border-bottom: 3px solid var(--gold); padding
 .video-info { padding: 18px 20px; text-align: right; }
 .video-info h3 { color: var(--dark); font-size: 1.05rem; margin-bottom: 6px; }
 .video-info p { color: #666; font-size: 0.88rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* مشاركة الفيديو */
+.share-wrap { margin-top: 14px; border-top: 1px solid #eee; padding-top: 12px; }
+.share-toggle { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 14px; border-radius: 24px; border: 1.5px solid var(--gold); background: transparent; color: var(--gold-dark); font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.25s; }
+.share-toggle:hover, .share-toggle[aria-expanded="true"] { background: var(--gold); color: #fff; }
+.share-panel { display: none; margin-top: 12px; }
+.share-panel.open { display: block; }
+.share-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; }
+.share-item { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 10px 4px; border-radius: 12px; background: var(--grey); color: var(--dark); text-decoration: none; border: 0; cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 0.78rem; font-weight: 600; transition: all 0.2s; }
+.share-item i { font-size: 1.25rem; }
+.share-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.share-note { color: #888; font-size: 0.75rem; line-height: 1.6; margin-top: 10px; text-align: center; }
+.share-toast { text-align: center; color: #1a7f37; font-size: 0.85rem; margin-top: 8px; min-height: 1.2em; }
 
 /* حالة عدم وجود فيديوهات بعد */
 .empty-state { background: var(--grey); border: 2px dashed var(--gold); border-radius: 16px; padding: 45px 30px; text-align: center; }
@@ -314,6 +327,74 @@ function playVideo(btn, id) {
   frame.replaceChildren(iframe);
 }
 
+/* ===== مشاركة الفيديو (روابط مشاركة رسمية فقط، لا نشر تلقائي) ===== */
+const SHARE_TEXT = {
+  ar: { btn: 'مشاركة الفيديو', native: 'مشاركة من جهازك', copy: 'نسخ الرابط', open: 'فتح على يوتيوب', copied: 'تم نسخ الرابط ✓', note: 'إنستجرام وتيك توك وسناب شات لا تقبل رابط مشاركة من المواقع، استخدم «مشاركة من جهازك» أو انسخ الرابط والصقه في التطبيق.', email: 'البريد', sms: 'رسالة SMS', pre: 'شاهد: ' },
+  en: { btn: 'Share video', native: 'Share from device', copy: 'Copy link', open: 'Open on YouTube', copied: 'Link copied ✓', note: 'Instagram, TikTok and Snapchat do not accept share links from websites. Use "Share from device" or copy the link and paste it in the app.', email: 'Email', sms: 'SMS', pre: 'Watch: ' },
+  fr: { btn: 'Partager la vidéo', native: 'Partager depuis l\'appareil', copy: 'Copier le lien', open: 'Ouvrir sur YouTube', copied: 'Lien copié ✓', note: 'Instagram, TikTok et Snapchat n\'acceptent pas de lien de partage depuis un site. Utilisez « Partager depuis l\'appareil » ou copiez le lien.', email: 'E-mail', sms: 'SMS', pre: 'À voir : ' }
+};
+function shareLinks(url, title, thumb) {
+  const u = encodeURIComponent(url), t = encodeURIComponent(title), ut = encodeURIComponent(title + ' ' + url);
+  const T = SHARE_TEXT[currentLang] || SHARE_TEXT.ar;
+  return [
+    { n: 'WhatsApp', i: 'fab fa-whatsapp', c: '#25d366', h: 'https://wa.me/?text=' + ut },
+    { n: 'Facebook', i: 'fab fa-facebook-f', c: '#1877f2', h: 'https://www.facebook.com/sharer/sharer.php?u=' + u },
+    { n: 'X', i: 'fab fa-x-twitter', c: '#000', h: 'https://twitter.com/intent/tweet?text=' + t + '&url=' + u },
+    { n: 'Telegram', i: 'fab fa-telegram', c: '#229ed9', h: 'https://t.me/share/url?url=' + u + '&text=' + t },
+    { n: 'LinkedIn', i: 'fab fa-linkedin-in', c: '#0a66c2', h: 'https://www.linkedin.com/sharing/share-offsite/?url=' + u },
+    { n: 'Threads', i: 'fab fa-threads', c: '#000', h: 'https://www.threads.net/intent/post?text=' + ut },
+    { n: 'Bluesky', i: 'fab fa-bluesky', c: '#1185fe', h: 'https://bsky.app/intent/compose?text=' + ut },
+    { n: 'Reddit', i: 'fab fa-reddit-alien', c: '#ff4500', h: 'https://www.reddit.com/submit?url=' + u + '&title=' + t },
+    { n: 'Pinterest', i: 'fab fa-pinterest-p', c: '#e60023', h: 'https://pinterest.com/pin/create/button/?url=' + u + '&media=' + encodeURIComponent(thumb) + '&description=' + t },
+    { n: 'Tumblr', i: 'fab fa-tumblr', c: '#36465d', h: 'https://www.tumblr.com/widgets/share/tool?canonicalUrl=' + u + '&title=' + t },
+    { n: 'LINE', i: 'fab fa-line', c: '#06c755', h: 'https://social-plugins.line.me/lineit/share?url=' + u },
+    { n: 'VK', i: 'fab fa-vk', c: '#4a76a8', h: 'https://vk.com/share.php?url=' + u + '&title=' + t },
+    { n: T.email, i: 'fas fa-envelope', c: '#666', h: 'mailto:?subject=' + t + '&body=' + ut },
+    { n: T.sms, i: 'fas fa-comment-sms', c: '#666', h: 'sms:?&body=' + ut }
+  ];
+}
+function shareBlock(id, title) {
+  const T = SHARE_TEXT[currentLang] || SHARE_TEXT.ar;
+  return '<div class="share-wrap" data-id="' + id + '" data-title="' + title + '">' +
+    '<button type="button" class="share-toggle" aria-expanded="false" onclick="toggleShare(this)"><i class="fas fa-share-nodes"></i> ' + T.btn + '</button>' +
+    '<div class="share-panel"></div></div>';
+}
+function toggleShare(btn) {
+  const wrap = btn.closest('.share-wrap'), panel = wrap.querySelector('.share-panel');
+  const open = !panel.classList.contains('open');
+  panel.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if (open && !panel.dataset.built) buildShare(wrap, panel);
+}
+function buildShare(wrap, panel) {
+  const T = SHARE_TEXT[currentLang] || SHARE_TEXT.ar;
+  const id = wrap.dataset.id, title = wrap.dataset.title;
+  const url = 'https://www.youtube.com/watch?v=' + id;
+  const thumb = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
+  let h = '<div class="share-grid">';
+  if (navigator.share) h += '<button type="button" class="share-item" data-act="native"><i class="fas fa-mobile-screen-button" style="color:#b59461"></i>' + T.native + '</button>';
+  h += '<button type="button" class="share-item" data-act="copy"><i class="fas fa-link" style="color:#b59461"></i>' + T.copy + '</button>';
+  shareLinks(url, title, thumb).forEach(l => {
+    h += '<a class="share-item" href="' + l.h + '" target="_blank" rel="noopener noreferrer"><i class="' + l.i + '" style="color:' + l.c + '"></i>' + l.n + '</a>';
+  });
+  h += '<a class="share-item" href="' + url + '" target="_blank" rel="noopener"><i class="fab fa-youtube" style="color:#c4302b"></i>' + T.open + '</a>';
+  h += '</div><p class="share-note">' + T.note + '</p><div class="share-toast" aria-live="polite"></div>';
+  panel.innerHTML = h;
+  panel.dataset.built = '1';
+  panel.addEventListener('click', async e => {
+    const b = e.target.closest('[data-act]'); if (!b) return;
+    const toast = panel.querySelector('.share-toast');
+    if (b.dataset.act === 'native') { try { await navigator.share({ title: title, text: title, url: url }); } catch (err) {} }
+    if (b.dataset.act === 'copy') {
+      try { await navigator.clipboard.writeText(url); } catch (err) {
+        const ta = document.createElement('textarea'); ta.value = url; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (e2) {} ta.remove();
+      }
+      toast.textContent = T.copied; setTimeout(() => { toast.textContent = ''; }, 2500);
+    }
+  });
+}
+
 function renderVideos(list, bannerHtml) {
   const container = document.getElementById('videosContainer');
   if (!list.length) {
@@ -347,6 +428,7 @@ function renderVideos(list, bannerHtml) {
         '<div class="video-info">' +
           '<h3>' + title + '</h3>' +
           (desc ? '<p>' + desc + '</p>' : '') +
+          shareBlock(id, title) +
         '</div>' +
       '</div>';
   });

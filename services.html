@@ -102,7 +102,7 @@
 
 <!-- ✅ بقية الروابط والستايل الأصلي (ماتمسحهوش) -->
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 <style>
 :root { --gold: #b59461; --gold-dark: #9c7e4d; --dark: #111; --white: #fff; --grey: #f8f9fa; --danger: #dc3545; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -656,6 +656,31 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
   </div>
 </div>
 
+
+<style>
+/* ✅ مشاركة الصفحة (نفس تصميم زر صفحة الفيديوهات) */
+.share-page { max-width: 560px; margin: 45px auto 10px; padding: 0 16px; }
+.share-page .share-wrap { border-top: 1px solid #eee; padding-top: 18px; }
+.share-page .share-toggle { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 14px; border-radius: 24px; border: 1.5px solid var(--gold, #b59461); background: transparent; color: var(--gold-dark, #9c7e4d); font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.25s; }
+.share-page .share-toggle:hover, .share-page .share-toggle[aria-expanded="true"] { background: var(--gold, #b59461); color: #fff; }
+.share-page .share-panel { display: none; margin-top: 12px; }
+.share-page .share-panel.open { display: block; }
+.share-page .share-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; }
+.share-page .share-item { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 10px 4px; border-radius: 12px; background: var(--grey, #f8f9fa); color: var(--dark, #111); text-decoration: none; border: 0; cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 0.78rem; font-weight: 600; transition: all 0.2s; }
+.share-page .share-item i { font-size: 1.25rem; }
+.share-page .share-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.share-page .share-note { color: #888; font-size: 0.75rem; line-height: 1.6; margin-top: 10px; text-align: center; }
+.share-page .share-toast { text-align: center; color: #1a7f37; font-size: 0.85rem; margin-top: 8px; min-height: 1.2em; }
+</style>
+
+<!-- ✅ زر المشاركة (نفس تصميم صفحة الفيديوهات: روابط مشاركة رسمية فقط، لا نشر تلقائي) -->
+<div class="share-page">
+  <div class="share-wrap" data-title="">
+    <button type="button" class="share-toggle" aria-expanded="false" onclick="togglePageShare(this)"><i class="fas fa-share-nodes"></i> <span class="share-label" data-ar="مشاركة الصفحة" data-en="Share page" data-fr="Partager la page">مشاركة الصفحة</span></button>
+    <div class="share-panel"></div>
+  </div>
+</div>
+
 <footer>
   <!-- ✅ المرحلة 3: تحسين alt للصورة (الـ 2) -->
   <img src="https://i.ibb.co/Gf08dRs9/image-c77e535a.png" alt="الحقانية للإستشارات القانونية - الأستاذ محمد صلاح" class="footer-logo" loading="lazy">
@@ -819,5 +844,89 @@ window.onclick = function(event) {
 
 window.addEventListener('DOMContentLoaded', () => { setLang(currentLang); });
 </script>
+
+<script>
+/* ===== مشاركة الصفحة (روابط مشاركة رسمية فقط، لا نشر تلقائي) ===== */
+const PAGE_SHARE_TEXT = {
+  ar: { btn: 'مشاركة الصفحة', native: 'مشاركة من جهازك', copy: 'نسخ الرابط', copied: 'تم نسخ الرابط ✓', note: 'إنستجرام وتيك توك وسناب شات لا تقبل رابط مشاركة من المواقع، استخدم «مشاركة من جهازك» أو انسخ الرابط والصقه في التطبيق.', email: 'البريد', sms: 'رسالة SMS' },
+  en: { btn: 'Share page', native: 'Share from device', copy: 'Copy link', copied: 'Link copied ✓', note: 'Instagram, TikTok and Snapchat do not accept share links from websites. Use "Share from device" or copy the link and paste it in the app.', email: 'Email', sms: 'SMS' },
+  fr: { btn: 'Partager la page', native: 'Partager depuis l\'appareil', copy: 'Copier le lien', copied: 'Lien copié ✓', note: 'Instagram, TikTok et Snapchat n\'acceptent pas de lien de partage depuis un site. Utilisez « Partager depuis l\'appareil » ou copiez le lien.', email: 'E-mail', sms: 'SMS' }
+};
+function pageShareLang() {
+  try { if (typeof currentLang !== 'undefined' && currentLang) return currentLang; } catch (e) {}
+  try { return localStorage.getItem('siteLang') || 'ar'; } catch (e) { return 'ar'; }
+}
+function pageShareLinks(url, title, thumb) {
+  const u = encodeURIComponent(url), t = encodeURIComponent(title), ut = encodeURIComponent(title + ' ' + url);
+  const T = PAGE_SHARE_TEXT[pageShareLang()] || PAGE_SHARE_TEXT.ar;
+  return [
+    { n: 'WhatsApp', i: 'fab fa-whatsapp', c: '#25d366', h: 'https://wa.me/?text=' + ut },
+    { n: 'Facebook', i: 'fab fa-facebook-f', c: '#1877f2', h: 'https://www.facebook.com/sharer/sharer.php?u=' + u },
+    { n: 'X', i: 'fab fa-x-twitter', c: '#000', h: 'https://twitter.com/intent/tweet?text=' + t + '&url=' + u },
+    { n: 'Telegram', i: 'fab fa-telegram', c: '#229ed9', h: 'https://t.me/share/url?url=' + u + '&text=' + t },
+    { n: 'LinkedIn', i: 'fab fa-linkedin-in', c: '#0a66c2', h: 'https://www.linkedin.com/sharing/share-offsite/?url=' + u },
+    { n: 'Threads', i: 'fab fa-threads', c: '#000', h: 'https://www.threads.net/intent/post?text=' + ut },
+    { n: 'Bluesky', i: 'fab fa-bluesky', c: '#1185fe', h: 'https://bsky.app/intent/compose?text=' + ut },
+    { n: 'Reddit', i: 'fab fa-reddit-alien', c: '#ff4500', h: 'https://www.reddit.com/submit?url=' + u + '&title=' + t },
+    { n: 'Pinterest', i: 'fab fa-pinterest-p', c: '#e60023', h: 'https://pinterest.com/pin/create/button/?url=' + u + '&media=' + encodeURIComponent(thumb) + '&description=' + t },
+    { n: 'Tumblr', i: 'fab fa-tumblr', c: '#36465d', h: 'https://www.tumblr.com/widgets/share/tool?canonicalUrl=' + u + '&title=' + t },
+    { n: 'LINE', i: 'fab fa-line', c: '#06c755', h: 'https://social-plugins.line.me/lineit/share?url=' + u },
+    { n: 'VK', i: 'fab fa-vk', c: '#4a76a8', h: 'https://vk.com/share.php?url=' + u + '&title=' + t },
+    { n: T.email, i: 'fas fa-envelope', c: '#666', h: 'mailto:?subject=' + t + '&body=' + ut },
+    { n: T.sms, i: 'fas fa-comment-sms', c: '#666', h: 'sms:?&body=' + ut }
+  ];
+}
+function togglePageShare(btn) {
+  const wrap = btn.closest('.share-wrap'), panel = wrap.querySelector('.share-panel');
+  const open = !panel.classList.contains('open');
+  panel.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if (open && panel.dataset.lang !== pageShareLang()) buildPageShare(wrap, panel);
+}
+function buildPageShare(wrap, panel) {
+  const lang = pageShareLang();
+  const T = PAGE_SHARE_TEXT[lang] || PAGE_SHARE_TEXT.ar;
+  const url = location.href.split('#')[0];
+  const title = wrap.dataset.title || document.title;
+  const thumb = 'https://i.ibb.co/Gf08dRs9/image-c77e535a.png';
+  let h = '<div class="share-grid">';
+  if (navigator.share) h += '<button type="button" class="share-item" data-act="native"><i class="fas fa-mobile-screen-button" style="color:#b59461"></i>' + T.native + '</button>';
+  h += '<button type="button" class="share-item" data-act="copy"><i class="fas fa-link" style="color:#b59461"></i>' + T.copy + '</button>';
+  pageShareLinks(url, title, thumb).forEach(l => {
+    h += '<a class="share-item" href="' + l.h + '" target="_blank" rel="noopener noreferrer"><i class="' + l.i + '" style="color:' + l.c + '"></i>' + l.n + '</a>';
+  });
+  h += '</div><p class="share-note">' + T.note + '</p><div class="share-toast" aria-live="polite"></div>';
+  panel.innerHTML = h;
+  panel.dataset.lang = lang;
+  panel.addEventListener('click', async e => {
+    const b = e.target.closest('[data-act]'); if (!b) return;
+    const toast = panel.querySelector('.share-toast');
+    if (b.dataset.act === 'native') { try { await navigator.share({ title: title, text: title, url: url }); } catch (err) {} }
+    if (b.dataset.act === 'copy') {
+      try { await navigator.clipboard.writeText(url); } catch (err) {
+        const ta = document.createElement('textarea'); ta.value = url; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (e2) {} ta.remove();
+      }
+      toast.textContent = T.copied; setTimeout(() => { toast.textContent = ''; }, 2500);
+    }
+  });
+}
+// مزامنة نص الزر مع اللغة وإعادة بناء اللوحة المفتوحة عند تغييرها
+(function () {
+  function syncPageShare() {
+    const lang = pageShareLang();
+    const T = PAGE_SHARE_TEXT[lang] || PAGE_SHARE_TEXT.ar;
+    document.querySelectorAll('.share-page').forEach(box => {
+      const label = box.querySelector('.share-label');
+      if (label) label.textContent = T.btn;
+      const panel = box.querySelector('.share-panel.open');
+      if (panel) buildPageShare(box.querySelector('.share-wrap'), panel);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', syncPageShare);
+  new MutationObserver(syncPageShare).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+})();
+</script>
+
 </body>
 </html>

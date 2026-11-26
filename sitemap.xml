@@ -159,4 +159,9 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.vercel.app/extras"/>
   </url>
 
+  <url>
+    <loc>https://elhaqania-legalconsultation.vercel.app/reviews</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

@@ -166,6 +166,7 @@ module.exports = async function handler(req, res) {
       const cmds = [];
       if (['auto', 'moderate'].includes(c.comments_mode)) cmds.push(['HSET', 'cfg', 'comments_mode', c.comments_mode]);
       if (['auto', 'moderate'].includes(c.reviews_mode)) cmds.push(['HSET', 'cfg', 'reviews_mode', c.reviews_mode]);
+      if (['0', '1'].includes(String(c.show_counter))) cmds.push(['HSET', 'cfg', 'show_counter', String(c.show_counter)]);
       if (cmds.length) await L.pipeline(cmds);
       return L.send(res, 200, { ok: true, cfg: await L.getCfg() });
     }

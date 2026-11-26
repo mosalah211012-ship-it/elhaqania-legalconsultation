@@ -92,16 +92,6 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.vercel.app/faq"/>
   </url>
 
-  <!-- ✅ 09. التقييمات -->
-  <url>
-    <loc>https://elhaqania-legalconsultation.vercel.app/reviews</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://elhaqania-legalconsultation.vercel.app/reviews"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://elhaqania-legalconsultation.vercel.app/reviews"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://elhaqania-legalconsultation.vercel.app/reviews"/>
-  </url>
 
   <!-- ✅ 10. حاسبة الميراث -->
   <url>

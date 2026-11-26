@@ -11,7 +11,7 @@ function plain(s, n) {
   return t.length > n ? t.slice(0, n - 1).replace(/\s+\S*$/, '') + '…' : t;
 }
 function readTemplate() {
-  const cands = [path.join(process.cwd(), 'article-detail.html'), path.join(__dirname, '..', 'article-detail.html')];
+  const cands = [path.join(process.cwd(), 'article-template.html'), path.join(__dirname, '..', 'article-template.html')];
   for (const p of cands) { try { return fs.readFileSync(p, 'utf8'); } catch (e) {} }
   throw new Error('template_missing');
 }

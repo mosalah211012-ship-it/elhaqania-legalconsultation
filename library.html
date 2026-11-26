@@ -164,22 +164,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
 const API_URL = '/api/content';
 
 // ✅ البيانات الثابتة الكاملة (بما فيها الحكم الناقص)
-const staticBooks = [
-  { title_ar: "مشروع قانون الإجراءات الجنائية الجديد", title_en: "Criminal Procedure Code", title_fr: "Code de procédure pénale", category: "قوانين جديدة", link: "https://drive.google.com/drive/folders/1KMbtW3IJt4xZ3M_qhG1xHKCIGuGREKKG?usp=drive_link" },
-  { title_ar: "قانون تنظيم المسئولية الطبية وحماية المريض", title_en: "Medical Liability Law", title_fr: "Loi sur la responsabilité médicale", category: "قوانين جديدة", link: "https://drive.google.com/drive/folders/1OGPKTrn4TQX9DxZh_RtdDBrk1h-3aH-z?usp=drive_link" },
-  { title_ar: "قانون الإيجار القديم 164 لسنة 2025", title_en: "Ancient Civil Law (164 years)", title_fr: "Droit civil ancien (164 ans)", category: "قانون مدني", link: "https://drive.google.com/drive/folders/1sXc76lShUtehanIssnzUfwUxHWZ95arv?usp=drive_link" },
-  { title_ar: "الكتاب الدوري رقم ١ لسنة ٢٠٢٦ (جداول المخدرات)", title_en: "Narcotics Table 2026", title_fr: "Tableau des stupéfiants 2026", category: "قانون جنائي", link: "https://drive.google.com/drive/folders/1uxSwpnCl8oedIjkP3QI-5kPoUwuXuR1Y?usp=sharing" },
-  { title_ar: "تعديلات قانون الرياضة", title_en: "Sports Law Amendments", title_fr: "Amendements au droit du sport", category: "قوانين جديدة", link: "https://drive.google.com/drive/folders/16gENhQ0CYDNcKOAbxvE-Hs4inR8PwquA?usp=drive_link" },
-  { title_ar: "قانون الضمان الاجتماعي", title_en: "Social Security Law", title_fr: "Loi sur la sécurité sociale", category: "قوانين جديدة", link: "https://drive.google.com/drive/folders/1hv2Sx1yF3KCcliCq2nWHBRg2UuD9ykkp?usp=sharing" },
-  { title_ar: "مشروع قانون العمل الجديد", title_en: "New Labor Law Project", title_fr: "Projet de nouvelle loi du travail", category: "قوانين جديدة", link: "https://drive.google.com/drive/folders/1Em_WlFjDLP_VpYmuULakEziM_E7Lts0s?usp=drive_link" },
-  { title_ar: "قانون لجوء الأجانب", title_en: "Positive Law", title_fr: "Droit positif", category: "قوانين جديدة", link: "https://drive.google.com/drive/folders/1wEWcsMPk2XRPT0O4-u4eE_TcOqH3FkrV?usp=drive_link" },
-  { title_ar: "القانون التجاري والشركات", title_en: "Commercial & Corporate Law", title_fr: "Droit commercial et des sociétés", category: "تجاري", link: "https://drive.google.com/drive/folders/1c7dSN6-nV7sLp0M1KykA9oMUBciV0F8c" },
-  { title_ar: "الأحوال الشخصية", title_en: "Personal Status Law", title_fr: "Droit du statut personnel", category: "أحوال شخصية", link: "https://drive.google.com/drive/folders/1U-h8mMFYyA3CHwLuE2cwa-MOfYdC8XLl" },
-  { title_ar: "القانون المدني للسنهوري", title_en: "Civil Law for Non-Jurists", title_fr: "Droit civil pour non-juristes", category: "قانون مدني", link: "https://drive.google.com/drive/folders/1wwGf3Uwpc0G-2LAsWRhep7j4sQUs8tFI" },
-  { title_ar: "الموسوعة الجنائية", title_en: "Criminal Encyclopedia", title_fr: "Encyclopédie pénale", category: "قانون جنائي", link: "https://drive.google.com/drive/folders/1zgrujIwxskHMTTtmhuYQF_6U5Tei-eOH" },
-  // ✅ الحكم الناقص تم إضافته هنا
-  { title_ar: "حكم: إنقاص مدة عقد إيجار قديم من 59 سنة لـ 3 سنوات", title_en: "Eviction due to termination of old rental contract duration", title_fr: "Expulsion pour résiliation de la durée d'un contrat de location ancien", category: "أحكام", link: "https://drive.google.com/file/d/1kwJfdajoEtlH2Ifdf1OLbYsBF072nwbt/view" }
-];
+const staticBooks = []; // all items are managed from the control panel
 
 document.addEventListener('copy', e => e.preventDefault());
 document.addEventListener('cut', e => e.preventDefault());

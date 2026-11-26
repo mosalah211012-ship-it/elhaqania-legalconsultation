@@ -23,7 +23,7 @@ Disallow: /*?*
 Disallow: /*.json$
 
 # ✅ خريطة الموقع (مهم جداً لجوجل)
-Sitemap: https://elhaqania-legalconsultation.netlify.app/sitemap.xml
+Sitemap: https://elhaqania-legalconsultation.vercel.app/sitemap.xml
 
 # ✅ تأخير الزحف عشان متأثرش على أداء الموقع
 Crawl-delay: 1

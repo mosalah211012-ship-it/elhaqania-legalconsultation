@@ -38,7 +38,7 @@
       var el = document.getElementById('visitorCounter');
       if (el) el.textContent = n;
       var f = document.createElement('div'); f.className = 'hq-foot';
-      f.innerHTML = '👁 ' + esc(t('visitors')) + ': <b>' + n + '</b> &nbsp;|&nbsp; <a href="/reviews">⭐ ' + esc(t('rateus')) + '</a>';
+      f.innerHTML = (j.hidden ? '' : '👁 ' + esc(t('visitors')) + ': <b>' + n + '</b> &nbsp;|&nbsp; ') + '<a href="/reviews">⭐ ' + esc(t('rateus')) + '</a>';
       document.body.appendChild(f);
     }).catch(function () {});
   }

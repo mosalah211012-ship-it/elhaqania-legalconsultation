@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-ar="تفاصيل المقال - الحقانية" data-en="Article Details - Haqania" data-fr="Détails de l'Article - Haqania">تفاصيل المقال - الحقانية</title>
+
+<!-- SEO & Meta -->
+<meta name="description" content="اقرأ المقال القانوني بالتفصيل من مكتب الحقانية">
+<meta name="keywords" content="مقال قانوني، تحليل قانوني، الحقانية">
+<meta name="author" content="الأستاذ محمد صلاح - الحقانية للإستشارات القانونية">
+<link rel="canonical" href="https://elhaqania-legalconsultation.vercel.app/article-detail">
+<meta name="google-site-verification" content="TOLjNwob98CBhRQ2ur97bJXgKzth6vSdwB4pQCmJcio" />
+
+<!-- ✅ Open Graph Tags (قيم افتراضية آمنة) -->
+<meta property="og:title" content="الحقانية للإستشارات القانونية">
+<meta property="og:description" content="خدمات قانونية متكاملة في مصر">
+<meta property="og:url" content="https://elhaqania-legalconsultation.vercel.app/article-detail">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="الحقانية للإستشارات القانونية">
+
+<!-- Styles -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<style>
+:root { --gold: #b59461; --gold-dark: #9c7e4d; --dark: #111; --white: #fff; --grey: #f8f9fa; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Cairo', sans-serif; background: var(--white); color: #333; line-height: 1.7; user-select: none; }
+header { background: var(--white); border-bottom: 3px solid var(--gold); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+.logo-box { display: flex; align-items: center; gap: 12px; }
+.logo-box img { height: 70px; width: 70px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; }
+.logo-text { font-weight: 700; font-size: 1.1rem; }
+.logo-sub { font-size: 0.85rem; color: var(--gold); }
+.nav-menu { display: flex; gap: 8px; list-style: none; padding: 0; align-items: center; flex-wrap: wrap; }
+.nav-menu a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.85rem; padding: 8px 12px; border-radius: 6px; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--gold); background: var(--grey); }
+.lang-switcher { display: flex; gap: 5px; margin-right: 10px; }
+.lang-btn { background: var(--gold); color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; }
+.lang-btn.active { background: var(--dark); }
+.hero-small { background: linear-gradient(135deg, var(--dark), var(--gold)); color: white; padding: 60px 5%; text-align: center; }
+.hero-small h1 { font-size: 2rem; margin-bottom: 10px; }
+.container { padding: 50px 8%; max-width: 900px; margin: 0 auto; }
+.article-content { background: var(--white); padding: 40px; border-radius: 16px; border: 2px solid #eee; margin-bottom: 40px; }
+.article-header { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px solid var(--gold); }
+.article-title { color: var(--gold); font-size: 2rem; margin-bottom: 15px; }
+.article-date { color: #888; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+.article-body { font-size: 1.1rem; line-height: 2; color: #444; white-space: pre-wrap; }
+.article-image { width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: none; }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-bottom: 25px; transition: all 0.3s; }
+.back-btn:hover { background: var(--gold-dark); transform: translateX(-5px); }
+.loading { text-align: center; padding: 60px; color: var(--gold); font-size: 1.2rem; }
+.error-msg { text-align: center; padding: 60px; background: #f8d7da; border-radius: 10px; color: #721c24; }
+
+/* ✅ تنسيقات زر المشاركة */
+.share-section { margin-top: 40px; padding-top: 30px; border-top: 2px solid #eee; text-align: center; }
+.share-title { font-size: 1.1rem; color: #555; margin-bottom: 20px; font-weight: 600; }
+.share-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+.share-btn { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; text-decoration: none; transition: transform 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.share-btn:hover { transform: translateY(-5px); }
+.share-wa { background: #25d366; }
+.share-fb { background: #1877f2; }
+.share-tw { background: #000; }
+.share-li { background: #0077b5; }
+.share-copy { background: var(--dark); cursor: pointer; border: none; font-family: 'Cairo'; }
+.share-copy i { margin-left: 5px; }
+
+footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-align: center; border-top: 5px solid var(--gold); margin-top: 50px; }
+.footer-logo { height: 90px; width: 90px; border-radius: 50%; border: 3px solid var(--gold); margin-bottom: 20px; object-fit: cover; }
+.footer-links { margin-top: 25px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+.footer-links a { color: #ccc; text-decoration: none; font-size: 1.5rem; }
+.footer-links a:hover { color: var(--gold); }
+.protection-notice { font-size: 0.85rem; color: #aaa; margin-top: 25px; padding-top: 20px; border-top: 1px solid #444; }
+.whatsapp-float { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 9999; text-decoration: none; }
+@media (max-width: 768px) { header { flex-direction: column; gap: 15px; } .nav-menu { justify-content: center; } .hero-small h1 { font-size: 1.5rem; } .container { padding: 30px 5%; } .article-content { padding: 25px; } .article-title { font-size: 1.5rem; } }
+</style>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jfa9qoskskljefrl.public.blob.vercel-storage.com/og-card-0Sh3IiYikRb9yjJDLLfGx3NOMcn2ln.jpg">
+<meta property="og:image" content="https://jfa9qoskskljefrl.public.blob.vercel-storage.com/og-card-0Sh3IiYikRb9yjJDLLfGx3NOMcn2ln.jpg">
+</head>
+<body oncontextmenu="return false">
+
+<a href="https://wa.me/201554797398" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<header>
+  <div class="logo-box">
+    <img src="https://jfa9qoskskljefrl.public.blob.vercel-storage.com/logo-256-tEnQxVzMtiqKb5NA53vDpz8hV6bTvu.webp" alt="الحقانية" loading="lazy">
+    <div>
+      <div class="logo-text" data-ar="الحقانية للإستشارات القانونية" data-en="Haqania Legal Consultations" data-fr="Haqania Consultations Juridiques">الحقانية للإستشارات القانونية</div>
+      <div class="logo-sub" data-ar="الأستاذ محمد صلاح" data-en="Mr. Mohamed Salah" data-fr="M. Mohamed Salah">الأستاذ محمد صلاح</div>
+    </div>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="index.html" data-ar="الرئيسية" data-en="Home" data-fr="Accueil">الرئيسية</a></li>
+    <li><a href="about.html" data-ar="من نحن" data-en="About Us" data-fr="À Propos">من نحن</a></li>
+    <li><a href="services.html" data-ar="خدماتنا" data-en="Services" data-fr="Services">خدماتنا</a></li>
+    <li><a href="library.html" data-ar="المكتبة القانونية" data-en="Legal Library" data-fr="Bibliothèque Juridique">المكتبة القانونية</a></li>
+    <li><a href="foreigners-services.html" data-ar="خدمات الأجانب" data-en="Foreigners Services" data-fr="Services Étrangers">خدمات الأجانب</a></li>
+    <li><a href="family.html" data-ar="الأحوال الشخصية" data-en="Family Law" data-fr="Droit de la Famille">الأحوال الشخصية</a></li>
+    <li><a href="inheritance.html" data-ar="الميراث" data-en="Inheritance" data-fr="Héritage">الميراث</a></li>
+    <li><a href="courts-guide.html" data-ar="دليل المحاكم" data-en="Courts Guide" data-fr="Guide des Tribunaux">دليل المحاكم</a></li>
+    <li><a href="articles.html" data-ar="المقالات" data-en="Articles" data-fr="Articles">المقالات</a></li>
+    <li><a href="videos.html" data-ar="الفيديوهات" data-en="Videos" data-fr="Vidéos">الفيديوهات</a></li>
+    <li><a href="faq.html" data-ar="أسئلة شائعة" data-en="FAQ" data-fr="FAQ">أسئلة شائعة</a></li>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('ar')" id="btn-ar">عربي</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+    </div>
+  </ul>
+</header>
+
+<div class="hero-small">
+  <h1 data-ar="📰 تفاصيل المقال" data-en="📰 Article Details" data-fr="📰 Détails de l'Article">📰 تفاصيل المقال</h1>
+</div>
+
+<div class="container">
+  <a href="articles.html" class="back-btn">
+    <i class="fas fa-arrow-right"></i>
+    <span data-ar="العودة للمقالات" data-en="Back to Articles" data-fr="Retour aux Articles">العودة للمقالات</span>
+  </a>
+  
+  <!-- محتوى المقال -->
+  <div class="article-content" id="articleContainer">
+    <div class="loading">جاري التحميل...</div>
+  </div>
+
+
+<style>
+/* ✅ مشاركة الصفحة (نفس تصميم زر صفحة الفيديوهات) */
+.share-page { max-width: 560px; margin: 45px auto 10px; padding: 0 16px; }
+.share-page .share-wrap { border-top: 1px solid #eee; padding-top: 18px; }
+.share-page .share-toggle { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 14px; border-radius: 24px; border: 1.5px solid var(--gold, #b59461); background: transparent; color: var(--gold-dark, #9c7e4d); font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.25s; }
+.share-page .share-toggle:hover, .share-page .share-toggle[aria-expanded="true"] { background: var(--gold, #b59461); color: #fff; }
+.share-page .share-panel { display: none; margin-top: 12px; }
+.share-page .share-panel.open { display: block; }
+.share-page .share-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; }
+.share-page .share-item { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 10px 4px; border-radius: 12px; background: var(--grey, #f8f9fa); color: var(--dark, #111); text-decoration: none; border: 0; cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 0.78rem; font-weight: 600; transition: all 0.2s; }
+.share-page .share-item i { font-size: 1.25rem; }
+.share-page .share-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.share-page .share-note { color: #888; font-size: 0.75rem; line-height: 1.6; margin-top: 10px; text-align: center; }
+.share-page .share-toast { text-align: center; color: #1a7f37; font-size: 0.85rem; margin-top: 8px; min-height: 1.2em; }
+</style>
+
+<!-- ✅ زر المشاركة (نفس تصميم صفحة الفيديوهات: روابط مشاركة رسمية فقط، لا نشر تلقائي) -->
+  <div class="share-page" id="shareSection" style="display:none;">
+  <div class="share-wrap" id="articleShareWrap" data-title="">
+    <button type="button" class="share-toggle" aria-expanded="false" onclick="togglePageShare(this)"><i class="fas fa-share-nodes"></i> <span class="share-label" data-ar="مشاركة المقال" data-en="Share article" data-fr="Partager l'article">مشاركة المقال</span></button>
+    <div class="share-panel"></div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <img src="https://jfa9qoskskljefrl.public.blob.vercel-storage.com/logo-256-tEnQxVzMtiqKb5NA53vDpz8hV6bTvu.webp" alt="الحقانية" class="footer-logo" loading="lazy">
+  <p style="display:none;">مكتب الحقانية للإستشارات القانونية</p>
+  <span id="visitorCounter" style="display:none;"></span>
+  <p data-ar="© 2026 الحقانية للإستشارات القانونية" data-en="© 2026 Haqania Legal Consultations" data-fr="© 2026 Haqania">© 2026 الحقانية للإستشارات القانونية</p>
+  <div class="footer-links">
+    <a href="https://www.facebook.com/profile.php?id=61575279803936" target="_blank"><i class="fab fa-facebook-square"></i> Haqania</a>
+    <a href="https://www.youtube.com/@ElhaqaniaLegal?sub_confirmation=1" target="_blank" data-ar="يوتيوب" data-en="YouTube" data-fr="YouTube"><i class="fab fa-youtube"></i> يوتيوب</a>
+    <a href="https://wa.me/201554797398" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <a href="refund-policy.html" data-ar="سياسة الاسترجاع" data-en="Refund Policy" data-fr="Politique de Remboursement">سياسة الاسترجاع</a>
+  </div>
+  <div class="protection-notice">⚠️ جميع المحتويات محمية بحقوق الملكية الفكرية</div>
+</footer>
+
+<script>
+const API_URL = '/api/content';
+let currentArticleId = null;
+let currentLang = localStorage.getItem('siteLang') || 'ar';
+let currentArticleData = {};
+
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('contextmenu', e => { if (e.target.tagName !== 'A') e.preventDefault(); });
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('siteLang', lang);
+  document.getElementById('mainHtml').lang = lang;
+  document.getElementById('mainHtml').dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn-'+lang).classList.add('active');
+  document.querySelectorAll('[data-ar][data-en][data-fr]').forEach(el => {
+    const txt = el.getAttribute('data-'+lang);
+    if(txt) el.innerText = txt;
+  });
+}
+
+// ✅ تحميل المقال وتحديث الميتا تايجز
+async function loadArticle() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const articleId = urlParams.get('id');
+  currentArticleId = articleId;
+  
+  if (!articleId) {
+    document.getElementById('articleContainer').innerHTML = `<div class="error-msg"><h2>المقال غير موجود</h2></div>`;
+    return;
+  }
+  
+  const container = document.getElementById('articleContainer');
+  container.innerHTML = '<div class="loading">جاري التحميل...</div>';
+  
+  try {
+    const res = await fetch(`${API_URL}?action=get_data&sheet=articles`);
+    const data = await res.json();
+    const article = data.find(a => a.id == articleId);
+    
+    if (!article) {
+      container.innerHTML = `<div class="error-msg"><h2>المقال غير موجود</h2></div>`;
+      return;
+    }
+    
+    currentArticleData = article;
+    
+    const title = currentLang === 'ar' ? (article.title_ar||article.title) : currentLang === 'en' ? (article.title_en||article.title) : (article.title_fr||article.title);
+    const content = currentLang === 'ar' ? (article.content_ar||article.content) : currentLang === 'en' ? (article.content_en||article.content) : (article.content_fr||article.content);
+    const date = article.date || '';
+    const image = article.image || '';
+
+    // ✅ تحديث الميتا تايجز فوراً وبشكل قاطع
+    updateMetaTags(title, content, image);
+
+    let imageHtml = '';
+    if(image) {
+        imageHtml = `<img src="${image}" alt="${title}" class="article-image" style="display:block;">`;
+    }
+
+    container.innerHTML = `
+      <div class="article-header">
+        <h1 class="article-title">${title}</h1>
+        <div class="article-date"><i class="fas fa-calendar-alt"></i> <span>${date}</span></div>
+      </div>
+      ${imageHtml}
+      <div class="article-body">${content}</div>
+    `;
+    
+    document.getElementById('articleShareWrap').dataset.title = title;
+    document.getElementById('shareSection').style.display = 'block';
+    
+  } catch (e) {
+    container.innerHTML = `<div class="error-msg"><h2>خطأ في التحميل</h2></div>`;
+  }
+}
+
+// ✅ دالة تحديث الميتا تايجز (الحل الجذري)
+function updateMetaTags(title, content, image) {
+    // تحديد الصورة النهائية (صورة المقال أو اللوجو)
+    const finalImage = image ? image : 'https://i.ibb.co/Gf08dRs9/image-c77e535a.png';
+    
+    // إنشاء عناصر ميتا جديدة لضمان استبدالها تماماً
+    // هذه الطريقة أجبر للمتصفح وفيسبوك على قراءة البيانات الجديدة
+    
+    // 1. العنوان
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if(!ogTitle) { ogTitle = document.createElement('meta'); ogTitle.setAttribute('property', 'og:title'); document.head.appendChild(ogTitle); }
+    ogTitle.setAttribute('content', title + ' | الحقانية للإستشارات القانونية');
+    document.title = title + ' | الحقانية'; // تحديث عنوان الصفحة أيضاً
+
+    // 2. الوصف
+    let ogDesc = document.querySelector('meta[property="og:description"]');
+    if(!ogDesc) { ogDesc = document.createElement('meta'); ogDesc.setAttribute('property', 'og:description'); document.head.appendChild(ogDesc); }
+    ogDesc.setAttribute('content', content.substring(0, 150) + '...');
+
+    // 3. الصورة
+    let ogImg = document.querySelector('meta[property="og:image"]');
+    if(!ogImg) { ogImg = document.createElement('meta'); ogImg.setAttribute('property', 'og:image'); document.head.appendChild(ogImg); }
+    ogImg.setAttribute('content', finalImage);
+    
+    // 4. الرابط
+    let ogUrl = document.querySelector('meta[property="og:url"]');
+    if(!ogUrl) { ogUrl = document.createElement('meta'); ogUrl.setAttribute('property', 'og:url'); document.head.appendChild(ogUrl); }
+    ogUrl.setAttribute('content', window.location.href);
+}
+
+function setupShareButtons(title, url) {
+    const text = encodeURIComponent(title + ' | اقرأ المزيد على موقع الحقانية للإستشارات القانونية');
+    const encodedUrl = encodeURIComponent(url);
+    
+    document.getElementById('shareWa').href = `https://wa.me/?text=${text}%20${encodedUrl}`;
+    document.getElementById('shareFb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+    document.getElementById('shareTw').href = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${text}`;
+    document.getElementById('shareLi').href = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodeURIComponent(title)}`;
+}
+
+function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+        alert('✅ تم نسخ رابط المقال بنجاح!');
+    }).catch(err => {
+        alert('❌ فشل نسخ الرابط');
+    });
+}
+
+(function() {
+  var count = localStorage.getItem('haqania_visitor_count') || 0;
+  count++;
+  localStorage.setItem('haqania_visitor_count', count);
+  const el = document.getElementById('visitorCounter');
+  if(el) el.textContent = count;
+})();
+
+window.addEventListener('DOMContentLoaded', () => { 
+  setLang(currentLang); 
+  loadArticle(); 
+});
+</script>
+
+<script>
+/* ===== مشاركة الصفحة (روابط مشاركة رسمية فقط، لا نشر تلقائي) ===== */
+const PAGE_SHARE_TEXT = {
+  ar: { btn: 'مشاركة المقال', native: 'مشاركة من جهازك', copy: 'نسخ الرابط', copied: 'تم نسخ الرابط ✓', note: 'إنستجرام وتيك توك وسناب شات لا تقبل رابط مشاركة من المواقع، استخدم «مشاركة من جهازك» أو انسخ الرابط والصقه في التطبيق.', email: 'البريد', sms: 'رسالة SMS' },
+  en: { btn: 'Share article', native: 'Share from device', copy: 'Copy link', copied: 'Link copied ✓', note: 'Instagram, TikTok and Snapchat do not accept share links from websites. Use "Share from device" or copy the link and paste it in the app.', email: 'Email', sms: 'SMS' },
+  fr: { btn: 'Partager l\'article', native: 'Partager depuis l\'appareil', copy: 'Copier le lien', copied: 'Lien copié ✓', note: 'Instagram, TikTok et Snapchat n\'acceptent pas de lien de partage depuis un site. Utilisez « Partager depuis l\'appareil » ou copiez le lien.', email: 'E-mail', sms: 'SMS' }
+};
+function pageShareLang() {
+  try { if (typeof currentLang !== 'undefined' && currentLang) return currentLang; } catch (e) {}
+  try { return localStorage.getItem('siteLang') || 'ar'; } catch (e) { return 'ar'; }
+}
+function pageShareLinks(url, title, thumb) {
+  const u = encodeURIComponent(url), t = encodeURIComponent(title), ut = encodeURIComponent(title + ' ' + url);
+  const T = PAGE_SHARE_TEXT[pageShareLang()] || PAGE_SHARE_TEXT.ar;
+  return [
+    { n: 'WhatsApp', i: 'fab fa-whatsapp', c: '#25d366', h: 'https://wa.me/?text=' + ut },
+    { n: 'Facebook', i: 'fab fa-facebook-f', c: '#1877f2', h: 'https://www.facebook.com/sharer/sharer.php?u=' + u },
+    { n: 'X', i: 'fab fa-x-twitter', c: '#000', h: 'https://twitter.com/intent/tweet?text=' + t + '&url=' + u },
+    { n: 'Telegram', i: 'fab fa-telegram', c: '#229ed9', h: 'https://t.me/share/url?url=' + u + '&text=' + t },
+    { n: 'LinkedIn', i: 'fab fa-linkedin-in', c: '#0a66c2', h: 'https://www.linkedin.com/sharing/share-offsite/?url=' + u },
+    { n: 'Threads', i: 'fab fa-threads', c: '#000', h: 'https://www.threads.net/intent/post?text=' + ut },
+    { n: 'Bluesky', i: 'fab fa-bluesky', c: '#1185fe', h: 'https://bsky.app/intent/compose?text=' + ut },
+    { n: 'Reddit', i: 'fab fa-reddit-alien', c: '#ff4500', h: 'https://www.reddit.com/submit?url=' + u + '&title=' + t },
+    { n: 'Pinterest', i: 'fab fa-pinterest-p', c: '#e60023', h: 'https://pinterest.com/pin/create/button/?url=' + u + '&media=' + encodeURIComponent(thumb) + '&description=' + t },
+    { n: 'Tumblr', i: 'fab fa-tumblr', c: '#36465d', h: 'https://www.tumblr.com/widgets/share/tool?canonicalUrl=' + u + '&title=' + t },
+    { n: 'LINE', i: 'fab fa-line', c: '#06c755', h: 'https://social-plugins.line.me/lineit/share?url=' + u },
+    { n: 'VK', i: 'fab fa-vk', c: '#4a76a8', h: 'https://vk.com/share.php?url=' + u + '&title=' + t },
+    { n: T.email, i: 'fas fa-envelope', c: '#666', h: 'mailto:?subject=' + t + '&body=' + ut },
+    { n: T.sms, i: 'fas fa-comment-sms', c: '#666', h: 'sms:?&body=' + ut }
+  ];
+}
+function togglePageShare(btn) {
+  const wrap = btn.closest('.share-wrap'), panel = wrap.querySelector('.share-panel');
+  const open = !panel.classList.contains('open');
+  panel.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if (open && panel.dataset.lang !== pageShareLang()) buildPageShare(wrap, panel);
+}
+function buildPageShare(wrap, panel) {
+  const lang = pageShareLang();
+  const T = PAGE_SHARE_TEXT[lang] || PAGE_SHARE_TEXT.ar;
+  const url = location.href.split('#')[0];
+  const title = wrap.dataset.title || document.title;
+  const thumb = 'https://i.ibb.co/Gf08dRs9/image-c77e535a.png';
+  let h = '<div class="share-grid">';
+  if (navigator.share) h += '<button type="button" class="share-item" data-act="native"><i class="fas fa-mobile-screen-button" style="color:#b59461"></i>' + T.native + '</button>';
+  h += '<button type="button" class="share-item" data-act="copy"><i class="fas fa-link" style="color:#b59461"></i>' + T.copy + '</button>';
+  pageShareLinks(url, title, thumb).forEach(l => {
+    h += '<a class="share-item" href="' + l.h + '" target="_blank" rel="noopener noreferrer"><i class="' + l.i + '" style="color:' + l.c + '"></i>' + l.n + '</a>';
+  });
+  h += '</div><p class="share-note">' + T.note + '</p><div class="share-toast" aria-live="polite"></div>';
+  panel.innerHTML = h;
+  panel.dataset.lang = lang;
+  panel.addEventListener('click', async e => {
+    const b = e.target.closest('[data-act]'); if (!b) return;
+    const toast = panel.querySelector('.share-toast');
+    if (b.dataset.act === 'native') { try { await navigator.share({ title: title, text: title, url: url }); } catch (err) {} }
+    if (b.dataset.act === 'copy') {
+      try { await navigator.clipboard.writeText(url); } catch (err) {
+        const ta = document.createElement('textarea'); ta.value = url; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (e2) {} ta.remove();
+      }
+      toast.textContent = T.copied; setTimeout(() => { toast.textContent = ''; }, 2500);
+    }
+  });
+}
+// مزامنة نص الزر مع اللغة وإعادة بناء اللوحة المفتوحة عند تغييرها
+(function () {
+  function syncPageShare() {
+    const lang = pageShareLang();
+    const T = PAGE_SHARE_TEXT[lang] || PAGE_SHARE_TEXT.ar;
+    document.querySelectorAll('.share-page').forEach(box => {
+      const label = box.querySelector('.share-label');
+      if (label) label.textContent = T.btn;
+      const panel = box.querySelector('.share-panel.open');
+      if (panel) buildPageShare(box.querySelector('.share-wrap'), panel);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', syncPageShare);
+  new MutationObserver(syncPageShare).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+})();
+</script>
+
+<script src="/engage.js" defer></script>
+</body>
+</html>

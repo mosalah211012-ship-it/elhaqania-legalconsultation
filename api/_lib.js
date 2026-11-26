@@ -89,7 +89,7 @@ function today() { return new Date().toISOString().slice(0, 10); }
 
 async function getCfg() {
   const flat = await cmd('HGETALL', 'cfg');
-  const c = { comments_mode: 'auto', reviews_mode: 'moderate' };
+  const c = { comments_mode: 'auto', reviews_mode: 'moderate', show_counter: '1' };
   for (let i = 0; i < (flat || []).length; i += 2) c[flat[i]] = flat[i + 1];
   return c;
 }

@@ -5,6 +5,8 @@ const BOT = /bot|crawl|spider|slurp|facebookexternalhit|preview|headless|lightho
 module.exports = async function handler(req, res) {
   try {
     if (req.method === 'GET') {
+      const cfg = await L.getCfg();
+      if (cfg.show_counter === '0') return L.send(res, 200, { hidden: true }, 'public, s-maxage=30');
       const d = L.today();
       const r = await L.pipeline([['GET', 'st:views'], ['PFCOUNT', 'st:uv'], ['GET', 'st:views:' + d], ['PFCOUNT', 'st:uv:' + d]]);
       return L.send(res, 200, { views: Number(r[0] || 0), visitors: r[1] || 0, today_views: Number(r[2] || 0), today_visitors: r[3] || 0 }, 'public, s-maxage=60, stale-while-revalidate=300');

@@ -34,7 +34,7 @@
   }, true);
   function showCounter() {
     fetch('/api/hit').then(function (r) { return r.json(); }).then(function (j) {
-      var n = (j.views || 0).toLocaleString('en-US');
+      var n = (j.visitors || 0).toLocaleString('en-US');
       var el = document.getElementById('visitorCounter');
       if (el) el.textContent = n;
       var f = document.createElement('div'); f.className = 'hq-foot';

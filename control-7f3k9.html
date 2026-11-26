@@ -101,8 +101,10 @@ function renderStats(){
   $('#view').innerHTML=`<div class="grid">
   <div class="stat"><b>${s.views}</b>إجمالي المشاهدات</div><div class="stat"><b>${s.visitors}</b>زوار مختلفين</div>
   <div class="stat"><b>${s.daily[s.daily.length-1].views}</b>مشاهدات النهارده</div><div class="stat"><b>${s.total_likes}</b>إجمالي اللايكات</div>
-  <div class="stat"><b>${s.pending_comments+s.pending_reviews}</b>في انتظار موافقتك</div><div class="stat"><b>${s.articles}</b>مقال</div></div>
+  <div class="stat"><b>${s.pending_comments+s.pending_reviews}</b>في انتظار موافقتك</div><div class="stat"><b>${s.articles}</b>مقال</div>
+  <div class="stat"><b>${s.wa_total||0}</b>ضغطات واتساب</div><div class="stat"><b>${(s.daily[s.daily.length-1].wa)||0}</b>ضغطات واتساب النهارده</div></div>
   <div class="card" style="margin-top:12px"><b>آخر 14 يوم</b><div class="bars" style="margin-bottom:22px">${s.daily.map(d=>`<div style="height:${Math.max(2,d.views/max*100)}%" title="${d.day}: ${d.views}"><span>${d.day.slice(8)}</span></div>`).join('')}</div></div>
+  <div class="card"><b>الصفحات اللي جاب منها ضغطات واتساب</b>${(s.wa_pages||[]).length?s.wa_pages.map(p=>`<div class="row"><span>${esc(p.path)}</span><b>${p.clicks}</b></div>`).join(''):'<p class="muted">لسه مفيش ضغطات متسجلة.</p>'}</div>
   <div class="card"><b>أكتر الصفحات زيارة</b>${s.pages.length?s.pages.map(p=>`<div class="row"><span>${esc(p.path)}</span><b>${p.views}</b></div>`).join(''):'<p class="muted">لسه مفيش زيارات متسجلة.</p>'}</div>
   <div class="card"><b>نقل محتوى الموقع القديم</b><p class="muted">ينقل المقالات والمكتبة والنماذج والأحكام والروابط والتقييمات القديمة للوحة الجديدة. يتعمل مرة واحدة، ولو في بيانات موجودة بيتخطاها.</p><button class="b" id="imp">نقل المحتوى القديم</button></div>`;
   $('#imp').onclick=async()=>{if(!confirm('ننقل المحتوى القديم؟'))return;try{const j=await api({action:'import_legacy'});toast('تم: '+Object.entries(j.report).map(([k,v])=>k+'='+v).join('، '))}catch(e){toast('فشل النقل')}};

@@ -264,7 +264,7 @@ footer { background: var(--dark); color: white; padding: 40px 8% 25px; text-alig
 </footer>
 
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbwyCWHX5yhkM4Knyt_55Ad0MzWXT3t2DUngCq_8zhgUCTPZ7qGHFdnEKiJwyvBH-dwE/exec';
+const API_URL = '/api/content';
 
 // ✅ حماية المحتوى: منع النسخ والقص، لكن السماح بالرايت كليك
 document.addEventListener('copy', e => { e.preventDefault(); alert('⚠️ المحتوى محمي بحقوق الملكية الفكرية'); });
@@ -414,5 +414,6 @@ function buildPageShare(wrap, panel) {
 })();
 </script>
 
+<script src="/engage.js" defer></script>
 </body>
 </html>

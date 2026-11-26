@@ -13,7 +13,7 @@ module.exports = async function handler(req, res) {
     if (type === 'reviews') {
       items = items.filter(r => r.status === 'approved' && (!q.target || r.target === q.target));
       items.sort((a, b) => String(b.created || '').localeCompare(String(a.created || '')));
-      return L.send(res, 200, items.map(r => ({ id: r.id, name: r.name, rating: r.rating, text: r.text, target: r.target, article_id: r.article_id || '', reply: r.reply || '', created: r.created })), 'public, s-maxage=30, stale-while-revalidate=120');
+      return L.send(res, 200, items.map(r => ({ id: r.id, name: r.name, rating: Number(r.rating) > 0 && Number(r.rating) <= 5 ? Number(r.rating) : 0, text: r.text, target: r.target, article_id: r.article_id || '', reply: r.reply || '', created: r.created })), 'public, s-maxage=30, stale-while-revalidate=120');
     }
     items = items.filter(a => L.isPublished(a, now)).map(a => Object.assign({}, a, { status: 'active' }));
     if (type === 'articles') {

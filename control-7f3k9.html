@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>لوحة التحكم</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0f2a47;--navy2:#0a1d33;--gold:#e8c872;--bg:#f3f5f8;--red:#c0392b;--green:#1e8e5a}
+*{box-sizing:border-box}body{margin:0;font-family:Cairo,Tahoma,sans-serif;background:var(--bg);color:#1b2733}
+header{background:var(--navy2);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
+header h1{font-size:1.05rem;margin:0;color:var(--gold)}
+nav{display:flex;gap:6px;flex-wrap:wrap;padding:10px 12px;background:#fff;border-bottom:1px solid #dde3ea}
+nav button{border:1px solid #cfd8e3;background:#fff;border-radius:20px;padding:7px 13px;font:inherit;font-size:.88rem;cursor:pointer}
+nav button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+nav .badge{background:var(--red);color:#fff;border-radius:10px;padding:0 6px;font-size:.72rem;margin-inline-start:4px}
+main{max-width:980px;margin:0 auto;padding:14px}
+.card{background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.stat{background:var(--navy);color:#fff;border-radius:12px;padding:14px;text-align:center}
+.stat b{display:block;font-size:1.6rem;color:var(--gold)}
+button.b{border:0;border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;background:var(--navy);color:#fff}
+button.g{background:var(--green)}button.r{background:var(--red)}button.o{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+input,textarea,select{width:100%;padding:9px;border:1px solid #cbd5e0;border-radius:8px;font:inherit;margin:3px 0 10px;background:#fff}
+textarea{min-height:130px}label{font-size:.85rem;font-weight:600;color:#435166}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eef1f5}
+.row:last-child{border-bottom:0}.muted{color:#6b7a8c;font-size:.82rem}
+.tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:.75rem;background:#e7edf5}
+.tag.ok{background:#d9f2e6;color:#14663f}.tag.no{background:#fde2de;color:#9b2c20}.tag.wait{background:#fff0c9;color:#7a5a00}
+#login{max-width:340px;margin:12vh auto;text-align:center}
+.bars{display:flex;align-items:flex-end;gap:4px;height:110px;margin-top:8px}
+.bars div{flex:1;background:var(--gold);border-radius:4px 4px 0 0;position:relative;min-height:2px}
+.bars span{position:absolute;bottom:-18px;left:0;right:0;text-align:center;font-size:.6rem;color:#667}
+#msg{position:fixed;bottom:14px;right:14px;left:14px;max-width:420px;margin:auto;background:#111c2b;color:#fff;border-radius:10px;padding:11px 14px;display:none;z-index:20;text-align:center}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div id="login" class="card">
+  <h2>لوحة التحكم</h2>
+  <p class="muted">للمسؤول فقط</p>
+  <input type="password" id="pw" placeholder="كلمة المرور" autocomplete="current-password">
+  <button class="b" style="width:100%" id="loginBtn">دخول</button>
+  <p id="lmsg" class="muted"></p>
+</div>
+<div id="app" class="hide">
+  <header><h1>⚖️ الحقانية، لوحة التحكم</h1><button class="b o" id="logout" style="padding:4px 10px">خروج</button></header>
+  <nav id="tabs"></nav>
+  <main id="view"></main>
+</div>
+<div id="msg"></div>
+<script>
+const API='/api/admin';
+let TOKEN=sessionStorage.getItem('hq_t')||'';
+let tab='stats', editing=null, cache={};
+const TYPES={
+ articles:{label:'المقالات',fields:[['title_ar','العنوان (عربي)'],['title_en','العنوان (English)'],['title_fr','Titre (Français)'],['content_ar','المحتوى (عربي) يقبل HTML','ta'],['content_en','Content (English)','ta'],['content_fr','Contenu (Français)','ta'],['image','رابط الصورة'],['category','التصنيف'],['Tags','الكلمات المفتاحية'],['publish_at','تاريخ ووقت النشر','dt'],['status','الحالة','st']],title:'title_ar'},
+ library:{label:'المكتبة',fields:[['title_ar','العنوان (عربي)'],['title_en','Title'],['title_fr','Titre'],['author','المؤلف'],['description_ar','الوصف (عربي)','ta'],['description_en','Description','ta'],['description_fr','Description FR','ta'],['file_link','رابط الملف'],['category','التصنيف'],['status','الحالة','st']],title:'title_ar'},
+ products:{label:'النماذج المدفوعة',fields:[['name_ar','الاسم (عربي)'],['name_en','Name'],['name_fr','Nom'],['price','السعر'],['short_desc_ar','وصف قصير (عربي)'],['short_desc_en','Short desc'],['short_desc_fr','Desc courte'],['full_desc_ar','وصف كامل (عربي)','ta'],['full_desc_en','Full desc','ta'],['full_desc_fr','Desc complète','ta'],['file_link','رابط الملف'],['status','الحالة','st']],title:'name_ar'},
+ judgments:{label:'الأحكام',fields:[['title_ar','العنوان (عربي)'],['title_en','Title'],['title_fr','Titre'],['court','المحكمة'],['summary_ar','الملخص (عربي)','ta'],['summary_en','Summary','ta'],['summary_fr','Résumé','ta'],['file_link','رابط الملف'],['date','التاريخ'],['status','الحالة','st']],title:'title_ar'},
+ extras:{label:'الروابط المفيدة',fields:[['Name','الاسم'],['Link','الرابط'],['Category','التصنيف']],title:'Name'}
+};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(t){const m=$('#msg');m.textContent=t;m.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>m.style.display='none',3200)}
+async function api(body){
+  const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+TOKEN},body:JSON.stringify(body)});
+  if(r.status===401&&body.action!=='login'){logout();throw new Error('auth')}
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(j.error||('http_'+r.status));
+  return j;
+}
+function logout(){TOKEN='';sessionStorage.removeItem('hq_t');localStorage.setItem('hq_noc','1');$('#app').classList.add('hide');$('#login').classList.remove('hide')}
+async function login(){
+  $('#lmsg').textContent='';
+  try{const j=await api({action:'login',password:$('#pw').value});TOKEN=j.token;sessionStorage.setItem('hq_t',TOKEN);localStorage.setItem('hq_noc','1');$('#pw').value='';start()}
+  catch(e){$('#lmsg').textContent=e.message==='locked'?'محاولات كتير، استنى 15 دقيقة':'كلمة المرور غلط'}
+}
+$('#loginBtn').onclick=login;$('#pw').onkeydown=e=>{if(e.key==='Enter')login()};$('#logout').onclick=logout;
+function buildTabs(badges){
+  const t=[['stats','📊 الإحصائيات']].concat(Object.keys(TYPES).map(k=>[k,TYPES[k].label])).concat([['comments','💬 التعليقات'],['reviews','⭐ التقييمات'],['settings','⚙️ الإعدادات']]);
+  $('#tabs').innerHTML=t.map(([k,l])=>`<button data-k="${k}" class="${k===tab?'on':''}">${l}${badges&&badges[k]?`<span class="badge">${badges[k]}</span>`:''}</button>`).join('');
+  $('#tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.k;editing=null;render()});
+}
+async function start(){$('#login').classList.add('hide');$('#app').classList.remove('hide');render()}
+async function render(){
+  const v=$('#view');v.innerHTML='<div class="card muted">جاري التحميل...</div>';
+  try{
+    let badges={};
+    try{const s=await api({action:'stats'});badges={comments:s.pending_comments,reviews:s.pending_reviews};cache.stats=s}catch(e){if(e.message==='auth')return}
+    buildTabs(badges);
+    if(tab==='stats')return renderStats();
+    if(tab==='settings')return renderSettings();
+    if(tab==='comments'||tab==='reviews')return renderMod(tab);
+    return editing?renderForm(tab):renderList(tab);
+  }catch(e){if(e.message!=='auth')v.innerHTML='<div class="card">حصل خطأ: '+esc(e.message)+'</div>'}
+}
+function renderStats(){
+  const s=cache.stats,max=Math.max(1,...s.daily.map(d=>d.views));
+  $('#view').innerHTML=`<div class="grid">
+  <div class="stat"><b>${s.views}</b>إجمالي المشاهدات</div><div class="stat"><b>${s.visitors}</b>زوار مختلفين</div>
+  <div class="stat"><b>${s.daily[s.daily.length-1].views}</b>مشاهدات النهارده</div><div class="stat"><b>${s.total_likes}</b>إجمالي اللايكات</div>
+  <div class="stat"><b>${s.pending_comments+s.pending_reviews}</b>في انتظار موافقتك</div><div class="stat"><b>${s.articles}</b>مقال</div></div>
+  <div class="card" style="margin-top:12px"><b>آخر 14 يوم</b><div class="bars" style="margin-bottom:22px">${s.daily.map(d=>`<div style="height:${Math.max(2,d.views/max*100)}%" title="${d.day}: ${d.views}"><span>${d.day.slice(8)}</span></div>`).join('')}</div></div>
+  <div class="card"><b>أكتر الصفحات زيارة</b>${s.pages.length?s.pages.map(p=>`<div class="row"><span>${esc(p.path)}</span><b>${p.views}</b></div>`).join(''):'<p class="muted">لسه مفيش زيارات متسجلة.</p>'}</div>
+  <div class="card"><b>نقل محتوى الموقع القديم</b><p class="muted">ينقل المقالات والمكتبة والنماذج والأحكام والروابط والتقييمات القديمة للوحة الجديدة. يتعمل مرة واحدة، ولو في بيانات موجودة بيتخطاها.</p><button class="b" id="imp">نقل المحتوى القديم</button></div>`;
+  $('#imp').onclick=async()=>{if(!confirm('ننقل المحتوى القديم؟'))return;try{const j=await api({action:'import_legacy'});toast('تم: '+Object.entries(j.report).map(([k,v])=>k+'='+v).join('، '))}catch(e){toast('فشل النقل')}};
+}
+async function renderList(type){
+  const j=await api({action:'list',type});const T=TYPES[type];
+  $('#view').innerHTML=`<div class="card"><div class="row" style="border:0"><b>${T.label} (${j.items.length})</b><button class="b g" id="new">➕ جديد</button></div>
+  ${j.items.map(it=>`<div class="row"><div><b>${esc(it[T.title]||it.title_en||'(بدون عنوان)')}</b><div class="muted">${type==='articles'?esc(it.date||'')+' · ❤ '+(it.likes||0)+' · ':''}<span class="tag ${it.status==='draft'?'wait':'ok'}">${it.status==='draft'?'مسودة':(type==='articles'&&Date.parse(it.publish_at)>Date.now()?'مجدول':'منشور')}</span></div></div>
+  <div><button class="b o" data-e="${esc(it.id)}">تعديل</button> <button class="b r" data-d="${esc(it.id)}">حذف</button></div></div>`).join('')||'<p class="muted">فاضي</p>'}</div>`;
+  cache.items=j.items;
+  $('#new').onclick=()=>{editing={};render()};
+  document.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{editing=cache.items.find(x=>String(x.id)===b.dataset.e);render()});
+  document.querySelectorAll('[data-d]').forEach(b=>b.onclick=async()=>{if(!confirm('تأكيد الحذف؟'))return;await api({action:'delete',type,id:b.dataset.d});toast('اتحذف');render()});
+}
+const toLocalInput=iso=>{if(!iso)return '';const d=new Date(iso);if(isNaN(d))return '';const o=d.getTimezoneOffset();return new Date(d.getTime()-o*60000).toISOString().slice(0,16)};
+function renderForm(type){
+  const T=TYPES[type],it=editing||{};
+  const def=type==='articles'&&!it.publish_at?toLocalInput(new Date().toISOString()):toLocalInput(it.publish_at);
+  $('#view').innerHTML=`<div class="card"><b>${it.id?'تعديل':'إضافة'} ${T.label}</b><div style="margin-top:10px">`+T.fields.map(([k,l,t])=>{
+    const v=it[k]==null?'':it[k];
+    if(t==='ta')return `<label>${l}</label><textarea data-k="${k}">${esc(v)}</textarea>`;
+    if(t==='st')return `<label>${l}</label><select data-k="${k}"><option value="active" ${v!=='draft'?'selected':''}>منشور</option><option value="draft" ${v==='draft'?'selected':''}>مسودة (مخفي)</option></select>`;
+    if(t==='dt')return `<label>${l} (لو في المستقبل، المقال يظهر في الميعاد ده)</label><input type="datetime-local" data-k="${k}" value="${def}">`;
+    return `<label>${l}</label><input data-k="${k}" value="${esc(v)}">`}).join('')+
+  `<button class="b g" id="save">حفظ</button> <button class="b o" id="cancel">إلغاء</button></div></div>`;
+  $('#cancel').onclick=()=>{editing=null;render()};
+  $('#save').onclick=async()=>{
+    const item=Object.assign({},it);
+    document.querySelectorAll('[data-k]').forEach(e=>{const k=e.dataset.k;item[k]=e.value});
+    if(type==='articles')item.publish_at=item.publish_at?new Date(item.publish_at).toISOString():new Date().toISOString();
+    try{await api({action:'save',type,item});toast('تم الحفظ');editing=null;render()}catch(e){toast('فشل الحفظ')}
+  };
+}
+async function renderMod(type){
+  const j=await api({action:'list',type}),arts=(await api({action:'list',type:'articles'})).items;
+  const an={};arts.forEach(a=>an[a.id]=a.title_ar);
+  const tg={site:'الموقع',office:'المكتب',article:'مقال'};
+  const st={approved:['ok','ظاهر'],pending:['wait','في الانتظار'],hidden:['no','مخفي']};
+  $('#view').innerHTML=`<div class="card"><b>${type==='comments'?'التعليقات':'التقييمات'} (${j.items.length})</b>`+(j.items.map(c=>`<div class="row"><div style="flex:1;min-width:220px"><b>${esc(c.name)}</b> ${c.rating?'⭐'.repeat(c.rating):''} <span class="tag ${st[c.status]?st[c.status][0]:''}">${st[c.status]?st[c.status][1]:esc(c.status)}</span>
+  <div>${esc(c.text)}</div><div class="muted">${esc((c.created||'').slice(0,10))}${c.target?' · '+tg[c.target]:''}${c.article_id&&an[c.article_id]?' · '+esc(an[c.article_id]):''}</div>${c.reply?`<div class="muted">ردك: ${esc(c.reply)}</div>`:''}</div>
+  <div><button class="b g" data-s="approved" data-i="${esc(c.id)}">إظهار</button> <button class="b o" data-s="hidden" data-i="${esc(c.id)}">إخفاء</button> <button class="b o" data-r="${esc(c.id)}">رد</button> <button class="b r" data-d="${esc(c.id)}">حذف</button></div></div>`).join('')||'<p class="muted">لسه مفيش</p>')+'</div>';
+  document.querySelectorAll('[data-s]').forEach(b=>b.onclick=async()=>{await api({action:'status',type,id:b.dataset.i,status:b.dataset.s});toast('تم');render()});
+  document.querySelectorAll('[data-d]').forEach(b=>b.onclick=async()=>{if(!confirm('تأكيد الحذف؟'))return;await api({action:'delete',type,id:b.dataset.d});toast('اتحذف');render()});
+  document.querySelectorAll('[data-r]').forEach(b=>b.onclick=async()=>{const c=j.items.find(x=>String(x.id)===b.dataset.r);const r=prompt('ردك العلني:',c.reply||'');if(r===null)return;await api({action:'status',type,id:c.id,status:c.status,reply:r});toast('تم');render()});
+}
+async function renderSettings(){
+  const {cfg}=await api({action:'get_settings'});
+  $('#view').innerHTML=`<div class="card"><b>الإعدادات</b><label>التعليقات على المقالات</label><select id="cm"><option value="auto" ${cfg.comments_mode==='auto'?'selected':''}>تظهر فورًا (وأنا أخفي أي حاجة مش مناسبة)</option><option value="moderate" ${cfg.comments_mode==='moderate'?'selected':''}>تظهر بعد موافقتي</option></select>
+  <label>التقييمات</label><select id="rm"><option value="moderate" ${cfg.reviews_mode!=='auto'?'selected':''}>تظهر بعد موافقتي</option><option value="auto" ${cfg.reviews_mode==='auto'?'selected':''}>تظهر فورًا</option></select>
+  <button class="b g" id="ss">حفظ</button></div>`;
+  $('#ss').onclick=async()=>{await api({action:'set_settings',cfg:{comments_mode:$('#cm').value,reviews_mode:$('#rm').value}});toast('تم الحفظ')};
+}
+if(TOKEN){start()}
+</script>
+</body>
+</html>

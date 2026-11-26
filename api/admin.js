@@ -139,17 +139,20 @@ module.exports = async function handler(req, res) {
     if (action === 'stats') {
       const days = [];
       for (let i = 13; i >= 0; i--) days.push(new Date(Date.now() - i * 86400000).toISOString().slice(0, 10));
-      const cmds = [['GET', 'st:views'], ['PFCOUNT', 'st:uv'], ['HGETALL', 'st:pages']];
-      days.forEach(d => { cmds.push(['GET', 'st:views:' + d]); cmds.push(['PFCOUNT', 'st:uv:' + d]); });
+      const cmds = [['GET', 'st:views'], ['PFCOUNT', 'st:uv'], ['HGETALL', 'st:pages'], ['GET', 'st:wa'], ['HGETALL', 'st:wapages']];
+      days.forEach(d => { cmds.push(['GET', 'st:views:' + d]); cmds.push(['PFCOUNT', 'st:uv:' + d]); cmds.push(['GET', 'st:wa:' + d]); });
       const r = await L.pipeline(cmds);
       const pagesFlat = r[2] || [], pages = [];
       for (let i = 0; i < pagesFlat.length; i += 2) pages.push({ path: pagesFlat[i], views: Number(pagesFlat[i + 1]) });
       pages.sort((a, b2) => b2.views - a.views);
-      const daily = days.map((d, i) => ({ day: d, views: Number(r[3 + i * 2] || 0), visitors: r[4 + i * 2] || 0 }));
+      const daily = days.map((d, i) => ({ day: d, views: Number(r[5 + i * 3] || 0), visitors: r[6 + i * 3] || 0, wa: Number(r[7 + i * 3] || 0) }));
+      const waFlat = r[4] || [], wapages = [];
+      for (let i = 0; i < waFlat.length; i += 2) wapages.push({ path: waFlat[i], clicks: Number(waFlat[i + 1]) });
+      wapages.sort((a, b2) => b2.clicks - a.clicks);
       const comments = await L.getAll('comments'), reviews = await L.getAll('reviews'), articles = await L.getAll('articles');
       const likeCounts = await L.pipeline(articles.map(a => ['SCARD', 'likes:' + a.id]));
       return L.send(res, 200, {
-        views: Number(r[0] || 0), visitors: r[1] || 0, daily, pages: pages.slice(0, 12),
+        views: Number(r[0] || 0), visitors: r[1] || 0, daily, pages: pages.slice(0, 12), wa_total: Number(r[3] || 0), wa_pages: wapages.slice(0, 8),
         pending_comments: comments.filter(c => c.status === 'pending').length,
         pending_reviews: reviews.filter(c => c.status === 'pending').length,
         total_likes: likeCounts.reduce((a, b2) => a + (b2 || 0), 0),

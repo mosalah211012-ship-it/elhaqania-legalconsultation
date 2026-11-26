@@ -17,6 +17,10 @@ module.exports = async function handler(req, res) {
     let path = L.clean(b.path, 80).split('?')[0].replace(/\.html$/, '') || '/';
     if (!path.startsWith('/')) path = '/' + path;
     const d = L.today();
+    if (b.ev === 'wa') {
+      await L.pipeline([['INCR', 'st:wa'], ['INCR', 'st:wa:' + d], ['EXPIRE', 'st:wa:' + d, 60 * 86400, 'NX'], ['HINCRBY', 'st:wapages', path, 1]]);
+      return L.send(res, 200, { ok: true });
+    }
     await L.pipeline([
       ['INCR', 'st:views'], ['INCR', 'st:views:' + d], ['EXPIRE', 'st:views:' + d, 60 * 86400, 'NX'],
       ['PFADD', 'st:uv', b.vid], ['PFADD', 'st:uv:' + d, b.vid], ['EXPIRE', 'st:uv:' + d, 60 * 86400, 'NX'],

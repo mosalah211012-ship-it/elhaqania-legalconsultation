@@ -3,6 +3,7 @@ const RURL = process.env.KV_REST_API_URL;
 const RTOK = process.env.KV_REST_API_TOKEN;
 
 async function pipeline(cmds) {
+  if (!cmds.length) return [];
   if (!RURL || !RTOK) throw new Error('storage_not_configured');
   const r = await fetch(RURL + '/pipeline', {
     method: 'POST',

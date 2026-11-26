@@ -126,8 +126,19 @@ function renderForm(type){
     if(t==='ta')return `<label>${l}</label><textarea data-k="${k}">${esc(v)}</textarea>`;
     if(t==='st')return `<label>${l}</label><select data-k="${k}"><option value="active" ${v!=='draft'?'selected':''}>منشور</option><option value="draft" ${v==='draft'?'selected':''}>مسودة (مخفي)</option></select>`;
     if(t==='dt')return `<label>${l} (لو في المستقبل، المقال يظهر في الميعاد ده)</label><input type="datetime-local" data-k="${k}" value="${def}">`;
+    if(['image','file_link','Link'].includes(k))return `<label>${l} (الصق رابط أو ارفع ملف)</label><div style="display:flex;gap:6px"><input data-k="${k}" value="${esc(v)}" style="flex:1"><button type="button" class="b o" data-up="${k}">⬆ رفع ملف</button></div><small class="muted" data-upmsg="${k}"></small>`;
     return `<label>${l}</label><input data-k="${k}" value="${esc(v)}">`}).join('')+
   `<button class="b g" id="save">حفظ</button> <button class="b o" id="cancel">إلغاء</button></div></div>`;
+  document.querySelectorAll('[data-up]').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.up,msg=document.querySelector('[data-upmsg="'+k+'"]');
+    const f=document.createElement('input');f.type='file';f.accept=k==='image'?'image/*':'';
+    f.onchange=async()=>{const file=f.files[0];if(!file)return;
+      try{msg.textContent='جاري الرفع...';
+        const m=await import('https://esm.sh/@vercel/blob@1.0.2/client');
+        const r=await m.upload(file.name.replace(/[^A-Za-z0-9._-]/g,'_')||'file',file,{access:'public',handleUploadUrl:'/api/upload',clientPayload:TOKEN,multipart:file.size>5000000,onUploadProgress:p=>{msg.textContent='جاري الرفع '+Math.round(p.percentage)+'%'}});
+        document.querySelector('input[data-k="'+k+'"]').value=r.url;msg.textContent='تم الرفع، اضغط حفظ';
+      }catch(e){msg.textContent='فشل الرفع: '+(e.message||e)}};
+    f.click()});
   $('#cancel').onclick=()=>{editing=null;render()};
   $('#save').onclick=async()=>{
     const item=Object.assign({},it);

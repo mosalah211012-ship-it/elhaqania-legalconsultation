@@ -77,7 +77,7 @@
     host.className = 'hq-box';
     function load() {
       fetch('/api/content?type=reviews').then(function (r) { return r.json(); }).then(function (list) {
-        var avg = list.length ? (list.reduce(function (a, c) { return a + (Number(c.rating) > 0 ? Number(c.rating) : 0); }, 0) / list.length) : 0;
+        var avg = list.length ? (list.reduce(function (a, c) { return a + (Number(c.rating) > 0 ? Number(c.rating) : 0); }, 0) / (list.filter(function (c) { return Number(c.rating) > 0; }).length || 1)) : 0;
         var tg = { site: t('site'), office: t('office'), article: t('article') };
         var h = '<h3>' + (list.length ? esc(t('avg')) + ': <span class="hq-star">' + stars(Math.round(avg)) + '</span> ' + avg.toFixed(1) + ' (' + list.length + ')' : '') + '</h3>';
         h += '<label>' + esc(t('target')) + '</label><select id="hqTg"><option value="site">' + esc(t('site')) + '</option><option value="office">' + esc(t('office')) + '</option></select>';

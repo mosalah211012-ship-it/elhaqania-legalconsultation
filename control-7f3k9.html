@@ -167,7 +167,7 @@ async function renderSettings(){
   <label>التقييمات</label><select id="rm"><option value="moderate" ${cfg.reviews_mode!=='auto'?'selected':''}>تظهر بعد موافقتي</option><option value="auto" ${cfg.reviews_mode==='auto'?'selected':''}>تظهر فورًا</option></select>
   <label>عدّاد الزوار في الموقع</label><select id="sc"><option value="1" ${cfg.show_counter!==`0`?`selected`:``}>ظاهر للزوار</option><option value="0" ${cfg.show_counter===`0`?`selected`:``}>مخفي (الأرقام في لوحة التحكم فقط)</option></select>
   <button class="b g" id="ss">حفظ</button></div>`;
-  $('#ss').onclick=async()=>{await api({action:'set_settings',cfg:{comments_mode:$('#cm').value,reviews_mode:$('#rm').value}});toast('تم الحفظ')};
+  $('#ss').onclick=async()=>{await api({action:'set_settings',cfg:{comments_mode:$('#cm').value,reviews_mode:$('#rm').value,show_counter:$('#sc').value}});toast('تم الحفظ')};
 }
 if(TOKEN){start()}
 </script>

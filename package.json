@@ -1,5 +1,5 @@
 {
-  "name": "elhaqania-site",
+  "name": "elhaqania-legal-site",
   "private": true,
   "dependencies": {
     "@vercel/blob": "^1.0.2"

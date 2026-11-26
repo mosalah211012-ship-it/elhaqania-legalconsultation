@@ -165,6 +165,7 @@ async function renderSettings(){
   const {cfg}=await api({action:'get_settings'});
   $('#view').innerHTML=`<div class="card"><b>الإعدادات</b><label>التعليقات على المقالات</label><select id="cm"><option value="auto" ${cfg.comments_mode==='auto'?'selected':''}>تظهر فورًا (وأنا أخفي أي حاجة مش مناسبة)</option><option value="moderate" ${cfg.comments_mode==='moderate'?'selected':''}>تظهر بعد موافقتي</option></select>
   <label>التقييمات</label><select id="rm"><option value="moderate" ${cfg.reviews_mode!=='auto'?'selected':''}>تظهر بعد موافقتي</option><option value="auto" ${cfg.reviews_mode==='auto'?'selected':''}>تظهر فورًا</option></select>
+  <label>عدّاد الزوار في الموقع</label><select id="sc"><option value="1" ${cfg.show_counter!==`0`?`selected`:``}>ظاهر للزوار</option><option value="0" ${cfg.show_counter===`0`?`selected`:``}>مخفي (الأرقام في لوحة التحكم فقط)</option></select>
   <button class="b g" id="ss">حفظ</button></div>`;
   $('#ss').onclick=async()=>{await api({action:'set_settings',cfg:{comments_mode:$('#cm').value,reviews_mode:$('#rm').value}});toast('تم الحفظ')};
 }

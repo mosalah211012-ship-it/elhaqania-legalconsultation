@@ -10,7 +10,13 @@ module.exports = async function handler(req, res) {
       body,
       request: req,
       onBeforeGenerateToken: async (pathname, clientPayload) => {
-        if (!L.verify(String(clientPayload || ''))) throw new Error('auth');
+        const cp = String(clientPayload || '');
+        if (cp.startsWith('S:')) {
+          const u = await L.supaUser({ headers: { authorization: 'Bearer ' + cp.slice(2) } });
+          if (!u || !/^pay-/.test(String(pathname))) throw new Error('auth');
+          return { maximumSizeInBytes: 6 * 1024 * 1024, addRandomSuffix: true, allowedContentTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/heic'] };
+        }
+        if (!L.verify(cp)) throw new Error('auth');
         return {
           maximumSizeInBytes: 100 * 1024 * 1024,
           addRandomSuffix: true,

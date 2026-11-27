@@ -4,6 +4,10 @@
     { "source": "/article-detail", "destination": "/api/article" }
   ],
   "functions": {
-    "api/article.js": { "includeFiles": "article-template.html" }
-  }
+    "api/article.js": { "includeFiles": "article-template.html" },
+    "api/notes.js": { "includeFiles": "assets-fonts/kufi.ttf", "maxDuration": 30 }
+  },
+  "crons": [
+    { "path": "/api/cron", "schedule": "0 4 * * *" }
+  ]
 }

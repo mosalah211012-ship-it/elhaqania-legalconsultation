@@ -105,4 +105,37 @@ function fmtDate(iso) {
   return p(d.getUTCDate()) + '/' + p(d.getUTCMonth() + 1) + '/' + d.getUTCFullYear();
 }
 
-module.exports = { pipeline, cmd, TYPES, getAll, send, clientIp, rateLimit, sign, verify, passwordOk, isAdmin, clean, today, getCfg, isPublished, fmtDate };
+
+// ---- students (Supabase auth, verified server-side) ----
+const SUPA_URL = process.env.SUPABASE_URL || 'https://vjzhmbdkrsanzmedremg.supabase.co';
+const SUPA_ANON = process.env.SUPABASE_ANON_KEY || 'sb_publishable_S7_fqWmzfh-SfpaC5oQ5sg_2JG7Av4D';
+async function supaUser(req) {
+  const h = req.headers.authorization || '';
+  const tok = h.startsWith('Bearer ') ? h.slice(7) : '';
+  if (!tok || tok.split('.').length !== 3) return null;
+  try {
+    const r = await fetch(SUPA_URL + '/auth/v1/user', { headers: { apikey: SUPA_ANON, Authorization: 'Bearer ' + tok } });
+    if (!r.ok) return null;
+    const u = await r.json();
+    if (!u || !u.id) return null;
+    return u;
+  } catch (e) { return null; }
+}
+function ipHash(req) {
+  let ip = clientIp(req);
+  if (/^\d+\.\d+\.\d+\.\d+$/.test(ip)) ip = ip.split('.').slice(0, 3).join('.'); // /24
+  else ip = ip.split(':').slice(0, 4).join(':'); // /64
+  return crypto.createHash('sha256').update('hq-ip|' + ip).digest('hex').slice(0, 24);
+}
+function hid(s) { return crypto.createHash('sha256').update(String(s)).digest('hex').slice(0, 16); }
+const BAN_MSG = 'لم يصل المبلغ إلينا، وتم إيقاف حسابك نهائيًا';
+async function banCheck(req, uid, dev) {
+  const keys = [];
+  if (uid) keys.push('ban:u:' + uid);
+  if (dev) keys.push('ban:d:' + String(dev).replace(/[^A-Za-z0-9-]/g, '').slice(0, 64));
+  keys.push('ban:i:' + ipHash(req));
+  const r = await pipeline(keys.map(k => ['EXISTS', k]));
+  return r.some(x => x === 1);
+}
+
+module.exports = { supaUser, ipHash, hid, banCheck, BAN_MSG, pipeline, cmd, TYPES, getAll, send, clientIp, rateLimit, sign, verify, passwordOk, isAdmin, clean, today, getCfg, isPublished, fmtDate };

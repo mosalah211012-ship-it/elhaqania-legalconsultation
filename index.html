@@ -122,7 +122,7 @@ footer { background: var(--dark); color: white; padding: 40px 8% 25px; text-alig
     <div class="lang-switcher">
       <button class="lang-btn active" onclick="setLang('ar')" id="btn-ar">عربي</button>
       <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
-      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">Français</button>
     </div>
   </ul>
 </header>
@@ -136,56 +136,20 @@ footer { background: var(--dark); color: white; padding: 40px 8% 25px; text-alig
     <span data-ar="نماذج جاهزة" data-en="Ready Templates" data-fr="Modèles Prêts">نماذج جاهزة</span>
   </div>
   <div class="hero-buttons">
-    <button class="btn btn-gold" onclick="openModal('egypt')"><i class="fas fa-phone-alt"></i><span data-ar="استشارة المصريين" data-en="Consultation for Egyptians" data-fr="Consultation pour Égyptiens">استشارة المصريين</span></button>
-    <button class="btn btn-gold" onclick="openModal('foreign')"><i class="fas fa-globe"></i><span data-ar="استشارة الأجانب" data-en="Consultation for Foreigners" data-fr="Consultation pour Étrangers">استشارة الأجانب</span></button>
+    <button class="btn btn-gold" data-hq-book="normal"><i class="fas fa-calendar-check"></i><span data-ar="حجز استشارة" data-en="Book a Consultation" data-fr="Réserver une Consultation">حجز استشارة</span></button>
     <a href="https://wa.me/201554797398?text=مرحبا، أريد طلب بحث علمي" class="btn" style="background:var(--dark); color:var(--gold); border:2px solid var(--gold);" target="_blank"><i class="fas fa-book-open"></i><span data-ar="أبحاث علمية" data-en="Scientific Research" data-fr="Recherche Scientifique">أبحاث علمية</span></a>
   </div>
 </div>
 
 <!-- Modal Sections -->
 <div class="section">
-  <div class="section-title"><h2 data-ar="💳 احصل على استشارتك الآن" data-en="💳 Get Your Consultation Now" data-fr="💳 Obtenez Votre Consultation Maintenant">💳 احصل على استشارتك الآن</h2></div>
+  <div class="section-title"><h2 data-ar="📞 احجز استشارتك الآن" data-en="📞 Book Your Consultation" data-fr="📞 Réservez Votre Consultation">📞 احجز استشارتك الآن</h2>
+    <p data-ar="استشارة عادية أو مستعجلة، عبر واتساب أو مكالمة" data-en="Standard or urgent consultation on WhatsApp" data-fr="Consultation standard ou urgente sur WhatsApp">استشارة عادية أو مستعجلة، عبر واتساب أو مكالمة</p>
+    <p style="margin-top:14px"><button class="btn btn-gold" data-hq-book="normal"><i class="fas fa-calendar-check"></i><span data-ar="حجز استشارة" data-en="Book a Consultation" data-fr="Réserver une Consultation">حجز استشارة</span></button></p></div>
   
-  <div class="modal" id="modalEgypt">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeModal('egypt')">×</button>
-      <h3 data-ar="📞 استشارة قانونية للمصريين" data-en="📞 Legal Consultation for Egyptians" data-fr="📞 Consultation Juridique pour Égyptiens">📞 استشارة قانونية للمصريين</h3>
-      <div class="price-tag" data-ar="300 جنيه" data-en="500 EGP" data-fr="500 EGP">300 جنيه</div>
-      <div class="payment-info">
-        <h4 data-ar="💳 طريقة الدفع:" data-en="💳 Payment Method:" data-fr="💳 Mode de Paiement:">💳 طريقة الدفع:</h4>
-        <p data-ar="لحجز استشارة، الرجاء دفع 300 جنيه عبر إنستا باي:" data-en="To book, please pay 300 EGP via InstaPay:" data-fr="Pour réserver, veuillez payer 300 EGP via InstaPay:">لحجز استشارة، الرجاء دفع 300 جنيه عبر إنستا باي:</p>
-        <p><strong>💳 إنستا باي:</strong> 01278683280</p>
-      </div>
-      <a href="https://wa.me/201554797398?text=لحجز%20استشارة" class="whatsapp-btn" target="_blank"><i class="fab fa-whatsapp"></i><span data-ar="إرسال إثبات الدفع" data-en="Send Payment Proof" data-fr="Envoyer Preuve de Paiement">إرسال إثبات الدفع</span></a>
-    </div>
-  </div>
   
-  <div class="modal" id="modalForeign">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeModal('foreign')">×</button>
-      <h3 data-ar="🌍 استشارة قانونية للأجانب" data-en="🌍 Legal Consultation for Foreigners" data-fr="🌍 Consultation Juridique pour Étrangers">🌍 استشارة قانونية للأجانب</h3>
-      
-      <div style="background: var(--grey); padding: 25px; border-radius: 12px; margin: 20px 0; border-right: 4px solid var(--gold);">
-        <p style="font-size: 1.1rem; color: var(--dark); margin-bottom: 20px; font-weight: 600;" data-ar="لحجز استشارة قانونية، الرجاء دفع مبلغ 25 دولار عن طريق الرابط التالي:" data-en="To book a legal consultation, please pay $25 via the link below:" data-fr="Pour réserver une consultation juridique, veuillez payer 25$ via le lien ci-dessous:">
-          لحجز استشارة قانونية، الرجاء دفع مبلغ 25 دولار عن طريق الرابط التالي:
-        </p>
-        
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NZ58WNL6JH77A&return=https%3A%2F%2Fwa.me%2F201554797398" target="_blank" class="whatsapp-btn" style="width: 100%; justify-content: center; font-size: 1.1rem;">
-          <i class="fab fa-paypal"></i>
-          <span data-ar="ادفع 25 دولار الآن" data-en="Pay $25 Now" data-fr="Payer 25$ Maintenant">ادفع 25 دولار الآن</span>
-        </a>
-        
-        <p style="font-size: 0.85rem; color: var(--gray); margin-top: 15px; text-align: center;" data-ar="بعد الدفع، اضغط 'Return to Merchant' للعودة للواتساب" data-en="After payment, click 'Return to Merchant' to return to WhatsApp" data-fr="Après paiement, cliquez sur 'Return to Merchant' pour revenir à WhatsApp">
-          بعد الدفع، اضغط 'Return to Merchant' للعودة للواتساب
-        </p>
-      </div>
-      
-      <a href="https://wa.me/201554797398?text=Payment%20Proof" class="whatsapp-btn" target="_blank" style="background: var(--dark);">
-        <i class="fab fa-whatsapp"></i>
-        <span data-ar="إرسال إثبات الدفع" data-en="Send Payment Proof" data-fr="Envoyer Preuve de Paiement">إرسال إثبات الدفع</span>
-      </a>
-    </div>
-  </div>
+  
+  
 
   <!-- Static Cards -->
   <div class="sections-grid">
@@ -327,9 +291,6 @@ async function loadLatestProducts() {
   } catch(e) { container.innerHTML = '<p style="color:red; text-align:center;">خطأ في التحميل</p>'; }
 }
 
-function openModal(type) { if(type==='egypt') document.getElementById('modalEgypt').classList.add('active'); else document.getElementById('modalForeign').classList.add('active'); }
-function closeModal(type) { if(type==='egypt') document.getElementById('modalEgypt').classList.remove('active'); else document.getElementById('modalForeign').classList.remove('active'); }
-window.onclick = e => { if(e.target.classList.contains('modal')) e.target.classList.remove('active'); };
 
 (function(){ var c=localStorage.getItem('haqania_visitor_count')||0; c++; localStorage.setItem('haqania_visitor_count',c); var el=document.getElementById('visitorCounter'); if(el) el.textContent=c; })();
 
@@ -420,5 +381,6 @@ function buildPageShare(wrap, panel) {
 </script>
 
 <script src="/engage.js" defer></script>
+<script src="/site.js" defer></script>
 </body>
 </html>

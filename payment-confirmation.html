@@ -88,10 +88,10 @@
 <body>
     <div class="container">
         <div class="success-icon">✅</div>
-        <h1>تم استلام الدفع بنجاح!</h1>
+        <h1>تم استلام طلبك</h1>
         <p class="message">
-            شكراً لك على الدفع.<br>
-            تم تأكيد استلام مبلغ $100 للاستشارة العاجلة.<br>
+            شكراً لك.<br>
+            تم تسجيل طلب الاستشارة العاجلة.<br>
             سيتم تحويلك إلى واتساب للتواصل الفوري مع المستشار القانوني.
         </p>
         
@@ -99,7 +99,7 @@
             جاري التحويل خلال <span id="countdown">5</span> ثوانٍ...
         </div>
         
-        <a href="https://wa.me/201554797398?text=Hello%20Haqania%2C%20I%20just%20paid%20%24100%20for%20an%20URGENT%20consultation.%20Please%20contact%20me%20as%20soon%20as%20possible." 
+        <a href="https://wa.me/201554797398?text=Hello%20Haqania%2C%20I%20would%20like%20an%20URGENT%20consultation.%20Please%20contact%20me%20as%20soon%20as%20possible." 
            class="whatsapp-btn" 
            id="whatsappBtn"
            target="_blank">
@@ -116,7 +116,7 @@
         // Countdown and auto-redirect
         let seconds = 5;
         const countdownEl = document.getElementById('countdown');
-        const whatsappUrl = 'https://wa.me/201554797398?text=Hello%20Haqania%2C%20I%20just%20paid%20%24100%20for%20an%20URGENT%20consultation.%20Please%20contact%20me%20as%20soon%20as%20possible.';
+        const whatsappUrl = 'https://wa.me/201554797398?text=Hello%20Haqania%2C%20I%20would%20like%20an%20URGENT%20consultation.%20Please%20contact%20me%20as%20soon%20as%20possible.';
         
         const countdownInterval = setInterval(() => {
             seconds--;
@@ -133,5 +133,6 @@
             clearInterval(countdownInterval);
         });
     </script>
+<script src="/site.js" defer></script>
 </body>
 </html>

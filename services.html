@@ -20,15 +20,6 @@
 <!-- ✅ المرحلة 5: أدوات جوجل -->
 <!-- 🔹 Google Search Console Verification -->
 <meta name="google-site-verification" content="TOLjNwob98CBhRQ2ur97bJXgKzth6vSdwB4pQCmJcio" />
-<!-- 🔹 Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true });
-</script>
-
 <!-- ✅ 2. Open Graph Tags (Facebook/WhatsApp) -->
 <meta property="og:title" content="خدماتنا القانونية - الحقانية للإستشارات القانونية">
 <meta property="og:description" content="تمثيل قانوني، صياغة عقود، دعاوى أسرة، قضايا ميراث، أبحاث علمية، وخدمات للأجانب. خدمات متكاملة بأعلى معايير الجودة">
@@ -249,7 +240,6 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
 .whatsapp-float:hover { transform: scale(1.1); }
 @media (max-width: 768px) { header { flex-direction: column; gap: 15px; } .nav-menu { justify-content: center; } .hero-small h1 { font-size: 1.5rem; } .container { padding: 30px 5%; } .services-grid { grid-template-columns: 1fr; } }
 </style>
-<script src="analytics.js"></script>
 <meta property="og:image" content="https://jfa9qoskskljefrl.public.blob.vercel-storage.com/og-card-0Sh3IiYikRb9yjJDLLfGx3NOMcn2ln.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -282,7 +272,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
     <div class="lang-switcher">
       <button class="lang-btn active" onclick="setLang('ar')" id="btn-ar">عربي</button>
       <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
-      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">Français</button>
     </div>
   </ul>
 </header>
@@ -308,7 +298,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
           <li><i class="fas fa-check"></i> <span data-ar="تمثيل أمام النيابة العامة" data-en="Representation before the Public Prosecution" data-fr="Représentation devant le Ministère Public">تمثيل أمام النيابة العامة</span></li>
           <li><i class="fas fa-check"></i> <span data-ar="صياغة المذكرات واللوائح" data-en="Drafting memoranda and regulations" data-fr="Rédaction de mémoires et règlements">صياغة المذكرات واللوائح</span></li>
         </ul>
-        <a href="https://wa.me/201554797398" class="btn btn-gold" target="_blank" onclick="openServiceModal('general')" data-ar="اطلب الخدمة" data-en="Request Service" data-fr="Demander Service">اطلب الخدمة</a>
+        <a href="https://wa.me/201554797398?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B7%D9%84%D8%A8%20%D8%AE%D8%AF%D9%85%D8%A9%3A%20%D8%A7%D9%84%D8%AA%D9%85%D8%AB%D9%8A%D9%84%20%D8%A7%D9%84%D9%82%D8%A7%D9%86%D9%88%D9%86%D9%8A" class="btn btn-gold" target="_blank" rel="noopener" data-ar="اطلب الخدمة" data-en="Request Service" data-fr="Demander Service">اطلب الخدمة</a>
       </div>
     </div>
     
@@ -326,7 +316,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
           <li><i class="fas fa-check"></i> <span data-ar="عقود الزواج" data-en="Marriage contracts" data-fr="Contrats de mariage">عقود الزواج</span></li>
           <li><i class="fas fa-check"></i> <span data-ar="عقود العمل والتوظيف" data-en="Employment and recruitment contracts" data-fr="Contrats de travail et de recrutement">عقود العمل والتوظيف</span></li>
         </ul>
-        <a href="https://wa.me/201554797398" class="btn btn-gold" target="_blank" onclick="openServiceModal('general')" data-ar="اطلب الخدمة" data-en="Request Service" data-fr="Demander Service">اطلب الخدمة</a>
+        <a href="https://wa.me/201554797398?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B7%D9%84%D8%A8%20%D8%AE%D8%AF%D9%85%D8%A9%3A%20%D8%A7%D9%84%D8%AA%D9%85%D8%AB%D9%8A%D9%84%20%D8%A7%D9%84%D9%82%D8%A7%D9%86%D9%88%D9%86%D9%8A" class="btn btn-gold" target="_blank" rel="noopener" data-ar="اطلب الخدمة" data-en="Request Service" data-fr="Demander Service">اطلب الخدمة</a>
       </div>
     </div>
     
@@ -380,7 +370,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
           <li><i class="fas fa-check"></i> <span data-ar="أبحاث باللغة الإنجليزية" data-en="Research in English" data-fr="Recherches en anglais">أبحاث باللغة الإنجليزية</span></li>
           <li><i class="fas fa-check"></i> <span data-ar="مراجعة وتحكيم الأبحاث" data-en="Review and arbitration of research" data-fr="Révision et arbitrage des recherches">مراجعة وتحكيم الأبحاث</span></li>
         </ul>
-        <a href="https://wa.me/201554797398" class="btn btn-gold" target="_blank" onclick="openServiceModal('general')" data-ar="اطلب بحثك" data-en="Request Your Research" data-fr="Demander Votre Recherche">اطلب بحثك</a>
+        <a href="https://wa.me/201554797398?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B7%D9%84%D8%A8%20%D8%AE%D8%AF%D9%85%D8%A9%3A%20%D8%A7%D9%84%D8%AA%D9%85%D8%AB%D9%8A%D9%84%20%D8%A7%D9%84%D9%82%D8%A7%D9%86%D9%88%D9%86%D9%8A" class="btn btn-gold" target="_blank" rel="noopener" data-ar="اطلب بحثك" data-en="Request Your Research" data-fr="Demander Votre Recherche">اطلب بحثك</a>
       </div>
     </div>
     
@@ -398,13 +388,13 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
           <li><i class="fas fa-check"></i> <span data-ar="إجراءات الإقامة" data-en="Residence procedures" data-fr="Procédures de résidence">إجراءات الإقامة</span></li>
           <li><i class="fas fa-check"></i> <span data-ar="تأسيس الشركات" data-en="Company establishment" data-fr="Création de sociétés">تأسيس الشركات</span></li>
         </ul>
-        <a href="https://wa.me/201554797398" class="btn btn-gold" target="_blank" onclick="openServiceModal('general')" data-ar="تواصل معنا" data-en="Contact Us" data-fr="Contactez-nous">تواصل معنا</a>
+        <a href="https://wa.me/201554797398?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B7%D9%84%D8%A8%20%D8%AE%D8%AF%D9%85%D8%A9%3A%20%D8%A7%D9%84%D8%AA%D9%85%D8%AB%D9%8A%D9%84%20%D8%A7%D9%84%D9%82%D8%A7%D9%86%D9%88%D9%86%D9%8A" class="btn btn-gold" target="_blank" rel="noopener" data-ar="تواصل معنا" data-en="Contact Us" data-fr="Contactez-nous">تواصل معنا</a>
       </div>
     </div>
 
     <!-- ✅ Service 7: فحص الحالة الاجتماعية للزوج (مع البادج الذهبي - تم ضبط المكان) -->
     <div class="service-card" onclick="openMaritalModal()">
-      <span class="service-badge gold">👑 الأكثر طلباً</span>
+      <span class="service-badge gold" data-ar="👑 الأكثر طلباً" data-en="👑 Most Requested" data-fr="👑 Le plus demandé">👑 الأكثر طلباً</span>
       <div class="service-header">
         <i class="fas fa-user-check"></i>
         <span data-ar="فحص الحالة الاجتماعية للزوج" data-en="Groom Marital Status Verification" data-fr="Vérification de l'État Civil du Futur Époux">فحص الحالة الاجتماعية للزوج</span>
@@ -414,7 +404,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
         <ul>
           <li><i class="fas fa-check"></i> <span data-ar="تحقق من حالة الزواج الرسمية" data-en="Official marriage status check" data-fr="Vérification du statut matrimonial officiel">تحقق من حالة الزواج الرسمية</span></li>
           <li><i class="fas fa-check"></i> <span data-ar="سرية تامة للبيانات" data-en="Complete data confidentiality" data-fr="Confidentialité totale des données">سرية تامة للبيانات</span></li>
-          <li><i class="fas fa-check"></i> <span data-ar="نتيجة خلال 24 ساعة" data-en="Result within 24 hours" data-fr="Résultat sous 24 heures">نتيجة خلال 24 ساعة</span></li>
+          <li><i class="fas fa-check"></i> <span data-ar="الرد على الطلب العاجل خلال ساعة" data-en="Urgent requests answered within one hour" data-fr="Réponse aux demandes urgentes en une heure">الرد على الطلب العاجل خلال ساعة</span></li>
         </ul>
         <button class="btn btn-gold" style="width:100%; justify-content:center;">
           <i class="fas fa-mouse-pointer"></i>
@@ -425,14 +415,14 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
 
     <!-- ✅ Service 8: الكشف عن السجل القانوني والأحكام (تم ضبط البادج + تبسيط الوصف) -->
     <div class="service-card" onclick="openLegalCheckModal()">
-      <span class="service-badge">🔥 الأكثر طلباً</span>
+      <span class="service-badge" data-ar="🔥 الأكثر طلباً" data-en="🔥 Most Requested" data-fr="🔥 Le plus demandé">🔥 الأكثر طلباً</span>
       <div class="service-header">
         <i class="fas fa-search-location"></i>
         <span data-ar="الكشف عن السجل القانوني والأحكام" data-en="Legal Record & Judgments Search" data-fr="Recherche de Casier Judiciaire">الكشف عن السجل القانوني والأحكام</span>
       </div>
       <div class="service-body">
         <p data-ar="التحقق من وجود قضايا أو أحكام قبل السفر والاستثمار. سرية تامة ونتيجة سريعة." data-en="Check for cases or judgments before travel or investment. Confidential and fast results." data-fr="Vérifier l'existence d'affaires ou jugements avant voyage ou investissement. Confidentialité et résultats rapides.">التحقق من وجود قضايا أو أحكام قبل السفر والاستثمار. سرية تامة ونتيجة سريعة.</p>
-        <p style="color:var(--gold); font-weight:700; margin:15px 0;" data-ar="⚡ نتيجة خلال 24 ساعة" data-en="⚡ Result within 24 hours" data-fr="⚡ Résultat sous 24 heures">⚡ نتيجة خلال 24 ساعة</p>
+        <p style="color:var(--gold); font-weight:700; margin:15px 0;" data-ar="⚡ الرد على الطلب العاجل خلال ساعة" data-en="⚡ Urgent requests answered within one hour" data-fr="⚡ Réponse aux demandes urgentes en une heure">⚡ الرد على الطلب العاجل خلال ساعة</p>
         <button class="btn btn-gold" style="width:100%; justify-content:center;">
           <i class="fas fa-mouse-pointer"></i>
           <span data-ar="اطلب الخدمة" data-en="Order Service" data-fr="Commander le Service">اطلب الخدمة</span>
@@ -450,71 +440,22 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
         <i class="fas fa-globe"></i>
         <h3 data-ar="استشارة للأجانب" data-en="Consultation for Foreigners" data-fr="Consultation pour Étrangers">استشارة للأجانب</h3>
         <p data-ar="Legal consultation in English & Français" data-en="Legal consultation in English & Français" data-fr="Consultation juridique en Anglais & Français">Legal consultation in English & Français</p>
-        <button class="btn" onclick="openModal('foreign')" data-ar="احجز الآن" data-en="Book Now" data-fr="Réserver Maintenant">احجز الآن</button>
+        <button class="btn" data-hq-book="normal" data-ar="احجز الآن" data-en="Book Now" data-fr="Réserver Maintenant">احجز الآن</button>
       </div>
       <div class="consultation-card">
         <i class="fas fa-phone-alt"></i>
         <h3 data-ar="استشارة للمصريين" data-en="Consultation for Egyptians" data-fr="Consultation pour Égyptiens">استشارة للمصريين</h3>
         <p data-ar="استشارة قانونية متخصصة عبر الهاتف أو واتساب" data-en="Specialized legal consultation via phone or WhatsApp" data-fr="Consultation juridique spécialisée par téléphone ou WhatsApp">استشارة قانونية متخصصة عبر الهاتف أو واتساب</p>
-        <button class="btn" onclick="openModal('egypt')" data-ar="احجز الآن" data-en="Book Now" data-fr="Réserver Maintenant">احجز الآن</button>
+        <button class="btn" data-hq-book="normal" data-ar="احجز الآن" data-en="Book Now" data-fr="Réserver Maintenant">احجز الآن</button>
       </div>
     </div>
   </div>
   
-  <!-- ✅ Modal استشارة المصريين -->
-  <div class="modal" id="modalEgypt">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeModal('egypt')">×</button>
-      <h3 data-ar="📞 حجز استشارة للمصريين" data-en="📞 Booking Consultation for Egyptians" data-fr="📞 Réservation de Consultation pour Égyptiens">📞 حجز استشارة للمصريين</h3>
-      <div class="payment-info">
-        <h4 data-ar="💳 معلومات الدفع" data-en="💳 Payment Information" data-fr="💳 Informations de Paiement">💳 معلومات الدفع</h4>
-        <p data-ar="لحجز استشارة مع مكتبنا، الرجاء التكرم بدفع مبلغ 300 جنيه عبر إنستا باي:" data-en="To book a consultation with our office, please kindly pay 300 EGP via InstaPay:" data-fr="Pour réserver une consultation with our cabinet, veuillez payer 300 EGP via InstaPay:">لحجز استشارة مع مكتبنا، الرجاء التكرم بدفع مبلغ 300 جنيه عبر إنستا باي:</p>
-        <p><i class="fas fa-credit-card"></i> <strong data-ar="إنستا باي:" data-en="InstaPay:" data-fr="InstaPay:">إنستا باي:</strong> 01278683280</p>
-      </div>
-      <a href="https://wa.me/201554797398?text=لحجز%20استشارة%20مع%20مكتبنا،%20الرجاء%20التكرم%20بدفع%20مبلغ%20300%20جنيه%20عبر%20إنستا%20باي:%2001278683280%0A%0Aالرجاء%20إرسال%20إثبات%20الدفع%20على%20واتساب" class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-        <span data-ar="إرسال إثبات الدفع" data-en="Send Payment Proof" data-fr="Envoyer Preuve de Paiement">إرسال إثبات الدفع</span>
-      </a>
-    </div>
-  </div>
   
-  <!-- ✅ Modal استشارة الأجانب -->
-  <div class="modal" id="modalForeign">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeModal('foreign')">×</button>
-      <h3 data-ar="🌍 حجز استشارة للأجانب" data-en="🌍 Booking Consultation for Foreigners" data-fr="🌍 Réservation de Consultation pour Étrangers">🌍 حجز استشارة للأجانب</h3>
-      <div class="payment-info">
-        <h4 data-ar="💳 معلومات الدفع" data-en="💳 Payment Information" data-fr="💳 Informations de Paiement">💳 معلومات الدفع</h4>
-        <p data-ar="لحجز استشارة مع مكتبنا، الرجاء التكرم بدفع مبلغ 25 دولار عبر PayPal" data-en="To book a consultation with our office, please kindly pay $25 via PayPal" data-fr="Pour réserver une consultation with our cabinet, veuillez payer 25$ via PayPal">لحجز استشارة مع مكتبنا، الرجاء التكرم بدفع مبلغ 25 دولار عبر PayPal</p>
-        <p><i class="fab fa-paypal"></i> <strong>PayPal:</strong> paypal.me/HaqaniaLegal</p>
-      </div>
-      <a href="https://wa.me/201554797398?text=To%20book%20a%20consultation%20with%20your%20office,%20I%20have%20paid%20$25%20via%20PayPal:%20paypal.me/HaqaniaLegal%0A%0APlease%20find%20attached%20payment%20proof" class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-        <span data-ar="إرسال إثبات الدفع" data-en="Send Payment Proof" data-fr="Envoyer Preuve de Paiement">إرسال إثبات الدفع</span>
-      </a>
-    </div>
-  </div>
+  
+  
 
-  <!-- ✅ مودال الخدمات العامة (واتساب فقط) -->
-  <div class="modal" id="serviceModal">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeServiceModal()">&times;</button>
-      <div class="modal-icon"><i class="fas fa-handshake"></i></div>
-      
-      <!-- النص للاستشارة الطارئة -->
-      <p id="modal-text-emergency" style="display:none;" data-ar="الرجاء دفع 25 دولار للاستشارة العاجلة. الرجاء التواصل واتساب لمعرفة طرق الدفع المتاحة." data-en="Please pay $25 for urgent consultation. Contact us on WhatsApp to know available payment methods." data-fr="Veuillez payer 25$ pour consultation urgente. Contactez-nous sur WhatsApp pour connaître les modes de paiement disponibles.">الرجاء دفع 25 دولار للاستشارة العاجلة. الرجاء التواصل واتساب لمعرفة طرق الدفع المتاحة.</p>
-      
-      <!-- النص لباقي الخدمات -->
-      <p id="modal-text-other" style="display:none;" data-ar="للاستفادة من الخدمة الرجاء التواصل معنا على الواتساب" data-en="To benefit from the service, please contact us on WhatsApp" data-fr="Pour bénéficier du service, veuillez nous contacter sur WhatsApp">للاستفادة من الخدمة الرجاء التواصل معنا على الواتساب</p>
-      
-      <div class="modal-buttons">
-        <a href="https://wa.me/201554797398" class="btn btn-gold" target="_blank">
-          <i class="fab fa-whatsapp"></i>
-          <span data-ar="تواصل واتس اب" data-en="WhatsApp" data-fr="WhatsApp">تواصل واتس اب</span>
-        </a>
-      </div>
-    </div>
-  </div>
+  
 
   <!-- ✅ مودال فحص الحالة الاجتماعية للزوج -->
   <div class="modal" id="maritalModal">
@@ -736,8 +677,6 @@ function setLang(lang) {
   });
 
   // ✅ Update service modal text
-  document.getElementById('modal-text-emergency').style.display = 'none';
-  document.getElementById('modal-text-other').style.display = 'none';
 
   // ✅ Update marital modal elements
   document.querySelectorAll('#maritalModal .service-checklist').forEach(el => { el.style.display = 'none'; });
@@ -784,38 +723,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (counterEl) { counterEl.textContent = count; }
 })();
 
-// ✅ Modal Functions for consultations
-function openModal(type) {
-  if (type === 'egypt') { document.getElementById('modalEgypt').classList.add('active'); }
-  else if (type === 'foreign') { document.getElementById('modalForeign').classList.add('active'); }
-}
-
-function closeModal(type) {
-  if (type === 'egypt') { document.getElementById('modalEgypt').classList.remove('active'); }
-  else if (type === 'foreign') { document.getElementById('modalForeign').classList.remove('active'); }
-}
-
-// ✅ Modal Functions for services (WhatsApp only)
-function openServiceModal(type) {
-  const modal = document.getElementById('serviceModal');
-  const emergencyText = document.getElementById('modal-text-emergency');
-  const otherText = document.getElementById('modal-text-other');
-  
-  emergencyText.style.display = 'none';
-  otherText.style.display = 'none';
-  
-  if (type === 'emergency') {
-    emergencyText.style.display = 'block';
-  } else {
-    otherText.style.display = 'block';
-  }
-  
-  modal.classList.add('active');
-}
-
-function closeServiceModal() {
-  document.getElementById('serviceModal').classList.remove('active');
-}
+// الحجز يتم من نافذة واحدة (site.js)
 
 // ✅ Modal Functions for marital check service
 function openMaritalModal() {
@@ -842,7 +750,6 @@ window.onclick = function(event) {
   }
   if (event.target === document.getElementById('maritalModal')) { closeMaritalModal(); }
   if (event.target === document.getElementById('legalCheckModal')) { closeLegalCheckModal(); }
-  if (event.target === document.getElementById('serviceModal')) { closeServiceModal(); }
 }
 
 window.addEventListener('DOMContentLoaded', () => { setLang(currentLang); });
@@ -932,5 +839,6 @@ function buildPageShare(wrap, panel) {
 </script>
 
 <script src="/engage.js" defer></script>
+<script src="/site.js" defer></script>
 </body>
 </html>

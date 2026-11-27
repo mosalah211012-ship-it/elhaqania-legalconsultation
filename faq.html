@@ -20,15 +20,6 @@
 <!-- ✅ المرحلة 5: أدوات جوجل -->
 <!-- 🔹 Google Search Console Verification -->
 <meta name="google-site-verification" content="TOLjNwob98CBhRQ2ur97bJXgKzth6vSdwB4pQCmJcio" />
-<!-- 🔹 Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true });
-</script>
-
 <!-- ✅ 2. Open Graph Tags (Facebook/WhatsApp) -->
 <meta property="og:title" content="الأسئلة الشائعة - الحقانية للإستشارات القانونية">
 <meta property="og:description" content="إجابات على أكثر الأسئلة تكراراً: حجز الاستشارات، طرق الدفع، النماذج القانونية، الأبحاث العلمية">
@@ -62,7 +53,7 @@
       "name": "ما هي طرق الدفع المتاحة؟",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "نقبل الدفع عبر فودافون كاش (01554797398)، إنستا باي (01278683280)، وPayPal للأجانب"
+        "text": "تفاصيل الدفع المتاحة تُرسل لك عبر واتساب بعد الاتفاق على الخدمة"
       }
     },
     {
@@ -137,7 +128,6 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
 .whatsapp-float { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 9999; text-decoration: none; }
 @media (max-width: 768px) { header { flex-direction: column; gap: 15px; } .nav-menu { justify-content: center; } .hero-small h1 { font-size: 1.5rem; } .container { padding: 30px 5%; } }
 </style>
-<script src="analytics.js"></script>
 <meta property="og:image" content="https://jfa9qoskskljefrl.public.blob.vercel-storage.com/og-card-0Sh3IiYikRb9yjJDLLfGx3NOMcn2ln.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -169,7 +159,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
     <div class="lang-switcher">
       <button class="lang-btn active" onclick="setLang('ar')" id="btn-ar">عربي</button>
       <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
-      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+      <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">Français</button>
     </div>
   </ul>
 </header>
@@ -194,7 +184,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
         <i class="fas fa-chevron-down"></i>
       </div>
       <div class="faq-answer">
-        <p data-ar=" (01554797398)، إنستا باي (01278683280)، وPayPal للأجانب" data-en="We accept payment via Vodafone Cash (01554797398), InstaPay (01278683280), and PayPal for foreigners" data-fr="Nous acceptons les paiements via Vodafone Cash (01554797398), InstaPay (01278683280) et PayPal pour les étrangers">نقبل الدفع عبر فودافون كاش (01554797398)، إنستا باي (01278683280)، وPayPal للأجانب</p>
+        <p data-ar="تفاصيل الدفع المتاحة تُرسل لك عبر واتساب بعد الاتفاق على الخدمة" data-en="Available payment details are sent to you on WhatsApp after the service is agreed" data-fr="Les modalités de paiement disponibles vous sont envoyées sur WhatsApp après accord sur le service">تفاصيل الدفع المتاحة تُرسل لك عبر واتساب بعد الاتفاق على الخدمة</p>
       </div>
     </div>
     <div class="faq-item">
@@ -414,5 +404,6 @@ function buildPageShare(wrap, panel) {
 </script>
 
 <script src="/engage.js" defer></script>
+<script src="/site.js" defer></script>
 </body>
 </html>

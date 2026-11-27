@@ -33,7 +33,7 @@
     var L = lang();
     function t(k) { return (T[L] || T.ar)[k] || T.ar[k] || k; }
     function nm(id) { return L === 'en' ? (EN[id] || E.nm(id)) : L === 'fr' ? (FR[id] || E.nm(id)) : E.nm(id); }
-    function fmt(n) { return (Math.round(n * 100) / 100).toLocaleString(L === 'ar' ? 'ar-EG' : L === 'fr' ? 'fr-FR' : 'en-US', { maximumFractionDigits: 2 }); }
+    function fmt(n) { return (Math.round(n * 100) / 100).toLocaleString(L === 'ar' ? 'en-US' : L === 'fr' ? 'fr-FR' : 'en-US', { maximumFractionDigits: 2 }); }
     function ftxt(fr) { return F.txt(fr); }
     function lim(id) { return id === 'husband' ? 1 : id === 'wife' ? 4 : (/^(father|mother|grandfather|grandmother)/.test(id) ? 1 : 30); }
     function cleanInp() { var r = {}; Object.keys(S.inp).forEach(function (k) { if (S.inp[k] > 0) r[k] = S.inp[k]; }); if (S.gender === 'male') delete r.husband; else delete r.wife; return r; }
@@ -141,7 +141,7 @@
       var rows = res.rows.map(function (r) { return '<tr><td>' + esc(nm(r.id)) + '</td><td>' + r.count + '</td><td dir="ltr">' + ftxt(r.frac) + '</td>' + (+c.gross ? '<td>' + money(r.frac, c.distributable) + '</td>' : '') + '</tr>'; }).join('');
       var pn = document.getElementById('hqPrint'); if (!pn) { pn = document.createElement('div'); pn.id = 'hqPrint'; document.body.appendChild(pn); }
       pn.dir = L === 'ar' ? 'rtl' : 'ltr';
-      pn.innerHTML = '<div class="pg"><div class="wm"></div><div class="lh"><img src="' + LOGO + '"><div><b style="font-size:18px">' + esc(t('office')) + '</b><br>' + esc(t('city')) + '</div></div><h2>' + esc(t('title')) + '</h2><p>' + esc(t('ref')) + ': <b dir="ltr">' + esc(S.ref) + '</b> | ' + esc(t('date')) + ': ' + d.toLocaleDateString(L === 'ar' ? 'ar-EG' : L === 'fr' ? 'fr-FR' : 'en-GB') + '</p>' +
+      pn.innerHTML = '<div class="pg"><div class="wm"></div><div class="lh"><img src="' + LOGO + '"><div><b style="font-size:18px">' + esc(t('office')) + '</b><br>' + esc(t('city')) + '</div></div><h2>' + esc(t('title')) + '</h2><p>' + esc(t('ref')) + ': <b dir="ltr">' + esc(S.ref) + '</b> | ' + esc(t('date')) + ': ' + d.toLocaleDateString(L === 'ar' ? 'en-US' : L === 'fr' ? 'fr-FR' : 'en-GB') + '</p>' +
         (+c.gross ? '<p>' + esc(t('net')) + ': ' + fmt(c.net) + ' ' + t('cur') + ' | ' + esc(t('dist')) + ': ' + fmt(c.distributable) + '</p>' : '') +
         '<table><tr><th>' + t('heir') + '</th><th>' + t('cnt') + '</th><th>' + t('share') + '</th>' + (+c.gross ? '<th>' + t('amount') + '</th>' : '') + '</tr>' + rows + '</table>' +
         (res.blocked.length ? '<p><b>' + esc(t('blk')) + ':</b> ' + res.blocked.map(function (b) { return esc(nm(b.id)) + ' (' + esc(b.by) + ')'; }).join('، ') + '</p>' : '') +
@@ -235,6 +235,7 @@
       }
     }
   }
+  window.HQCalcT = { T: T, EN: EN, FR: FR };
   window.HQVerse = verse;
   window.HQCalc = { mount: mount };
 })();

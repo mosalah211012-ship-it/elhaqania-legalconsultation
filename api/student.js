@@ -85,8 +85,11 @@ module.exports = async function handler(req, res) {
     }
 
     // ---------- everything else needs a verified student ----------
-    const su = await L.supaUser(req);
+    let su = await L.supaUser(req);
+    let ownerPrev = false;
+    if (!su && L.isAdmin(req)) { ownerPrev = true; su = { id: 'owner-preview', email: 'legalelhaqania@gmail.com', user_metadata: { full_name: 'الأستاذ محمد صلاح' }, app_metadata: { provider: 'owner' } }; }
     if (!su) return L.send(res, 401, { error: 'auth' });
+    if (ownerPrev && ['order_start', 'order_paid', 'download'].includes(action)) return L.send(res, 403, { error: 'owner_preview' });
     const uid = su.id;
     let me = await getUser(uid);
     const meta = su.user_metadata || {};
@@ -99,13 +102,13 @@ module.exports = async function handler(req, res) {
     if (dev && !me.devs.includes(dev)) me.devs = me.devs.concat([dev]).slice(-8);
     if (!me.ips.includes(ih)) me.ips = me.ips.concat([ih]).slice(-8);
     me.last = new Date(now).toISOString();
-    const banned = me.banned || await L.banCheck(req, uid, dev);
+    const banned = !ownerPrev && (me.banned || await L.banCheck(req, uid, dev));
     if (banned) {
       if (!me.banned) { me.banned = true; }
       await putUser(me);
       return L.send(res, 403, { error: 'banned', message: L.BAN_MSG });
     }
-    await putUser(me);
+    if (!ownerPrev) await putUser(me);
     const nameOk = !!me.name;
 
     if (action === 'me') {

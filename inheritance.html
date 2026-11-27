@@ -107,6 +107,8 @@ header { background: var(--white); border-bottom: 3px solid var(--gold); padding
 .hero-small h1 { font-size: 2rem; margin-bottom: 10px; }
 .container { padding: 50px 8%; }
 .calculator-section { background: var(--grey); padding: 40px; border-radius: 16px; margin-bottom: 40px; border: 2px solid var(--gold); }
+#student.open #stuEnter, #student.open > p { display: none; }
+#stuApp { display: none; margin-top: 22px; } #student.open #stuApp { display: block; }
 .calculator-section h2 { color: var(--gold); text-align: center; margin-bottom: 30px; }
 .inheritance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
 .inheritance-card { background: var(--white); border: 2px solid #eee; border-radius: 16px; padding: 30px; text-align: center; transition: all 0.3s; }
@@ -149,7 +151,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
     <li><a href="library.html" data-ar="المكتبة القانونية" data-en="Legal Library" data-fr="Bibliothèque Juridique">المكتبة القانونية</a></li>
     <li><a href="foreigners-services.html" data-ar="خدمات الأجانب" data-en="Foreigners Services" data-fr="Services Étrangers">خدمات الأجانب</a></li>
     <li><a href="family.html" data-ar="الأحوال الشخصية" data-en="Family Law" data-fr="Droit de la Famille">الأحوال الشخصية</a></li>
-    <li><a href="inheritance.html" class="active" data-ar="المواريث" data-en="Inheritance" data-fr="Héritage">الميراث</a></li>
+    <li><a href="inheritance.html" class="active" data-ar="المواريث" data-en="Inheritance" data-fr="Héritage">المواريث</a></li>
     <li><a href="courts-guide.html" data-ar="دليل المحاكم" data-en="Courts Guide" data-fr="Guide des Tribunaux">دليل المحاكم</a></li>
     <li><a href="articles.html" data-ar="المقالات" data-en="Articles" data-fr="Articles">المقالات</a></li>
     <li><a href="videos.html" data-ar="الفيديوهات" data-en="Videos" data-fr="Vidéos">الفيديوهات</a></li>
@@ -163,7 +165,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
   </ul>
 </header>
 <div class="hero-small">
-  <h1 data-ar="⚖️ قسم الميراث" data-en="⚖️ Inheritance Section" data-fr="⚖️ Section Héritage">⚖️ قسم الميراث</h1>
+  <h1 data-ar="⚖️ المواريث" data-en="⚖️ Inheritance" data-fr="⚖️ Section Héritage">⚖️ المواريث</h1>
   <p data-ar="حساب الميراث الشرعي ونماذج قسمة التركات" data-en="Islamic inheritance calculation and estate division templates" data-fr="Calcul de l'héritage islamique et modèles de partage de succession">حساب الميراث الشرعي ونماذج قسمة التركات</p>
 </div>
 <div class="container">
@@ -172,6 +174,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
     <p style="text-align:center; color:#666; margin-bottom:25px;" data-ar="احسب أنصبة الورثة بدقة حسب الشريعة الإسلامية والقانون المصري" data-en="Calculate heirs' shares accurately according to Islamic Sharia and Egyptian law" data-fr="Calculez les parts des héritiers avec précision selon la charia islamique et la loi égyptienne">احسب أنصبة الورثة بدقة حسب الشريعة الإسلامية والقانون المصري</p>
     <div style="text-align:center;">
       <a href="calculator.html" class="btn btn-gold" data-ar="استخدام الحاسبة الشاملة" data-en="Use Comprehensive Calculator" data-fr="Utiliser le Calculateur Complet">استخدام الحاسبة الشاملة</a>
+      <a href="#student" class="btn btn-gold" style="margin-inline-start:10px" data-ar="🎓 ركن الطلبة" data-en="🎓 Student &amp; Learning Corner" data-fr="🎓 Espace Étudiants">🎓 ركن الطلبة</a>
     </div>
   </div>
   
@@ -200,6 +203,14 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
       <p data-ar="مجموعة شاملة من الأحكام القضائية في مسائل الميراث" data-en="Comprehensive collection of court rulings on inheritance matters" data-fr="Collection complète de décisions de justice sur les questions d'héritage">مجموعة شاملة من الأحكام القضائية في مسائل الميراث</p>
       <a href="inheritance-rules.html" class="btn" data-ar="عرض الأحكام" data-en="View Rulings" data-fr="Voir les Décisions">عرض الأحكام</a>
     </div>
+  </div>
+  <div class="calculator-section" id="student">
+    <h2 data-ar="🎓 ركن الطلبة" data-en="🎓 Students' Corner" data-fr="🎓 Espace Étudiants">🎓 ركن الطلبة</h2>
+    <p style="text-align:center; color:#666; margin-bottom:25px;" data-ar="مسألة اليوم ومسائل متدرجة ولوحة شرف ومذكرة المواريث، بعد تسجيل الدخول" data-en="Daily problem, graded problems, honor board and study notes, after sign-in" data-fr="Problème du jour, problèmes progressifs, classement et notes, après connexion">مسألة اليوم ومسائل متدرجة ولوحة شرف ومذكرة المواريث، بعد تسجيل الدخول</p>
+    <div style="text-align:center;" id="stuEnter">
+      <a href="#student" class="btn btn-gold" onclick="HQStudentToggle();var e=document.getElementById('stuEnter');if(e)e.style.display='none';return false" data-ar="دخول الركن التعليمي" data-en="Enter the Learning Corner" data-fr="Entrer dans l'espace pédagogique">دخول الركن التعليمي</a>
+    </div>
+    <div id="stuApp"><div class="card">جاري التحميل...</div></div>
   </div>
   
   <div style="background:linear-gradient(135deg, var(--gold), var(--gold-dark)); color:white; padding:35px; border-radius:16px; text-align:center; margin-top:40px;">
@@ -391,6 +402,7 @@ function buildPageShare(wrap, panel) {
 })();
 </script>
 
+<script src="/student-app.js"></script>
 <script src="/engage.js" defer></script>
 <script src="/site.js" defer></script>
 </body>

@@ -1,6 +1,9 @@
 /* الحقانية: طبقة مشتركة لكل الصفحات: لغة حسب البلد، حجز الاستشارة، أزرار التواصل، التذييل، تعديلات الأدمن، الشهادات */
 (function () {
   'use strict';
+  // رجوع تسجيل الدخول (فيسبوك/جوجل): لو رجع لأي صفحة غير صفحة المواريث، حوّله لها مع بيانات الدخول
+  try { var _h = location.hash || '', _q = location.search || '', _p = location.pathname.replace(/\.html$/, '');
+    if (_p !== '/inheritance' && _p !== '/calculator' && (/access_token=|error_description=|error_code=/.test(_h) || /[?&](code|error_description)=/.test(_q)) && !/control-7f3k9/.test(_p)) location.replace('/inheritance' + _q + _h); } catch (e) {}
   var WA = '201554797398', TEL = '+201554797398', MAIL = 'legalelhaqania@gmail.com';
   var GA_ID = 'G-RZW8N3VJGM';
   var CFG = null;
@@ -89,7 +92,7 @@
       h += '<div class="opt"><span>' + t('call') + '<br><b>' + nf(c) + ' ' + t('cur') + '</b></span><a class="c" target="_blank" rel="noopener" href="' + waLink(u ? t('waMsgU') + ' (مكالمة)' : t('waMsgN') + ' (مكالمة)') + '">' + t('bookCall') + '</a></div>';
     } else {
       var f = u ? P.foreign.urgent : P.foreign.wa;
-      h += '<div class="opt"><span>' + t('wa') + '<br><b>$' + nf(f) + '</b></span><a target="_blank" rel="noopener" href="' + waLink((u ? t('waMsgU') : t('waMsgN')) + ' (WhatsApp)') + '">' + t('bookWa') + '</a></div>';
+      h += '<div class="opt"><span>' + t('wa') + '<br><b>$' + nf(f) + '</b></span><a target="_blank" rel="noopener" href="' + waLink(u ? 'Hello, I am a foreign client and I would like to book an URGENT consultation (WhatsApp message). Please confirm availability and payment details. (Booked from the website, language: '+L.toUpperCase()+')' : 'Hello, I am a foreign client and I would like to book a STANDARD consultation (WhatsApp message). Please confirm availability and payment details. (Booked from the website, language: '+L.toUpperCase()+')') + '">' + t('bookWa') + '</a></div>';
       h += '<div class="note">' + esc(t('callOnly')) + '</div>';
     }
     h += '</div><div class="note">' + esc(t('after')) + '</div>';
@@ -126,22 +129,15 @@
   function fixFooter() {
     var f = document.querySelector('footer'); if (!f) return;
     var links = f.querySelector('.footer-links');
-    if (links && !links.querySelector('.hq-tel')) {
-      var tel = document.createElement('a'); tel.className = 'hq-tel'; tel.href = 'tel:' + TEL; tel.innerHTML = '<i class="fas fa-phone-alt"></i> ' + t('phone') + ' 01554797398'; links.insertBefore(tel, links.firstChild);
+    if (links && !links.querySelector('.hq-mail')) {
       var mail = document.createElement('a'); mail.className = 'hq-mail'; mail.href = 'mailto:' + MAIL; mail.innerHTML = '<i class="fas fa-envelope"></i> ' + MAIL; links.appendChild(mail);
     }
     var old = f.querySelector('.hq-extra'); if (old) old.remove();
     var d = document.createElement('div'); d.className = 'hq-extra';
-    d.innerHTML = '<div class="hq-addr"><i class="fas fa-location-dot"></i> ' + esc(t('addr')) + '</div><div class="hq-flinks"><a href="/privacy">' + esc(t('privacy')) + '</a><a href="/terms">' + esc(t('terms')) + '</a><a href="/student">' + esc(t('students')) + '</a></div>';
+    d.innerHTML = '<div class="hq-addr"><i class="fas fa-location-dot"></i> ' + esc(t('addr')) + '</div><div class="hq-flinks"><a href="/privacy">' + esc(t('privacy')) + '</a><a href="/terms">' + esc(t('terms')) + '</a></div>';
     var prot = f.querySelector('.protection-notice');
     if (prot) f.insertBefore(d, prot); else f.appendChild(d);
-    var tel2 = f.querySelector('.hq-tel'); if (tel2) tel2.lastChild.textContent = ' ' + t('phone') + ' 01554797398';
-  }
-  function navStudents() {
-    var m = document.querySelector('.nav-menu') || document.querySelector('header nav > ul'); if (!m || m.querySelector('.hq-nav-st')) return;
-    var li = document.createElement('li'); li.className = 'hq-nav-st';
-    li.innerHTML = '<a href="/student" data-ar="ركن الطالب" data-en="Students" data-fr="Espace étudiants">ركن الطالب</a>';
-    var sw = m.querySelector('.lang-switcher'); if (sw) m.insertBefore(li, sw); else m.appendChild(li);
+    
   }
   function adminBtn() {
     var on = false; try { on = localStorage.getItem('hq_adm') === '1'; } catch (e) {}
@@ -235,7 +231,7 @@
   function afterLang() { renderCerts(); fixFooter(); if (bk && bk.classList.contains('on')) renderBook(); var a = document.querySelector('.hq-adm'); if (a) a.textContent = '⚙ ' + t('admin'); }
 
   function init() {
-    wrapSetLang(); navStudents(); addFloatCall(); fixFooter(); adminBtn(); renderCerts();
+    wrapSetLang(); addFloatCall(); fixFooter(); adminBtn(); renderCerts();
     // buttons that open the booking window
     document.addEventListener('click', function (e) {
       var b = e.target.closest('[data-hq-book]'); if (b) { e.preventDefault(); openBook(b.getAttribute('data-hq-book')); }

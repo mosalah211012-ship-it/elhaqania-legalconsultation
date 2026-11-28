@@ -73,6 +73,7 @@ module.exports = async function handler(req, res) {
       if (!Object.keys(inp).length) return L.send(res, 400, { error: 'empty' });
       const est = b.estate && typeof b.estate === 'object' ? { gross: +b.estate.gross || 0, funeral: +b.estate.funeral || 0, debts: +b.estate.debts || 0, willAmount: +b.estate.willAmount || 0, willConsent: !!b.estate.willConsent } : {};
       const opts = {}; if (Array.isArray(b.opts && b.opts.barred)) opts.barred = b.opts.barred.filter(k => E.NAMES[k]).slice(0, 80);
+      if (b.opts && ['egypt', 'hanafi', 'maliki', 'shafii', 'hanbali', 'saudi'].includes(b.opts.madhab)) opts.madhab = b.opts.madhab;
       const it = { id: refId(), inp, estate: est, opts, source: ['calc', 'edu', 'gen', 'daily'].includes(b.source) ? b.source : 'calc', created: new Date(now).toISOString(), uid: '', log: [] };
       const u = await L.supaUser(req); if (u) it.uid = u.id;
       await putItem('problems', it);
@@ -82,6 +83,17 @@ module.exports = async function handler(req, res) {
       const it = await getItem('problems', clean(b.ref, 20));
       if (!it) return L.send(res, 404, { error: 'not_found' });
       return L.send(res, 200, { ref: it.id, inp: it.inp, estate: it.estate, opts: it.opts, source: it.source, created: it.created });
+    }
+    // ---------- public: follow a problem by its reference number ----------
+    if (action === 'ref_status') {
+      const ip = L.clientIp(req);
+      if (!(await L.rateLimit('rl:refs:' + ip, 30, 3600))) return L.send(res, 429, { error: 'slow_down' });
+      const key = clean(b.ref, 20).toUpperCase().replace(/\s+/g, '');
+      if (!/^[A-Z0-9-]{4,20}$/.test(key)) return L.send(res, 400, { error: 'bad_ref' });
+      const it = await getItem('problems', key);
+      if (!it) return L.send(res, 404, { error: 'not_found' });
+      const edits = (it.log || []).filter(x => x && x.by === 'admin').map(x => x.at);
+      return L.send(res, 200, { ref: it.id, inp: it.inp, estate: it.estate, opts: it.opts, source: it.source, created: it.created, status: edits.length ? 'reviewed' : 'received', office_edits: edits });
     }
 
     // ---------- everything else needs a verified student ----------
@@ -137,14 +149,14 @@ module.exports = async function handler(req, res) {
       g.n = (g.n || 0) + 1; g.cur = { level: lvl, seed: uid.slice(0, 8) + '|' + g.n + '|' + rid(6), t: now };
       await L.cmd('SET', 'gen:' + uid, JSON.stringify(g));
       const p = G.makeProblem(lvl, g.cur.seed);
-      return L.send(res, 200, { level: lvl, streak: g.streak, items: G.describeInput(p.inp), ask: { id: p.ask, name: E.nm(p.ask) }, estate: p.estate, studentLevel: g.level });
+      return L.send(res, 200, { level: lvl, streak: g.streak, items: G.describeInput(p.inp), studentLevel: g.level });
     }
     if (action === 'gen_answer') {
       let g = JSON.parse((await L.cmd('GET', 'gen:' + uid)) || 'null');
       if (!g || !g.cur) return L.send(res, 400, { error: 'no_problem' });
       if (!(await L.rateLimit('rl:ans:' + uid, 120, 3600))) return L.send(res, 429, { error: 'slow_down' });
       const p = G.makeProblem(g.cur.level, g.cur.seed);
-      const c = G.checkAnswer(p, b.answer);
+      const c = G.checkAnswer(p, b.answers);
       g.solved = (g.solved || 0) + 1;
       const cur = g.cur; g.cur = null;
       let leveled = false;
@@ -155,15 +167,15 @@ module.exports = async function handler(req, res) {
         await L.pipeline([['HINCRBY', 'hb:' + wk, uid, 1], ['EXPIRE', 'hb:' + wk, 86400 * 120], ['HINCRBY', 'hb:all', uid, 1]]);
       } else if (cur.level === g.level) g.streak = 0;
       await L.cmd('SET', 'gen:' + uid, JSON.stringify(g));
-      return L.send(res, 200, { ok: c.ok, want: c.want, solution: G.solutionOf(p.inp), leveled, level: g.level, streak: g.streak });
+      return L.send(res, 200, { ok: c.ok, want: c.want, per: c.per, solution: G.solutionOf(p.inp), leveled, level: g.level, streak: g.streak });
     }
     // ---------- library: solved problems by level ----------
     if (action === 'library') {
       const lv = Math.max(1, Math.min(6, Math.floor(+b.level) || 1));
       const idx = Math.max(1, Math.min(12, Math.floor(+b.idx) || 1));
       const p = G.makeProblem(lv, 'lib|' + lv + '|' + idx);
-      const ans = G.checkAnswer(p, '0');
-      return L.send(res, 200, { level: lv, idx, count: 12, items: G.describeInput(p.inp), ask: { id: p.ask, name: E.nm(p.ask) }, estate: p.estate, want: ans.want, solution: G.solutionOf(p.inp) });
+      const ans = G.checkAnswer(p, {});
+      return L.send(res, 200, { level: lv, idx, count: 12, items: G.describeInput(p.inp), want: ans.want, solution: G.solutionOf(p.inp) });
     }
     // ---------- daily problem ----------
     if (action === 'daily') {
@@ -175,8 +187,8 @@ module.exports = async function handler(req, res) {
         if (!p) p = dailyProblem(day);
         if (!p) return null;
         const mine = JSON.parse((await L.cmd('HGET', 'daily:ans:' + day, uid)) || 'null');
-        const o = { day, items: G.describeInput(p.inp), ask: { id: p.ask, name: E.nm(p.ask) }, estate: p.estate, mine: mine ? { answer: mine.answer, ok: mine.ok } : null, closed: !!reveal };
-        if (reveal) { const c = G.checkAnswer(p, '0'); o.want = c.want; o.solution = G.solutionOf(p.inp); }
+        const o = { day, items: G.describeInput(p.inp), mine: mine ? { answer: mine.answer, ok: mine.ok } : null, closed: !!reveal };
+        if (reveal) { const c = G.checkAnswer(p, {}); o.want = c.want; o.solution = G.solutionOf(p.inp); }
         return o;
       };
       out.posted = await mk(st.cur, st.revealed >= st.cur);
@@ -198,8 +210,8 @@ module.exports = async function handler(req, res) {
       if (exists) return L.send(res, 400, { error: 'already' });
       let p = null; const ov = await L.cmd('HGET', 'daily:ov', day); if (ov) { try { p = JSON.parse(ov); } catch (e) {} }
       if (!p) p = dailyProblem(day);
-      const c = G.checkAnswer(p, b.answer);
-      await L.pipeline([['HSET', 'daily:ans:' + day, uid, JSON.stringify({ answer: clean(b.answer, 20), ok: c.ok, t: now })], ['EXPIRE', 'daily:ans:' + day, 86400 * 40]]);
+      const c = G.checkAnswer(p, b.answers);
+      await L.pipeline([['HSET', 'daily:ans:' + day, uid, JSON.stringify({ answer: JSON.stringify(b.answers || {}).slice(0, 800), ok: c.ok, t: now })], ['EXPIRE', 'daily:ans:' + day, 86400 * 40]]);
       if (c.ok) { const wk = weekKey(now); await L.pipeline([['HINCRBY', 'hb:' + wk, uid, 1], ['EXPIRE', 'hb:' + wk, 86400 * 120], ['HINCRBY', 'hb:all', uid, 1]]); }
       return L.send(res, 200, { ok: true, saved: true });
     }

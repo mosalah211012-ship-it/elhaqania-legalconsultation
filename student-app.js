@@ -13,7 +13,7 @@ html[dir=ltr] #stuApp .card{border-right:0;border-left:4px solid var(--gold)}
 #stuApp input:focus,#stuApp select:focus,#stuApp textarea:focus{outline:0;border-color:var(--gold)}#stuApp textarea{min-height:90px}
 #stuApp .btn{background:var(--gold);color:#fff;border:0;border-radius:25px;padding:11px 26px;font:inherit;font-weight:700;cursor:pointer;margin:4px 3px}
 #stuApp .btn:hover{background:var(--gold-dark)}#stuApp .btn.g{background:var(--gold)}#stuApp .btn.l{background:#fff;color:var(--gold-dark);border:2px solid var(--gold)}#stuApp .btn[disabled]{opacity:.5}
-#stuApp .msg{padding:10px 12px;border-radius:8px;margin:8px 0;background:#fff9e6;border-right:3px solid var(--gold)}#stuApp .msg.e{background:#ffecec;color:#a00;border-color:#c0392b}#stuApp .msg.ok{background:#eaf7ea;color:#165a16;border-color:#27ae60}
+#stuApp .tutor{line-height:2;font-size:1.02em}#stuApp .tutor h4{color:#9c7e4d;margin:18px 0 6px;border-bottom:1px solid #e3dccb;padding-bottom:4px}#stuApp .tutor p{margin:6px 0}#stuApp .tutor ul.i li{margin:6px 0}#stuApp .msg{padding:10px 12px;border-radius:8px;margin:8px 0;background:#fff9e6;border-right:3px solid var(--gold)}#stuApp .msg.e{background:#ffecec;color:#a00;border-color:#c0392b}#stuApp .msg.ok{background:#eaf7ea;color:#165a16;border-color:#27ae60}
 #stuApp table{width:100%;border-collapse:collapse;font-size:.92rem;margin:8px 0;background:#fff}#stuApp th,#stuApp td{border:1px solid #e3dccb;padding:8px;text-align:start;vertical-align:top}#stuApp th{background:var(--gold);color:#fff}
 #stuApp ul.i{padding-inline-start:22px}#stuApp .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:640px){#stuApp .row{grid-template-columns:1fr}}
 #stuApp .small{font-size:.85rem;color:#666}#stuApp .sep{text-align:center;margin:10px 0;color:#888}
@@ -71,19 +71,98 @@ var TABS=[['daily','مسألة اليوم'],['gen','مولّد المسائل'],
 function shell(){A.innerHTML='<div class="tabs" id="tabs">'+TABS.map(function(t){return'<button data-t="'+t[0]+'">'+t[1]+'</button>'}).join('')+'</div><div id="pane"></div>';
  document.querySelectorAll('#tabs button').forEach(function(b){b.onclick=function(){show(b.dataset.t)}});show(TAB)}
 function show(t){TAB=t;document.querySelectorAll('#tabs button').forEach(function(b){b.className=b.dataset.t===t?'on':''});var p=$('#pane');p.innerHTML='<div class="card">...</div>';(VIEW[t]||function(){})(p)}
-function sol(s){if(!s)return'';var h='<table><tr><th>الوارث</th><th>العدد</th><th>النصيب</th><th>السهام</th><th>السبب</th></tr>'+s.rows.map(function(r){return'<tr><td>'+esc(r.name)+'</td><td>'+r.count+'</td><td dir="ltr">'+esc(r.frac)+'</td><td>'+r.units+' / '+s.asl+'</td><td>'+esc(r.reason||'')+(r.law?' ('+esc(r.law)+')':'')+'</td></tr>'}).join('')+'</table>';
- if(s.blocked&&s.blocked.length)h+='<p><b>المحجوبون:</b> '+s.blocked.map(function(b){return esc(b.name)+' ('+esc(b.by)+')'}).join('، ')+'</p>';
- var st=s.steps;h+='<p><b>الخطوات:</b></p><ol><li>'+esc(st[1])+'</li><li>'+esc(st[2])+'</li><li>'+esc(st[3])+'</li><li>'+esc(st[4])+'</li><li>'+esc(st[5])+'</li><li>'+(Array.isArray(st[6])&&st[6].length?st[6].map(function(g){return esc(g.id)+': '+g.heads+'/'+g.units}).join('، '):'—')+'</li><li>'+esc(st[7])+'</li></ol>';
- (s.notes||[]).forEach(function(n){h+='<div class="msg">'+esc(n)+'</div>'});(s.flags||[]).forEach(function(f){h+='<div class="msg">⚖ '+esc(f.text)+'</div>'});return h}
-function prob(p){return'<ul class="i">'+p.items.map(function(i){return'<li>'+esc(i.name)+' ('+i.count+')</li>'}).join('')+'</ul><p><b>المطلوب: نصيب '+esc(p.ask.name)+' من التركة (كسر مثل 1/6 أو نسبة مثل 16.7%)</b></p>'+(p.estate?'<p class="small">التركة: '+esc(JSON.stringify(p.estate))+'</p>':'')}
+var PL={husband:['زوج','',''],wife:['زوجة','زوجتان','زوجات'],father:['أب','',''],mother:['أم','',''],sons:['ابن','ابنان','أبناء'],daughters:['بنت','بنتان','بنات'],sonSons:['ابن ابن','ابنا ابن','أبناء ابن'],sonDaughters:['بنت ابن','بنتا ابن','بنات ابن'],
+ fullBrothers:['أخ شقيق','أخوان شقيقان','إخوة أشقاء'],fullSisters:['أخت شقيقة','أختان شقيقتان','أخوات شقيقات'],paternalBrothers:['أخ لأب','أخوان لأب','إخوة لأب'],paternalSisters:['أخت لأب','أختان لأب','أخوات لأب'],
+ maternalBrothers:['أخ لأم','أخوان لأم','إخوة لأم'],maternalSisters:['أخت لأم','أختان لأم','أخوات لأم'],grandfatherFather:['جد (أب الأب)','',''],grandmotherMother:['جدة (أم الأم)','',''],grandmotherFather:['جدة (أم الأب)','',''],
+ dSons:['ابن بنت','ابنا بنت','أبناء بنت'],dDaughters:['بنت بنت','بنتا بنت','بنات بنت'],aunt:['عمة','عمتان','عمات'],maternalUncle:['خال','خالان','أخوال'],maternalAunt:['خالة','خالتان','خالات'],sonFullBrothers:['ابن أخ شقيق','ابنا أخ شقيق','أبناء أخ شقيق'],
+ fullUncles:['عم شقيق','عمان شقيقان','أعمام أشقاء'],paternalUncles:['عم لأب','عمان لأب','أعمام لأب']};
+function stmtName(i){var p=PL[i.id],n=i.count;if(!p)return n>1?esc(i.name)+' (عددهم '+n+')':esc(i.name).replace(/^ال/,'');if(n===1)return p[0];if(n===2&&p[1])return p[1];if(n<=10&&p[2])return(n>2?n+' ':'')+p[2];return n+' '+p[2]}
+function stmt(items){window.__nm=window.__nm||{};items.forEach(function(i){window.__nm[i.id]=i.name});return'<p><b>حلّ المسألة الآتية:</b></p><p style="font-size:1.1em">مات وترك: <b>'+items.map(stmtName).join('، ')+'</b></p>'}
+function ansForm(px,items){return'<p class="small">اكتب نصيب كل وارث من التركة كلها (كسر مثل 1/6 أو نسبة مثل 16.7%). لو الوارث محجوب اكتب 0. وإذا كان للوارث أكثر من فرد اكتب نصيب الفئة كلها معًا.</p>'+items.map(function(i){return'<label>'+esc(i.name)+(i.count>1?' (عددهم '+i.count+'، النصيب الإجمالي لهم)':'')+'</label><input id="'+px+i.id+'" dir="ltr" placeholder="مثال 1/8">'}).join('')}
+function readAns(px,items){var o={};items.forEach(function(i){var e=document.getElementById(px+i.id);o[i.id]=e?e.value:''});return o}
+function showMine(a){try{var o=typeof a==='string'?JSON.parse(a):a;return Object.keys(o).map(function(k){return esc((window.__nm&&window.__nm[k])||k)+': '+esc(o[k]||'-')}).join('، ')}catch(e){return esc(a)}}
+function G(a,b){a=Math.abs(a);b=Math.abs(b);while(b){var t=a%b;a=b;b=t}return a||1}
+function LC(a,b){return a/G(a,b)*b}
+function fr(n,d){var g=G(n,d);n/=g;d/=g;return d===1?String(n):n+'/'+d}
+function sol(s){if(!s)return'';
+ var E=s.entriesInfo||[],rows=s.rows,asl=s.asl,H='';
+ rows.forEach(function(r){window.__nm=window.__nm||{};window.__nm[r.id]=r.name});
+ var rowOf=function(id){return rows.filter(function(r){return r.id===id})[0]};
+ var fardEs=E.filter(function(e){return e.fardPart}),aslF=1;fardEs.forEach(function(e){aslF=LC(aslF,e.fardD)});
+ var uF=function(e){return e.fardN*aslF/e.fardD};
+ var sumF=fardEs.reduce(function(a,e){return a+uF(e)},0),asabaEs=E.filter(function(e){return !e.fardPart||e.kind==='فرض وتعصيب'});
+ var rem=aslF-sumF,awl=!!s.awl,radd=!!s.radd;
+ var A=awl?sumF:(radd?s.baseAsl:aslF);
+ var eU=function(e){return e.fracN*A/e.fracD};var HD=function(e){return e.members.length===1?e.members[0].count:e.members.reduce(function(a,m){return a+m.count*m.weight},0)};var WS=function(e){return e.members.reduce(function(a,m){return a+m.count*m.weight},0)};
+ var nameOfE=function(e){return e.members.map(function(m){var r=rowOf(m.id);return r?r.name:m.id}).join(' و')};
+ H+='<div class="tutor"><p><b>تعالَ نحلّ المسألة معًا خطوة خطوة.</b> هنمشي على 7 خطوات، وهشرحلك كل كلمة جديدة أول ما تظهر، فخُد وقتك ومتستعجلش.</p>';
+ // 1
+ H+='<h4>الخطوة 1: تحديد الفروض (مين يرث وياخد كام ولماذا)</h4><p>أول حاجة نعمل جرد للورثة. <b>الفرض</b> هو نصيب محدد في القرآن أو السنة لوارث معين (مثل النصف والربع والسدس). و<b>التعصيب</b> معناه إن الوارث ياخد <i>الباقي</i> بعد أصحاب الفروض.</p><ul class="i">';
+ E.forEach(function(e){var nm=nameOfE(e),multi=e.members.some(function(m){return m.count>1})||e.members.length>1;
+  var ev=e.members.map(function(m){var r=rowOf(m.id);return r&&r.evidence?r.evidence:''}).filter(function(x,i,a){return x&&a.indexOf(x)===i});
+  var law=e.members.map(function(m){var r=rowOf(m.id);return r&&r.law?r.law:''}).filter(function(x,i,a){return x&&a.indexOf(x)===i}).join('، ');
+  var what=e.fardPart?(e.kind==='فرض وتعصيب'?'فرضه '+e.fardPart+' ثم ياخد الباقي تعصيبًا':'نصيبه (فرضه) '+e.fardPart):(e.kind==='رحم'?'ياخد بالرحم':'ياخد <b>الباقي</b> تعصيبًا');
+  H+='<li><b>'+esc(nm)+'</b>: '+what+(multi&&e.fardPart?' (النصيب للمجموعة كلها ويتقسّم عليهم بالتساوي)':'')+'.<br><span class="small">السبب: '+esc(e.reason||'')+(law?' ('+esc(law)+')':'')+'</span>'+(ev.length?'<br><span class="small">📖 الدليل: '+ev.map(esc).join(' | ')+'</span>':'')+'</li>'});
+ H+='</ul>';
+ if(s.blocked&&s.blocked.length)H+='<p><b>الورثة المحجوبون:</b> <b>الحجب</b> معناه إن وارث أقرب يمنع وارث أبعد من الميراث. هنا: '+s.blocked.map(function(b){return esc(b.name)+' (محجوب بسبب: '+esc(b.by)+')'}).join('، ')+'. المحجوب نصيبه صفر.</p>';
+ (s.notes||[]).forEach(function(n){H+='<p class="small">ملاحظة: '+esc(n)+'</p>'});
+ (s.flags||[]).forEach(function(f){H+='<div class="msg">⚖ '+esc(f.text)+'</div>'});
+ // 2
+ var dens=[];fardEs.forEach(function(e){if(dens.indexOf(e.fardD)<0)dens.push(e.fardD)});
+ H+='<h4>الخطوة 2: أصل المسألة</h4><p><b>أصل المسألة</b> هو أصغر عدد صحيح نقدر نقسّم منه كل الفروض من غير كسور، يعني نعتبر التركة كلها كأنها قطعة مقسّمة لأجزاء متساوية، وكل جزء اسمه سهم.</p>';
+ if(fardEs.length){H+='<p>بنجيب <b>مقامات</b> الفروض: '+fardEs.map(function(e){return e.fardPart}).join('، ')+'. المقامات هي '+dens.join('، ')+'. وبناخد <b>المضاعف المشترك الأصغر</b> لها (أصغر عدد يقبل القسمة على كل المقامات) = <b>'+aslF+'</b>.</p><p>إذن أصل المسألة = <b>'+aslF+'</b>، يعني التركة مقسومة على '+aslF+' سهم.</p>'}
+ else H+='<p>مفيش أصحاب فروض هنا، فالورثة كلهم عصبة وياخدوا التركة كلها، ونعتبر أصل المسألة = <b>'+aslF+'</b> ونقسمه على عدد الرؤوس (الذكر برأسين والأنثى برأس).</p>';
+ // 3
+ H+='<h4>الخطوة 3: سهام كل وارث</h4><p><b>السهم</b> هو وحدة القسمة: كل وارث نحسب عدد الأسهم اللي ياخدها بضرب فرضه في أصل المسألة.</p><ul class="i">';
+ fardEs.forEach(function(e){H+='<li>'+esc(nameOfE(e))+': '+e.fardPart+' × '+aslF+' = <b>'+uF(e)+'</b> سهم</li>'});
+ H+='</ul><p>مجموع أسهم أصحاب الفروض = '+sumF+' من '+aslF+'.</p>';
+ if(asabaEs.length&&rem>0)H+='<p>الباقي = '+aslF+' − '+sumF+' = <b>'+rem+'</b> سهم، ياخده العصبة وهم: '+asabaEs.map(function(e){return esc(nameOfE(e))}).join('، ')+'.'+(asabaEs.some(function(e){return e.members.some(function(m){return m.weight===2})&&e.members.length>1})?' ولو اجتمع ذكور وإناث في العصبة يتقسّم الباقي <b>للذكر مثل حظ الأنثيين</b> (الذكر يحسب برأسين والأنثى برأس).':'')+'</p>';
+ else if(asabaEs.length&&rem<=0&&!awl)H+='<p>الفروض استغرقت التركة ولم يبق شيء للعصبة.</p>';
+ // 4
+ var kind=awl?'عائلة':(radd?'ردّية':'عادلة');
+ H+='<h4>الخطوة 4: نوع المسألة ولماذا</h4><p>المسألة ممكن تكون <b>عادلة</b> (الفروض = أصل المسألة بالظبط أو الباقي أخده العصبة)، أو <b>عائلة</b> (الفروض أكتر من التركة)، أو <b>ردّية</b> (الفروض أقل من التركة ومفيش عاصب). مسألتنا: <b>'+kind+'</b>.</p>';
+ if(awl)H+='<p>السبب: مجموع أسهم الفروض ('+sumF+') أكبر من أصل المسألة ('+aslF+')، يعني التركة مش كفاية لكل الفروض. هنا بنعمل <b>العول</b>: بنرفع أصل المسألة ليساوي مجموع الأسهم = <b>'+sumF+'</b>، فيتحمل كل وارث نقصًا بنسبة سهمه.</p>';
+ else if(radd)H+='<p>السبب: الفروض أخدت '+sumF+' من '+aslF+' والباقي ('+rem+') ما فيش عاصب ياخده، فبنعمل <b>الرد</b>: يرجع الباقي على أصحاب الفروض بنسبة فروضهم، <b>ما عدا الزوج أو الزوجة</b> لأن نصيبهم مرتبط بالزوجية فقط.</p>';
+ else H+='<p>السبب: '+(rem>0&&asabaEs.length?'الفروض أخدت '+sumF+' من '+aslF+' والباقي ('+rem+') أخده العاصب، فما في عول ولا رد.':'مجموع أسهم الفروض ('+sumF+') يساوي أصل المسألة ('+aslF+') بالظبط، فما في عول ولا رد.')+'</p>';
+ (s.evidenceSummary||[]).forEach(function(g){if(g.problem==='awl'||g.problem==='radd'||g.problem==='omariyyatan'||g.problem==='mushtaraka'||g.problem==='akdariyya'||g.problem==='arham')H+='<p class="small">📖 دليل ('+esc({awl:'العول',radd:'الرد',omariyyatan:'العمريتين',mushtaraka:'المشتركة',akdariyya:'الأكدرية',arham:'ذوي الأرحام'}[g.problem])+'): '+g.evidence.map(function(x){return esc(x.type)+': '+esc(x.text)}).join(' | ')+'</p>'});
+ // radd detail
+ if(radd){var spE=E.filter(function(e){return e.isSp}),nonE=E.filter(function(e){return !e.isSp});
+  var S=nonE.reduce(function(a,e){return a+(e.fardPart?e.fardN/e.fardD:0)},0);
+  H+='<div class="msg"><b>تفصيل الرد:</b> فيه ثلاث حالات: (1) لو مفيش زوج ولا زوجة: الباقي يتوزع على كل أصحاب الفروض بنسبة فروضهم. (2) لو فيه زوج أو زوجة مع غيرهم: الزوج أو الزوجة ياخد فرضه من التركة كلها أولًا، والباقي يتوزع على باقي أصحاب الفروض بنسبة فروضهم. (3) لو الورثة زوج أو زوجة فقط: ننظر أولًا إن كان فيه من ذوي الأرحام، ولو مفيش يُرد الباقي على الزوج أو الزوجة.<br>';
+  if(spE.length&&nonE.length){var sp=spE[0];H+='في مسألتنا: '+esc(nameOfE(sp))+' ياخد '+sp.fardPart+' من التركة كلها. الباقي = 1 − '+sp.fardPart+' = '+fr(sp.fardD-sp.fardN,sp.fardD)+'. وبعدين نقسمه على باقي الورثة بنسبة فروضهم.<br>'}
+  nonE.forEach(function(e){if(e.fardPart)H+=esc(nameOfE(e))+': فرضه '+e.fardPart+' ، نصيبه بعد الرد = '+e.frac+' من التركة.<br>'});
+  H+='</div>'}
+ // 5
+ var broken=[];E.forEach(function(e){if(HD(e)>1){var u=eU(e);if(u!==Math.round(u)||u%HD(e)!==0)broken.push({e:e,u:u})}});
+ H+='<h4>الخطوة 5: هل فيه انكسار؟</h4><p><b>الانكسار</b> معناه إن نصيب مجموعة من الورثة (مثلًا 3 بنات) ما ينقسم على عددهم قسمة صحيحة، فيطلع كسر في السهم الواحد.</p><ul class="i">';
+ var multiE=E.filter(function(e){return HD(e)>1});
+ multiE.forEach(function(e){var u=eU(e),ok=u%HD(e)===0;H+='<li>'+esc(nameOfE(e))+': نصيبهم '+u+' سهم، وعدد رؤوسهم '+HD(e)+(e.members.some(function(m){return m.weight===2})?' (الذكر برأسين والأنثى برأس)':'')+'. '+u+' ÷ '+HD(e)+' = '+(ok?(u/HD(e))+' تمامًا، <b>لا انكسار</b>.':fr(u,HD(e))+' فيه كسر، <b>فيه انكسار</b>.')+'</li>'});
+ if(!multiE.length)H+='<li>كل وارث فرد واحد، فلا يوجد انكسار.</li>';
+ H+='</ul>';
+ // 6
+ var broken=[];E.forEach(function(e){if(HD(e)>1){var u=eU(e);if(u%HD(e)!==0)broken.push({e:e,u:u})}});
+ var parts=broken.map(function(b){return HD(b.e)/G(b.u,HD(b.e))}),k=parts.reduce(LC,1),aslT=A*k;
+ H+='<h4>الخطوة 6: التصحيح (علاج الانكسار)</h4><p><b>التصحيح</b> هو إننا نضرب أصل المسألة في عدد مناسب (<b>ضارب التصحيح</b>) لحد ما كل وارث ياخد عددًا صحيحًا من الأسهم من غير كسور، ونضرب سهام كل الورثة في نفس العدد، فتفضل النسب بينهم زي ما هي.</p>';
+ if(broken.length){H+='<ul class="i">';broken.forEach(function(b,ix){var h=HD(b.e),g=G(b.u,h),p=parts[ix];H+='<li>'+esc(nameOfE(b.e))+': بين سهامهم ('+b.u+') وعدد رؤوسهم ('+h+') '+(g>1?'<b>توافق</b> لأنهما يشتركان في القاسم '+g+'، فنقسم عدد الرؤوس على '+g+' فيطلع <b>جزء السهم</b> = '+h+' ÷ '+g+' = '+p:'<b>تباين</b> لأنهما لا يشتركان في أي قاسم (غير 1)، فنأخذ عدد الرؤوس كله و<b>جزء السهم</b> = '+p)+'.</li>'});H+='</ul>';
+  H+='<p>'+(parts.length>1?'عندنا أكتر من جزء سهم ('+parts.join('، ')+')، فبناخد <b>المضاعف المشترك الأصغر</b> لها = '+k+'. ':'')+'إذن ضارب التصحيح = <b>'+k+'</b>، وأصل المسألة بعد التصحيح = '+A+' × '+k+' = <b>'+aslT+'</b>.</p>'}
+ else H+='<p>بما إنه ما فيش انكسار، ضارب التصحيح = 1، ويفضل أصل المسألة = <b>'+aslT+'</b> من غير تغيير.</p>';
+ // 7
+ var TR=rows.map(function(r){var en=E.filter(function(e){return e.ids.indexOf(r.id)>=0})[0];if(!en)return{r:r,u:r.units,ph:r.count?r.units/r.count:r.units,b:'-'};var m=en.members.filter(function(x){return x.id===r.id})[0],U0=eU(en),U=U0*k,ws=WS(en);var b=en.members.length===1?String(U0):fr(U0*m.count*m.weight,ws),u=en.members.length===1?U:U*m.count*m.weight/ws;return{r:r,u:u,ph:u/m.count,b:b}});
+ H+='<h4>الخطوة 7: التصحيح النهائي والنصيب النهائي لكل وارث</h4><p>دلوقتي نضرب سهام كل وارث في ضارب التصحيح ('+k+') ونجيب <b>سهم الفرد الواحد</b>، وبعدها <b>نصيب الوارث من التركة = عدد سهامه ÷ أصل المسألة بعد التصحيح ('+aslT+')</b>.</p>';
+ H+='<table><tr><th>الوارث</th><th>العدد</th><th>سهام قبل التصحيح</th><th>× '+k+'</th><th>سهام بعد التصحيح</th><th>سهم الفرد</th><th>النصيب</th></tr>'+TR.map(function(x){var r=x.r;return'<tr><td>'+esc(r.name)+'</td><td>'+r.count+'</td><td>'+x.b+'</td><td>×'+k+'</td><td><b>'+x.u+'</b></td><td>'+x.ph+'</td><td dir="ltr"><b>'+fr(x.u,aslT)+'</b> ('+(Math.round(x.u/aslT*1000)/10)+'%)</td></tr>'}).join('')+'</table>';
+ H+='<p>مراجعة: مجموع الأسهم = '+TR.reduce(function(a,x){return a+x.u},0)+' = أصل المسألة بعد التصحيح ('+aslT+') ✓</p>';
+ H+='<p><b>الخلاصة:</b> '+TR.map(function(x){return esc(x.r.name)+' '+fr(x.u,aslT)}).join('، ')+(s.blocked&&s.blocked.length?'، '+s.blocked.map(function(b){return esc(b.name)+' 0 (محجوب)'}).join('، '):'')+'.</p></div>';
+ s.__chk=TR.map(function(x){return[x.r.id,x.u,aslT]});
+ return H}
+function prob(p){return stmt(p.items)}
 var VIEW={
   daily:function(p){api('daily').then(function(d){var h='<div class="card"><h2>مسألة اليوم</h2><p class="small">تُنشر 8 مساء بتوقيت القاهرة، وتظهر الإجابة 7 مساء اليوم التالي.</p>';
-  if(d.posted){h+=prob(d.posted);if(d.posted.mine)h+='<div class="msg">إجابتك: '+esc(d.posted.mine.answer)+(d.posted.closed?(d.posted.mine.ok?' ✓ صح':' ✗ غلط'):' (تم الحفظ، النتيجة بعد غلق المسألة)')+'</div>';else if(!d.posted.closed)h+='<input id="da" placeholder="إجابتك"><button class="btn" id="dag">أرسل الإجابة</button><div id="dam"></div>';
+  if(d.posted){h+=prob(d.posted);if(d.posted.mine)h+='<div class="msg">إجابتك: '+showMine(d.posted.mine.answer)+(d.posted.closed?(d.posted.mine.ok?' ✓ صح':' ✗ غلط'):' (تم الحفظ، النتيجة بعد غلق المسألة)')+'</div>';else if(!d.posted.closed)h+=ansForm('da_',d.posted.items)+'<button class="btn" id="dag">أرسل الإجابة</button><div id="dam"></div>';
    if(d.posted.closed)h+='<p><b>الإجابة: '+esc(d.posted.want)+'</b></p>'+sol(d.posted.solution)}else h+='<p>لا توجد مسألة منشورة الآن.</p>';
-  h+='</div>';if(d.previous){h+='<div class="card"><h3>مسألة أمس</h3>'+prob(d.previous)+(d.previous.stats?'<p class="small">عدد المجيبين: '+d.previous.stats.total+'، أخطأ منهم: '+d.previous.stats.wrong+'</p>':'')+(d.previous.mine?'<div class="msg">إجابتك: '+esc(d.previous.mine.answer)+(d.previous.mine.ok?' ✓':' ✗')+'</div>':'')+'<p><b>الإجابة: '+esc(d.previous.want)+'</b></p>'+sol(d.previous.solution)+'</div>'}
-  p.innerHTML=h;var g=$('#dag');if(g)g.onclick=function(){api('daily_answer',{day:d.posted.day,answer:$('#da').value}).then(function(r){if(r.saved)VIEW.daily(p);else msg($('#dam'),'تعذّر الإرسال: '+(r.error||''),'e')})}}).catch(function(){})},
+  h+='</div>';if(d.previous){h+='<div class="card"><h3>مسألة أمس</h3>'+prob(d.previous)+(d.previous.stats?'<p class="small">عدد المجيبين: '+d.previous.stats.total+'، أخطأ منهم: '+d.previous.stats.wrong+'</p>':'')+(d.previous.mine?'<div class="msg">إجابتك: '+showMine(d.previous.mine.answer)+(d.previous.mine.ok?' ✓':' ✗')+'</div>':'')+'<p><b>الإجابة: '+esc(d.previous.want)+'</b></p>'+sol(d.previous.solution)+'</div>'}
+  p.innerHTML=h;var g=$('#dag');if(g)g.onclick=function(){api('daily_answer',{day:d.posted.day,answers:readAns('da_',d.posted.items)}).then(function(r){if(r.saved)VIEW.daily(p);else msg($('#dam'),'تعذّر الإرسال: '+(r.error||''),'e')})}}).catch(function(){})},
  gen:function(p){var cur=null,lvl=1;api('me').then(function(m){lvl=m.gen.level;p.innerHTML='<div class="card"><h2>مولّد المسائل</h2><p>مستواك: <b>'+m.gen.level+'</b> من 6 | إجابات صحيحة متتالية: '+m.gen.streak+' من 3 للترقية | حللت: '+m.gen.solved+'</p><label>المستوى</label><select id="gl">'+[1,2,3,4,5,6].filter(function(x){return x<=m.gen.level}).map(function(x){return'<option>'+x+'</option>'}).join('')+'</select><button class="btn" id="gn">مسألة جديدة</button><div id="gb"></div></div>';
-  $('#gl').value=Math.min(6,m.gen.level);$('#gn').onclick=function(){api('gen_next',{level:+$('#gl').value}).then(function(q){cur=q;$('#gb').innerHTML=prob(q)+'<input id="ga" placeholder="إجابتك"><button class="btn g" id="gs">تحقق</button><div id="gm"></div>';$('#gs').onclick=function(){api('gen_answer',{answer:$('#ga').value}).then(function(r){var h='<div class="msg '+(r.ok?'ok':'e')+'">'+(r.ok?'إجابة صحيحة ✓':'إجابة غير صحيحة، الصحيح: '+esc(r.want))+(r.leveled?' 🎉 ترقيت لمستوى '+r.level:'')+'</div>'+sol(r.solution);$('#gb').innerHTML+=h;$('#gs').disabled=true})}})}})},
+  $('#gl').value=Math.min(6,m.gen.level);$('#gn').onclick=function(){api('gen_next',{level:+$('#gl').value}).then(function(q){cur=q;$('#gb').innerHTML=prob(q)+ansForm('ga_',q.items)+'<button class="btn g" id="gs">تحقق</button><div id="gm"></div>';$('#gs').onclick=function(){api('gen_answer',{answers:readAns('ga_',q.items)}).then(function(r){var h='<div class="msg '+(r.ok?'ok':'e')+'">'+(r.ok?'إجابة صحيحة ✓':'إجابة غير صحيحة، الصحيح: '+esc(r.want))+(r.leveled?' 🎉 ترقيت لمستوى '+r.level:'')+'</div>'+sol(r.solution);$('#gb').innerHTML+=h;$('#gs').disabled=true})}})}})},
  lib:function(p){var lv=1,ix=1;function go(){api('library',{level:lv,idx:ix}).then(function(q){$('#lb').innerHTML=prob(q)+'<button class="btn l" id="ls">اعرض الحل</button><div id="lsol" style="display:none"><p><b>الإجابة: '+esc(q.want)+'</b></p>'+sol(q.solution)+'</div>';$('#ls').onclick=function(){$('#lsol').style.display='block'}})}
   p.innerHTML='<div class="card"><h2>مسائل محلولة ومتدرجة</h2><div class="row"><div>المستوى<select id="ll">'+[1,2,3,4,5,6].map(function(x){return'<option>'+x+'</option>'}).join('')+'</select></div><div>المسألة<select id="li">'+[1,2,3,4,5,6,7,8,9,10,11,12].map(function(x){return'<option>'+x+'</option>'}).join('')+'</select></div></div><div id="lb"></div></div>';
   $('#ll').onchange=function(){lv=+this.value;go()};$('#li').onchange=function(){ix=+this.value;go()};go()},

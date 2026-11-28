@@ -135,12 +135,13 @@
       }
       var est = { gross: gross, funeral: funeral, debts: debts, willAmount: willAmt, willConsent: $('willConsent').value === 'yes' };
       var pred = ($('special-wasiyaWajiba').checked ? PRED : []).filter(function (p) { return (p.sons || 0) + (p.daughters || 0) > 0; }).map(function (p) { return { kind: p.kind, sons: +p.sons || 0, daughters: +p.daughters || 0, gift: +p.gift || 0 }; });
-      var R = { calc: E.calculate(inp, est, { barred: barred, predeceased: pred }), inp: inp, est: est, barred: barred };
-      if ($('special-pregnancy').checked) R.preg = E.solvePregnancy(inp, { barred: barred, unbornKind: $('pregKind').value });
+      var mad = ($('madhab') && $('madhab').value) || 'egypt'; if (mad !== 'egypt') pred = [];
+      var R = { calc: E.calculate(inp, est, { barred: barred, predeceased: pred, madhab: mad }), inp: inp, est: est, barred: barred, madhab: mad };
+      if ($('special-pregnancy').checked) R.preg = E.solvePregnancy(inp, { barred: barred, unbornKind: $('pregKind').value, madhab: mad });
       R.ref = ''; R.refState = 'saving'; LAST = R;
       render();
       $('calcResult').classList.add('active'); $('calcResult').scrollIntoView({ behavior: 'smooth' });
-      fetch('/api/student', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'ref_save', inp: inp, estate: est, opts: { barred: barred }, source: 'calc' }) })
+      fetch('/api/student', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'ref_save', inp: inp, estate: est, opts: { barred: barred, madhab: mad }, source: 'calc' }) })
         .then(function (r) { return r.json(); }).then(function (j) { if (LAST === R) { if (j && j.ref) { R.ref = j.ref; R.refState = 'ok'; } else R.refState = 'fail'; renderRef(); } })
         .catch(function () { if (LAST === R) { R.refState = 'fail'; renderRef(); } });
     } catch (e) { console.error(e); alert('Error: ' + e.message); }
@@ -178,6 +179,7 @@
     }
     (c.wajiba || []).forEach(function (w) { mh += '<div class="legal-notice" style="margin-bottom:12px">' + esc(xt('wajiba')) + ' (' + esc(xt(w.kind)) + '): ' + (w.inherits ? esc(w.note) : '<b>' + fmt(w.amount) + '</b> ' + cur()) + '</div>'; });
     (c.notes || []).forEach(function (n) { mh += '<div class="legal-notice" style="margin-bottom:12px">' + esc(n) + '</div>'; });
+    if (res.madhabName) mh = '<div class="legal-notice" style="margin-bottom:12px"><strong>' + esc((function(l){return l==='ar'?'المذهب / النظام':l==='en'?'School / system':'École / système'})(lang())) + ':</strong> ' + esc(res.madhabName) + '</div>' + mh;
     $('resMoney').innerHTML = mh;
     // shares table (reason and evidence always visible, all evidence together)
     var th = '<h3 style="color:#b59461;margin:10px 0">' + esc(t('heirsHdr')) + '</h3>';

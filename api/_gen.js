@@ -103,13 +103,22 @@ function parseAns(s) {
   if (m) return parseFloat(m[1]) / 100;
   return NaN;
 }
-function checkAnswer(problem, answer) {
+function checkAnswer(problem, answers) {
   const res = E.solve(problem.inp, {});
-  const row = res.rows.find(x => x.id === problem.ask);
-  const want = F.val(row.frac);
-  const got = parseAns(answer);
-  const ok = isFinite(got) && Math.abs(got - want) < 1e-6;
-  return { ok, want: F.txt(row.frac), res };
+  const ids = Object.keys(problem.inp).filter(k => problem.inp[k] > 0);
+  if (typeof answers === 'string') { try { answers = JSON.parse(answers); } catch (e) { answers = null; } }
+  answers = answers && typeof answers === 'object' ? answers : {};
+  let ok = true; const per = []; const wantTxt = [];
+  ids.forEach(id => {
+    const row = res.rows.find(x => x.id === id);
+    const want = row ? F.val(row.frac) : 0;
+    const got = parseAns(answers[id]);
+    const good = isFinite(got) && Math.abs(got - want) < 1e-6;
+    if (!good) ok = false;
+    per.push({ id, ok: good });
+    wantTxt.push(E.nm(id) + ': ' + (row ? F.txt(row.frac) : '0 (محجوب)'));
+  });
+  return { ok, want: wantTxt.join('، '), per, res };
 }
 
 function frac(f) { return F.txt(f); }
@@ -117,7 +126,7 @@ function solutionOf(inp, opts) {
   const res = E.solve(inp, opts || {});
   return {
     asl: res.asl, awl: !!res.awl, radd: !!res.radd, omariyyatan: !!res.omariyyatan,
-    steps: res.steps, notes: res.notes, flags: res.flags, asabaNote: res.asabaNote || null,
+    steps: res.steps, entriesInfo: res.entriesInfo, baseAsl: res.baseAsl, notes: res.notes, flags: res.flags, asabaNote: res.asabaNote || null,
     blocked: res.blocked.map(b => ({ id: b.id, name: E.nm(b.id), by: b.by, law: b.law })),
     rows: res.rows.map(r => ({ id: r.id, name: E.nm(r.id), count: r.count, frac: frac(r.frac), units: r.units, perHead: r.perHead, kind: r.kind, reason: r.reason, law: r.law, evidence: r.evidence })),
     evidenceSummary: res.evidenceSummary

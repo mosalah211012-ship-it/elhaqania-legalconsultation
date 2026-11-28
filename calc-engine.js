@@ -39,6 +39,7 @@ const NAMES = {
   sisterSonsFull: 'ابن الأخت الشقيقة', sisterDaughtersFull: 'بنت الأخت الشقيقة',
   sisterSonsPaternal: 'ابن الأخت لأب', sisterDaughtersPaternal: 'بنت الأخت لأب',
   maternalSibSons: 'ابن الأخ/الأخت لأم', maternalSibDaughters: 'بنت الأخ/الأخت لأم',
+  baytMal: 'بيت المال (الخزينة العامة)',
   aunt: 'العمة', uncleMaternal: 'العم لأم', maternalUncle: 'الخال', maternalAunt: 'الخالة'
 };
 const ALL = Object.keys(NAMES);
@@ -172,8 +173,31 @@ function solvePregnancy(inp, opts) {
   ];
   return { unbornKind: kind, scenarios: scen, noneBorn: none, reserve: maxU, immediate, suspended, khuntha: kh, notes, evidence: problemEvidence(none, ['pregnancy']).concat(problemEvidence(scen.male, []).filter(e => e.problem !== 'pregnancy')).concat([{ problem: 'khuntha', evidence: PE.khuntha.map(([type, text]) => ({ type, text })) }]) };
 }
+const MZ = {
+  egypt:   { mush: 1, arham: 'classes', radd: 1, gmFather: 1 },
+  hanafi:  { gfBlocks: 1, mush: 0, arham: 'classes', radd: 1, gmFather: 1 },
+  maliki:  { zayd: 1, mush: 1, arham: 0, radd: 0, akd: 1, gmFather: 1 },
+  shafii:  { zayd: 1, mush: 1, arham: 0, radd: 0, akd: 1, gmFather: 1 },
+  hanbali: { zayd: 1, mush: 0, arham: 'tanzil', radd: 1, akd: 1, gmFather: 0 },
+  saudi:   { gfBlocks: 1, mush: 0, arham: 'tanzil', radd: 1, gmFather: 0 }
+};
+const MNAMES = { egypt: 'القانون المصري', hanafi: 'المذهب الحنفي', maliki: 'المذهب المالكي', shafii: 'المذهب الشافعي', hanbali: 'المذهب الحنبلي', saudi: 'نظام الأحوال الشخصية السعودي' };
+const ARHAM_MAP = { dSons: 'daughters', dDaughters: 'daughters', grandfatherMother: 'mother', brotherDaughtersFull: 'fullBrothers', brotherDaughtersPaternal: 'paternalBrothers',
+  sisterSonsFull: 'fullSisters', sisterDaughtersFull: 'fullSisters', sisterSonsPaternal: 'paternalSisters', sisterDaughtersPaternal: 'paternalSisters',
+  maternalSibSons: 'maternalBrothers', maternalSibDaughters: 'maternalBrothers', aunt: 'father', uncleMaternal: 'father', maternalUncle: 'mother', maternalAunt: 'mother' };
+const SA_LAW = { husband: 'م٢٠٩', wife: 'م٢١٠', father: 'م٢١١', grandfatherFather: 'م٢١٢', grandfatherFatherFather: 'م٢١٢', mother: 'م٢١٣', daughters: 'م٢١٥', sonDaughters: 'م٢١٦', sonSonDaughters: 'م٢١٦',
+  fullSisters: 'م٢١٧', paternalSisters: 'م٢١٨', maternalBrothers: 'م٢١٩ و٢٢٠', maternalSisters: 'م٢١٩ و٢٢٠' };
 function solve(inp, opts) {
   opts = opts || {};
+  const madh = MZ[opts.madhab] ? opts.madhab : 'egypt';
+  if (madh !== 'egypt' && !opts._inner) {
+    const r = solveCore(inp, opts, madh);
+    return localize(r, madh);
+  }
+  return solveCore(inp, opts, madh);
+}
+function solveCore(inp, opts, madh) {
+  const CFG = MZ[madh];
   const c = {}; ALL.forEach(id => { c[id] = Math.max(0, Math.floor((inp && inp[id]) || 0)); });
   (opts.barred || []).forEach(id => { c[id] = 0; });
   if (c.husband > 1) c.husband = 1;
@@ -191,7 +215,7 @@ function solve(inp, opts) {
   else if (N('grandfatherFather')) B('grandfatherFatherFather', 'الجد الأقرب', 'م١٨');
   const gfId = N('grandfatherFather') ? 'grandfatherFather' : (N('grandfatherFatherFather') ? 'grandfatherFatherFather' : null);
   if (N('mother')) GM.forEach(g => B(g.id, 'الأم', 'م٢٥'));
-  if (N('father')) GM.filter(g => g.pat).forEach(g => B(g.id, 'الأب', 'م٢٥'));
+  if (N('father') && CFG.gmFather) GM.filter(g => g.pat).forEach(g => B(g.id, 'الأب', 'م٢٥'));
   if (gfId === 'grandfatherFather') B('grandmotherFatherFather', 'الجد', 'م٢٥');
   let liveGM = GM.filter(g => N(g.id) > 0);
   if (liveGM.length) {
@@ -248,14 +272,17 @@ function solve(inp, opts) {
   }
   if (hasDesc) { B('maternalBrothers', 'الفرع الوارث', 'م٢٦'); B('maternalSisters', 'الفرع الوارث', 'م٢٦'); }
   if (gfId) { B('maternalBrothers', 'الجد', 'م٢٦'); B('maternalSisters', 'الجد', 'م٢٦'); COLL.forEach(id => B(id, 'الجد', 'م١٧')); }
+  if (CFG.gfBlocks && gfId && !fatherP) SIBS.forEach(id => B(id, 'الجد (يحجب الإخوة كالأب)', ''));
   const femDescNoMale = hasDesc && !hasMaleDesc;
   // paternal siblings vs full siblings (art 29, 20)
   if (N('fullBrothers')) { B('paternalBrothers', 'الأخ الشقيق', 'م١٨'); B('paternalSisters', 'الأخ الشقيق', 'م٢٩'); }
   else if (N('fullSisters') && femDescNoMale) { B('paternalBrothers', 'الأخت الشقيقة (عصبة مع الغير)', 'م٢٩'); B('paternalSisters', 'الأخت الشقيقة (عصبة مع الغير)', 'م٢٩'); }
   else if (N('fullSisters') >= 2 && !N('paternalBrothers')) B('paternalSisters', 'الأختان الشقيقتان', 'م٢٩');
   const fb = N('fullBrothers'), fs = N('fullSisters'), pb = N('paternalBrothers'), ps = N('paternalSisters');
-  const fsAsaba = fs > 0 && (fb > 0 || femDescNoMale);
-  const psAsaba = ps > 0 && (pb > 0 || (femDescNoMale && fs === 0));
+  const akPat = N('husband') && N('mother') && gfId && !fatherP && !hasDesc && fb === 0 && pb === 0 && ((fs === 1 && ps === 0) || (fs === 0 && ps === 1)) && (N('maternalBrothers') + N('maternalSisters')) === 0;
+  const zaydSis = !!(CFG.zayd && gfId && !fatherP && !hasDesc && !akPat);
+  const fsAsaba = fs > 0 && (fb > 0 || femDescNoMale || zaydSis);
+  const psAsaba = ps > 0 && (pb > 0 || (femDescNoMale && fs === 0) || (zaydSis && fs === 0));
   const mt = N('maternalBrothers') + N('maternalSisters');
 
   // ---------- spouses, mother ----------
@@ -300,7 +327,8 @@ function solve(inp, opts) {
   // mushtaraka decision: needs sum of fards incl. maternal >= 1 and full brother(s)
   if (maternalEntry) {
     const withMat = F.add(sumOf(entries), maternalEntry.frac);
-    if (fb > 0 && F.cmp(withMat, F.one()) >= 0) {
+    if (fb > 0 && F.cmp(withMat, F.one()) >= 0 && !CFG.mush) { blocked.push({ id: 'fullBrothers', by: 'استغراق الفروض للتركة (لا يُقال بالمشتركة في هذا المذهب)', law: null }); if (fs) blocked.push({ id: 'fullSisters', by: 'استغراق الفروض للتركة', law: null }); c.fullBrothers = 0; if (fs) c.fullSisters = 0; flags.push({ id: 'mushtaraka_no', text: 'المسألة المشتركة: لا يشرَّك الأشقاء مع ولد الأم في الثلث في هذا المذهب، فيسقط الأشقاء لأنهم عصبة والفروض استغرقت التركة.' }); }
+    else if (fb > 0 && F.cmp(withMat, F.one()) >= 0) {
       maternalEntry.members.push({ id: 'fullBrothers', count: fb, weight: 1 });
       if (fs) maternalEntry.members.push({ id: 'fullSisters', count: fs, weight: 1 });
       maternalEntry.kind = 'مشتركة'; maternalEntry.reason = 'المسألة المشتركة: يشارك الأشقاء أولاد الأم في الثلث بالسوية';
@@ -347,7 +375,13 @@ function solve(inp, opts) {
         const heads = mem.reduce((s, m) => s + m.count * m.weight, 0);
         const gfShare = F.mul(remNow, F.make(2, heads));
         const six = F.make(1, 6);
-        if (F.cmp(gfShare, six) < 0) {
+        const third = F.div(remNow, F.make(3));
+        if (CFG.zayd && F.cmp(third, gfShare) > 0 && F.cmp(third, six) >= 0) {
+          entries.push({ members: gMembers, frac: third, reason: 'ثلث الباقي بعد الفروض: أفضل له من المقاسمة', kind: 'فرض', law: '' });
+          const others = mem.slice(1);
+          addAsaba(others, F.sub(remNow, third), 'الباقي تعصيباً للإخوة بعد ثلث الباقي للجد', 'تعصيب');
+          flags.push({ id: 'zayd-gf', text: 'الجد مع الإخوة على قول زيد بن ثابت: يأخذ الجد الأفضل له من ثلاثة: المقاسمة كأخ، أو ثلث الباقي بعد الفروض، أو سدس التركة.' });
+        } else if (F.cmp(gfShare, six) < 0) {
           entries.push({ members: gMembers, frac: six, reason: 'السدس: المقاسمة تنقصه عن السدس (م٢٢)', kind: 'فرض', law: 'م٢٢' });
           const rest = F.sub(remNow, six);
           const others = mem.slice(1);
@@ -411,6 +445,9 @@ function solve(inp, opts) {
   // ---------- awl / radd / dhawu al-arham ----------
   sum = sumOf(entries); rem = F.sub(F.one(), sum);
   const baseSum = sum;
+  entries.forEach(e => { e.fardPart = (e.kind === 'فرض' || e.kind === 'مشتركة') ? e.frac : (e.kind === 'فرض وتعصيب' ? F.make(1, 6) : null); e.fard0 = e.frac; });
+  function baytAdd(fr) { entries.push({ members: [{ id: 'baytMal', count: 1, weight: 1 }], frac: fr, reason: 'يؤول الباقي إلى بيت المال لأن هذا المذهب لا يقول بالرد ولا يورّث ذوي الأرحام', kind: 'بيت المال', law: '' }); notes.push('الباقي لبيت المال'); flags.push({ id: 'bayt', text: 'عند المالكية والشافعية في المذهب القديم يؤول الباقي إلى بيت المال. وقد أفتى متأخرو المالكية والشافعية بالرد على ذوي الفروض وتوريث ذوي الأرحام إذا لم يكن بيت المال منتظمًا، وهو الغالب اليوم.' }); }
+  if (!CFG.arham) ARHAM_IDS.forEach(id => B(id, 'لا يرث ذوو الأرحام في هذا المذهب', ''));
   const isSp = e => e.members.some(m => m.id === 'husband' || m.id === 'wife');
   let arhamRows = null;
   if (F.cmp(sum, F.one()) > 0) {
@@ -420,26 +457,37 @@ function solve(inp, opts) {
   } else if (F.val(rem) > 0 && !asabaTaker) {
     const nonSp = entries.filter(e => !isSp(e));
     if (nonSp.length) {
-      radd = true;
-      const spSum = entries.filter(isSp).reduce((s, e) => F.add(s, e.frac), F.zero());
-      const nonSum = sumOf(nonSp);
-      const target = F.sub(F.one(), spSum);
-      nonSp.forEach(e => { e.frac = F.mul(e.frac, F.div(target, nonSum)); });
-      notes.push('رُدّ الباقي على أصحاب الفروض غير الزوجين (م٣٠)');
+      if (CFG.radd) {
+        radd = true;
+        const spSum = entries.filter(isSp).reduce((s, e) => F.add(s, e.frac), F.zero());
+        const nonSum = sumOf(nonSp);
+        const target = F.sub(F.one(), spSum);
+        nonSp.forEach(e => { e.frac = F.mul(e.frac, F.div(target, nonSum)); });
+        notes.push('رُدّ الباقي على أصحاب الفروض غير الزوجين (م٣٠)');
+      } else {
+        baytAdd(rem);
+      }
     } else {
-      const arh = distributeArham(c, F.sub(F.one(), sumOf(entries)), flags);
+      let arh = null;
+      if (CFG.arham === 'classes') arh = distributeArham(c, F.sub(F.one(), sumOf(entries)), flags);
+      else if (CFG.arham === 'tanzil') arh = tanzilArham(c, F.sub(F.one(), sumOf(entries)), flags, opts, madh);
       if (arh) { arh.forEach(r => entries.push(r)); notes.push('الباقي لذوي الأرحام (م٣١-٣٨)'); }
       else if (entries.length) {
-        radd = true;
-        const tot = sumOf(entries);
-        entries.forEach(e => { e.frac = F.div(e.frac, tot); });
-        notes.push('لا وارث غير الزوج/الزوجة: يُرد عليه الباقي (م٣٠)');
+        if (CFG.radd) {
+          radd = true;
+          const tot = sumOf(entries);
+          entries.forEach(e => { e.frac = F.div(e.frac, tot); });
+          notes.push('لا وارث غير الزوج/الزوجة: يُرد عليه الباقي (م٣٠)');
+        } else baytAdd(rem);
       }
     }
   }
   if (!entries.length) {
-    const arh = distributeArham(c, F.one(), flags);
+    let arh = null;
+    if (CFG.arham === 'classes') arh = distributeArham(c, F.one(), flags);
+    else if (CFG.arham === 'tanzil') arh = tanzilArham(c, F.one(), flags, opts, madh);
     if (arh) { arh.forEach(r => entries.push(r)); notes.push('التركة لذوي الأرحام (م٣١-٣٨)'); }
+    else if (!CFG.arham && Object.keys(raw).some(k => raw[k] > 0)) baytAdd(F.one());
   }
 
   // ---------- rows ----------
@@ -453,7 +501,7 @@ function solve(inp, opts) {
     const ids = rows.map(r => r.id).sort().join(',');
     const sis = rows.find(r => r.id === 'fullSisters' || r.id === 'paternalSisters');
     const gf = rows.find(r => r.id === 'grandfatherFather');
-    if (!opts || opts.akdariyya !== 'zayd') return; // default = literal text of art 22 (Umar / Ibn Mas'ud approach); 'zayd' = traditional re-division
+    if (!opts || (opts.akdariyya !== 'zayd' && !CFG.akd)) return; // default = literal text of art 22 (Umar / Ibn Mas'ud approach); 'zayd' = traditional re-division
     if (!sis || !gf || rows.length !== 4 || !rows.some(r => r.id === 'husband') || !rows.some(r => r.id === 'mother')) return;
     if (sis.count !== 1 || gf.count !== 1 || !F.eq(sis.frac, F.make(1, 3)) || !F.eq(gf.frac, F.make(1, 9))) return;
     gf.frac = F.make(8, 27); sis.frac = F.make(4, 27);
@@ -473,7 +521,8 @@ function solve(inp, opts) {
   if (!rows.length && Object.keys(inp).some(k => +inp[k] > 0)) flags.push({ id: 'manual', text: 'الحالة خارج ما تغطيه الحاسبة (ذوو أرحام من درجات بعيدة أو بيت المال). تحتاج دراسة يدوية من المحامي (م٣١ إلى ٣٨).' });
   const _res0 = { rows, flags, awl, radd, omariyyatan };
   const evidenceSummary = problemEvidence(_res0);
-  return { evidenceSummary, rows, asl, baseAsl, blocked, notes, flags, awl, radd, omariyyatan, asabaNote, steps, total: rows.reduce((s, r) => F.add(s, r.frac), F.zero()) };
+  const entriesInfo = entries.map(e => ({ ids: e.members.map(m => m.id), members: e.members.map(m => ({ id: m.id, count: m.count, weight: m.weight })), kind: e.kind, reason: e.reason, frac: F.txt(e.frac), fracN: e.frac.n, fracD: e.frac.d, fardPart: e.fardPart ? F.txt(e.fardPart) : null, fardN: e.fardPart ? e.fardPart.n : 0, fardD: e.fardPart ? e.fardPart.d : 1, heads: e.members.reduce((a, m) => a + m.count * m.weight, 0), isSp: isSp(e) }));
+  return { entriesInfo, evidenceSummary, rows, asl, baseAsl, blocked, notes, flags, awl, radd, omariyyatan, asabaNote, steps, total: rows.reduce((s, r) => F.add(s, r.frac), F.zero()) };
 }
 
 function buildSteps(o) {
@@ -488,6 +537,41 @@ function buildSteps(o) {
   return { 1: 'تحديد الفروض', 2: 'أصل المسألة = ' + o.asl, 3: 'سهام كل وارث', 4: 'نوع المسألة: ' + type, 5: groups.some(g => g.broken) ? 'يوجد انكسار' : 'لا يوجد انكسار', 6: groups.filter(g => g.broken), 7: 'التصحيح النهائي: الأصل ' + o.asl, type, groups };
 }
 
+function tanzilArham(c, remaining, flags, opts, madh) {
+  const sub = {}, groups = {};
+  ARHAM_IDS.forEach(id => { if ((c[id] || 0) > 0) { const t = ARHAM_MAP[id]; sub[t] = 1; (groups[t] = groups[t] || []).push({ id, count: c[id], weight: 1 }); } });
+  if (!Object.keys(sub).length) return null;
+  const r2 = solveCore(sub, { madhab: opts.madhab }, madh);
+  const out = [];
+  r2.rows.forEach(r => {
+    const g = groups[r.id]; if (!g || !(F.val(r.frac) > 0)) return;
+    out.push({ members: g, frac: F.mul(remaining, r.frac), reason: 'ذوو الأرحام بالتنزيل: يُنزَّلون منزلة ' + nm(r.id) + ' الذي أدلوا به، ويقتسمون نصيبه بالتساوي بلا تفضيل للذكر على الأنثى', kind: 'رحم', law: 'م٢٣٥' });
+  });
+  flags.push({ id: 'arham', text: 'توريث ذوي الأرحام بالتنزيل: افترضنا أن كل مجموعة من ذوي الأرحام أدلت بوارث واحد (فأولاد البنات مثلًا من بنت واحدة). إن كانوا من أكثر من وارث فالحساب يحتاج مراجعة المحامي.' });
+  return out.length ? out : null;
+}
+const stripLaw = t => String(t == null ? '' : t).replace(/\s*—\s*م[٠-٩]+(?:\([أ-ي]\))?(?:\s*(?:و|إلى)\s*[٠-٩]+(?:\([أ-ي]\))?)*/g, '').replace(/\s*\((?:م|ق)[^)]*\)/g, '').replace(/\s*م[٠-٩]+[ \/إلى و٠-٩\-]*/g, ' ').replace(/\s+/g, ' ').trim();
+function localize(r, madh) {
+  const sa = madh === 'saudi';
+  r.rows.forEach(w => {
+    w.reason = stripLaw(w.reason);
+    w.law = sa ? (/تعصيب|عصبة/.test(w.kind || '') ? 'م٢٢٣ إلى ٢٢٩' : /رحم/.test(w.kind || '') ? 'م٢٣٢ إلى ٢٣٦' : (SA_LAW[w.id] || (/Grandmother/.test(w.id) ? 'م٢١٤' : ''))) : '';
+    if (w.evidence) w.evidence = stripLaw(w.evidence);
+  });
+  r.blocked.forEach(b => { b.law = sa ? '' : ''; b.by = stripLaw(b.by); });
+  r.notes = r.notes.map(stripLaw).map(n => sa && /عالت/.test(n) ? n + ' (م٢٣٠)' : sa && /رُدّ|يُرد/.test(n) ? n + ' (م٢٣١)' : n);
+  r.flags = r.flags.filter(f => ['gf-siblings', 'akdariyya', 'mushtaraka'].indexOf(f.id) < 0).map(f => ({ id: f.id, text: stripLaw(f.text) }));
+  if (r.awl) r.flags.push({ id: 'awl_m', text: 'عالت المسألة: يُقسَّم المال على السهام بنسبة الفروض فينقص نصيب كل صاحب فرض بقدر.' });
+  if (r.steps) { r.steps = JSON.parse(JSON.stringify(r.steps)); }
+  const keep = (ev) => ev.map(g => ({ problem: g.problem, evidence: g.evidence.map(e => ({ type: e.type, text: stripLaw(e.text) })).filter(e => e.type !== 'مادة' && !/م[٠-٩]/.test(e.text) && !/القانون المصري/.test(e.text)) })).filter(g => g.evidence.length);
+  r.evidenceSummary = keep(r.evidenceSummary || []);
+  if (sa) {
+    const refs = []; if (r.awl) refs.push('م٢٣٠'); if (r.radd) refs.push('م٢٣١'); if (r.omariyyatan) refs.push('م٢١٣(٢)');
+    r.evidenceSummary = r.evidenceSummary.map(g => g.problem === 'awl' ? { problem: g.problem, evidence: g.evidence.concat([{ type: 'مادة', text: 'م٢٣٠ من نظام الأحوال الشخصية السعودي (العول)' }]) } : g.problem === 'radd' ? { problem: g.problem, evidence: g.evidence.concat([{ type: 'مادة', text: 'م٢٣١ من نظام الأحوال الشخصية السعودي (الرد)' }]) } : g.problem === 'arham' ? { problem: g.problem, evidence: g.evidence.concat([{ type: 'مادة', text: 'م٢٣٢ إلى ٢٣٦ من نظام الأحوال الشخصية السعودي (ذوو الأرحام والتنزيل)' }]) } : g);
+  }
+  r.madhab = madh; r.madhabName = MNAMES[madh];
+  return r;
+}
 // ---- dhawu al-arham (art 31-38). Supported: class 1 (daughters' children, first generation), class 2 (maternal grandfather),
 // ---- class 3 (children of sisters / daughters of brothers, first generation), class 4 first group (aunts, uncles of mother side).
 function distributeArham(c, remaining, flags) {

@@ -190,6 +190,7 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
 </div>
 
 <div class="container">
+<div id="refTrack"></div>
   <div class="calculator-box" id="calculatorBox">
     
     <div class="print-header">
@@ -270,13 +271,13 @@ footer { background: var(--dark); color: white; padding: 50px 8% 30px; text-alig
           <label data-ar="مذهب التقسيم / قانون الدولة" data-en="School of Thought / Country Law" data-fr="École de pensée / Loi du pays">مذهب التقسيم / قانون الدولة</label>
           <select id="madhab">
             <option value="egypt" data-ar="القانون المصري (الأحوال الشخصية)" data-en="Egyptian Law (Personal Status)" data-fr="Loi égyptienne (Statut personnel)">القانون المصري (الأحوال الشخصية)</option>
-            <option value="hanafi" disabled data-ar="المذهب الحنفي" data-en="Hanafi Madhab" data-fr="École Hanafite">المذهب الحنفي</option>
-            <option value="maliki" disabled data-ar="المذهب المالكي" data-en="Maliki Madhab" data-fr="École Malikite">المذهب المالكي</option>
-            <option value="shafii" disabled data-ar="المذهب الشافعي" data-en="Shafi'i Madhab" data-fr="École Shafi'ite">المذهب الشافعي</option>
-            <option value="hanbali" disabled data-ar="المذهب الحنبلي" data-en="Hanbali Madhab" data-fr="École Hanbalite">المذهب الحنبلي</option>
-            <option value="saudi" disabled data-ar="نظام الأحوال الشخصية السعودي" data-en="Saudi Personal Status Law" data-fr="Loi saoudienne sur le statut personnel">نظام الأحوال الشخصية السعودي</option>
+            <option value="hanafi" data-ar="المذهب الحنفي" data-en="Hanafi Madhab" data-fr="École Hanafite">المذهب الحنفي</option>
+            <option value="maliki" data-ar="المذهب المالكي" data-en="Maliki Madhab" data-fr="École Malikite">المذهب المالكي</option>
+            <option value="shafii" data-ar="المذهب الشافعي" data-en="Shafi'i Madhab" data-fr="École Shafi'ite">المذهب الشافعي</option>
+            <option value="hanbali" data-ar="المذهب الحنبلي" data-en="Hanbali Madhab" data-fr="École Hanbalite">المذهب الحنبلي</option>
+            <option value="saudi" data-ar="نظام الأحوال الشخصية السعودي" data-en="Saudi Personal Status Law" data-fr="Loi saoudienne sur le statut personnel">نظام الأحوال الشخصية السعودي</option>
           </select>
-          <div class="optional-text" data-ar="الحساب يتم وفق القانون المصري (ق77/1943 وق71/1946). مقارنة المذاهب الأخرى غير متاحة حاليًا." data-en="Calculated under Egyptian law (Law 77/1943 and 71/1946). Other schools are not available yet." data-fr="Calcul selon le droit égyptien (lois 77/1943 et 71/1946). Autres écoles pas encore disponibles.">الحساب يتم وفق القانون المصري (ق77/1943 وق71/1946). مقارنة المذاهب الأخرى غير متاحة حاليًا.</div>
+          <div class="optional-text" id="madhabNote" data-ar="الحساب يتم وفق المذهب أو النظام الذي تختاره. القانون المصري (ق77/1943 وق71/1946) هو الأساس. الوصية الواجبة تخص القانون المصري فقط. الفروق بين المذاهب في الجد مع الإخوة والمشتركة والرد وذوي الأرحام تظهر في الشرح." data-en="The calculation follows the school or system you choose. Egyptian law (Law 77/1943 and 71/1946) is the default. The obligatory bequest applies to Egyptian law only. Differences between schools (grandfather with siblings, the Mushtaraka, Radd, distant kin) are explained in the result." data-fr="Le calcul suit l'école ou le système choisi. Le droit égyptien (lois 77/1943 et 71/1946) est la base. Le legs obligatoire ne concerne que le droit égyptien. Les différences entre écoles (grand-père et fratrie, Mushtaraka, Radd, parents éloignés) sont expliquées dans le résultat.">الحساب يتم وفق المذهب أو النظام الذي تختاره. القانون المصري (ق77/1943 وق71/1946) هو الأساس. الوصية الواجبة تخص القانون المصري فقط. الفروق بين المذاهب في الجد مع الإخوة والمشتركة والرد وذوي الأرحام تظهر في الشرح.</div>
         </div>
       </div>
       <div class="input-row" style="margin-top: 15px;">
@@ -630,6 +631,7 @@ function buildPageShare(wrap, panel) {
 <script src="/calc.js"></script>
 <script src="/calc-ui.js"></script>
 <script src="/student-app.js"></script>
+<script src="/track.js"></script>
 <script src="/engage.js" defer></script>
 </body>
       </html>
